@@ -10,7 +10,6 @@ choco install tfs2013powertools       -y
 choco install vs2013.vscommands       -y
 choco install resharper               -y
 choco install ncrunch2.vs2013         -y
-choco install sudo                    -y
 
 (new-object -c shell.application).namespace("${env:SystemRoot}\system32\WindowsPowerShell\v1.0\").parsename("powershell.exe").invokeverb("taskbarpin")
 
