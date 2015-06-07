@@ -43,6 +43,8 @@
     firefox
     rxvt_unicode_with-plugins
 
+    xlsfonts
+
     trayer
     haskellPackages.xmobar
     haskellPackages.xmonad
@@ -55,6 +57,13 @@
     gnome3.gvfs
     gnome3.nautilus
   ];
+
+  fonts = {
+    enableFontDir = true;
+    fonts = with pkgs; [
+      terminus_font
+    ];
+  };
 
   # List services that you want to enable:
 
