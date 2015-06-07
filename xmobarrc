@@ -1,0 +1,14 @@
+Config { font = "-*-Fixed-Bold-R-Normal-*-13-*-*-*-*-*-*-*"
+       , bgColor = "white"
+       , fgColor = "darkgrey"
+       , position = TopW L 90
+       , commands = [ Run Weather "EHBK" ["-t"," <tempC>C","-L","5","-H","20","--normal","green","--high","red","--low","lightblue"] 36000
+                    , Run Cpu ["-L","3","-H","50","--normal","green","--high","red"] 10
+                    , Run Memory ["-t","Mem: <usedratio>%"] 10
+                    , Run Date "%Y %m %d %H:%M" "date" 10
+                    , Run StdinReader
+                    ]
+       , sepChar = "%"
+       , alignSep = "}{"
+       , template = "%StdinReader% }{ %cpu% | %memory% <fc=#ee9a00>%date%</fc> | %EHBK%"
+       }
