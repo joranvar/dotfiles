@@ -6,7 +6,7 @@ import XMonad.Util.EZConfig
 import System.IO
 
 main = do
-    xmobar <- spawnPipe "/usr/bin/env xmobar"
+    xmobar <- spawnPipe "/usr/bin/env xmobar -x 1"
     xmonad $ defaultConfig
         { modMask = mod4Mask
         , manageHook = manageDocks <+> manageHook defaultConfig
