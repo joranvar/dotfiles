@@ -5,6 +5,7 @@ import XMonad.Hooks.ManageDocks
 import XMonad.Util.Run(spawnPipe)
 import XMonad.Util.EZConfig
 import System.IO
+import XMonad.Util.SpawnOnce(spawnOnce)
 
 main = do
     xmobar <- spawnPipe "/usr/bin/env xmobar -x 1"
@@ -16,6 +17,7 @@ main = do
             { ppOutput = hPutStrLn xmobar
             , ppTitle = xmobarColor "green" "" . shorten 50
             }
+	, startupHook = spawnOnce "/usr/bin/env xscreensaver -no-splash"
         } `additionalKeys`
         ( [ ((mod4Mask .|. shiftMask, xK_l), spawn "xscreensaver-command -lock")
           ] ++
