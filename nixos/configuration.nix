@@ -104,4 +104,5 @@
     uid = 1000;
   };
   security.sudo.enable = true;
+  users.defaultUserShell = "/var/run/current-system/sw/bin/zsh";
 }
