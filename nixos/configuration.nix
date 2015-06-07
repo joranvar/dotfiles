@@ -34,8 +34,10 @@
     zsh
     git
     gnupg
+    htop
 
     emacs
+    emacs24Packages.magit
     emacs24Packages.haskellMode
 
     firefox
