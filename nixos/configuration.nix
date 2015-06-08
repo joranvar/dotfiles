@@ -14,6 +14,11 @@
   boot.loader.gummiboot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
+  boot.extraModprobeConfig = ''
+    options snd_hda_intel enable=0,1
+  '';
+  boot.blacklistedKernelModules = [ "snd_pcsp" ];
+
   networking.hostName = "lapbart"; # Define your hostname.
   networking.hostId = "3d14756b";
   networking.wireless.enable = true;  # Enables wireless.
