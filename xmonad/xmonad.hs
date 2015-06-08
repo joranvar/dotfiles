@@ -20,6 +20,7 @@ main = do
 	, startupHook = do
 	    spawnOnce "/usr/bin/env xscreensaver -no-splash"
 	    spawnOnce "trayer --SetPartialStrut true --edge top --align right --width 10 --height 14"
+	    spawnOnce "nm-applet"
 	, terminal = "/usr/bin/env urxvt"
         } `additionalKeys`
         ( [ ((mod4Mask .|. shiftMask, xK_l), spawn "xscreensaver-command -lock")

@@ -21,7 +21,7 @@
 
   networking.hostName = "lapbart"; # Define your hostname.
   networking.hostId = "3d14756b";
-  networking.wireless.enable = true;  # Enables wireless.
+  # networking.wireless.enable = true;  # Enables wireless.
 
   # Select internationalisation properties.
   # i18n = {
@@ -44,6 +44,7 @@
     emacs
     emacs24Packages.magit
     emacs24Packages.haskellMode
+    networkmanagerapplet
 
     firefox
     rxvt_unicode_with-plugins
@@ -113,10 +114,11 @@
     isNormalUser = true;
     createHome = true;
     home = "/home/joranvar";
-    extraGroups = [ "wheel" "disk" "cdrom" ];
+    extraGroups = [ "wheel" "disk" "cdrom" "networkmanager" ];
     useDefaultShell = true;
     uid = 1000;
   };
+  networking.networkmanager.enable = true;
   security.sudo.enable = true;
   users.defaultUserShell = "/var/run/current-system/sw/bin/zsh";
 }
