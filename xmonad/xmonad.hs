@@ -17,7 +17,9 @@ main = do
             { ppOutput = hPutStrLn xmobar
             , ppTitle = xmobarColor "green" "" . shorten 50
             }
-	, startupHook = spawnOnce "/usr/bin/env xscreensaver -no-splash"
+	, startupHook = do
+	    spawnOnce "/usr/bin/env xscreensaver -no-splash"
+	    spawnOnce "trayer --SetPartialStrut true --edge top --align right --width 10 --height 14"
 	, terminal = "/usr/bin/env urxvt"
         } `additionalKeys`
         ( [ ((mod4Mask .|. shiftMask, xK_l), spawn "xscreensaver-command -lock")
