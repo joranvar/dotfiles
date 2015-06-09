@@ -42,8 +42,7 @@
     htop
 
     emacs
-    emacs24Packages.magit
-    emacs24Packages.haskellMode
+
     networkmanagerapplet
 
     firefox
