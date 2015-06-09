@@ -3,16 +3,25 @@ import XMonad
 import XMonad.Actions.PhysicalScreens
 import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.ManageDocks
+import XMonad.Layout
+import XMonad.Layout.NoBorders ( noBorders, smartBorders )
 import XMonad.Util.EZConfig
 import XMonad.Util.Run(spawnPipe)
 import XMonad.Util.SpawnOnce(spawnOnce)
+
+myLayout = avoidStruts  $  smartBorders tiled ||| smartBorders (Mirror tiled) ||| noBorders Full
+  where
+    tiled = Tall nmaster delta tiled_ratio
+    nmaster = 1
+    delta = 3/100
+    tiled_ratio = 1/2
 
 main = do
     xmobar <- spawnPipe "/usr/bin/env xmobar -x 1"
     xmonad $ defaultConfig
         { modMask = mod4Mask
         , manageHook = manageDocks <+> manageHook defaultConfig
-        , layoutHook = avoidStruts  $  layoutHook defaultConfig
+        , layoutHook = myLayout
         , logHook = dynamicLogWithPP xmobarPP
             { ppOutput = hPutStrLn xmobar
             , ppTitle = xmobarColor "green" "" . shorten 50
