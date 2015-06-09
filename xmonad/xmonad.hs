@@ -34,8 +34,8 @@ main = do
 	    spawnOnce "nm-applet"
 	, terminal = "/usr/bin/env urxvt"
         } `additionalKeys`
-        ( [ ((mod4Mask .|. shiftMask, xK_l), spawn "xscreensaver-command -lock")
-          , ((mod4Mask,               xK_b), sendMessage ToggleStruts)
+        ( [ ((mod4Mask .|. shiftMask, xK_l                    ), spawn "xscreensaver-command -lock")
+          , ((mod4Mask,               xK_b                    ), sendMessage ToggleStruts)
           , ((0,                      xF86XK_AudioLowerVolume ), lowerVolume 6 >> return ())
           , ((0,                      xF86XK_AudioRaiseVolume ), raiseVolume 3 >> return ())
           , ((0,                      xF86XK_AudioMute        ), toggleMute >> return ())
