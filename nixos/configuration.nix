@@ -47,6 +47,7 @@
 
     firefox
     rxvt_unicode_with-plugins
+    vlc
 
     xlsfonts
 
@@ -77,6 +78,9 @@
 
   # Enable CUPS to print documents.
   # services.printing.enable = true;
+
+  # Enable Samba.
+  services.samba.enable = true;
 
   # Enable the X11 windowing system.
   services.xserver = {
