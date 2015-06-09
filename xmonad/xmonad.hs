@@ -1,6 +1,8 @@
 import System.IO
 import XMonad
 import XMonad.Actions.PhysicalScreens
+import XMonad.Actions.Volume
+import Graphics.X11.ExtraTypes.XF86
 import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.ManageDocks
 import XMonad.Layout
@@ -34,6 +36,9 @@ main = do
         } `additionalKeys`
         ( [ ((mod4Mask .|. shiftMask, xK_l), spawn "xscreensaver-command -lock")
           , ((mod4Mask,               xK_b), sendMessage ToggleStruts)
+          , ((0,                      xF86XK_AudioLowerVolume ), lowerVolume 6 >> return ())
+          , ((0,                      xF86XK_AudioRaiseVolume ), raiseVolume 3 >> return ())
+          , ((0,                      xF86XK_AudioMute        ), toggleMute >> return ())
           ] ++
           [ ((mod4Mask .|. mask, key), f sc) | (key, sc) <- zip [xK_w, xK_e, xK_r] [0..]
                                              , (f, mask) <- [(viewScreen, 0), (sendToScreen, shiftMask)] ] )
