@@ -24,6 +24,7 @@ main = do
 	, terminal = "/usr/bin/env urxvt"
         } `additionalKeys`
         ( [ ((mod4Mask .|. shiftMask, xK_l), spawn "xscreensaver-command -lock")
+          , ((mod4Mask,               xK_b), sendMessage ToggleStruts)
           ] ++
           [ ((mod4Mask .|. mask, key), f sc) | (key, sc) <- zip [xK_w, xK_e, xK_r] [0..]
                                              , (f, mask) <- [(viewScreen, 0), (sendToScreen, shiftMask)] ] )
