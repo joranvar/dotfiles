@@ -83,7 +83,7 @@
   # Enable Samba.
   services.samba.enable = true;
 
-  nixpkgs.config.allowUnfree = true;
+  # nixpkgs.config.allowUnfree = true;
 
   # Enable the X11 windowing system.
   services.xserver = {
@@ -96,7 +96,7 @@
       enable = true;
       twoFingerScroll = true;
     };
-    videoDrivers = [ "nvidia" ];
+    videoDrivers = [ "intel" ];
     xrandrHeads = [ "HDMI1" "eDP1" ];
     resolutions = [ { x = 2560; y = 1440; } { x = 1920; y = 1080; } ];
     windowManager.default = "xmonad";
