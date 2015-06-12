@@ -18,6 +18,7 @@
     options snd_hda_intel enable=0,1
   '';
   boot.blacklistedKernelModules = [ "snd_pcsp" ];
+  hardware.pulseaudio.enable = true;
 
   networking.hostName = "lapbart"; # Define your hostname.
   networking.hostId = "3d14756b";
@@ -117,7 +118,7 @@
     isNormalUser = true;
     createHome = true;
     home = "/home/joranvar";
-    extraGroups = [ "wheel" "disk" "cdrom" "networkmanager" ];
+    extraGroups = [ "wheel" "disk" "cdrom" "networkmanager" "audio" ];
     useDefaultShell = true;
     uid = 1000;
   };
