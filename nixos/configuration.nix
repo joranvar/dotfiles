@@ -108,7 +108,8 @@
     };
   };
 
-  programs.ssh.startAgent = true;
+  services.xserver.startGnuPGAgent = true;
+  programs.ssh.startAgent = false; # gpg agent takes over this role
 
   services.nixosManual.showManual = true;
 
