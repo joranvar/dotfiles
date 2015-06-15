@@ -1,4 +1,4 @@
-Config { bgColor = "white"
+Config { bgColor = "black"
        , fgColor = "darkgrey"
        , position = TopW L 90
        , lowerOnStart = True

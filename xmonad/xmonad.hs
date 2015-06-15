@@ -30,7 +30,7 @@ main = do
             }
 	, startupHook = do
 	    spawnOnce "/usr/bin/env xscreensaver -no-splash"
-	    spawnOnce "trayer --SetPartialStrut true --edge top --align right --width 10 --height 14"
+	    spawnOnce "trayer --SetPartialStrut true --edge top --align right --width 10 --height 14 --transparent true --alpha 0 --tint black"
 	    spawnOnce "nm-applet"
 	, terminal = "/usr/bin/env urxvt"
         } `additionalKeys`
