@@ -40,6 +40,11 @@
 (eval-when-compile
   (require 'use-package))
 
+(use-package auto-package-update
+  :ensure t
+  :config
+  (auto-package-update-maybe))
+
 (use-package smart-mode-line-powerline-theme
   :ensure t)
 
