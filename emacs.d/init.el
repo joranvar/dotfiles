@@ -45,6 +45,11 @@
   :config
   (auto-package-update-maybe))
 
+(use-package dash
+  :ensure t)
+(use-package s
+  :ensure t)
+
 (use-package smart-mode-line-powerline-theme
   :ensure t)
 
@@ -193,6 +198,10 @@
   :ensure t
   :bind (("M-s r" . vr/replace)
          ("M-s q" . vr/query-replace)))
+
+(use-package sql-reformat
+  :load-path "lisp/"
+  :commands sql-reformat)
 
 (set-face-attribute 'default nil :height (if (eq system-type 'gnu/linux) 100 90))
 
