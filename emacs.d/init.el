@@ -12,7 +12,11 @@
     ("26614652a4b3515b4bbbb9828d71e206cc249b67c9142c06239ed3418eff95e2" default)))
  '(haskell-process-auto-import-loaded-modules t)
  '(haskell-process-log t)
- '(haskell-process-suggest-remove-import-lines t))
+ '(haskell-process-suggest-remove-import-lines t)
+ '(helm-external-programs-associations (quote (("sln" . "explorer.exe"))))
+ '(package-selected-packages
+   (quote
+    (aggressive-indent aggressive-indent-mode smartparens multiple-cursors whitespace-cleanup-mode visual-regexp neotree persp-projectile perspective use-package smart-mode-line-powerline-theme org-plus-contrib omnisharp material-theme magit leuven-theme hi2 helm-projectile ghc avy))))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
@@ -60,10 +64,17 @@
 (use-package org
   :ensure org-plus-contrib
   :bind (("C-c a" . org-agenda)
-	 ("C-c c" . org-capture))
+         ("C-c c" . org-capture))
   :config
   (require 'org-contacts)
-  (setq org-agenda-files '("~/org/main.org")))
+  (setq org-agenda-files '("~/org/main.org"))
+  (setq org-capture-templates '(("t" "Todo" entry (file+headline "cgm.org" "Todo")
+                                 "* TODO %?\n%U\n%a\n" :clock-in t :clock-resume t)
+                                ("j" "Project related journal" entry (file+headline "cgm.org" "Journal")
+                                 "* %?\n%U\n" :clock-in t :clock-resume t)
+                                ("i" "Interrupt" entry (file+datetree "cgm.org" "JOURNAL")
+                                 "* %?\n%U\n" :clock-in t :clock-resume t)))
+  (org-babel-do-load-languages 'org-babel-load-languages '((sql . t))))
 
 (use-package nix-mode)
 
@@ -106,16 +117,85 @@
 (use-package avy
   :ensure t
   :bind (("C-:" . avy-goto-char)
-	 ("C-'" . avy-goto-char-2))
+         ("C-'" . avy-goto-char-2))
   :init
   (avy-setup-default))
+
+(use-package omnisharp
+  :ensure t
+  :config
+  (add-hook 'csharp-mode-hook #'omnisharp-mode)
+  (setq omnisharp-server-executable-path
+        (substitute-in-file-name
+         (if (eq system-type 'gnu/linux)
+             "$HOME/git_pull/omnisharp-server/OmniSharp/bin/Debug/OmniSharp.exe"
+           "D:\\Ontwikkeling\\omnisharp-server\\OmniSharp\\bin\\Debug\\OmniSharp.exe")))
+  (define-key omnisharp-mode-map (kbd "M-.") #'omnisharp-auto-complete)
+  (define-key omnisharp-mode-map (kbd "M-RET") #'omnisharp-run-code-action-refactoring)
+  (define-key omnisharp-mode-map (kbd "<C-return>") #'omnisharp-fix-code-issue-at-point))
+
+(use-package aggressive-indent
+  :ensure t
+  :config
+  (global-aggressive-indent-mode))
+
+(use-package whitespace-cleanup-mode
+  :ensure t
+  :config
+  (setq-default whitespace-style '(face spaces tabs newline
+                                        space-mark tab-mark ; newline-mark
+                                        trailing lines-tail empty
+                                        indentation::space
+                                        space-after-tab::space)
+                whitespace-line-column 120
+                indent-tabs-mode nil)
+  (global-whitespace-mode)
+  (add-hook 'csharp-mode-hook #'whitespace-cleanup-mode))
+
+(use-package projectile
+  :ensure t
+  :bind (("M-p" . helm-projectile)
+         ("M-P" . projectile-persp-switch-project))
+  :diminish projectile-mode
+  :config
+  (projectile-global-mode)
+  (setq projectile-indexing-method 'alien
+        projectile-completion-system 'helm
+        projectile-enable-caching t
+        projectile-enable-idle-timer t)
+  (use-package perspective
+    :ensure t
+    :config (progn (persp-mode)
+                   (use-package persp-projectile
+                     :ensure t)))
+  (use-package helm-projectile
+    :ensure t
+    :config
+    (helm-projectile-on)
+    (setq projectile-switch-project-action (lambda () (magit-status (projectile-project-root)))))
+  (setq magit-repo-dirs (mapcar (lambda (dir)
+                                  (substring dir 0 -1))
+                                (-filter (lambda (project)
+                                           (file-directory-p (concat project "/.git/")))
+                                         (projectile-relevant-known-projects)))
+        magit-repo-dirs-depth 1))
+
+(use-package neotree
+  :ensure t
+  :bind (("<f8>" . neotree-toggle)))
+
+(use-package visual-regexp
+  :ensure t
+  :bind (("M-s r" . vr/replace)
+         ("M-s q" . vr/query-replace)))
 
 (set-face-attribute 'default nil :height (if (eq system-type 'gnu/linux) 100 90))
 
 (defun sudo-find-file ()
-    "Find the file in current buffer with tramp-sudo."
-    (interactive)
+  "Find the file in current buffer with tramp-sudo."
+  (interactive)
   (find-file (concat "/sudo:localhost:" buffer-file-name)))
 
 (provide 'init)
 ;;; init.el ends here
+(put 'narrow-to-region 'disabled nil)
