@@ -1,23 +1,35 @@
-Function new-symlink ($link, $target)
+Function New-Symlink ($link, $target)
 {
-    if (test-path -pathtype container $target)
+    if (Test-Path -Pathtype container $target)
     {
-        $command = "cmd /c mklink /d"
+        $command = "/c mklink /d"
     }
     else
     {
-        $command = "cmd /c mklink"
+        $command = "/c mklink"
     }
 
-   invoke-expression "$command $link $target"
+    Start-Process cmd -Verb RunAs -ArgumentList "$command $link $target"
 }
 
-# mypath=${0:a:h} # TODO: current script path
+$myPath = Split-Path -Path $MyInvocation.MyCommand.Definition -Parent
 
-foreach ($i in antigen,emacs.d/init.el,emacs.d/lisp,xmobarrc,xmonad/xmonad.hs,zshrc) {
-    # TODO: get folder name
-    # TODO: real home directory (e.g. C:\Users\${me}\)
-    new-item -path ~/.${i:h} -type directory -force
-    # TODO: check if exists
-    [[ -a ~/.$i ]] || new-symlink $mypath/$i ~/.$i
+Foreach ($i in @("antigen","emacs.d\init.el","emacs.d\lisp","xmobarrc","xmonad\xmonad.hs","zshrc")) {
+    $target = $env:UserProfile + "\." + $i
+    if (Test-Path -Pathtype container $i)
+    {
+        $targetFolder = $i
+    }
+    else
+    {
+        $targetFolder = Split-Path -Path $target -Parent
+    }
+
+    New-Item -Path $targetFolder -Type directory -Force
+
+    echo $target
+    if (! (Test-Path $target))
+    {
+        New-Symlink $target ($myPath + "\" + $i)
+    }
 }
