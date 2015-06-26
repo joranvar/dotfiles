@@ -45,6 +45,11 @@
   :config
   (auto-package-update-maybe))
 
+(prefer-coding-system 'utf-8)
+(set-default-coding-systems 'utf-8)
+(set-terminal-coding-system 'utf-8)
+(set-keyboard-coding-system 'utf-8)
+
 (use-package dash
   :ensure t)
 (use-package s
