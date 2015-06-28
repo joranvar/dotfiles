@@ -222,6 +222,16 @@
          ("M-s q" . vr/query-replace)
          ("M-s m" . vr/mc-mark)))
 
+(use-package zop-to-char
+  :ensure t
+  :bind (("M-z" . zop-up-to-char)))
+
+;; Do not lose my clippings from outside of emacs
+(setq save-interprogram-paste-before-kill t)
+
+;; Use hippie expand instead of dabbrev-expand
+(global-set-key (kbd "M-/") 'hippie-expand)
+
 (use-package sql-reformat
   :load-path "lisp/sql-reformat"
   :commands sql-reformat)
