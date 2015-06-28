@@ -207,10 +207,20 @@
   :ensure t
   :bind (("<f8>" . neotree-toggle)))
 
+(use-package multiple-cursors
+  :ensure t
+  :bind (("C->" . mc/mark-next-like-this)
+         ("C-<" . mc/mark-next-previous-this)))
+
+(use-package expand-region
+  :ensure t
+  :bind (("C-=" . er/expand-region)))
+
 (use-package visual-regexp
   :ensure t
   :bind (("M-s r" . vr/replace)
-         ("M-s q" . vr/query-replace)))
+         ("M-s q" . vr/query-replace)
+         ("M-s m" . vr/mc-mark)))
 
 (use-package sql-reformat
   :load-path "lisp/sql-reformat"
