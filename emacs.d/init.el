@@ -206,7 +206,7 @@
          ("M-s q" . vr/query-replace)))
 
 (use-package sql-reformat
-  :load-path "lisp/"
+  :load-path "lisp/sql-reformat"
   :commands sql-reformat)
 
 (set-face-attribute 'default nil :height (if (eq system-type 'gnu/linux) 100 90))
