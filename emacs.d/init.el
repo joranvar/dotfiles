@@ -149,10 +149,18 @@
   (define-key omnisharp-mode-map (kbd "M-RET") #'omnisharp-run-code-action-refactoring)
   (define-key omnisharp-mode-map (kbd "<C-return>") #'omnisharp-fix-code-issue-at-point))
 
+(use-package smartparens
+  :ensure t
+  :config
+  (require 'smartparens-config)
+  (show-smartparens-global-mode)
+  (smartparens-global-strict-mode))
+
 (use-package aggressive-indent
   :ensure t
   :config
-  (global-aggressive-indent-mode))
+  (global-aggressive-indent-mode)
+  (add-hook 'csharp-mode-hook (lambda () (aggressive-indent-mode -1))))
 
 (use-package whitespace-cleanup-mode
   :ensure t
