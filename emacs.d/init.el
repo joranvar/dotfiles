@@ -51,10 +51,9 @@
 (set-terminal-coding-system 'utf-8)
 (set-keyboard-coding-system 'utf-8)
 
-(use-package dash
-  :ensure t)
-(use-package s
-  :ensure t)
+(use-package dash :ensure t)
+(use-package s :ensure t)
+(use-package rdp :ensure t)
 
 (use-package smart-mode-line-powerline-theme
   :ensure t)
