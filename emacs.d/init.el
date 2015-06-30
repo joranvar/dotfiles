@@ -139,7 +139,7 @@
 (use-package omnisharp
   :ensure t
   :config
-  (add-hook 'csharp-mode-hook #'omnisharp-mode)
+  ;; (add-hook 'csharp-mode-hook #'omnisharp-mode)
   (setq omnisharp-server-executable-path
         (substitute-in-file-name
          (if (eq system-type 'gnu/linux)
