@@ -205,7 +205,7 @@
 
 (use-package neotree
   :ensure t
-  :bind (("<f8>" . neotree-toggle)))
+  :bind (("<f8>" . neotree-toggle))) ; TODO: try getting the project root from projectile first
 
 (use-package multiple-cursors
   :ensure t
