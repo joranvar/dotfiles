@@ -32,6 +32,10 @@
  ;; If there is more than one, they won't work right.
  )
 
+;; Me
+(setq user-full-name "Bart Post")
+(setq user-mail-address "bart.post@gmail.com")
+
 ;; Enable package.el
 (require 'package)
 (setq package-enable-at-startup nil)
