@@ -242,6 +242,10 @@
   :load-path "lisp/sql-reformat"
   :commands sql-reformat)
 
+(use-package tf-git
+  :load-path "lisp/tf-git"
+  :commands tf-mark-reviewed)
+
 (set-face-attribute 'default nil :height (if (eq system-type 'gnu/linux) 100 90))
 
 (defun joranvar-insert-guid ()
