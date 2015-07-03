@@ -248,7 +248,8 @@
 
 (use-package tf-git
   :load-path "lisp/tf-git"
-  :commands tf-mark-reviewed)
+  :commands (tf-mark-reviewed
+             tf-get-reviewer))
 
 (set-face-attribute 'default nil :height (if (eq system-type 'gnu/linux) 100 90))
 
