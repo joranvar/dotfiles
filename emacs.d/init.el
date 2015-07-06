@@ -255,6 +255,13 @@
   :commands (tf-mark-reviewed
              tf-get-reviewer))
 
+(use-package moz-reload
+  :load-path "lisp/moz-reload"
+  :commands (moz-enable-auto-update
+             moz-disable-auto-update)
+  :init (use-package moz
+          :ensure t))
+
 (set-face-attribute 'default nil :height (if (eq system-type 'gnu/linux) 100 90))
 
 (defun joranvar-insert-guid ()
