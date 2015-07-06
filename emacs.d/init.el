@@ -236,6 +236,10 @@
   :ensure t
   :bind (("M-z" . zop-up-to-char)))
 
+(use-package ace-window
+  :ensure t
+  :bind (("C-x o" . ace-window)))
+
 ;; Do not lose my clippings from outside of emacs
 (setq save-interprogram-paste-before-kill t)
 
