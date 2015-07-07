@@ -62,11 +62,16 @@ This code is not yet complete, and *will* eat your SQL."
     (empty        . "")
     (select       "SELECT" exprs)
     (from         . [("FROM" table) empty])
-    (table        . [db-table sch-table expr])
-    (db-table     expr "\\." expr "\\." expr)
-    (sch-table    expr "\\." expr)
+    (table        . [srv-table db-table sch-table id])
+    (srv-table    id "\\." id "\\." [id empty] "\\." id)
+    (db-table     id "\\." [id empty] "\\." id)
+    (sch-table    id "\\." id)
     (exprs        . [(expr "," exprs) expr])
-    (expr         . "[^,;. ]*")))
+    (expr         . [id literal])
+    (literal      . [num string])
+    (num          . "[0-9.]*")
+    (string       . "'\\([^']\\|''\\)*'")
+    (id           . "\\([a-zA-Z][^,;. ]*\\|\\[[^,; ]*\\]\\)")))
 
 ;; The token set below is the direction I want to grow this to.
 ;; (defvar sql-tokens
@@ -109,16 +114,23 @@ This code is not yet complete, and *will* eat your SQL."
     (`(query ,select ,from)     (s-concat (sql-astts select) (sql-astts from) ";"))
     (`(select ,_ ,expr)         (s-concat "SELECT " (sql-astts expr)))
     (`(from empty . ,_)         "")
-    (`(from ,_ . (,table))      (s-concat "\n  FROM " (sql-astts table)))
-    (`(table expr . ,table)     (s-concat (sql-quote table)))
-    (`(table sch-table . ,table)(s-concat (sql-quote (sql-astts (nth 0 table))) "."
-                                          (sql-quote (sql-astts (nth 2 table)))))
-    (`(table db-table . ,table) (s-concat (sql-quote (sql-astts (nth 0 table))) "."
-                                          (sql-quote (sql-astts (nth 2 table))) "."
-                                          (sql-quote (sql-astts (nth 4 table)))))
+    (`(from ,_  (table . ,table))(s-concat "\n  FROM " (sql-astts table)))
+    (`(sch-table . ,table)      (s-concat (sql-astts (nth 0 table)) "."
+                                          (sql-astts (nth 2 table))))
+    (`(db-table . ,table)       (s-concat (sql-astts (nth 0 table)) "."
+                                          (sql-astts (nth 2 table)) "."
+                                          (sql-astts (nth 4 table))))
+    (`(srv-table . ,table)      (s-concat (sql-astts (nth 0 table)) "."
+                                          (sql-astts (nth 2 table)) "."
+                                          (sql-astts (nth 4 table)) "."
+                                          (sql-astts (nth 6 table))))
     (`(exprs ,expr "," ,exprs)  (s-concat (sql-astts expr) "\n     , " (sql-astts exprs)))
-    (`(exprs expr . ,expr)      expr)
-    (`(expr . ,expr)            expr)
+    (`(exprs . ,expr)           (sql-astts expr))
+    (`(expr . ,expr)            (sql-astts expr))
+    (`(id . ,id)                (sql-quote id))
+    (`(literal . ,lit)          (sql-astts lit))
+    (`(num . ,num)              num)
+    (`(string . ,str)           str)
     (_                          (print ast))
     ))
 
