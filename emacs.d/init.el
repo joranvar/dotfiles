@@ -244,7 +244,9 @@
 
 (use-package ace-window
   :ensure t
-  :bind (("C-x o" . ace-window)))
+  :bind (("C-x o" . ace-window))
+  :config
+  (setq aw-scope 'frame))
 
 ;; Do not lose my clippings from outside of emacs
 (setq save-interprogram-paste-before-kill t)
