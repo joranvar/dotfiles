@@ -261,7 +261,8 @@
 (use-package tf-git
   :load-path "lisp/tf-git"
   :commands (tf-mark-reviewed
-             tf-get-reviewer))
+             tf-get-reviewer
+             tf-set-jira-issue-id))
 
 (use-package moz-reload
   :load-path "lisp/moz-reload"
