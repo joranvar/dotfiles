@@ -271,6 +271,14 @@
   :init (use-package moz
           :ensure t))
 
+;; Printing
+;; TODO: Move to package
+(when (eq system-type 'windows-nt)
+  (setenv "GS_LIB" "C:/Program Files/gs/gs9.15;C:/Program Files/gs/gs9.15/lib")
+  (setq ps-lpr-command "C:/Program Files/gs/gs9.15/bin/gswin64c.exe")
+  (setq ps-lpr-switches '("-q" "-dNOPAUSE" "-dBATCH" "-sDEVICE=mswinpr2"))
+  (setq ps-printer-name t))
+
 (set-face-attribute 'default nil :height (if (eq system-type 'gnu/linux) 100 90))
 
 (defun joranvar-insert-guid ()
