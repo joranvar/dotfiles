@@ -125,6 +125,12 @@
   :config
   (global-flycheck-mode))
 
+(use-package highlight-symbol
+  :ensure t
+  :config
+  (progn
+    (add-hook 'prog-mode-hook #'highlight-symbol-mode)))
+
 (use-package async
   :ensure t)
 
