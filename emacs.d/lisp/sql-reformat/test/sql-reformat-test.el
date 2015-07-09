@@ -26,10 +26,10 @@
   (should (equal (sql-reformat-string "select 1, 2") "SELECT 1\n     , 2;"))
   (should (equal (sql-reformat-string "select 1, 2, 3") "SELECT 1\n     , 2\n     , 3;")))
 
-(ert-deftest sql-reformat-test/multi-expression-select ()
-  "Should return clean statement when given multi-expression select statement."
-  (should (equal (sql-reformat-string "select 1, 2") "SELECT 1\n     , 2;"))
-  (should (equal (sql-reformat-string "select 1, 2, 3") "SELECT 1\n     , 2\n     , 3;")))
+(ert-deftest sql-reformat-test/multi-expression-select-with-indent ()
+  "Should return clean statement when given multi-expression select statement and indent size."
+  (should (equal (sql-reformat-string "select 1, 2" 5) "SELECT 1\n          , 2;"))
+  (should (equal (sql-reformat-string "select 1, 2; bla" 2) "SELECT 1\n       , 2;\n  -- PARSE ERROR\n bla")))
 
 (ert-deftest sql-reformat-test/trailing-unparsed ()
   "Should return mark the spot between parsed/reformatted and unparsed text."
