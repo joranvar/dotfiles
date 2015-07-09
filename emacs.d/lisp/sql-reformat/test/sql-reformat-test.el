@@ -9,10 +9,17 @@
   (should (equal (sql-reformat-string "select 2;") "SELECT 2;")))
 
 (ert-deftest sql-reformat-test/minimal-select-id ()
-  "Should return clean statement when given minimal select statement."
+  "Should return clean statement when given minimal select statement with ids."
   (should (equal (sql-reformat-string "select this") "SELECT [this];"))
   (should (equal (sql-reformat-string "select [me]") "SELECT [me];"))
-  (should (equal (sql-reformat-string "select [2nd_time];") "SELECT [2nd_time];")))
+  (should (equal (sql-reformat-string "select [2nd_time];") "SELECT [2nd_time];"))
+  (should (equal (sql-reformat-string "select 2, [2nd_time], 5;") "SELECT 2\n     , [2nd_time]\n     , 5;")))
+
+(ert-deftest sql-reformat-test/minimal-select-alias-and-id ()
+  "Should return clean statement when given minimal select statement with ids with an alias."
+  (should (equal (sql-reformat-string "select b.this") "SELECT [this] = [b].[this];"))
+  (should (equal (sql-reformat-string "select this = 2") "SELECT [this] = 2;"))
+  (should (equal (sql-reformat-string "select 2 as this") "SELECT [this] = 2;")))
 
 (ert-deftest sql-reformat-test/multi-expression-select ()
   "Should return clean statement when given multi-expression select statement."

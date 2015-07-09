@@ -60,18 +60,23 @@ This code is not yet complete, and *will* eat your SQL."
 (defvar sql-tokens
   '((query        select from)
     (empty        . "")
-    (select       "SELECT" exprs)
+    (select       "SELECT" aliasable-exprs)
     (from         . [("FROM" table) empty])
     (table        . [srv-table db-table sch-table id])
     (srv-table    id "\\." id "\\." [id empty] "\\." id)
     (db-table     id "\\." [id empty] "\\." id)
     (sch-table    id "\\." id)
+    (aliasable-exprs . [(aliasable-expr "," aliasable-exprs) aliasable-expr])
     (exprs        . [(expr "," exprs) expr])
     (expr         . [id literal])
     (literal      . [num string])
     (num          . "[0-9.]*")
     (string       . "'\\([^']\\|''\\)*'")
-    (id           . "\\([a-zA-Z][^,;. ]*\\|\\[[^,; ]*\\]\\)")))
+    (id           . "\\([a-zA-Z][^,;. ]*\\|\\[[^,; ]+\\]\\)")
+    (aliasable-expr . [column post-alias pre-alias expr])
+    (post-alias   expr "AS" id)
+    (pre-alias    id "=" expr)
+    (column       id "\\." id)))
 
 ;; The token set below is the direction I want to grow this to.
 ;; (defvar sql-tokens
@@ -124,9 +129,15 @@ This code is not yet complete, and *will* eat your SQL."
                                           (sql-astts (nth 2 table)) "."
                                           (sql-astts (nth 4 table)) "."
                                           (sql-astts (nth 6 table))))
+    (`(aliasable-exprs ,expr "," ,exprs)  (s-concat (sql-astts expr) "\n     , " (sql-astts exprs)))
+    (`(aliasable-exprs . ,expr)           (sql-astts expr))
     (`(exprs ,expr "," ,exprs)  (s-concat (sql-astts expr) "\n     , " (sql-astts exprs)))
     (`(exprs . ,expr)           (sql-astts expr))
     (`(expr . ,expr)            (sql-astts expr))
+    (`(aliasable-expr . ,expr)  (sql-astts expr))
+    (`(column ,alias ,_ ,fld)   (s-concat (sql-astts fld) " = " (sql-astts alias) "." (sql-astts fld)))
+    (`(pre-alias ,alias ,_ ,expr)(s-concat (sql-astts alias) " = " (sql-astts expr)))
+    (`(post-alias ,expr ,_ ,alias)(s-concat (sql-astts alias) " = " (sql-astts expr)))
     (`(id . ,id)                (sql-quote id))
     (`(literal . ,lit)          (sql-astts lit))
     (`(num . ,num)              num)
