@@ -125,6 +125,12 @@
   :config
   (global-flycheck-mode))
 
+(use-package highlight-symbol
+  :ensure t
+  :config
+  (progn
+    (add-hook 'prog-mode-hook #'highlight-symbol-mode)))
+
 (use-package async
   :ensure t)
 
@@ -238,7 +244,9 @@
 
 (use-package ace-window
   :ensure t
-  :bind (("C-x o" . ace-window)))
+  :bind (("C-x o" . ace-window))
+  :config
+  (setq aw-scope 'frame))
 
 ;; Do not lose my clippings from outside of emacs
 (setq save-interprogram-paste-before-kill t)
@@ -253,7 +261,8 @@
 (use-package tf-git
   :load-path "lisp/tf-git"
   :commands (tf-mark-reviewed
-             tf-get-reviewer))
+             tf-get-reviewer
+             tf-set-jira-issue-id))
 
 (use-package moz-reload
   :load-path "lisp/moz-reload"
@@ -261,6 +270,14 @@
              moz-disable-auto-update)
   :init (use-package moz
           :ensure t))
+
+;; Printing
+;; TODO: Move to package
+(when (eq system-type 'windows-nt)
+  (setenv "GS_LIB" "C:/Program Files/gs/gs9.15;C:/Program Files/gs/gs9.15/lib")
+  (setq ps-lpr-command "C:/Program Files/gs/gs9.15/bin/gswin64c.exe")
+  (setq ps-lpr-switches '("-q" "-dNOPAUSE" "-dBATCH" "-sDEVICE=mswinpr2"))
+  (setq ps-printer-name t))
 
 (set-face-attribute 'default nil :height (if (eq system-type 'gnu/linux) 100 90))
 
