@@ -42,7 +42,12 @@
   "Parse and reformat string S to prettify it.
 
 This code is not yet complete, and *will* eat your SQL."
-  (sql-ast-to-string (rdp-parse-string s sql-tokens)))
+  (s-concat
+   (sql-ast-to-string (rdp-parse-string s sql-tokens))
+   (when (> (length s) rdp-best)
+     (s-concat
+      "\n-- PARSE ERROR\n"
+      (substring s rdp-best)))))
 
 (defun sql-reformat (p1 p2)
   "Format SQL in region P1 through P2."
@@ -58,7 +63,7 @@ This code is not yet complete, and *will* eat your SQL."
               (replace-match (s-upcase it)))))))))
 
 (defvar sql-tokens
-  '((query        select from)
+  '((query        select from [";" empty])
     (empty        . "")
     (select       "SELECT" aliasable-exprs)
     (from         . [("FROM" table) empty])
@@ -70,7 +75,7 @@ This code is not yet complete, and *will* eat your SQL."
     (exprs        . [(expr "," exprs) expr])
     (expr         . [id literal])
     (literal      . [num string])
-    (num          . "[0-9.]*")
+    (num          . "[0-9\\.]*")
     (string       . "'\\([^']\\|''\\)*'")
     (id           . "\\([a-zA-Z][^,;. ]*\\|\\[[^,; ]+\\]\\)")
     (aliasable-expr . [column post-alias pre-alias expr])
@@ -116,7 +121,7 @@ This code is not yet complete, and *will* eat your SQL."
   "Translate the rdp-parsed AST back to sql."
   (pcase ast
     (`(empty . "")              "")
-    (`(query ,select ,from)     (s-concat (sql-astts select) (sql-astts from) ";"))
+    (`(query ,select ,from ,_)  (s-concat (sql-astts select) (sql-astts from) ";"))
     (`(select ,_ ,expr)         (s-concat "SELECT " (sql-astts expr)))
     (`(from empty . ,_)         "")
     (`(from ,_  (table . ,table))(s-concat "\n  FROM " (sql-astts table)))

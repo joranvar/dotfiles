@@ -31,6 +31,10 @@
   (should (equal (sql-reformat-string "select 1, 2") "SELECT 1\n     , 2;"))
   (should (equal (sql-reformat-string "select 1, 2, 3") "SELECT 1\n     , 2\n     , 3;")))
 
+(ert-deftest sql-reformat-test/trailing-unparsed ()
+  "Should return mark the spot between parsed/reformatted and unparsed text."
+  (should (equal (sql-reformat-string "select 1, 2; bla") "SELECT 1\n     , 2;\n-- PARSE ERROR\n bla")))
+
 (ert-deftest sql-reformat-test/select-with-from ()
   "Should return clean statement when given select statement with from clause."
   (should (equal (sql-reformat-string "select 1 from quetzlquatl") "SELECT 1\n  FROM [quetzlquatl];"))
