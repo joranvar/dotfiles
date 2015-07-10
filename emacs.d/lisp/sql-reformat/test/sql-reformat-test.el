@@ -51,7 +51,21 @@
 
 (ert-deftest sql-reformat-test/select-with-from-and-where ()
   "Should return clean statement when given select statement with from and where clause."
-  (should (equal (sql-reformat-string "select 1 from quetzlquatl where x = 1") "SELECT 1\n  FROM [quetzlquatl]\n WHERE [x] = 1;")))
+  (should (equal (sql-reformat-string "select 1 from quetzlquatl where x = 1" 18)
+                 "SELECT 1
+                    FROM [quetzlquatl]
+                   WHERE [x] = 1;"))
+  (should (equal (sql-reformat-string "select 1 from quetzlquatl where x = 1 or x = 2;" 18)
+                 "SELECT 1
+                    FROM [quetzlquatl]
+                   WHERE [x] = 1
+                      OR [x] = 2;"))
+  (should (equal (sql-reformat-string "select 1 from quetzlquatl where 2 = 1 and y = 2 or x = 3;" 18)
+                 "SELECT 1
+                    FROM [quetzlquatl]
+                   WHERE 2 = 1
+                         AND [y] = 2
+                      OR [x] = 3;")))
 
 ;; (rdp-parse-string "select a, amore, somuch from dbo.a join myDb..this join second on morebla on bla;" sql-tokens)
 ;; (sql-ast-to-string (rdp-parse-string "select a as b" sql-tokens))
