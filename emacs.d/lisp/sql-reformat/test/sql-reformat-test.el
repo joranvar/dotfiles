@@ -65,6 +65,13 @@
                              FROM [quetzlquatl]
                          );")))
 
+(ert-deftest sql-reformat-test/select-with-subquery-and-aliases ()
+  "Should return clean statement when given select statement with a subquery with aliases."
+  (should (equal (sql-reformat-string "select (select 1 as one from quetzlquatl) as sub" 18)
+                 "SELECT [sub] = ( SELECT [one] = 1
+                                     FROM [quetzlquatl]
+                                 );")))
+
 (ert-deftest sql-reformat-test/select-with-from-specified-table ()
   "Should return clean statement when given select statement with from clause from a specified table."
   (should (equal (sql-reformat-string "select 1 from dbo.quetzlquatl" 18)
