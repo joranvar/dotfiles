@@ -92,6 +92,10 @@
          ("C-c c" . org-capture))
   :config
   (require 'org-contacts)
+  (setq org-agenda-window-setup 'other-frame
+        org-agenda-sticky t)
+  (setq org-clock-persist t)
+  (org-clock-persistence-insinuate)
   (setq org-agenda-files '("~/org/main.org" "~/org/cgm.org"))
   (setq org-capture-templates '(("t" "Todo" entry (file+headline "cgm.org" "Todo")
                                  "* TODO %?\n%U\n%a\n" :clock-in t :clock-resume t)
