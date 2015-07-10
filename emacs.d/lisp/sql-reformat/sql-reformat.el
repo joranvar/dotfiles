@@ -149,18 +149,19 @@ first line."
      (s-concat (sql-astts select) (sql-astts from) (sql-astts where) ";"))
     (`(select ,_ ,expr)         (s-concat "SELECT " (sql-astts expr)))
     (`(from empty . ,_)         "")
-    (`(from ,_  (table . ,table))(s-concat (sql-newline) "  FROM " (sql-astts table)))
+    (`(from ,_  ,table)         (s-concat (sql-newline) "  FROM " (sql-astts table)))
     (`(where empty . ,_)        "")
-    (`(where ,_ (pred . ,pred)) (s-concat (sql-newline) " WHERE " (sql-astts pred)))
-    (`(sch-table . ,table)      (s-concat (sql-astts (nth 0 table)) "."
-                                          (sql-astts (nth 2 table))))
-    (`(db-table . ,table)       (s-concat (sql-astts (nth 0 table)) "."
-                                          (sql-astts (nth 2 table)) "."
-                                          (sql-astts (nth 4 table))))
-    (`(srv-table . ,table)      (s-concat (sql-astts (nth 0 table)) "."
-                                          (sql-astts (nth 2 table)) "."
-                                          (sql-astts (nth 4 table)) "."
-                                          (sql-astts (nth 6 table))))
+    (`(where ,_ ,pred)          (s-concat (sql-newline) " WHERE " (sql-astts pred)))
+    (`(table id . ,table)       (sql-quote table))
+    (`(table sch-table . ,table)      (s-concat (sql-astts (nth 0 table)) "."
+                                                (sql-astts (nth 2 table))))
+    (`(table db-table . ,table)       (s-concat (sql-astts (nth 0 table)) "."
+                                                (sql-astts (nth 2 table)) "."
+                                                (sql-astts (nth 4 table))))
+    (`(table srv-table . ,table)      (s-concat (sql-astts (nth 0 table)) "."
+                                                (sql-astts (nth 2 table)) "."
+                                                (sql-astts (nth 4 table)) "."
+                                                (sql-astts (nth 6 table))))
     (`(aliasable-exprs ,expr "," ,exprs)  (s-concat (sql-astts expr) (sql-newline) "     , " (sql-astts exprs)))
     (`(aliasable-exprs . ,expr)           (sql-astts expr))
     (`(exprs ,expr "," ,exprs)  (s-concat (sql-astts expr) (sql-newline) "     , " (sql-astts exprs)))
