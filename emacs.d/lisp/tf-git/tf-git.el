@@ -38,15 +38,21 @@ If changeset-id is nil, get the reviewer note of the changeset id on the current
         (when (string-match "Code Reviewer:\n    \\(.*\\)" output)
           (message (match-string 1 output)))))))
 
-(defun tf-mark-reviewed ()
+(defun tf-mark-reviewed (arg)
   "Set the reviewer note of the changeset-at-point to `variable:user-full-name'."
-  (interactive)
-  (let ((changeset-id (tf-get-changeset-in-current-line)))
+  (interactive "P")
+  (let ((changeset-id (if arg
+                          (read-from-minibuffer "Changeset ID: ")
+                        (tf-get-changeset-in-current-line))))
     (when changeset-id
-      (let ((reviewer (tf-get-reviewer changeset-id)))
-        (if reviewer
-            (message (s-concat "Already reviewed by " reviewer "!"))
-          (tf-set-note changeset-id "Code Reviewer" user-full-name))))))
+      (tf-mark-reviewed-changeset changeset-id))))
+
+(defun tf-mark-reviewed-changeset (changeset-id)
+  "Set the reviewer note of changeset CHANGESET-ID to `variable:user-full-name'."
+  (let ((reviewer (tf-get-reviewer changeset-id)))
+    (if reviewer
+        (message (s-concat "Already reviewed by " reviewer "!"))
+      (tf-set-note changeset-id "Code Reviewer" user-full-name))))
 
 (defun tf-set-jira-issue-id (id)
   "Set the jira issue id note of the changeset-at-point to ID."
