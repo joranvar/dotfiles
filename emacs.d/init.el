@@ -291,6 +291,11 @@
   (interactive)
   (find-file (concat "/sudo:localhost:" buffer-file-name)))
 
+(defun joranvar-distinct-matches-in-buffer (regex)
+  "Get a list of unique matching occurrences of REGEX in the current buffer."
+  (interactive "sRegex: \n")
+  (-distinct (s-match-strings-all regex (buffer-substring-no-properties (point-min)(point-max)))))
+
 (provide 'init)
 ;;; init.el ends here
 (put 'narrow-to-region 'disabled nil)
