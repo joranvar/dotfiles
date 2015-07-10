@@ -279,6 +279,10 @@
   (setq ps-lpr-switches '("-q" "-dNOPAUSE" "-dBATCH" "-sDEVICE=mswinpr2"))
   (setq ps-printer-name t))
 
+(when (eq system-type 'windows-nt)
+  (setenv "PATH" (concat ":C:\\GnuWin\\bin" (getenv "PATH")))
+  (setq exec-path (append '("C:\\GnuWin\\bin") exec-path)))
+
 (set-face-attribute 'default nil :height (if (eq system-type 'gnu/linux) 100 90))
 
 (defun joranvar-insert-guid ()
