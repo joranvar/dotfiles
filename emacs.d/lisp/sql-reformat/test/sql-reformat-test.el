@@ -13,7 +13,10 @@
   (should (equal (sql-reformat-string "select this") "SELECT [this];"))
   (should (equal (sql-reformat-string "select [me]") "SELECT [me];"))
   (should (equal (sql-reformat-string "select [2nd_time];") "SELECT [2nd_time];"))
-  (should (equal (sql-reformat-string "select 2, [2nd_time], 5;") "SELECT 2\n     , [2nd_time]\n     , 5;")))
+  (should (equal (sql-reformat-string "select 2, [2nd_time], 5;" 18)
+                 "SELECT 2
+                       , [2nd_time]
+                       , 5;")))
 
 (ert-deftest sql-reformat-test/minimal-select-alias-and-id ()
   "Should return clean statement when given minimal select statement with ids with an alias."
@@ -23,31 +26,55 @@
 
 (ert-deftest sql-reformat-test/multi-expression-select ()
   "Should return clean statement when given multi-expression select statement."
-  (should (equal (sql-reformat-string "select 1, 2") "SELECT 1\n     , 2;"))
-  (should (equal (sql-reformat-string "select 1, 2, 3") "SELECT 1\n     , 2\n     , 3;")))
-
-(ert-deftest sql-reformat-test/multi-expression-select-with-indent ()
-  "Should return clean statement when given multi-expression select statement and indent size."
-  (should (equal (sql-reformat-string "select 1, 2" 5) "SELECT 1\n          , 2;"))
-  (should (equal (sql-reformat-string "select 1, 2; bla" 2) "SELECT 1\n       , 2;\n  -- PARSE ERROR\n bla")))
+  (should (equal (sql-reformat-string "select 1, 2" 18)
+                 "SELECT 1
+                       , 2;"))
+  (should (equal (sql-reformat-string "select 1, 2, 3" 18)
+                 "SELECT 1
+                       , 2
+                       , 3;")))
 
 (ert-deftest sql-reformat-test/trailing-unparsed ()
   "Should return mark the spot between parsed/reformatted and unparsed text."
-  (should (equal (sql-reformat-string "select 1, 2; bla") "SELECT 1\n     , 2;\n-- PARSE ERROR\n bla")))
+  (should (equal (sql-reformat-string "select 1, 2; bla" 18)
+                 "SELECT 1
+                       , 2;
+                  -- PARSE ERROR\n bla")))
 
 (ert-deftest sql-reformat-test/select-with-from ()
   "Should return clean statement when given select statement with from clause."
-  (should (equal (sql-reformat-string "select 1 from quetzlquatl") "SELECT 1\n  FROM [quetzlquatl];"))
-  (should (equal (sql-reformat-string "select 1 from [quetzlquatl]") "SELECT 1\n  FROM [quetzlquatl];"))
-  (should (equal (sql-reformat-string "select 1, 2 from quetzlquatl") "SELECT 1\n     , 2\n  FROM [quetzlquatl];"))
-  (should (equal (sql-reformat-string "select 1, 2 From Quetzlquatl;") "SELECT 1\n     , 2\n  FROM [Quetzlquatl];")))
+  (should (equal (sql-reformat-string "select 1 from quetzlquatl" 18)
+                 "SELECT 1
+                    FROM [quetzlquatl];"))
+  (should (equal (sql-reformat-string "select 1 from [quetzlquatl]" 18)
+                 "SELECT 1
+                    FROM [quetzlquatl];"))
+  (should (equal (sql-reformat-string "select 1, 2 from quetzlquatl" 18)
+                 "SELECT 1
+                       , 2
+                    FROM [quetzlquatl];"))
+  (should (equal (sql-reformat-string "select 1, 2 From Quetzlquatl;" 18)
+                 "SELECT 1
+                       , 2
+                    FROM [Quetzlquatl];")))
 
 (ert-deftest sql-reformat-test/select-with-from-specified-table ()
   "Should return clean statement when given select statement with from clause from a specified table."
-  (should (equal (sql-reformat-string "select 1 from dbo.quetzlquatl") "SELECT 1\n  FROM [dbo].[quetzlquatl];"))
-  (should (equal (sql-reformat-string "select 1, 2 from thisdb..quetzlquatl") "SELECT 1\n     , 2\n  FROM [thisdb]..[quetzlquatl];"))
-  (should (equal (sql-reformat-string "select 1, 2 from thisdb.dbo.quetzlquatl") "SELECT 1\n     , 2\n  FROM [thisdb].[dbo].[quetzlquatl];"))
-  (should (equal (sql-reformat-string "select 1, 2 from myserver.thisdb.dbo.quetzlquatl") "SELECT 1\n     , 2\n  FROM [myserver].[thisdb].[dbo].[quetzlquatl];")))
+  (should (equal (sql-reformat-string "select 1 from dbo.quetzlquatl" 18)
+                 "SELECT 1
+                    FROM [dbo].[quetzlquatl];"))
+  (should (equal (sql-reformat-string "select 1, 2 from thisdb..quetzlquatl" 18)
+                 "SELECT 1
+                       , 2
+                    FROM [thisdb]..[quetzlquatl];"))
+  (should (equal (sql-reformat-string "select 1, 2 from thisdb.dbo.quetzlquatl" 18)
+                 "SELECT 1
+                       , 2
+                    FROM [thisdb].[dbo].[quetzlquatl];"))
+  (should (equal (sql-reformat-string "select 1, 2 from myserver.thisdb.dbo.quetzlquatl" 18)
+                 "SELECT 1
+                       , 2
+                    FROM [myserver].[thisdb].[dbo].[quetzlquatl];")))
 
 (ert-deftest sql-reformat-test/select-with-from-and-where ()
   "Should return clean statement when given select statement with from and where clause."
