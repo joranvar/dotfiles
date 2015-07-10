@@ -215,7 +215,7 @@
     :ensure t
     :config
     (helm-projectile-on)
-    (setq projectile-switch-project-action (lambda () (magit-status (projectile-project-root)))))
+    (setq projectile-switch-project-action (lambda () (magit-status-internal (projectile-project-root)))))
   (setq magit-repo-dirs (mapcar (lambda (dir)
                                   (substring dir 0 -1))
                                 (-filter (lambda (project)
