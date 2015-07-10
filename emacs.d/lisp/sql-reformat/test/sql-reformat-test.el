@@ -58,6 +58,13 @@
                        , 2
                     FROM [Quetzlquatl];")))
 
+(ert-deftest sql-reformat-test/select-with-subquery ()
+  "Should return clean statement when given select statement with a subquery."
+  (should (equal (sql-reformat-string "select (select 1 from quetzlquatl)" 18)
+                 "SELECT ( SELECT 1
+                             FROM [quetzlquatl]
+                         );")))
+
 (ert-deftest sql-reformat-test/select-with-from-specified-table ()
   "Should return clean statement when given select statement with from clause from a specified table."
   (should (equal (sql-reformat-string "select 1 from dbo.quetzlquatl" 18)
