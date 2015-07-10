@@ -66,18 +66,18 @@
 (use-package rdp :ensure t)
 
 (use-package smart-mode-line-powerline-theme
+  :defer t
   :ensure t)
 
 (use-package smart-mode-line
   :ensure t
+  :defer t
   :config
   (setq sml/theme 'powerline)
   (sml/setup))
 
 (use-package magit
-  :ensure t
-  :config
-  (setq magit-last-seen-setup-instructions "1.4.0"))
+  :ensure t)
 
 (use-package helm
   :ensure t
