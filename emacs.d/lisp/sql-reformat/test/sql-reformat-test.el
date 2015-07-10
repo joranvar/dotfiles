@@ -49,5 +49,9 @@
   (should (equal (sql-reformat-string "select 1, 2 from thisdb.dbo.quetzlquatl") "SELECT 1\n     , 2\n  FROM [thisdb].[dbo].[quetzlquatl];"))
   (should (equal (sql-reformat-string "select 1, 2 from myserver.thisdb.dbo.quetzlquatl") "SELECT 1\n     , 2\n  FROM [myserver].[thisdb].[dbo].[quetzlquatl];")))
 
+(ert-deftest sql-reformat-test/select-with-from-and-where ()
+  "Should return clean statement when given select statement with from and where clause."
+  (should (equal (sql-reformat-string "select 1 from quetzlquatl where x = 1") "SELECT 1\n  FROM [quetzlquatl]\n WHERE [x] = 1;")))
+
 ;; (rdp-parse-string "select a, amore, somuch from dbo.a join myDb..this join second on morebla on bla;" sql-tokens)
 ;; (sql-ast-to-string (rdp-parse-string "select a as b" sql-tokens))

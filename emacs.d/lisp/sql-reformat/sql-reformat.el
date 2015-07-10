@@ -70,10 +70,11 @@ line."
                   (replace-match (s-upcase it)))))))))))
 
 (defvar sql-tokens
-  '((query        select from [";" empty])
+  '((query        select from where [";" empty])
     (empty        . "")
     (select       "SELECT" aliasable-exprs)
     (from         . [("FROM" table) empty])
+    (where        . [("WHERE" pred) empty])
     (table        . [srv-table db-table sch-table id])
     (srv-table    id "\\." id "\\." [id empty] "\\." id)
     (db-table     id "\\." [id empty] "\\." id)
@@ -82,13 +83,17 @@ line."
     (exprs        . [(expr "," exprs) expr])
     (expr         . [id literal])
     (literal      . [num string])
-    (num          . "[0-9\\.]*")
+    (num          . "[0-9][0-9\\.]*")
     (string       . "'\\([^']\\|''\\)*'")
     (id           . "\\([a-zA-Z][^,;. ]*\\|\\[[^,; ]+\\]\\)")
     (aliasable-expr . [column post-alias pre-alias expr])
     (post-alias   expr "AS" id)
     (pre-alias    id "=" expr)
-    (column       id "\\." id)))
+    (column       id "\\." id)
+    (pred         . [(predexpr predop pred) predexpr])
+    (predexpr     "\\(NOT\\)?" expr cmp expr)
+    (predop       . ["AND" "OR"])
+    (cmp          . "\\(=\\|<>\\)")))
 
 ;; The token set below is the direction I want to grow this to.
 ;; (defvar sql-tokens
@@ -138,10 +143,13 @@ first line."
     (setq sql-cur-indent indent))
   (pcase ast
     (`(empty . "")              "")
-    (`(query ,select ,from ,_)  (s-concat (sql-astts select) (sql-astts from) ";"))
+    (`(query ,select ,from ,where ,_)
+     (s-concat (sql-astts select) (sql-astts from) (sql-astts where) ";"))
     (`(select ,_ ,expr)         (s-concat "SELECT " (sql-astts expr)))
     (`(from empty . ,_)         "")
     (`(from ,_  (table . ,table))(s-concat (sql-newline) "  FROM " (sql-astts table)))
+    (`(where empty . ,_)        "")
+    (`(where ,_ (pred . ,pred)) (s-concat (sql-newline) " WHERE " (sql-astts pred)))
     (`(sch-table . ,table)      (s-concat (sql-astts (nth 0 table)) "."
                                           (sql-astts (nth 2 table))))
     (`(db-table . ,table)       (s-concat (sql-astts (nth 0 table)) "."
@@ -157,6 +165,8 @@ first line."
     (`(exprs . ,expr)           (sql-astts expr))
     (`(expr . ,expr)            (sql-astts expr))
     (`(aliasable-expr . ,expr)  (sql-astts expr))
+    (`(predexpr ,not ,expr1 ,cmp ,expr2) (s-concat (unless (string= "" not) "NOT ") (sql-astts expr1) " " (sql-astts cmp) " " (sql-astts expr2)))
+    (`(cmp . ,cmp)              cmp)
     (`(column ,alias ,_ ,fld)   (s-concat (sql-astts fld) " = " (sql-astts alias) "." (sql-astts fld)))
     (`(pre-alias ,alias ,_ ,expr)(s-concat (sql-astts alias) " = " (sql-astts expr)))
     (`(post-alias ,expr ,_ ,alias)(s-concat (sql-astts alias) " = " (sql-astts expr)))
