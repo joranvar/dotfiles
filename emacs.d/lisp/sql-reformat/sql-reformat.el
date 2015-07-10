@@ -135,6 +135,11 @@ line."
 
 (defvar sql-cur-indent 0)
 
+(defmacro sql-adjusting-indent-for (s &rest body)
+  "Adjust the sql-indent with the length of string S during execution of BODY."
+  `(let ((sql-cur-indent (+ (length ,s) sql-cur-indent)))
+     ,@body))
+
 (defun sql-newline ()
   (s-concat "\n" (make-string sql-cur-indent ?\s)))
 
@@ -171,8 +176,8 @@ first line."
     (`(exprs . ,expr)           (sql-astts expr))
     (`(expr . ,expr)            (sql-astts expr))
     (`(pexpr "(" ,contained-expr ")") (s-concat "( "
-                                                (let ((sql-cur-indent (+ 9 sql-cur-indent)))
-                                                  (sql-astts contained-expr))
+                                                (sql-adjusting-indent-for "SELECT ( "
+                                                                          (sql-astts contained-expr))
                                                 (sql-newline)
                                                 "       )"))
     (`(aliasable-expr . ,expr)  (sql-astts expr))
@@ -183,12 +188,12 @@ first line."
     (`(predop and . ,_)         "       AND ")
     (`(predop or . ,_)          "    OR ")
     (`(cmp . ,cmp)              cmp)
-    (`(column ,alias ,_ ,fld)   (let ((sql-cur-indent (+ 3 (length (sql-astts fld)) sql-cur-indent)))
-                                  (s-concat (sql-astts fld) " = " (sql-astts alias) "." (sql-astts fld))))
-    (`(pre-alias ,alias ,_ ,expr) (let ((sql-cur-indent (+ 3 (length (sql-astts alias)) sql-cur-indent)))
-                                    (s-concat (sql-astts alias) " = " (sql-astts expr))))
-    (`(post-alias ,expr ,_ ,alias)(let ((sql-cur-indent (+ 3 (length (sql-astts alias)) sql-cur-indent)))
-                                    (s-concat (sql-astts alias) " = " (sql-astts expr))))
+    (`(column ,alias ,_ ,fld)   (sql-adjusting-indent-for (s-concat (sql-astts fld) " = ")
+                                                          (s-concat (sql-astts fld) " = " (sql-astts alias) "." (sql-astts fld))))
+    (`(pre-alias ,alias ,_ ,expr) (sql-adjusting-indent-for (s-concat (sql-astts alias) " = ")
+                                                            (s-concat (sql-astts alias) " = " (sql-astts expr))))
+    (`(post-alias ,expr ,_ ,alias)(sql-adjusting-indent-for (s-concat (sql-astts alias) " = ")
+                                                            (s-concat (sql-astts alias) " = " (sql-astts expr))))
     (`(id . ,id)                (sql-quote id))
     (`(literal . ,lit)          (sql-astts lit))
     (`(num . ,num)              num)
