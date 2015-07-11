@@ -133,7 +133,8 @@
 (ert-deftest sql-reformat-test/select-with-top-directive ()
   "Should return clean statement when given select statement with top directive."
   (should (equal (sql-reformat-string "select top 10 * from quetzlquatl" 18)
-                 "SELECT TOP 10 *
+                 "SELECT TOP 10
+                         *
                     FROM [quetzlquatl];")))
 
 ;; (rdp-parse-string "select a, amore, somuch from dbo.a join myDb..this join second on morebla on bla;" sql-tokens)

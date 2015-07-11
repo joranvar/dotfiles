@@ -173,7 +173,7 @@ first line."
                                                            (sql-astts (nth 2 table)) "."
                                                            (sql-astts (nth 4 table)) "."
                                                            (sql-astts (nth 6 table))))
-    (`(directive ,top ,num)                      (s-concat (s-upcase top) " " (sql-astts num) " "))
+    (`(directive ,top ,num)                      (s-concat (s-upcase top) " " (sql-astts num) (sql-newline) "       "))
     (`(aliasable-exprs ,expr "," ,exprs)         (s-concat (sql-astts expr) (sql-newline) "     , " (sql-astts exprs)))
     (`(aliasable-exprs . ,expr)                  (sql-astts expr))
     (`(exprs ,expr "," ,exprs)                   (s-concat (sql-astts expr) (sql-newline) "     , " (sql-astts exprs)))
