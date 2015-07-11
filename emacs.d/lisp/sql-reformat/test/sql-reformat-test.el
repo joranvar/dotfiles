@@ -73,6 +73,20 @@
                              FROM [quetzlquatl]
                          ) AS [q];")))
 
+(ert-deftest sql-reformat-test/select-with-column-expression-in-where ()
+  "Should return clean statement when given select statement with a where clause containing a column expression."
+  (should (equal (sql-reformat-string "select x from q where q.x = 1" 18)
+                 "SELECT [x]
+                    FROM [q]
+                   WHERE [q].[x] = 1;"))
+  (should (equal (sql-reformat-string "select 1 from (select 1 as x from quetzlquatl where 1 = 1 ) q where q.x = 1" 18)
+                 "SELECT 1
+                    FROM ( SELECT [x] = 1
+                             FROM [quetzlquatl]
+                            WHERE 1 = 1
+                         ) AS [q]
+                   WHERE [q].[x] = 1;")))
+
 (ert-deftest sql-reformat-test/select-with-subquery-and-aliases ()
   "Should return clean statement when given select statement with a subquery with aliases."
   (should (equal (sql-reformat-string "select (select 1 as one from quetzlquatl) as sub" 18)

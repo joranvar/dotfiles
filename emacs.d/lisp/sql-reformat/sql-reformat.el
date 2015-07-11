@@ -83,13 +83,14 @@ line."
     (sch-table           id "\\." id)
     (aliasable-exprs   . [(aliasable-expr "," aliasable-exprs) aliasable-expr])
     (exprs             . [(expr "," exprs) expr])
-    (expr              . [pexpr id literal])
+    (expr              . [pexpr column id literal])
     (pexpr               "(" [query expr] ")")
     (literal           . [num string])
     (num               . "[0-9][0-9\\.]*")
     (string            . "'\\([^']\\|''\\)*'")
     (id                . "\\([a-zA-Z][^,;.() ]*\\|\\[[^,; ]+\\]\\)")
-    (aliasable-expr    . [column post-alias pre-alias expr])
+    (aliasable-expr    . [aliasable-column post-alias pre-alias expr])
+    (aliasable-column  . column)
     (post-alias          expr "AS" id)
     (pre-alias           id "=" expr)
     (column              id "\\." id)
@@ -190,7 +191,7 @@ first line."
     (`(predop and . ,_)                          "       AND ")
     (`(predop or . ,_)                           "    OR ")
     (`(cmp . ,cmp)                               cmp)
-    (`(column ,alias ,_ ,fld)                    (sql-adjusting-indent-for (s-concat (sql-astts fld) " = ")
+    (`(aliasable-column column ,alias ,_ ,fld)   (sql-adjusting-indent-for (s-concat (sql-astts fld) " = ")
                                                                            (s-concat (sql-astts fld) " = "
                                                                                      (sql-astts alias) "."
                                                                                      (sql-astts fld))))
@@ -200,6 +201,8 @@ first line."
     (`(post-alias ,expr ,_ ,alias)               (sql-adjusting-indent-for (s-concat (sql-astts alias) " = ")
                                                                            (s-concat (sql-astts alias) " = "
                                                                                      (sql-astts expr))))
+    (`(column ,alias ,_ ,fld)                    (s-concat (sql-astts alias) "."
+                                                           (sql-astts fld)))
     (`(id . ,id)                                 (sql-quote id))
     (`(literal . ,lit)                           (sql-astts lit))
     (`(num . ,num)                               num)
