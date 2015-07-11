@@ -137,5 +137,14 @@
                          *
                     FROM [quetzlquatl];")))
 
+(ert-deftest sql-reformat-test/select-with-distinct-directive ()
+  "Should return clean statement when given select statement with distinct directive."
+  (should (equal (sql-reformat-string "select distinct a, b, c from quetzlquatl" 18)
+                 "SELECT DISTINCT
+                         [a]
+                       , [b]
+                       , [c]
+                    FROM [quetzlquatl];")))
+
 ;; (rdp-parse-string "select a, amore, somuch from dbo.a join myDb..this join second on morebla on bla;" sql-tokens)
 ;; (sql-ast-to-string (rdp-parse-string "select a as b" sql-tokens))
