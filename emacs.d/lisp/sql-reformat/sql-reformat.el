@@ -73,7 +73,8 @@ line."
   '((statement           query [";" empty])
     (query               select from where)
     (empty             . "")
-    (select              "SELECT" aliasable-exprs)
+    (select              "SELECT" [directive empty] aliasable-exprs)
+    (directive           "TOP" num)
     (from              . [("FROM" table) empty])
     (where             . [("WHERE" pred) empty])
     (table             . [subquery-as-table srv-table db-table sch-table id])
@@ -89,7 +90,7 @@ line."
     (num               . "[0-9][0-9\\.]*")
     (string            . "'\\([^']\\|''\\)*'")
     (id                . "\\([a-zA-Z][^,;.() ]*\\|\\[[^,; ]+\\]\\)")
-    (aliasable-expr    . [aliasable-column post-alias pre-alias expr])
+    (aliasable-expr    . [aliasable-column post-alias pre-alias expr "*"])
     (aliasable-column  . column)
     (post-alias          expr "AS" id)
     (pre-alias           id "=" expr)
@@ -156,7 +157,7 @@ first line."
     (`(empty . "")                               "")
     (`(statement ,query ,_)                      (s-concat (sql-astts query) ";"))
     (`(query ,select ,from ,where)               (s-concat (sql-astts select) (sql-astts from) (sql-astts where)))
-    (`(select ,_ ,expr)                          (s-concat "SELECT " (sql-astts expr)))
+    (`(select ,_ ,directive ,expr)               (s-concat "SELECT " (sql-astts directive) (sql-astts expr)))
     (`(from empty . ,_)                          "")
     (`(from ,_ ,table)                           (s-concat (sql-newline) "  FROM " (sql-astts table)))
     (`(where empty . ,_)                         "")
@@ -172,6 +173,7 @@ first line."
                                                            (sql-astts (nth 2 table)) "."
                                                            (sql-astts (nth 4 table)) "."
                                                            (sql-astts (nth 6 table))))
+    (`(directive ,top ,num)                      (s-concat (s-upcase top) " " (sql-astts num) " "))
     (`(aliasable-exprs ,expr "," ,exprs)         (s-concat (sql-astts expr) (sql-newline) "     , " (sql-astts exprs)))
     (`(aliasable-exprs . ,expr)                  (sql-astts expr))
     (`(exprs ,expr "," ,exprs)                   (s-concat (sql-astts expr) (sql-newline) "     , " (sql-astts exprs)))
@@ -203,6 +205,7 @@ first line."
                                                                                      (sql-astts expr))))
     (`(column ,alias ,_ ,fld)                    (s-concat (sql-astts alias) "."
                                                            (sql-astts fld)))
+    (`("*")                                      "*")
     (`(id . ,id)                                 (sql-quote id))
     (`(literal . ,lit)                           (sql-astts lit))
     (`(num . ,num)                               num)
