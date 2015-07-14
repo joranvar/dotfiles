@@ -66,6 +66,20 @@
                        , 2
                     FROM [Quetzalqoatl];")))
 
+(ert-deftest sql-reformat-test/select-with-from-and-alias ()
+  "Should return clean statement when given select statement with from clause and alias."
+  (should (equal (sql-reformat-string "select 1 from quetzalqoatl q" 18)
+                 "SELECT 1
+                    FROM [quetzalqoatl] AS [q];")))
+
+;; (ert-deftest sql-reformat-test/select-with-from-and-join ()
+;;   "Should return clean statement when given select statement with from and join clause."
+;;   (should (equal (sql-reformat-string "select 1 from quetzalqoatl q join mixcoatl m on m.a = q.b" 18)
+;;                  "SELECT 1
+;;                     FROM [quetzalqoatl] AS [q]
+;;                    INNER JOIN [mixcoatl] AS [m]
+;;                       ON [m].[a] = [q].[b];")))
+
 (ert-deftest sql-reformat-test/select-with-subquery ()
   "Should return clean statement when given select statement with a subquery."
   (should (equal (sql-reformat-string "select (select 1 from quetzalqoatl)" 18)
