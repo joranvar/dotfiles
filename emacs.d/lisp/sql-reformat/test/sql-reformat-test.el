@@ -8,6 +8,10 @@
   (should (equal (sql-reformat-string "select 2") "SELECT 2;"))
   (should (equal (sql-reformat-string "select 2;") "SELECT 2;")))
 
+(ert-deftest sql-reformat-test/minimal-select-cast ()
+  "Should return clean statement when given minimal select statement with a cast."
+  (should (equal (sql-reformat-string "select cast(1 as int)") "SELECT cast (1 AS int);")))
+
 (ert-deftest sql-reformat-test/minimal-select-id ()
   "Should return clean statement when given minimal select statement with ids."
   (should (equal (sql-reformat-string "select this") "SELECT [this];"))
@@ -17,6 +21,10 @@
                  "SELECT 2
                        , [2nd_time]
                        , 5;")))
+
+(ert-deftest sql-reformat-test/minimal-select-cast-alias ()
+  "Should return clean statement when given minimal select statement with a cast and an alias."
+  (should (equal (sql-reformat-string "select cast(1 as int) as x") "SELECT [x] = cast (1 AS int);")))
 
 (ert-deftest sql-reformat-test/minimal-select-alias-and-id ()
   "Should return clean statement when given minimal select statement with ids with an alias."
