@@ -73,6 +73,13 @@
                              FROM [quetzlquatl]
                          );")))
 
+(ert-deftest sql-reformat-test/select-with-cast-subquery ()
+  "Should return clean statement when given select statement with a subquery."
+  (should (equal (sql-reformat-string "select cast ((select 1 from quetzlquatl) as int)" 18)
+                 "SELECT cast (( SELECT 1
+                                   FROM [quetzlquatl]
+                               ) AS int);")))
+
 (ert-deftest sql-reformat-test/select-from-subquery ()
   "Should return clean statement when given select statement from a subquery."
   (should (equal (sql-reformat-string "select 1 from (select 1 from quetzlquatl) q" 18)

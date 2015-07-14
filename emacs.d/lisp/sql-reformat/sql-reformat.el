@@ -194,7 +194,7 @@ first line."
                                                                                      (sql-astts contained-expr))
                                                            (sql-newline)
                                                            "       )"))
-    (`(cast ,_ ,_ ,expr ,_ ,type ,_)             (s-concat "cast (" (sql-adjusting-indent-for " ( " (sql-astts expr)) " AS " (sql-astts type) ")"))
+    (`(cast ,_ ,_ ,expr ,_ ,type ,_)             (s-concat "cast (" (sql-adjusting-indent-for "cast (" (sql-astts expr)) " AS " (sql-astts type) ")"))
     (`(type . ,type)                             (s-downcase type))
     (`(aliasable-expr . ,expr)                   (sql-astts expr))
     (`(pred ,predexpr ,predop, pred)             (s-concat (sql-astts predexpr)
