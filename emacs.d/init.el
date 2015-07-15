@@ -76,7 +76,8 @@
 
 (use-package helm
   :ensure t
-  :bind (("M-x" . helm-M-x))
+  :bind (("M-x" . helm-M-x)
+         ("C-x C-f" . helm-find-files))
   :init
   (require 'helm-config)
   (helm-mode 1))
