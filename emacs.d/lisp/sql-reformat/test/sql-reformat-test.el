@@ -8,6 +8,10 @@
   (should (equal (sql-reformat-string "select 2") "SELECT 2;"))
   (should (equal (sql-reformat-string "select 2;") "SELECT 2;")))
 
+(ert-deftest sql-reformat-test/minimal-select-cast ()
+  "Should return clean statement when given minimal select statement with a cast."
+  (should (equal (sql-reformat-string "select cast(1 as int)") "SELECT cast (1 AS int);")))
+
 (ert-deftest sql-reformat-test/minimal-select-id ()
   "Should return clean statement when given minimal select statement with ids."
   (should (equal (sql-reformat-string "select this") "SELECT [this];"))
@@ -17,6 +21,10 @@
                  "SELECT 2
                        , [2nd_time]
                        , 5;")))
+
+(ert-deftest sql-reformat-test/minimal-select-cast-alias ()
+  "Should return clean statement when given minimal select statement with a cast and an alias."
+  (should (equal (sql-reformat-string "select cast(1 as int) as x") "SELECT [x] = cast (1 AS int);")))
 
 (ert-deftest sql-reformat-test/minimal-select-alias-and-id ()
   "Should return clean statement when given minimal select statement with ids with an alias."
@@ -43,34 +51,41 @@
 
 (ert-deftest sql-reformat-test/select-with-from ()
   "Should return clean statement when given select statement with from clause."
-  (should (equal (sql-reformat-string "select 1 from quetzlquatl" 18)
+  (should (equal (sql-reformat-string "select 1 from quetzalqoatl" 18)
                  "SELECT 1
-                    FROM [quetzlquatl];"))
-  (should (equal (sql-reformat-string "select 1 from [quetzlquatl]" 18)
+                    FROM [quetzalqoatl];"))
+  (should (equal (sql-reformat-string "select 1 from [quetzalqoatl]" 18)
                  "SELECT 1
-                    FROM [quetzlquatl];"))
-  (should (equal (sql-reformat-string "select 1, 2 from quetzlquatl" 18)
-                 "SELECT 1
-                       , 2
-                    FROM [quetzlquatl];"))
-  (should (equal (sql-reformat-string "select 1, 2 From Quetzlquatl;" 18)
+                    FROM [quetzalqoatl];"))
+  (should (equal (sql-reformat-string "select 1, 2 from quetzalqoatl" 18)
                  "SELECT 1
                        , 2
-                    FROM [Quetzlquatl];")))
+                    FROM [quetzalqoatl];"))
+  (should (equal (sql-reformat-string "select 1, 2 From Quetzalqoatl;" 18)
+                 "SELECT 1
+                       , 2
+                    FROM [Quetzalqoatl];")))
 
 (ert-deftest sql-reformat-test/select-with-subquery ()
   "Should return clean statement when given select statement with a subquery."
-  (should (equal (sql-reformat-string "select (select 1 from quetzlquatl)" 18)
+  (should (equal (sql-reformat-string "select (select 1 from quetzalqoatl)" 18)
                  "SELECT ( SELECT 1
-                             FROM [quetzlquatl]
+                             FROM [quetzalqoatl]
                          );")))
+
+(ert-deftest sql-reformat-test/select-with-cast-subquery ()
+  "Should return clean statement when given select statement with a subquery."
+  (should (equal (sql-reformat-string "select cast ((select 1 from quetzalqoatl) as int)" 18)
+                 "SELECT cast (( SELECT 1
+                                   FROM [quetzalqoatl]
+                               ) AS int);")))
 
 (ert-deftest sql-reformat-test/select-from-subquery ()
   "Should return clean statement when given select statement from a subquery."
-  (should (equal (sql-reformat-string "select 1 from (select 1 from quetzlquatl) q" 18)
+  (should (equal (sql-reformat-string "select 1 from (select 1 from quetzalqoatl) q" 18)
                  "SELECT 1
                     FROM ( SELECT 1
-                             FROM [quetzlquatl]
+                             FROM [quetzalqoatl]
                          ) AS [q];")))
 
 (ert-deftest sql-reformat-test/select-with-column-expression-in-where ()
@@ -79,72 +94,72 @@
                  "SELECT [x]
                     FROM [q]
                    WHERE [q].[x] = 1;"))
-  (should (equal (sql-reformat-string "select 1 from (select 1 as x from quetzlquatl where 1 = 1 ) q where q.x = 1" 18)
+  (should (equal (sql-reformat-string "select 1 from (select 1 as x from quetzalqoatl where 1 = 1 ) q where q.x = 1" 18)
                  "SELECT 1
                     FROM ( SELECT [x] = 1
-                             FROM [quetzlquatl]
+                             FROM [quetzalqoatl]
                             WHERE 1 = 1
                          ) AS [q]
                    WHERE [q].[x] = 1;")))
 
 (ert-deftest sql-reformat-test/select-with-subquery-and-aliases ()
   "Should return clean statement when given select statement with a subquery with aliases."
-  (should (equal (sql-reformat-string "select (select 1 as one from quetzlquatl) as sub" 18)
+  (should (equal (sql-reformat-string "select (select 1 as one from quetzalqoatl) as sub" 18)
                  "SELECT [sub] = ( SELECT [one] = 1
-                                     FROM [quetzlquatl]
+                                     FROM [quetzalqoatl]
                                  );")))
 
 (ert-deftest sql-reformat-test/select-with-from-specified-table ()
   "Should return clean statement when given select statement with from clause from a specified table."
-  (should (equal (sql-reformat-string "select 1 from dbo.quetzlquatl" 18)
+  (should (equal (sql-reformat-string "select 1 from dbo.quetzalqoatl" 18)
                  "SELECT 1
-                    FROM [dbo].[quetzlquatl];"))
-  (should (equal (sql-reformat-string "select 1, 2 from thisdb..quetzlquatl" 18)
-                 "SELECT 1
-                       , 2
-                    FROM [thisdb]..[quetzlquatl];"))
-  (should (equal (sql-reformat-string "select 1, 2 from thisdb.dbo.quetzlquatl" 18)
+                    FROM [dbo].[quetzalqoatl];"))
+  (should (equal (sql-reformat-string "select 1, 2 from thisdb..quetzalqoatl" 18)
                  "SELECT 1
                        , 2
-                    FROM [thisdb].[dbo].[quetzlquatl];"))
-  (should (equal (sql-reformat-string "select 1, 2 from myserver.thisdb.dbo.quetzlquatl" 18)
+                    FROM [thisdb]..[quetzalqoatl];"))
+  (should (equal (sql-reformat-string "select 1, 2 from thisdb.dbo.quetzalqoatl" 18)
                  "SELECT 1
                        , 2
-                    FROM [myserver].[thisdb].[dbo].[quetzlquatl];")))
+                    FROM [thisdb].[dbo].[quetzalqoatl];"))
+  (should (equal (sql-reformat-string "select 1, 2 from myserver.thisdb.dbo.quetzalqoatl" 18)
+                 "SELECT 1
+                       , 2
+                    FROM [myserver].[thisdb].[dbo].[quetzalqoatl];")))
 
 (ert-deftest sql-reformat-test/select-with-from-and-where ()
   "Should return clean statement when given select statement with from and where clause."
-  (should (equal (sql-reformat-string "select 1 from quetzlquatl where x = 1" 18)
+  (should (equal (sql-reformat-string "select 1 from quetzalqoatl where x = 1" 18)
                  "SELECT 1
-                    FROM [quetzlquatl]
+                    FROM [quetzalqoatl]
                    WHERE [x] = 1;"))
-  (should (equal (sql-reformat-string "select 1 from quetzlquatl where x = 1 or x = 2;" 18)
+  (should (equal (sql-reformat-string "select 1 from quetzalqoatl where x = 1 or x = 2;" 18)
                  "SELECT 1
-                    FROM [quetzlquatl]
+                    FROM [quetzalqoatl]
                    WHERE [x] = 1
                       OR [x] = 2;"))
-  (should (equal (sql-reformat-string "select 1 from quetzlquatl where 2 = 1 and y = 2 or x = 3;" 18)
+  (should (equal (sql-reformat-string "select 1 from quetzalqoatl where 2 = 1 and y = 2 or x = 3;" 18)
                  "SELECT 1
-                    FROM [quetzlquatl]
+                    FROM [quetzalqoatl]
                    WHERE 2 = 1
                          AND [y] = 2
                       OR [x] = 3;")))
 
 (ert-deftest sql-reformat-test/select-with-top-directive ()
   "Should return clean statement when given select statement with top directive."
-  (should (equal (sql-reformat-string "select top 10 * from quetzlquatl" 18)
+  (should (equal (sql-reformat-string "select top 10 * from quetzalqoatl" 18)
                  "SELECT TOP 10
                          *
-                    FROM [quetzlquatl];")))
+                    FROM [quetzalqoatl];")))
 
 (ert-deftest sql-reformat-test/select-with-distinct-directive ()
   "Should return clean statement when given select statement with distinct directive."
-  (should (equal (sql-reformat-string "select distinct a, b, c from quetzlquatl" 18)
+  (should (equal (sql-reformat-string "select distinct a, b, c from quetzalqoatl" 18)
                  "SELECT DISTINCT
                          [a]
                        , [b]
                        , [c]
-                    FROM [quetzlquatl];")))
+                    FROM [quetzalqoatl];")))
 
 ;; (rdp-parse-string "select a, amore, somuch from dbo.a join myDb..this join second on morebla on bla;" sql-tokens)
 ;; (sql-ast-to-string (rdp-parse-string "select a as b" sql-tokens))
