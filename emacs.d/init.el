@@ -72,7 +72,8 @@
   (sml/setup))
 
 (use-package magit
-  :ensure t)
+  :ensure t
+  :bind (("M-G" . magit-status)))
 
 (use-package helm
   :ensure t
