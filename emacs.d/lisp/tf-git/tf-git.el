@@ -9,18 +9,19 @@
 
 (defun tf-set-note (changeset-id note-name note-value)
   "Set the changeset note of CHANGESET-ID with name NOTE-NAME to NOTE-VALUE."
-  (with-output-to-temp-buffer "*tf*"
-    (princ "Before:\n-------\n\n")
-    (start-process "tf" "*tf*" tf-program-location
-                   "changeset"
-                   "/noprompt"
-                   changeset-id)
-    (princ "\n\nAfter:\n------\n\n")
-    (start-process "tf" "*tf*" tf-program-location
-                   "changeset"
-                   (s-concat "/notes:" note-name "=" note-value)
-                   "/noprompt"
-                   changeset-id)))
+  (let ((note-value (s-replace ";" ";;" note-value)))
+    (with-output-to-temp-buffer "*tf*"
+      (princ "Before:\n-------\n\n")
+      (start-process "tf" "*tf*" tf-program-location
+                     "changeset"
+                     "/noprompt"
+                     changeset-id)
+      (princ "\n\nAfter:\n------\n\n")
+      (start-process "tf" "*tf*" tf-program-location
+                     "changeset"
+                     (s-concat "/notes:" note-name "=" note-value)
+                     "/noprompt"
+                     changeset-id))))
 
 (defun tf-get-reviewer (&optional changeset-id)
   "Get the reviewer note of CHANGESET-ID.
