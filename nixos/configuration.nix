@@ -20,6 +20,8 @@
   boot.blacklistedKernelModules = [ "snd_pcsp" ];
   hardware.pulseaudio.enable = true;
 
+  hardware.opengl.driSupport32Bit = true;
+
   networking.hostName = "lapbart"; # Define your hostname.
   networking.hostId = "3d14756b";
   # networking.wireless.enable = true;  # Enables wireless.
