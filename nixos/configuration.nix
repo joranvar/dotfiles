@@ -25,6 +25,10 @@
   networking.hostName = "lapbart"; # Define your hostname.
   networking.hostId = "3d14756b";
   # networking.wireless.enable = true;  # Enables wireless.
+  networking.firewall.enable = true;
+  networking.firewall.allowPing = true;
+  networking.firewall.allowedTCPPorts = [ 445 139 ];
+  networking.firewall.allowedUDPPorts = [ 137 138 ];
 
   # Select internationalisation properties.
   # i18n = {
