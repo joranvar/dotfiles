@@ -57,8 +57,8 @@
     trayer
     haskellPackages.xmobar
     haskellPackages.xmonad
-    haskellPackages.xmonadContrib
-    haskellPackages.xmonadExtras
+    haskellPackages.xmonad-contrib
+    haskellPackages.xmonad-extras
 
     dmenu
     xscreensaver
