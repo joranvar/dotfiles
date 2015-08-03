@@ -101,6 +101,7 @@
                                  "* %?\n%U\n" :clock-in t :clock-resume t)
                                 ("i" "Interrupt" entry (file+datetree "cgm.org" "JOURNAL")
                                  "* %?\n%U\n" :clock-in t :clock-resume t)))
+  (setq org-mobile-directory "~/org/mobile/")
   (org-babel-do-load-languages 'org-babel-load-languages '((sql . t))))
 
 (use-package nix-mode)
