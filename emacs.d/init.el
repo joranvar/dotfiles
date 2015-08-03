@@ -165,7 +165,7 @@
   (setq omnisharp-server-executable-path
         (substitute-in-file-name
          (if (eq system-type 'gnu/linux)
-             "$HOME/git_pull/omnisharp-server/OmniSharp/bin/Debug/OmniSharp.exe"
+             "$HOME/git/omnisharp-server/OmniSharp/bin/Debug/OmniSharp.exe"
            "D:\\Ontwikkeling\\omnisharp-server\\OmniSharp\\bin\\Debug\\OmniSharp.exe")))
   (define-key omnisharp-mode-map (kbd "M-.") #'omnisharp-auto-complete)
   (define-key omnisharp-mode-map (kbd "M-RET") #'omnisharp-run-code-action-refactoring)
