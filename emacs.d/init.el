@@ -73,6 +73,7 @@
 
 (use-package magit
   :ensure t
+  :commands (magit-status-internal)
   :bind (("M-G" . magit-status)))
 
 (use-package helm
@@ -100,6 +101,7 @@
                                  "* %?\n%U\n" :clock-in t :clock-resume t)
                                 ("i" "Interrupt" entry (file+datetree "cgm.org" "JOURNAL")
                                  "* %?\n%U\n" :clock-in t :clock-resume t)))
+  (setq org-mobile-directory "~/org/mobile/")
   (org-babel-do-load-languages 'org-babel-load-languages '((sql . t))))
 
 (use-package nix-mode)
@@ -163,7 +165,7 @@
   (setq omnisharp-server-executable-path
         (substitute-in-file-name
          (if (eq system-type 'gnu/linux)
-             "$HOME/git_pull/omnisharp-server/OmniSharp/bin/Debug/OmniSharp.exe"
+             "$HOME/git/omnisharp-server/OmniSharp/bin/Debug/OmniSharp.exe"
            "D:\\Ontwikkeling\\omnisharp-server\\OmniSharp\\bin\\Debug\\OmniSharp.exe")))
   (define-key omnisharp-mode-map (kbd "M-.") #'omnisharp-auto-complete)
   (define-key omnisharp-mode-map (kbd "M-RET") #'omnisharp-run-code-action-refactoring)

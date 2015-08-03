@@ -25,6 +25,10 @@
   networking.hostName = "lapbart"; # Define your hostname.
   networking.hostId = "3d14756b";
   # networking.wireless.enable = true;  # Enables wireless.
+  networking.firewall.enable = true;
+  networking.firewall.allowPing = true;
+  networking.firewall.allowedTCPPorts = [ 445 139 ];
+  networking.firewall.allowedUDPPorts = [ 137 138 ];
 
   # Select internationalisation properties.
   # i18n = {
@@ -46,22 +50,36 @@
 
     emacs
 
+    python34
+    python34Packages.pywinrm
+
+    nox
+
     networkmanagerapplet
 
     firefox
     rxvt_unicode_with-plugins
     vlc
+    sshfsFuse
 
     xlsfonts
 
     trayer
     haskellPackages.xmobar
     haskellPackages.xmonad
-    haskellPackages.xmonadContrib
-    haskellPackages.xmonadExtras
+    haskellPackages.xmonad-contrib
+    haskellPackages.xmonad-extras
+
+    virtmanager
 
     dmenu
     xscreensaver
+    samba
+    java
+    flashplayer
+    pidgin
+
+    pass
 
     gnome3.gvfs
     gnome3.nautilus
@@ -79,16 +97,46 @@
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;
 
-  # Enable CUPS to print documents.
-  # services.printing.enable = true;
+  services.dbus = {
+    enable = true;
+    packages = [
+        pkgs.libvirt
+        pkgs.virtmanager
+        pkgs.gnome.GConf
+      ];
+  };
 
-  # Enable Samba.
-  services.samba.enable = true;
+        # Enable CUPS to print documents.
+        # services.printing.enable = true;
 
-  # nixpkgs.config.allowUnfree = true;
+        # Enable Samba.
+        services.samba = {
+        enable = true;
+        shares = {
+        devenv = {
+        path = "/home/joranvar/git/";
+        "read only" = "no";
+        browseable = "yes";
+        "guest ok" = "no";
+        "valid users" = "joranvar";
+        extraConfig = ''
+          guest account = nobody
+          map to guest = bad user
+        '';
+      };
+    };
+  };
 
-  # Enable the X11 windowing system.
-  services.xserver = {
+  services.avahi = {
+    enable = true;
+    ipv4 = true;
+    ipv6 = true;
+  };
+
+  nixpkgs.config.allowUnfree = true;
+
+    # Enable the X11 windowing system.
+    services.xserver = {
     enable = true;
     windowManager.xmonad = {
       enable = true;
@@ -110,6 +158,7 @@
     };
   };
 
+  time.timeZone = "Europe/Amsterdam";
   services.xserver.startGnuPGAgent = true;
   programs.ssh.startAgent = false; # gpg agent takes over this role
 
@@ -124,11 +173,13 @@
     isNormalUser = true;
     createHome = true;
     home = "/home/joranvar";
-    extraGroups = [ "wheel" "disk" "cdrom" "networkmanager" "audio" ];
+    extraGroups = [ "wheel" "disk" "cdrom" "networkmanager" "audio" "libvirtd" ];
     useDefaultShell = true;
     uid = 1000;
   };
   networking.networkmanager.enable = true;
   security.sudo.enable = true;
   users.defaultUserShell = "/var/run/current-system/sw/bin/zsh";
+
+  virtualisation.libvirtd.enable = true;
 }
