@@ -4,6 +4,7 @@ import XMonad.Actions.PhysicalScreens
 import XMonad.Actions.Volume
 import Graphics.X11.ExtraTypes.XF86
 import XMonad.Hooks.DynamicLog
+import XMonad.Hooks.EwmhDesktops
 import XMonad.Hooks.ManageDocks
 import XMonad.Layout
 import XMonad.Layout.NoBorders ( noBorders, smartBorders )
@@ -20,7 +21,7 @@ myLayout = avoidStruts  $  smartBorders tiled ||| smartBorders (Mirror tiled) ||
 
 main = do
     xmobar <- spawnPipe "/usr/bin/env xmobar -x 1"
-    xmonad $ defaultConfig
+    xmonad $ ewmh $ defaultConfig
         { modMask = mod4Mask
         , manageHook = manageDocks <+> manageHook defaultConfig
         , layoutHook = myLayout
@@ -28,11 +29,12 @@ main = do
             { ppOutput = hPutStrLn xmobar
             , ppTitle = xmobarColor "green" "" . shorten 50
             }
-	, startupHook = do
-	    spawnOnce "/usr/bin/env xscreensaver -no-splash"
-	    spawnOnce "trayer --SetPartialStrut true --edge top --align right --width 10 --height 14 --transparent true --alpha 0 --tint black"
-	    spawnOnce "nm-applet"
-	, terminal = "/usr/bin/env urxvt"
+        , startupHook = do
+            spawnOnce "/usr/bin/env xscreensaver -no-splash"
+            spawnOnce "trayer --SetPartialStrut true --edge top --align right --width 10 --height 14 --transparent true --alpha 0 --tint black"
+            spawnOnce "nm-applet"
+        , terminal = "/usr/bin/env urxvt"
+        , handleEventHook = handleEventHook defaultConfig <+> fullscreenEventHook
         } `additionalKeys`
         ( [ ((mod4Mask .|. shiftMask, xK_l                    ), spawn "xscreensaver-command -lock")
           , ((mod4Mask,               xK_b                    ), sendMessage ToggleStruts)
