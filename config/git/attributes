@@ -1,0 +1,2 @@
+*.ncrunchsolution diff=utf16
+*.ncrunchproject diff=utf16

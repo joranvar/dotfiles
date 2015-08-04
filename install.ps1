@@ -14,7 +14,7 @@ Function New-Symlink ($link, $target)
 
 $myPath = Split-Path -Path $MyInvocation.MyCommand.Definition -Parent
 
-Foreach ($i in @("antigen","emacs.d\init.el","emacs.d\lisp","xmobarrc","xmonad\xmonad.hs","zshrc")) {
+Foreach ($i in @("antigen","config\git","emacs.d\init.el","emacs.d\lisp","xmobarrc","xmonad\xmonad.hs","zshrc")) {
     $target = $env:UserProfile + "\." + $i
     if (Test-Path -Pathtype container $i)
     {
