@@ -3,13 +3,12 @@ Set-TaskbarOptions -Size Small -Lock -Dock Bottom
 
 choco install microsoft-build-tools   -y
 choco install MsSqlServer2012Express  -y
-choco install visualstudio2013premium -y -InstallArguments "/Features:WebTools SQL"
-choco install vs2013.4                -y
+choco install visualstudio2015enterprise -y -InstallArguments "/Features:WebTools SQL"
 choco install netfx-4.5.2-devpack     -y
 choco install tfs2013powertools       -y
-choco install vs2013.vscommands       -y
+choco install vs2015.vscommands       -y
 choco install resharper               -y
-choco install ncrunch2.vs2013         -y
+choco install ncrunch-vs2015          -y
 
 (new-object -c shell.application).namespace("${env:SystemRoot}\system32\WindowsPowerShell\v1.0\").parsename("powershell.exe").invokeverb("taskbarpin")
 
