@@ -193,7 +193,8 @@
                                         indentation::space
                                         space-after-tab::space)
                 whitespace-line-column 120
-                indent-tabs-mode nil)
+                indent-tabs-mode nil
+                require-final-newline nil)
   (global-whitespace-mode)
   (add-hook 'csharp-mode-hook #'whitespace-cleanup-mode))
 
