@@ -13,7 +13,11 @@
  '(haskell-process-auto-import-loaded-modules t)
  '(haskell-process-log t)
  '(haskell-process-suggest-remove-import-lines t)
- '(helm-external-programs-associations (quote (("sln" . "explorer.exe"))))
+ '(helm-external-programs-associations
+   (quote
+    (("mkv" . "vlc --play-and-exit")
+     ("avi" . "vlc --play-and-exit")
+     ("sln" . "explorer.exe"))))
  '(magit-diff-arguments
    (quote
     ("--ignore-space-change" "--ignore-all-space" "--no-ext-diff")))
