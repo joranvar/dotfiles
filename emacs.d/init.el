@@ -14,6 +14,10 @@
  '(haskell-process-log t)
  '(haskell-process-suggest-remove-import-lines t)
  '(helm-external-programs-associations (quote (("sln" . "explorer.exe"))))
+ '(magit-diff-arguments
+   (quote
+    ("--ignore-space-change" "--ignore-all-space" "--no-ext-diff")))
+ '(magit-rebase-arguments (quote ("--autostash")))
  '(org-agenda-files (quote ("~/org/cgm.org" "~/org/main.org")))
  '(package-selected-packages
    (quote
