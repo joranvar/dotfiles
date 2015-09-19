@@ -301,6 +301,9 @@
   (interactive)
   (find-file (concat "/sudo:localhost:" buffer-file-name)))
 
+;; This fixes sudo-tramp on NixOS
+(setq tramp-shell-prompt-pattern "\\(?:^\\|\r\\)[^]#$%>\n]*#?[]#$%>].* *\\(^[\\[[0-9;]*[a-zA-Z] *\\)*")
+
 (defun joranvar-distinct-matches-in-buffer (regex)
   "Get a list of unique matching occurrences of REGEX in the current buffer."
   (interactive "sRegex: \n")
