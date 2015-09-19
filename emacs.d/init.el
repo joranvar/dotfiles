@@ -20,7 +20,7 @@
      ("sln" . "explorer.exe"))))
  '(magit-diff-arguments
    (quote
-    ("--ignore-space-change" "--ignore-all-space" "--no-ext-diff")))
+    ("--ignore-space-change" "--ignore-all-space" "--no-ext-diff" "-M")))
  '(magit-rebase-arguments (quote ("--autostash")))
  '(org-agenda-files (quote ("~/org/cgm.org" "~/org/main.org")))
  '(package-selected-packages
