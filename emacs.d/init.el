@@ -303,7 +303,7 @@
 (defun joranvar-insert-guid ()
   "Insert a guid at point."
   (interactive)
-  (shell-command "C:\\Program Files (x86)\\Windows Kits\\8.1\\bin\\x64\\uuidgen.exe" t))
+  (s-replace "\r\n" "" (shell-command "C:\\Program Files (x86)\\Windows Kits\\8.1\\bin\\x64\\uuidgen.exe" t)))
 
 (defun sudo-find-file ()
   "Find the file in current buffer with tramp-sudo."
