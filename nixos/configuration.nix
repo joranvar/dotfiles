@@ -138,6 +138,7 @@
     # Enable the X11 windowing system.
     services.xserver = {
     enable = true;
+    xkbOptions = "compose:ralt";
     windowManager.xmonad = {
       enable = true;
       enableContribAndExtras = true;

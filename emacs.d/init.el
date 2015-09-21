@@ -13,8 +13,14 @@
  '(haskell-process-auto-import-loaded-modules t)
  '(haskell-process-log t)
  '(haskell-process-suggest-remove-import-lines t)
- '(helm-external-programs-associations (quote (("sln" . "explorer.exe"))))
- '(magit-diff-arguments (quote ("-M" "-C")))
+ '(helm-external-programs-associations
+   (quote
+    (("mkv" . "vlc --play-and-exit")
+     ("avi" . "vlc --play-and-exit")
+     ("sln" . "explorer.exe"))))
+ '(magit-diff-arguments
+   (quote
+    ("--ignore-space-change" "--ignore-all-space" "--no-ext-diff" "-M" "-C")))
  '(magit-rebase-arguments (quote ("--autostash")))
  '(org-agenda-files (quote ("~/org/cgm.org" "~/org/main.org")))
  '(package-selected-packages
@@ -187,7 +193,7 @@
 (use-package aggressive-indent
   :ensure t
   :config
-  (global-aggressive-indent-mode)
+  ;;(global-aggressive-indent-mode)
   (add-hook 'csharp-mode-hook (lambda () (aggressive-indent-mode -1))))
 
 (use-package whitespace-cleanup-mode
@@ -198,8 +204,9 @@
                                         trailing lines-tail empty
                                         indentation::space
                                         space-after-tab::space)
-                whitespace-line-column 120
-                indent-tabs-mode nil)
+                whitespace-line-column 160
+                indent-tabs-mode nil
+                require-final-newline nil)
   (global-whitespace-mode)
   (add-hook 'csharp-mode-hook #'whitespace-cleanup-mode))
 
@@ -300,12 +307,15 @@
 (defun joranvar-insert-guid ()
   "Insert a guid at point."
   (interactive)
-  (shell-command "C:\\Program Files (x86)\\Windows Kits\\8.1\\bin\\x64\\uuidgen.exe" t))
+  (s-replace "\r\n" "" (shell-command "C:\\Program Files (x86)\\Windows Kits\\8.1\\bin\\x64\\uuidgen.exe" t)))
 
 (defun sudo-find-file ()
   "Find the file in current buffer with tramp-sudo."
   (interactive)
   (find-file (concat "/sudo:localhost:" buffer-file-name)))
+
+;; This fixes sudo-tramp on NixOS
+(setq tramp-shell-prompt-pattern "\\(?:^\\|\r\\)[^]#$%>\n]*#?[]#$%>].* *\\(^[\\[[0-9;]*[a-zA-Z] *\\)*")
 
 (defun joranvar-distinct-matches-in-buffer (regex)
   "Get a list of unique matching occurrences of REGEX in the current buffer."
