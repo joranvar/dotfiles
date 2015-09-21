@@ -1,0 +1,13 @@
+[user]
+	email = bart.post@gmail.com
+	name = joranvar
+[alias]
+	tfci = tf checkin --deep --note='"Code Reviewer"=' --note='"Jira Issue ID"=-'
+	tfco = tf pull --deep --rebase
+	tfu = tf fetch --deep
+[diff "utf16"]
+	textconv = "iconv -f utf-16 -t utf-8"
+[diff "dll"]
+	textconv = monodis
+[diff "orgmode"]
+	xfuncname = "^(\\*+.*)$"
