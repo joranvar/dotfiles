@@ -189,7 +189,7 @@
 (use-package aggressive-indent
   :ensure t
   :config
-  (global-aggressive-indent-mode)
+  ;;(global-aggressive-indent-mode)
   (add-hook 'csharp-mode-hook (lambda () (aggressive-indent-mode -1))))
 
 (use-package whitespace-cleanup-mode
