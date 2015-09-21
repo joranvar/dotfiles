@@ -200,7 +200,7 @@
                                         trailing lines-tail empty
                                         indentation::space
                                         space-after-tab::space)
-                whitespace-line-column 120
+                whitespace-line-column 160
                 indent-tabs-mode nil
                 require-final-newline nil)
   (global-whitespace-mode)
