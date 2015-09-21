@@ -168,6 +168,10 @@
          (if (eq system-type 'gnu/linux)
              "$HOME/git/omnisharp-server/OmniSharp/bin/Debug/OmniSharp.exe"
            "D:\\Ontwikkeling\\omnisharp-server\\OmniSharp\\bin\\Debug\\OmniSharp.exe")))
+  (use-package company
+    :ensure t
+    :config
+    (add-hook 'after-init-hook 'global-company-mode))
   (define-key omnisharp-mode-map (kbd "M-.") #'omnisharp-auto-complete)
   (define-key omnisharp-mode-map (kbd "M-RET") #'omnisharp-run-code-action-refactoring)
   (define-key omnisharp-mode-map (kbd "<C-return>") #'omnisharp-fix-code-issue-at-point))
