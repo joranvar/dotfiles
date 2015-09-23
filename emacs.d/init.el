@@ -20,7 +20,7 @@
      ("sln" . "explorer.exe"))))
  '(magit-diff-arguments
    (quote
-    ("--ignore-space-change" "--ignore-all-space" "--no-ext-diff" "-M")))
+    ("--ignore-space-change" "--ignore-all-space" "--no-ext-diff" "-M" "-C")))
  '(magit-rebase-arguments (quote ("--autostash")))
  '(org-agenda-files (quote ("~/org/cgm.org" "~/org/main.org")))
  '(package-selected-packages
@@ -174,12 +174,16 @@
 (use-package omnisharp
   :ensure t
   :config
-  ;; (add-hook 'csharp-mode-hook #'omnisharp-mode)
+  (add-hook 'csharp-mode-hook #'omnisharp-mode)
   (setq omnisharp-server-executable-path
         (substitute-in-file-name
          (if (eq system-type 'gnu/linux)
              "$HOME/git/omnisharp-server/OmniSharp/bin/Debug/OmniSharp.exe"
            "D:\\Ontwikkeling\\omnisharp-server\\OmniSharp\\bin\\Debug\\OmniSharp.exe")))
+  (use-package company
+    :ensure t
+    :config
+    (add-hook 'after-init-hook 'global-company-mode))
   (define-key omnisharp-mode-map (kbd "M-.") #'omnisharp-auto-complete)
   (define-key omnisharp-mode-map (kbd "M-RET") #'omnisharp-run-code-action-refactoring)
   (define-key omnisharp-mode-map (kbd "<C-return>") #'omnisharp-fix-code-issue-at-point))
