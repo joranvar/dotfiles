@@ -318,6 +318,16 @@
 ;; This fixes sudo-tramp on NixOS
 (setq tramp-shell-prompt-pattern "\\(?:^\\|\r\\)[^]#$%>\n]*#?[]#$%>].* *\\(^[\\[[0-9;]*[a-zA-Z] *\\)*")
 
+;; This fixes the utf-8-signature removing behavior in e.g. nxml
+(defun joranvar-save-buffer-and-keep-utf-8-with-signature-dos ()
+  (interactive)
+  (if (eq buffer-file-coding-system 'utf-8-with-signature-dos)
+      (let ((coding-system-for-write 'utf-8-with-signature-dos))
+        (save-buffer))
+    (save-buffer)))
+
+(define-key (current-global-map) [remap save-buffer] #'joranvar-save-buffer-and-keep-utf-8-with-signature-dos)
+
 (defun joranvar-distinct-matches-in-buffer (regex)
   "Get a list of unique matching occurrences of REGEX in the current buffer."
   (interactive "sRegex: \n")
