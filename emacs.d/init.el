@@ -54,15 +54,12 @@
 (eval-when-compile
   (require 'use-package))
 
-(use-package auto-package-update
-  :ensure t
-  :config
-  (auto-package-update-maybe))
-
 (use-package paradox
   :ensure t
   :config
-  (paradox-enable))
+  (setq paradox-execute-asynchronously t)
+  (paradox-enable)
+  (paradox-upgrade-packages))
 
 (prefer-coding-system 'utf-8)
 (set-default-coding-systems 'utf-8)
