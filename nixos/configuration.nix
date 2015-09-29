@@ -80,6 +80,9 @@
     pidgin
 
     pass
+    yubikey-personalization
+    yubikey-personalization-gui
+    opensc
 
     gnome3.gvfs
     gnome3.nautilus
