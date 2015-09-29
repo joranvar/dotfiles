@@ -292,6 +292,17 @@
   :init (use-package moz
           :ensure t))
 
+(use-package ecb
+  :ensure t
+  :config
+  (setq ecb-layout-name "left1")
+  (setq-default semantic-symref-tool "global"))
+
+(use-package ggtags
+  :ensure t
+  :config
+  (ggtags-mode 1))
+
 ;; Printing
 ;; TODO: Move to package
 (when (eq system-type 'windows-nt)
