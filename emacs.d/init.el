@@ -218,7 +218,7 @@
          ("M-P" . projectile-persp-switch-project))
   :diminish projectile-mode
   :config
-  (projectile-global-mode)
+  ; (projectile-global-mode) ;; This messes up tramp-sudo
   (setq projectile-indexing-method 'alien
         projectile-completion-system 'helm
         projectile-enable-caching t
