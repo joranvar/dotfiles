@@ -314,7 +314,7 @@
 (defun sudo-find-file ()
   "Find the file in current buffer with tramp-sudo."
   (interactive)
-  (find-file (concat "/sudo:localhost:" buffer-file-name)))
+  (find-alternate-file (concat "/sudo:root@localhost:" buffer-file-name)))
 
 ;; This fixes sudo-tramp on NixOS
 (setq tramp-shell-prompt-pattern "\\(?:^\\|\r\\)[^]#$%>\n]*#?[]#$%>].* *\\(^[\\[[0-9;]*[a-zA-Z] *\\)*")
