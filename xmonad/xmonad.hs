@@ -27,7 +27,7 @@ main = do
         , layoutHook = myLayout
         , logHook = dynamicLogWithPP xmobarPP
             { ppOutput = hPutStrLn xmobar
-            , ppTitle = xmobarColor "green" "" . shorten 50
+            , ppTitle = xmobarColor "green" "" . shorten 100
             }
         , startupHook = do
             spawnOnce "/usr/bin/env xscreensaver -no-splash"
