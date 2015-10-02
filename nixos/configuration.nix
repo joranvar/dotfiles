@@ -17,10 +17,13 @@
   boot.extraModprobeConfig = ''
     options snd_hda_intel enable=0,1
   '';
-  boot.blacklistedKernelModules = [ "snd_pcsp" ];
+  # boot.blacklistedKernelModules = [ "snd_pcsp" ];
+  boot.kernelModules = [ "nouveau-fw" ];
   hardware.pulseaudio.enable = true;
 
   hardware.opengl.driSupport32Bit = true;
+
+  hardware.enableAllFirmware = true;
 
   networking.hostName = "lapbart"; # Define your hostname.
   networking.hostId = "3d14756b";
@@ -45,10 +48,16 @@
 
     zsh
     git
+    libusb
     gnupg
     htop
+    lsof
+    usbutils
 
     emacs
+
+    fsharp
+    mono
 
     python34
     python34Packages.pywinrm
@@ -73,13 +82,17 @@
     haskellPackages.xmonad-extras
 
     virtmanager
+    remmina
 
     dmenu
     xscreensaver
     samba
-    java
     flashplayer
     pidgin
+    skype
+    gitAndTools.git-annex
+
+    steam
 
     pass
     yubikey-personalization
@@ -195,4 +208,3 @@
 
   virtualisation.libvirtd.enable = true;
 }
-
