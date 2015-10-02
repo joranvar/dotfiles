@@ -61,6 +61,7 @@
     rxvt_unicode_with-plugins
     vlc
     sshfsFuse
+    cifs_utils
     pavucontrol
 
     xlsfonts
