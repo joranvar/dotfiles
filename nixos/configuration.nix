@@ -15,10 +15,14 @@
   boot.loader.efi.canTouchEfiVariables = true;
 
   boot.extraModprobeConfig = ''
-    options snd_hda_intel enable=0,1
+    # options snd_hda_intel enable=0,1
+    options i915 modeset=1 i915_enable_rc6=7 i915_enable_fbc=1 lvds_downclock=1
+    # options snd slots=snd-hda-intel
+    options snd-hda-intel index=0 id=PCH
+    options snd-hda-intel index=1 id=HDMI
   '';
-  # boot.blacklistedKernelModules = [ "snd_pcsp" ];
-  boot.kernelModules = [ "nouveau-fw" ];
+  boot.blacklistedKernelModules = [ "snd_pcsp" "nouveau" ];
+  boot.kernelModules = [ "intel_agp" "i915" ];
   hardware.pulseaudio.enable = true;
 
   hardware.opengl.driSupport32Bit = true;
