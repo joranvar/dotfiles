@@ -57,6 +57,7 @@
     htop
     lsof
     usbutils
+    binutils
 
     emacs
 
