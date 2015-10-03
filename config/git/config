@@ -11,3 +11,5 @@
 	textconv = monodis
 [diff "orgmode"]
 	xfuncname = "^(\\*+.*)$"
+[push]
+	default = simple
