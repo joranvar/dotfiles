@@ -22,6 +22,9 @@
  '(magit-diff-arguments
    (quote
     ("--ignore-space-change" "--ignore-all-space" "--no-ext-diff" "-M" "-C")))
+ '(magit-log-arguments
+   (quote
+    ("--graph" "--color" "--decorate" "--show-signature" "-n256")))
  '(magit-rebase-arguments (quote ("--autostash")))
  '(org-agenda-files (quote ("~/org/cgm.org" "~/org/main.org")))
  '(package-selected-packages
