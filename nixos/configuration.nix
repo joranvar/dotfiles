@@ -59,6 +59,7 @@
     lsof
     usbutils
     binutils
+    gnumake
 
     emacs
 
