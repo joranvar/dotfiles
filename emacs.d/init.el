@@ -18,6 +18,7 @@
     (("mkv" . "vlc --play-and-exit")
      ("avi" . "vlc --play-and-exit")
      ("sln" . "explorer.exe"))))
+ '(magit-commit-arguments (quote ("--gpg-sign=9BD68A49AB3D8E4D")))
  '(magit-diff-arguments
    (quote
     ("--ignore-space-change" "--ignore-all-space" "--no-ext-diff" "-M" "-C")))
