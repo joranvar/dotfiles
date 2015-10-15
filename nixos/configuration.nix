@@ -54,6 +54,7 @@
     git
     libusb
     gnupg
+    gnupg1compat
     htop
     lsof
     usbutils
