@@ -261,7 +261,11 @@
   :ensure t
   :bind (("M-s r" . vr/replace)
          ("M-s q" . vr/query-replace)
-         ("M-s m" . vr/mc-mark)))
+         ("M-s m" . vr/mc-mark)
+         ("C-s"   . isearch-forward-regexp)
+         ("M-C-s" . isearch-forward)
+         ("C-r"   . isearch-backward-regexp)
+         ("M-C-r" . isearch-backward)))
 
 (use-package zop-to-char
   :ensure t
