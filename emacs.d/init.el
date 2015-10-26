@@ -155,7 +155,44 @@
   :ensure t)
 
 (use-package gnus
-  :ensure t)
+  :ensure t
+  :config
+  (add-to-list 'gnus-secondary-select-methods
+               '(nnimap "gmail"
+                        (nnimap-address "imap.gmail.com")
+                        (nnimap-server-port "imaps")
+                        (nnimap-stream ssl)))
+  (setq smtpmail-smtp-service 587
+        mail-user-agent 'message-user-agent
+        message-send-mail-function 'smtpmail-send-it
+        smtpmail-default-smtp-server "smtp.gmail.com"
+        gnus-ignored-newsgroups "^to\\.\\|^[0-9. ]+\\( \\|$\\)\\|^[\"]\"[#'()]"))
+
+(use-package epg
+  :ensure t
+  :config
+  (setq mml2015-use 'epg
+
+        mml2015-verbose t
+        epg-user-id "1C0DD510"
+        mml2015-encrypt-to-self t
+        mml2015-always-trust nil
+        mml2015-cache-passphrase t
+        mml2015-passphrase-cache-expiry '36000
+        mml2015-sign-with-sender t
+
+        gnus-message-replyencrypt t
+        gnus-message-replysign t
+        gnus-message-replysignencrypted t
+        gnus-treat-x-pgp-sig t
+
+        ;; mm-sign-option 'guided
+        ;; mm-encrypt-option 'guided
+        mm-verify-option 'always
+        mm-decrypt-option 'always
+
+        gnus-buttonized-mime-types '("multipart/alternative" "multipart/encrypted" "multipart/signed"))
+  (add-hook 'gnus-message-setup-hook (lambda () (mml-secure-message-sign))))
 
 (use-package material-theme
   :defer t
