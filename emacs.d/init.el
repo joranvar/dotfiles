@@ -330,6 +330,10 @@
              tf-get-reviewer
              tf-set-jira-issue-id))
 
+(use-package gpg-agent-reload
+  :load-path "lisp/gpg-agent-reload"
+  :commands (gpg-agent-reload))
+
 (use-package moz-reload
   :load-path "lisp/moz-reload"
   :commands (moz-enable-auto-update
