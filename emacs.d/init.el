@@ -210,7 +210,6 @@
   :ensure t)
 
 (use-package leuven-theme
-  :defer t
   :ensure t)
 
 (use-package avy
