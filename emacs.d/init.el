@@ -166,7 +166,8 @@
         mail-user-agent 'message-user-agent
         message-send-mail-function 'smtpmail-send-it
         smtpmail-default-smtp-server "smtp.gmail.com"
-        gnus-ignored-newsgroups "^to\\.\\|^[0-9. ]+\\( \\|$\\)\\|^[\"]\"[#'()]"))
+        gnus-ignored-newsgroups "^to\\.\\|^[0-9. ]+\\( \\|$\\)\\|^[\"]\"[#'()]")
+  (gnus-demon-add-handler 'gnus-demon-scan-news 5 t))
 
 (use-package epg
   :ensure t
