@@ -242,7 +242,8 @@
   :config
   (require 'smartparens-config)
   (show-smartparens-global-mode)
-  (smartparens-global-strict-mode))
+  (smartparens-global-strict-mode)
+  (sp-use-paredit-bindings))
 
 (use-package aggressive-indent
   :ensure t
