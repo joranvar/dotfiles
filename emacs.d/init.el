@@ -194,6 +194,11 @@
         gnus-buttonized-mime-types '("multipart/alternative" "multipart/encrypted" "multipart/signed"))
   (add-hook 'gnus-message-setup-hook (lambda () (mml-secure-message-sign))))
 
+(use-package eww
+  :ensure t
+  :config
+  (setq browse-url-browser-function 'eww-browse-url))
+
 (use-package material-theme
   :defer t
   :ensure t)
