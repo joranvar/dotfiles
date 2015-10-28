@@ -401,6 +401,7 @@
   (-distinct (s-match-strings-all regex (buffer-substring-no-properties (point-min)(point-max)))))
 
 (server-start)
+(tool-bar-mode -1)
 
 (provide 'init)
 ;;; init.el ends here
