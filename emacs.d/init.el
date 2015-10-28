@@ -136,6 +136,12 @@
 (use-package ghc
   :ensure t)
 
+(use-package linum-relative
+  :ensure t
+  :config
+  (global-linum-mode)
+  (linum-relative-on))
+
 (use-package auto-complete
   :ensure t)
 
