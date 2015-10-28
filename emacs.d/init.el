@@ -394,6 +394,8 @@
   (interactive "sRegex: \n")
   (-distinct (s-match-strings-all regex (buffer-substring-no-properties (point-min)(point-max)))))
 
+(server-start)
+
 (provide 'init)
 ;;; init.el ends here
 (put 'narrow-to-region 'disabled nil)
