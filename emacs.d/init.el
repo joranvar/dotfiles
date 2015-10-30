@@ -270,10 +270,10 @@
          ("M-P" . projectile-persp-switch-project))
   :diminish projectile-mode
   :config
-  ; (projectile-global-mode) ;; This messes up tramp-sudo
+  (projectile-global-mode)
   (setq projectile-indexing-method 'alien
         projectile-completion-system 'helm
-        projectile-enable-caching t
+        ; projectile-enable-caching t ;; This messes up tramp-sudo, see https://github.com/bbatsov/projectile/issues/835
         projectile-enable-idle-timer t)
   (use-package perspective
     :ensure t
