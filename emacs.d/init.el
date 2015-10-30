@@ -86,7 +86,7 @@
 
 (use-package magit
   :ensure t
-  :commands (magit-status-internal)
+  :commands (magit-git-repo-p magit-status-internal)
   :bind (("M-G" . magit-status)))
 
 (use-package helm
@@ -292,7 +292,9 @@
     :ensure t
     :config
     (helm-projectile-on)
-    (setq projectile-switch-project-action (lambda () (magit-status-internal (projectile-project-root)))))
+    (setq projectile-switch-project-action (lambda () (if (magit-git-repo-p (projectile-project-root))
+                                                          (magit-status-internal (projectile-project-root))
+                                                        (dired (projectile-project-root))))))
   (setq magit-repo-dirs (mapcar (lambda (dir)
                                   (substring dir 0 -1))
                                 (-filter (lambda (project)
