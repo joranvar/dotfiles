@@ -87,6 +87,8 @@
     haskellPackages.xmonad
     haskellPackages.xmonad-contrib
     haskellPackages.xmonad-extras
+    libnotify
+    notify-osd
 
     virtmanager
     remmina

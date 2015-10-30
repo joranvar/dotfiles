@@ -161,7 +161,13 @@
 
 (use-package gnus
   :ensure t
+  :defines smtpmail-smtp-service smtpmail-default-smtp-server gnus-ignored-newsgroups
   :config
+  (use-package gnus-desktop-notify
+    :ensure t
+    :config
+    (use-package alert
+      :ensure t))
   (add-to-list 'gnus-secondary-select-methods
                '(nnimap "gmail"
                         (nnimap-address "imap.gmail.com")
@@ -172,7 +178,9 @@
         message-send-mail-function 'smtpmail-send-it
         smtpmail-default-smtp-server "smtp.gmail.com"
         gnus-ignored-newsgroups "^to\\.\\|^[0-9. ]+\\( \\|$\\)\\|^[\"]\"[#'()]")
-  (add-hook 'gnus-startup-hook (lambda () (gnus-demon-add-handler 'gnus-demon-scan-news 5 t))))
+  (add-hook 'gnus-startup-hook (lambda ()
+                                 (gnus-desktop-notify-mode)
+                                 (gnus-demon-add-scanmail))))
 
 (use-package epg
   :ensure t
