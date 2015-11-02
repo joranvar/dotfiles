@@ -182,6 +182,19 @@
                                  (gnus-desktop-notify-mode)
                                  (gnus-demon-add-scanmail))))
 
+(require 'org-mime)
+(add-hook 'message-mode-hook
+          (lambda () (local-set-key "\C-c\M-o" (lambda ()
+                                                 (interactive)
+                                                 (save-excursion
+                                                   (message-goto-body)
+                                                   (when (looking-at "<#secure.*>") (forward-line 1))
+                                                   (set-mark-command nil)
+                                                   (goto-char (point-max))
+                                                   (org-mime-htmlize))))))
+(add-hook 'org-mode-hook
+          (lambda () (local-set-key "\C-c\M-o" 'org-mime-org-buffer-htmlize)))
+
 (use-package epg
   :ensure t
   :config
