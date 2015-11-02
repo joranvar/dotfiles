@@ -99,23 +99,50 @@
   (require 'helm-config)
   (helm-mode 1))
 
+(defun joranvar/skip-non-stuck-projects ()
+  "Skip trees that are not stuck projects.
+
+Based on bh/skip-non-stuck-projects from Bernd Hansen."
+  (save-restriction
+    (widen)
+    (let ((next-headline (save-excursion (or (outline-next-heading) (point-max))))
+          (subtree-end (save-excursion (org-end-of-subtree t))))
+      (save-excursion
+        (forward-line 1)
+        (if (or (not (re-search-forward "^\\*" subtree-end t))(re-search-forward "\\*+ TODO " subtree-end t))
+            next-headline
+          nil) ; a stuck project, has subtasks but no todo task
+        ))))
+
 (use-package org
   :ensure org-plus-contrib
   :bind (("C-c a" . org-agenda)
          ("C-c c" . org-capture))
   :config
+  (add-to-list 'org-modules 'org-habit)
   (require 'org-contacts)
   (setq org-agenda-window-setup 'other-frame
         org-agenda-sticky t)
   (setq org-clock-persist t)
+  (setq org-agenda-todo-ignore-scheduled 'future) ;; Ignore TODO items for the future
   (org-clock-persistence-insinuate)
-  (setq org-agenda-files '("~/org/main.org" "~/org/cgm.org"))
-  (setq org-capture-templates '(("t" "Todo" entry (file+headline "cgm.org" "Todo")
+  (setq org-agenda-files '("~/org/gtd.org"))
+  (setq org-capture-templates '(("i" "INBOX" entry (file+headline "gtd.org" "INBOX")
                                  "* TODO %?\n%U\n%a\n" :clock-in t :clock-resume t)
-                                ("j" "Project related journal" entry (file+headline "cgm.org" "Journal")
-                                 "* %?\n%U\n" :clock-in t :clock-resume t)
-                                ("i" "Interrupt" entry (file+datetree "cgm.org" "JOURNAL")
-                                 "* %?\n%U\n" :clock-in t :clock-resume t)))
+                                ;; ("j" "Project related journal" entry (file+headline "cgm.org" "Journal")
+                                ;;  "* %?\n%U\n" :clock-in t :clock-resume t)
+                                ;; ("i" "Interrupt" entry (file+datetree "cgm.org" "JOURNAL")
+                                ;;  "* %?\n%U\n" :clock-in t :clock-resume t)
+                                ))
+  (setq org-agenda-custom-commands
+        '(
+          (" " "Agenda"
+           ((agenda "" nil)
+            (tags-todo "+LEVEL=2-DONE/!"
+                       ((org-agenda-overriding-header "Stuck")
+                        (org-agenda-skip-function 'joranvar/skip-non-stuck-projects)))
+            (todo "TODO"
+                  ((org-agenda-overriding-header "Todo")))))))
   (setq org-mobile-directory "~/org/mobile/")
   (org-babel-do-load-languages 'org-babel-load-languages '((sql . t))))
 
