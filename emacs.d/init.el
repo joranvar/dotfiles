@@ -229,6 +229,9 @@ Based on bh/skip-non-stuck-projects from Bernd Hansen."
 (add-hook 'org-mode-hook
           (lambda () (local-set-key "\C-c\M-o" 'org-mime-org-buffer-htmlize)))
 
+(require 'org-contacts)
+(setq org-contacts-files '("~/org/people.org"))
+
 (use-package epg
   :ensure t
   :config
