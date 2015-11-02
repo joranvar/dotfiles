@@ -211,7 +211,7 @@ Based on bh/skip-non-stuck-projects from Bernd Hansen."
         gnus-ignored-newsgroups "^to\\.\\|^[0-9. ]+\\( \\|$\\)\\|^[\"]\"[#'()]")
   (add-hook 'gnus-startup-hook (lambda ()
                                  (gnus-desktop-notify-mode)
-                                 (gnus-demon-add-scanmail))))
+                                 (gnus-demon-add-handler 'gnus-demon-scan-news 5 t))))
 
 (require 'org-mime)
 (add-hook 'message-mode-hook
