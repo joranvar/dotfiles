@@ -125,6 +125,8 @@ Based on bh/skip-non-stuck-projects from Bernd Hansen."
         org-agenda-sticky t)
   (setq org-clock-persist t)
   (setq org-agenda-todo-ignore-scheduled 'future) ;; Ignore TODO items for the future
+  (setq org-use-speed-commands
+      (lambda () (and (looking-at org-outline-regexp) (looking-back "^\**"))))
   (org-clock-persistence-insinuate)
   (setq org-agenda-files '("~/org/gtd.org"))
   (setq org-capture-templates '(("i" "INBOX" entry (file+headline "gtd.org" "INBOX")
