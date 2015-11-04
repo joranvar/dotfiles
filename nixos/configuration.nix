@@ -73,6 +73,7 @@
     nox
 
     networkmanagerapplet
+    gkrellm
 
     firefox
     rxvt_unicode_with-plugins
