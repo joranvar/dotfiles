@@ -126,6 +126,10 @@ Based on bh/skip-non-stuck-projects from Bernd Hansen."
           nil) ; an item that has no scheduled date
         ))))
 
+(defun bh/verify-refile-target ()
+  "Exclude todo keywords with a done state from refile targets."
+  (not (member (nth 2 (org-heading-components)) org-done-keywords)))
+
 (use-package org
   :ensure org-plus-contrib
   :bind (("C-c a" . org-agenda)
@@ -164,6 +168,10 @@ Based on bh/skip-non-stuck-projects from Bernd Hansen."
   (setq org-feed-alist
         '(("xkcd" "http://xkcd.com/rss.xml" "~/org/gtd.org" "INBOX")))
   (org-feed-update-all)
+  (setq org-refile-targets '((org-agenda-files . (:maxlevel . 5)))
+        org-refile-use-outline-path t
+        org-outline-path-complete-in-steps nil)
+  (setq org-refile-target-verify-function 'bh/verify-refile-target)
   (org-babel-do-load-languages 'org-babel-load-languages '((sql . t))))
 
 (use-package nix-mode)
