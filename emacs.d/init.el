@@ -161,6 +161,9 @@ Based on bh/skip-non-stuck-projects from Bernd Hansen."
                    (org-agenda-skip-function 'joranvar/skip-scheduled-items)
                    (org-tags-match-list-sublevels 'indented)))))))
   (setq org-mobile-directory "~/org/mobile/")
+  (setq org-feed-alist
+        '(("xkcd" "http://xkcd.com/rss.xml" "~/org/gtd.org" "INBOX")))
+  (org-feed-update-all)
   (org-babel-do-load-languages 'org-babel-load-languages '((sql . t))))
 
 (use-package nix-mode)
