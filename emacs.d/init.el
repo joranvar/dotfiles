@@ -114,6 +114,18 @@ Based on bh/skip-non-stuck-projects from Bernd Hansen."
           nil) ; a stuck project, has subtasks but no todo task
         ))))
 
+(defun joranvar/skip-scheduled-items ()
+  "Skip items that have a scheduled date."
+  (save-restriction
+    (widen)
+    (let ((next-headline (save-excursion (or (outline-next-heading) (point-max)))))
+      (save-excursion
+        (forward-line 1)
+        (if (re-search-forward "^[ ]*SCHEDULED:" next-headline t)
+            next-headline
+          nil) ; an item that has no scheduled date
+        ))))
+
 (use-package org
   :ensure org-plus-contrib
   :bind (("C-c a" . org-agenda)
@@ -139,12 +151,15 @@ Based on bh/skip-non-stuck-projects from Bernd Hansen."
   (setq org-agenda-custom-commands
         '(
           (" " "Agenda"
-           ((agenda "" nil)
-            (tags-todo "+LEVEL=2-DONE/!"
+           ((agenda ""
+                    ((org-agenda-skip-function nil)))
+            (tags-todo "+LEVEL=2/-DONE"
                        ((org-agenda-overriding-header "Stuck")
                         (org-agenda-skip-function 'joranvar/skip-non-stuck-projects)))
-            (todo "TODO"
-                  ((org-agenda-overriding-header "Todo")))))))
+            (tags-todo "/TODO"
+                  ((org-agenda-overriding-header "Todo")
+                   (org-agenda-skip-function 'joranvar/skip-scheduled-items)
+                   (org-tags-match-list-sublevels 'indented)))))))
   (setq org-mobile-directory "~/org/mobile/")
   (org-babel-do-load-languages 'org-babel-load-languages '((sql . t))))
 
