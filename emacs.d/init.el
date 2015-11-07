@@ -234,7 +234,9 @@ Based on bh/skip-non-stuck-projects from Bernd Hansen."
         mail-user-agent 'message-user-agent
         message-send-mail-function 'smtpmail-send-it
         smtpmail-default-smtp-server "smtp.gmail.com"
-        gnus-ignored-newsgroups "^to\\.\\|^[0-9. ]+\\( \\|$\\)\\|^[\"]\"[#'()]")
+        gnus-ignored-newsgroups "^to\\.\\|^[0-9. ]+\\( \\|$\\)\\|^[\"]\"[#'()]"
+        mm-discouraged-alternatives '("text/html" "text/richtext") ;; Prefer text/plain
+        )
   (add-hook 'gnus-startup-hook (lambda ()
                                  (gnus-desktop-notify-mode)
                                  (gnus-demon-add-handler 'gnus-demon-scan-news 5 t))))
