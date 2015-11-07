@@ -411,9 +411,9 @@ Based on bh/skip-non-stuck-projects from Bernd Hansen."
 
 (use-package visual-regexp
   :ensure t
-  :bind (("M-s r" . vr/replace)
-         ("M-s q" . vr/query-replace)
-         ("M-s m" . vr/mc-mark)
+  :bind (("C-c r" . vr/replace)
+         ("C-c q" . vr/query-replace)
+         ("C-c m" . vr/mc-mark)
          ("C-s"   . isearch-forward-regexp)
          ("M-C-s" . isearch-forward)
          ("C-r"   . isearch-backward-regexp)
