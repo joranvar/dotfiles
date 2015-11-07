@@ -237,6 +237,7 @@ Based on bh/skip-non-stuck-projects from Bernd Hansen."
         gnus-ignored-newsgroups "^to\\.\\|^[0-9. ]+\\( \\|$\\)\\|^[\"]\"[#'()]"
         mm-discouraged-alternatives '("text/html" "text/richtext") ;; Prefer text/plain
         )
+  (add-hook 'gnus-group-mode-hook 'gnus-topic-mode) ;; Show me topics
   (add-hook 'gnus-startup-hook (lambda ()
                                  (gnus-desktop-notify-mode)
                                  (gnus-demon-add-handler 'gnus-demon-scan-news 5 t))))
