@@ -316,6 +316,24 @@ Based on bh/skip-non-stuck-projects from Bernd Hansen."
   :config (disable-theme 'leuven)
   :init (bind-key "C-c t l" (lambda () (interactive) (joranvar/toggle-theme 'leuven))))
 
+(use-package rase
+  :ensure t
+  :config
+  (setq calendar-latitude 50.9342277
+        calendar-longitude -5.7725223)
+  (add-hook 'rase-functions (lambda (sun-event &optional first-run)
+                              (if first-run
+                                  (cond ((memq sun-event '(sunrise midday))
+                                         (joranvar/toggle-theme 'leuven))
+                                        (t
+                                         (joranvar/toggle-theme 'material))))
+                              (cond ((eq sun-event 'sunrise)
+                                     (joranvar/toggle-theme 'leuven))
+                                    ((eq sun-event 'sunset)
+                                     (joranvar/toggle-theme 'material)))))
+  :init
+  (rase-start t))
+
 (use-package avy
   :ensure t
   :bind (("C-:" . avy-goto-char)
