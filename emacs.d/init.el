@@ -179,6 +179,10 @@ Based on bh/skip-non-stuck-projects from Bernd Hansen."
 (use-package htmlize
   :ensure t)
 
+(use-package sauron
+  :ensure t
+  :config (sauron-start))
+
 (use-package nix-mode)
 
 (use-package hi2
