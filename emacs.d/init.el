@@ -176,6 +176,9 @@ Based on bh/skip-non-stuck-projects from Bernd Hansen."
   (setq org-refile-target-verify-function 'bh/verify-refile-target)
   (org-babel-do-load-languages 'org-babel-load-languages '((sql . t))))
 
+(use-package htmlize
+  :ensure t)
+
 (use-package nix-mode)
 
 (use-package hi2
