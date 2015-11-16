@@ -221,6 +221,7 @@ Based on bh/skip-non-stuck-projects from Bernd Hansen."
   :defines smtpmail-smtp-service smtpmail-default-smtp-server gnus-ignored-newsgroups
   :config
   (use-package gnus-desktop-notify
+    :if (eq system-type 'gnu/linux)
     :ensure t
     :config
     (use-package alert
@@ -239,7 +240,7 @@ Based on bh/skip-non-stuck-projects from Bernd Hansen."
         )
   (add-hook 'gnus-group-mode-hook 'gnus-topic-mode) ;; Show me topics
   (add-hook 'gnus-startup-hook (lambda ()
-                                 (gnus-desktop-notify-mode)
+                                 (if (eq system-type 'gnu/linux) (gnus-desktop-notify-mode))
                                  (gnus-demon-add-handler 'gnus-demon-scan-news 5 t))))
 
 (require 'org-mime)
