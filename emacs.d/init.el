@@ -140,6 +140,8 @@ Based on bh/skip-non-stuck-projects from Bernd Hansen."
   (setq org-agenda-window-setup 'other-frame
         org-agenda-sticky t)
   (setq org-clock-persist t)
+  (setq org-agenda-dim-blocked-tasks 'invisible
+        org-enforce-todo-dependencies t)
   (setq org-agenda-todo-ignore-scheduled 'future) ;; Ignore TODO items for the future
   (setq org-use-speed-commands
       (lambda () (and (looking-at org-outline-regexp) (looking-back "^\**"))))
@@ -165,14 +167,22 @@ Based on bh/skip-non-stuck-projects from Bernd Hansen."
                    (org-agenda-skip-function 'joranvar/skip-scheduled-items)
                    (org-tags-match-list-sublevels 'indented)))))))
   (setq org-mobile-directory "~/org/mobile/")
-  (setq org-feed-alist
-        '(("xkcd" "http://xkcd.com/rss.xml" "~/org/gtd.org" "INBOX")))
+  (setq org-feed-alist '(("xkcd" "http://xkcd.com/rss.xml" "~/org/gtd.org" "INBOX"))
+        org-feed-default-template "\n* TODO %h\n  %U\n  %description\n  %a\n")
   (org-feed-update-all)
   (setq org-refile-targets '((org-agenda-files . (:maxlevel . 5)))
         org-refile-use-outline-path t
-        org-outline-path-complete-in-steps nil)
+        org-outline-path-complete-in-steps nil
+        org-agenda-clockreport-parameter-plist '(:link t :maxlevel 3 :properties ("Pomodori") :step day))
   (setq org-refile-target-verify-function 'bh/verify-refile-target)
   (org-babel-do-load-languages 'org-babel-load-languages '((sql . t))))
+
+(use-package htmlize
+  :ensure t)
+
+(use-package sauron
+  :ensure t
+  :config (sauron-start))
 
 (use-package nix-mode)
 
@@ -314,6 +324,24 @@ Based on bh/skip-non-stuck-projects from Bernd Hansen."
   :ensure t
   :config (disable-theme 'leuven)
   :init (bind-key "C-c t l" (lambda () (interactive) (joranvar/toggle-theme 'leuven))))
+
+(use-package rase
+  :ensure t
+  :config
+  (setq calendar-latitude 50.9342277
+        calendar-longitude -5.7725223)
+  (add-hook 'rase-functions (lambda (sun-event &optional first-run)
+                              (if first-run
+                                  (cond ((memq sun-event '(sunrise midday))
+                                         (joranvar/toggle-theme 'leuven))
+                                        (t
+                                         (joranvar/toggle-theme 'material))))
+                              (cond ((eq sun-event 'sunrise)
+                                     (joranvar/toggle-theme 'leuven))
+                                    ((eq sun-event 'sunset)
+                                     (joranvar/toggle-theme 'material)))))
+  :init
+  (rase-start t))
 
 (use-package avy
   :ensure t
