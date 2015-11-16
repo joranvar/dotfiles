@@ -182,7 +182,10 @@ Based on bh/skip-non-stuck-projects from Bernd Hansen."
 
 (use-package sauron
   :ensure t
-  :config (sauron-start))
+  :config
+  (when (eq system-type 'windows-nt)
+    (delete 'sauron-dbus sauron-modules))
+  (sauron-start))
 
 (use-package nix-mode)
 
