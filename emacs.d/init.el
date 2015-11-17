@@ -203,6 +203,9 @@ Based on bh/skip-non-stuck-projects from Bernd Hansen."
 (use-package ghc
   :ensure t)
 
+(use-package fsharp-mode
+  :ensure t)
+
 (use-package linum-relative
   :ensure t
   :config
