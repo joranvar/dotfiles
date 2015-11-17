@@ -109,7 +109,9 @@ Based on bh/skip-non-stuck-projects from Bernd Hansen."
           (subtree-end (save-excursion (org-end-of-subtree t))))
       (save-excursion
         (forward-line 1)
-        (if (or (not (re-search-forward "^\\*" subtree-end t))(re-search-forward "\\*+ TODO " subtree-end t))
+        (if (or (> (point) subtree-end)
+                (not (re-search-forward "^\\*" subtree-end t))
+                (re-search-forward "\\*+ TODO " subtree-end t))
             next-headline
           nil) ; a stuck project, has subtasks but no todo task
         ))))
@@ -121,7 +123,8 @@ Based on bh/skip-non-stuck-projects from Bernd Hansen."
     (let ((next-headline (save-excursion (or (outline-next-heading) (point-max)))))
       (save-excursion
         (forward-line 1)
-        (if (re-search-forward "^[ ]*SCHEDULED:" next-headline t)
+        (if (or (> (point) next-headline)
+                (re-search-forward "^[ ]*SCHEDULED:" next-headline t))
             next-headline
           nil) ; an item that has no scheduled date
         ))))
@@ -182,7 +185,10 @@ Based on bh/skip-non-stuck-projects from Bernd Hansen."
 
 (use-package sauron
   :ensure t
-  :config (sauron-start))
+  :config
+  (when (eq system-type 'windows-nt)
+    (delete 'sauron-dbus sauron-modules))
+  (sauron-start))
 
 (use-package nix-mode)
 
@@ -254,6 +260,7 @@ Based on bh/skip-non-stuck-projects from Bernd Hansen."
   :defines smtpmail-smtp-service smtpmail-default-smtp-server gnus-ignored-newsgroups
   :config
   (use-package gnus-desktop-notify
+    :if (eq system-type 'gnu/linux)
     :ensure t
     :config
     (use-package alert
@@ -299,7 +306,7 @@ Based on bh/skip-non-stuck-projects from Bernd Hansen."
         gnus-use-adaptive-scoring t)
   (add-hook 'gnus-group-mode-hook 'gnus-topic-mode) ;; Show me topics
   (add-hook 'gnus-startup-hook (lambda ()
-                                 (gnus-desktop-notify-mode)
+                                 (if (eq system-type 'gnu/linux) (gnus-desktop-notify-mode))
                                  (gnus-demon-add-handler 'gnus-demon-scan-news 5 t))))
 
 (require 'org-mime)
@@ -564,7 +571,7 @@ Based on bh/skip-non-stuck-projects from Bernd Hansen."
   (setenv "PATH" (concat "C:\\GnuWin\\bin;" (getenv "PATH")))
   (setq exec-path (append '("C:/GnuWin/bin") exec-path)))
 
-(set-face-attribute 'default nil :height (if (eq system-type 'gnu/linux) 100 90))
+(set-face-attribute 'default nil :height (if (eq system-type 'gnu/linux) 100 80))
 
 (defun joranvar-insert-guid ()
   "Insert a guid at point."
