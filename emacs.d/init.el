@@ -257,7 +257,9 @@ Based on bh/skip-non-stuck-projects from Bernd Hansen."
     :ensure t
     :config
     (use-package alert
-      :ensure t))
+      :ensure t
+      :config
+      (setq alert-default-style 'libnotify)))
   (add-to-list 'gnus-secondary-select-methods
                '(nnimap "gmail"
                         (nnimap-address "imap.gmail.com")
