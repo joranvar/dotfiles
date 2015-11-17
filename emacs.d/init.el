@@ -457,6 +457,12 @@ Based on bh/skip-non-stuck-projects from Bernd Hansen."
   :config
   (setq aw-scope 'frame))
 
+(use-package flyspell
+  :ensure t
+  :config
+  (setq ispell-program-name "aspell"
+        ispell-list-command "--list"))
+
 ;; Do not lose my clippings from outside of emacs
 (setq save-interprogram-paste-before-kill t)
 
