@@ -109,7 +109,9 @@ Based on bh/skip-non-stuck-projects from Bernd Hansen."
           (subtree-end (save-excursion (org-end-of-subtree t))))
       (save-excursion
         (forward-line 1)
-        (if (or (not (re-search-forward "^\\*" subtree-end t))(re-search-forward "\\*+ TODO " subtree-end t))
+        (if (or (> (point) subtree-end)
+                (not (re-search-forward "^\\*" subtree-end t))
+                (re-search-forward "\\*+ TODO " subtree-end t))
             next-headline
           nil) ; a stuck project, has subtasks but no todo task
         ))))
@@ -121,7 +123,8 @@ Based on bh/skip-non-stuck-projects from Bernd Hansen."
     (let ((next-headline (save-excursion (or (outline-next-heading) (point-max)))))
       (save-excursion
         (forward-line 1)
-        (if (re-search-forward "^[ ]*SCHEDULED:" next-headline t)
+        (if (or (> (point) next-headline)
+                (re-search-forward "^[ ]*SCHEDULED:" next-headline t))
             next-headline
           nil) ; an item that has no scheduled date
         ))))
