@@ -215,10 +215,30 @@ Based on bh/skip-non-stuck-projects from Bernd Hansen."
 (use-package auto-complete
   :ensure t)
 
+(defun joranvar-find-file-upwards (filename)
+  "Find the nearest occurrence of FILENAME in the current buffer file directory or upwards."
+  (f-expand filename (f--traverse-upwards (f-exists? (f-expand filename it)) (f-dirname buffer-file-name))))
+
 (use-package flycheck
   :ensure t
+  :defines fsharp-check flycheck-define-checker
   :config
-  (global-flycheck-mode))
+  (progn
+  (flycheck-define-checker fsharp-check
+    "My F# checker that utilizes FSharp.mk and fsharp-check."
+    :command
+    ("sh"
+     (eval (joranvar-find-file-upwards "fsharp-check"))
+     (eval (joranvar-find-file-upwards "Makefile"))
+     source
+     (eval (f-filename buffer-file-name)))
+    :error-patterns
+    ((error line-start (file-name) "(" line "," column "): error "
+            (message (and (one-or-more not-newline) "\n" (zero-or-more (and (one-or-more not-newline) "\n")) (or "\n" buffer-end))))
+     (warning line-start (file-name) "(" line "," column "): warning "
+              (message (and (one-or-more not-newline) "\n" (zero-or-more (and (one-or-more not-newline) "\n")) (or "\n" buffer-end)))))
+    :modes fsharp-mode)
+  (global-flycheck-mode)))
 
 (use-package highlight-symbol
   :ensure t
