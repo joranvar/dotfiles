@@ -263,6 +263,12 @@ Based on bh/skip-non-stuck-projects from Bernd Hansen."
                         (nnimap-address "imap.gmail.com")
                         (nnimap-server-port "imaps")
                         (nnimap-stream ssl)))
+  (add-to-list 'gnus-secondary-select-methods
+               '(nnimap "cgm"
+                        (nnimap-address "localhost")
+                        (nnimap-server-port "1143")
+                        (nnimap-stream network)))
+  (setq nnheader-file-name-translation-alist '((?[ . ?_) (?] . ?_)) ) ;; Fix adaptive scoring in [GMAIL] folders
   (setq smtpmail-smtp-service 587
         mail-user-agent 'message-user-agent
         message-send-mail-function 'smtpmail-send-it
