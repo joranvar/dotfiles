@@ -392,7 +392,8 @@ Based on bh/skip-non-stuck-projects from Bernd Hansen."
                 indent-tabs-mode nil
                 require-final-newline nil)
   (global-whitespace-mode)
-  (add-hook 'csharp-mode-hook #'whitespace-cleanup-mode))
+  (add-hook 'csharp-mode-hook #'whitespace-cleanup-mode)
+  (add-hook 'fsharp-mode-hook #'whitespace-cleanup-mode))
 
 (use-package projectile
   :ensure t
