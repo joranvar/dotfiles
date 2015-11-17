@@ -26,7 +26,6 @@
    (quote
     ("--graph" "--color" "--decorate" "--show-signature" "-n256")))
  '(magit-rebase-arguments (quote ("--autostash")))
- '(org-agenda-files (quote ("~/org/cgm.org" "~/org/main.org")))
  '(package-selected-packages
    (quote
     (powershell zop-to-char expand-region rdp auto-package-update aggressive-indent aggressive-indent-mode smartparens multiple-cursors whitespace-cleanup-mode visual-regexp neotree persp-projectile perspective use-package smart-mode-line-powerline-theme org-plus-contrib omnisharp material-theme magit leuven-theme hi2 helm-projectile ghc avy)))
