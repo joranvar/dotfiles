@@ -73,6 +73,7 @@
 
 (use-package dash :ensure t)
 (use-package s :ensure t)
+(use-package f :ensure t)
 (use-package rdp :ensure t)
 
 (use-package smart-mode-line-powerline-theme
