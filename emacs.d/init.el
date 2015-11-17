@@ -247,6 +247,25 @@ Based on bh/skip-non-stuck-projects from Bernd Hansen."
         gnus-ignored-newsgroups "^to\\.\\|^[0-9. ]+\\( \\|$\\)\\|^[\"]\"[#'()]"
         mm-discouraged-alternatives '("text/html" "text/richtext") ;; Prefer text/plain
         )
+  (setq gnus-select-method '(nntp "news.usenetserver.com"))
+  (setq message-citation-line-function 'message-insert-formatted-citation-line)
+  (setq message-citation-line-format "On %a, %b %d %Y, %f writes:\n")
+  (setq message-cite-style message-cite-style-outlook)
+  (when window-system
+    (setq gnus-sum-thread-tree-indent "  ")
+    (setq gnus-sum-thread-tree-root "● ")
+    (setq gnus-sum-thread-tree-false-root "◯ ")
+    (setq gnus-sum-thread-tree-single-indent "◎ ")
+    (setq gnus-sum-thread-tree-vertical        "│")
+    (setq gnus-sum-thread-tree-leaf-with-other "├─► ")
+    (setq gnus-sum-thread-tree-single-leaf     "╰─► "))
+  (setq-default gnus-summary-line-format "%U%R%z %(%&user-date;  %-15,15f  %B%s%)\n"
+                gnus-user-date-format-alist '((t . "%Y-%m-%d %H:%M"))
+                gnus-summary-thread-gathering-function 'gnus-gather-threads-by-subject
+                gnus-thread-sort-functions '(gnus-thread-sort-by-number (not gnus-thread-sort-by-total-score))
+                gnus-subthread-sort-functions '(gnus-sort-thread-by-number))
+  (setq gnus-decay-scores t
+        gnus-use-adaptive-scoring t)
   (add-hook 'gnus-group-mode-hook 'gnus-topic-mode) ;; Show me topics
   (add-hook 'gnus-startup-hook (lambda ()
                                  (gnus-desktop-notify-mode)
