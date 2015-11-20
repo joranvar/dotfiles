@@ -464,6 +464,9 @@ Based on bh/skip-non-stuck-projects from Bernd Hansen."
   :config
   (setq aw-scope 'frame))
 
+(setq focus-follows-mouse t
+      mouse-autoselect-window t)
+
 ;; Do not lose my clippings from outside of emacs
 (setq save-interprogram-paste-before-kill t)
 
