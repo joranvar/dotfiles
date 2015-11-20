@@ -26,7 +26,6 @@
    (quote
     ("--graph" "--color" "--decorate" "--show-signature" "-n256")))
  '(magit-rebase-arguments (quote ("--autostash")))
- '(org-agenda-files (quote ("~/org/cgm.org" "~/org/main.org")))
  '(package-selected-packages
    (quote
     (powershell zop-to-char expand-region rdp auto-package-update aggressive-indent aggressive-indent-mode smartparens multiple-cursors whitespace-cleanup-mode visual-regexp neotree persp-projectile perspective use-package smart-mode-line-powerline-theme org-plus-contrib omnisharp material-theme magit leuven-theme hi2 helm-projectile ghc avy)))
@@ -74,6 +73,7 @@
 
 (use-package dash :ensure t)
 (use-package s :ensure t)
+(use-package f :ensure t)
 (use-package rdp :ensure t)
 
 (use-package smart-mode-line-powerline-theme
@@ -209,6 +209,9 @@ Based on bh/skip-non-stuck-projects from Bernd Hansen."
 (use-package ghc
   :ensure t)
 
+(use-package fsharp-mode
+  :ensure t)
+
 (use-package linum-relative
   :ensure t
   :config
@@ -218,10 +221,30 @@ Based on bh/skip-non-stuck-projects from Bernd Hansen."
 (use-package auto-complete
   :ensure t)
 
+(defun joranvar-find-file-upwards (filename)
+  "Find the nearest occurrence of FILENAME in the current buffer file directory or upwards."
+  (f-expand filename (f--traverse-upwards (f-exists? (f-expand filename it)) (f-dirname buffer-file-name))))
+
 (use-package flycheck
   :ensure t
+  :defines fsharp-check flycheck-define-checker
   :config
-  (global-flycheck-mode))
+  (progn
+  (flycheck-define-checker fsharp-check
+    "My F# checker that utilizes FSharp.mk and fsharp-check."
+    :command
+    ("sh"
+     (eval (joranvar-find-file-upwards "fsharp-check"))
+     (eval (joranvar-find-file-upwards "Makefile"))
+     source
+     (eval (f-filename buffer-file-name)))
+    :error-patterns
+    ((error line-start (file-name) "(" line "," column "): error "
+            (message (and (one-or-more not-newline) "\n" (zero-or-more (and (one-or-more not-newline) "\n")) (or "\n" buffer-end))))
+     (warning line-start (file-name) "(" line "," column "): warning "
+              (message (and (one-or-more not-newline) "\n" (zero-or-more (and (one-or-more not-newline) "\n")) (or "\n" buffer-end)))))
+    :modes fsharp-mode)
+  (global-flycheck-mode)))
 
 (use-package highlight-symbol
   :ensure t
@@ -241,12 +264,20 @@ Based on bh/skip-non-stuck-projects from Bernd Hansen."
     :ensure t
     :config
     (use-package alert
-      :ensure t))
+      :ensure t
+      :config
+      (setq alert-default-style 'libnotify)))
   (add-to-list 'gnus-secondary-select-methods
                '(nnimap "gmail"
                         (nnimap-address "imap.gmail.com")
                         (nnimap-server-port "imaps")
                         (nnimap-stream ssl)))
+  (add-to-list 'gnus-secondary-select-methods
+               '(nnimap "cgm"
+                        (nnimap-address "localhost")
+                        (nnimap-server-port "1143")
+                        (nnimap-stream network)))
+  (setq nnheader-file-name-translation-alist '((?[ . ?_) (?] . ?_)) ) ;; Fix adaptive scoring in [GMAIL] folders
   (setq smtpmail-smtp-service 587
         mail-user-agent 'message-user-agent
         message-send-mail-function 'smtpmail-send-it
@@ -254,6 +285,25 @@ Based on bh/skip-non-stuck-projects from Bernd Hansen."
         gnus-ignored-newsgroups "^to\\.\\|^[0-9. ]+\\( \\|$\\)\\|^[\"]\"[#'()]"
         mm-discouraged-alternatives '("text/html" "text/richtext") ;; Prefer text/plain
         )
+  (setq gnus-select-method '(nntp "news.usenetserver.com"))
+  (setq message-citation-line-function 'message-insert-formatted-citation-line)
+  (setq message-citation-line-format "On %a, %b %d %Y, %f writes:\n")
+  (setq message-cite-style message-cite-style-outlook)
+  (when window-system
+    (setq gnus-sum-thread-tree-indent "  ")
+    (setq gnus-sum-thread-tree-root "● ")
+    (setq gnus-sum-thread-tree-false-root "◯ ")
+    (setq gnus-sum-thread-tree-single-indent "◎ ")
+    (setq gnus-sum-thread-tree-vertical        "│")
+    (setq gnus-sum-thread-tree-leaf-with-other "├─► ")
+    (setq gnus-sum-thread-tree-single-leaf     "╰─► "))
+  (setq-default gnus-summary-line-format "%U%R%z %(%&user-date;  %-15,15f  %B%s%)\n"
+                gnus-user-date-format-alist '((t . "%Y-%m-%d %H:%M"))
+                gnus-summary-thread-gathering-function 'gnus-gather-threads-by-subject
+                gnus-thread-sort-functions '(gnus-thread-sort-by-number (not gnus-thread-sort-by-total-score))
+                gnus-subthread-sort-functions '(gnus-sort-thread-by-number))
+  (setq gnus-decay-scores t
+        gnus-use-adaptive-scoring t)
   (add-hook 'gnus-group-mode-hook 'gnus-topic-mode) ;; Show me topics
   (add-hook 'gnus-startup-hook (lambda ()
                                  (if (eq system-type 'gnu/linux) (gnus-desktop-notify-mode))
@@ -399,7 +449,8 @@ Based on bh/skip-non-stuck-projects from Bernd Hansen."
                 indent-tabs-mode nil
                 require-final-newline nil)
   (global-whitespace-mode)
-  (add-hook 'csharp-mode-hook #'whitespace-cleanup-mode))
+  (add-hook 'csharp-mode-hook #'whitespace-cleanup-mode)
+  (add-hook 'fsharp-mode-hook #'whitespace-cleanup-mode))
 
 (use-package projectile
   :ensure t
@@ -466,6 +517,12 @@ Based on bh/skip-non-stuck-projects from Bernd Hansen."
 
 (setq focus-follows-mouse t
       mouse-autoselect-window t)
+
+(use-package flyspell
+  :ensure t
+  :config
+  (setq ispell-program-name "aspell"
+        ispell-list-command "--list"))
 
 ;; Do not lose my clippings from outside of emacs
 (setq save-interprogram-paste-before-kill t)
