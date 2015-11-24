@@ -214,6 +214,7 @@ Based on bh/skip-non-stuck-projects from Bernd Hansen."
 
 (use-package linum-relative
   :ensure t
+  :defer t
   :config
   (global-linum-mode)
   (linum-relative-on))
