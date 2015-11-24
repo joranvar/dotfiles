@@ -18,7 +18,6 @@
     (("mkv" . "vlc --play-and-exit")
      ("avi" . "vlc --play-and-exit")
      ("sln" . "explorer.exe"))))
- '(magit-commit-arguments (quote ("--gpg-sign=9BD68A49AB3D8E4D")))
  '(magit-diff-arguments
    (quote
     ("--ignore-space-change" "--ignore-all-space" "--no-ext-diff" "-M" "-C")))
@@ -89,7 +88,11 @@
 (use-package magit
   :ensure t
   :commands (magit-git-repo-p magit-status-internal)
-  :bind (("M-G" . magit-status)))
+  :bind (("M-G" . magit-status))
+  :config
+  (setq magit-commit-arguments (if (eq 'system 'gnu/linux)
+                                   '("--gpg-sign=9BD68A49AB3D8E4D")
+                                 '(nil))))
 
 (use-package helm
   :ensure t
