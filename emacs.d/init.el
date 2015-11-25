@@ -92,7 +92,7 @@
   :config
   (setq magit-commit-arguments (if (eq 'system 'gnu/linux)
                                    '("--gpg-sign=9BD68A49AB3D8E4D")
-                                 '(nil))))
+                                 '(""))))
 
 (use-package helm
   :ensure t
