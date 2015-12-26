@@ -41,6 +41,7 @@ main = do
           , ((0,                      xF86XK_AudioLowerVolume ), lowerVolume 6 >> return ())
           , ((0,                      xF86XK_AudioRaiseVolume ), raiseVolume 3 >> return ())
           , ((0,                      xF86XK_AudioMute        ), toggleMute >> return ())
+          , ((mod4Mask,               xK_r                    ), spawn "pkill redshift || redshift -l 50.9342277:-5.7725223")
           ] ++
-          [ ((mod4Mask .|. mask, key), f sc) | (key, sc) <- zip [xK_w, xK_e, xK_r] [0..]
+          [ ((mod4Mask .|. mask, key), f sc) | (key, sc) <- zip [xK_w, xK_e] [0..]
                                              , (f, mask) <- [(viewScreen, 0), (sendToScreen, shiftMask)] ] )
