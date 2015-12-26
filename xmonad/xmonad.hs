@@ -38,6 +38,7 @@ main = do
         } `additionalKeys`
         ( [ ((mod4Mask .|. shiftMask, xK_l                    ), spawn "xscreensaver-command -lock")
           , ((mod4Mask,               xK_b                    ), sendMessage ToggleStruts)
+          , ((mod4Mask,               xK_p                    ), spawn "dmenu_run -b")
           , ((0,                      xF86XK_AudioLowerVolume ), lowerVolume 6 >> return ())
           , ((0,                      xF86XK_AudioRaiseVolume ), raiseVolume 3 >> return ())
           , ((0,                      xF86XK_AudioMute        ), toggleMute >> return ())
