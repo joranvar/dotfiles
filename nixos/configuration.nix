@@ -146,14 +146,14 @@
       ];
   };
 
-        # Enable CUPS to print documents.
-        # services.printing.enable = true;
+  # Enable CUPS to print documents.
+  # services.printing.enable = true;
 
-        # Enable Samba.
-        services.samba = {
-        enable = true;
-        shares = {
-        devenv = {
+  # Enable Samba.
+  services.samba = {
+    enable = true;
+    shares = {
+      devenv = {
         path = "/home/joranvar/git/";
         "read only" = "no";
         browseable = "yes";
@@ -175,8 +175,8 @@
 
   nixpkgs.config.allowUnfree = true;
 
-    # Enable the X11 windowing system.
-    services.xserver = {
+  # Enable the X11 windowing system.
+  services.xserver = {
     enable = true;
     xkbOptions = "compose:ralt";
     windowManager.xmonad = {
