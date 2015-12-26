@@ -92,7 +92,7 @@
     libnotify
     notify-osd
 
-    virtmanager
+    # virtmanager
     remmina
 
     dmenu
@@ -129,8 +129,6 @@
   services.dbus = {
     enable = true;
     packages = [
-        pkgs.libvirt
-        pkgs.virtmanager
         pkgs.gnome.GConf
       ];
   };
