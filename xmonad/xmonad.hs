@@ -33,7 +33,7 @@ main = do
             spawnOnce "/usr/bin/env xscreensaver -no-splash"
             spawnOnce "trayer --SetPartialStrut true --edge top --align right --width 10 --height 14 --transparent true --alpha 0 --tint black"
             spawnOnce "nm-applet"
-        , terminal = "/usr/bin/env urxvt"
+        , terminal = "/usr/bin/env emacsclient -c -n -e \"(eshell \\\"@login\\\")\""
         , handleEventHook = handleEventHook defaultConfig <+> fullscreenEventHook
         } `additionalKeys`
         ( [ ((mod4Mask .|. shiftMask, xK_l                    ), spawn "xscreensaver-command -lock")
