@@ -70,6 +70,9 @@
     cabal-install
 
     emacs
+    aspell
+    aspellDicts.en
+    aspellDicts.nl
 
     fsharp
     mono
