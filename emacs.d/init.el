@@ -519,6 +519,10 @@ Based on bh/skip-non-stuck-projects from Bernd Hansen."
                                          (projectile-relevant-known-projects)))
         magit-repo-dirs-depth 1))
 
+;; Set default commands for dired
+(add-to-list 'dired-guess-shell-alist-user '("\\.mkv" "vlc --play-and-exit"))
+(add-to-list 'dired-guess-shell-alist-user '("\\.avi" "vlc --play-and-exit"))
+
 (use-package neotree
   :ensure t
   :bind (("<f8>" . neotree-toggle))) ; TODO: try getting the project root from projectile first
