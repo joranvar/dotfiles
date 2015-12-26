@@ -73,6 +73,7 @@
 
     fsharp
     mono
+    czmq
 
     python34
     python34Packages.pywinrm
