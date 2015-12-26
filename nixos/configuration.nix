@@ -103,6 +103,7 @@
 
     # virtmanager
     remmina
+    redshift
 
     dmenu
     xscreensaver
