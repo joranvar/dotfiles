@@ -61,6 +61,10 @@
 
 (use-package paradox
   :ensure t
+  :defer t
+  :commands
+  (paradox-list-packages
+   package-list-packages)
   :config
   (setq paradox-execute-asynchronously t)
   (paradox-enable)
@@ -189,6 +193,7 @@ Based on bh/skip-non-stuck-projects from Bernd Hansen."
 
 (use-package sauron
   :ensure t
+  :defer t
   :config
   (when (eq system-type 'windows-nt)
     (delete 'sauron-dbus sauron-modules))
@@ -258,6 +263,7 @@ Based on bh/skip-non-stuck-projects from Bernd Hansen."
 
 (use-package flycheck
   :ensure t
+  :defer t
   :defines fsharp-check flycheck-define-checker
   :config
   (progn
@@ -288,6 +294,7 @@ Based on bh/skip-non-stuck-projects from Bernd Hansen."
 
 (use-package gnus
   :ensure t
+  :defer t
   :defines smtpmail-smtp-service smtpmail-default-smtp-server gnus-ignored-newsgroups
   :config
   (use-package gnus-desktop-notify
@@ -298,6 +305,8 @@ Based on bh/skip-non-stuck-projects from Bernd Hansen."
       :ensure t
       :config
       (setq alert-default-style 'libnotify)))
+  (require 'org-contacts)
+  (setq org-contacts-files '("~/org/people.org"))
   (add-to-list 'gnus-secondary-select-methods
                '(nnimap "gmail"
                         (nnimap-address "imap.gmail.com")
@@ -356,9 +365,6 @@ Based on bh/skip-non-stuck-projects from Bernd Hansen."
 (add-hook 'org-mode-hook
           (lambda () (local-set-key "\C-c\M-o" 'org-mime-org-buffer-htmlize)))
 
-(require 'org-contacts)
-(setq org-contacts-files '("~/org/people.org"))
-
 (use-package epg
   :ensure t
   :config
@@ -414,6 +420,7 @@ Based on bh/skip-non-stuck-projects from Bernd Hansen."
 
 (use-package rase
   :ensure t
+  :defer t
   :config
   (setq calendar-latitude 50.9342277
         calendar-longitude -5.7725223)
@@ -427,7 +434,6 @@ Based on bh/skip-non-stuck-projects from Bernd Hansen."
                                      (joranvar/toggle-theme 'leuven))
                                     ((eq sun-event 'sunset)
                                      (joranvar/toggle-theme 'material)))))
-  :init
   (rase-start t))
 
 (use-package avy
@@ -584,6 +590,7 @@ Based on bh/skip-non-stuck-projects from Bernd Hansen."
 
 (use-package ecb
   :ensure t
+  :defer t
   :config
   (setq ecb-layout-name "left1")
   (setq-default semantic-symref-tool "global"))
