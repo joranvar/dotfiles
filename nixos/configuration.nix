@@ -43,6 +43,11 @@
   #   consoleKeyMap = "us";
   #   defaultLocale = "en_US.UTF-8";
   # };
+  nixpkgs.config.packageOverrides = pkgs : rec {
+    xmonad = pkgs.haskellPackages.xmonad;
+    xmonad-contrib = pkgs.haskellPackages.xmonad-contrib;
+    xmonad-extras = pkgs.haskellPackages.xmonad-extras;
+  };
 
   # List packages installed in system profile. To search by name, run:
   # $ nix-env -qaP | grep wget
@@ -62,10 +67,16 @@
     binutils
     gnumake
 
+    cabal-install
+
     emacs
+    aspell
+    aspellDicts.en
+    aspellDicts.nl
 
     fsharp
     mono
+    czmq
 
     python34
     python34Packages.pywinrm
@@ -85,6 +96,7 @@
     xlsfonts
 
     trayer
+    haskellPackages.ghc
     haskellPackages.xmobar
     haskellPackages.xmonad
     haskellPackages.xmonad-contrib
@@ -92,8 +104,9 @@
     libnotify
     notify-osd
 
-    virtmanager
+    # virtmanager
     remmina
+    redshift
 
     dmenu
     xscreensaver
@@ -129,20 +142,18 @@
   services.dbus = {
     enable = true;
     packages = [
-        pkgs.libvirt
-        pkgs.virtmanager
         pkgs.gnome.GConf
       ];
   };
 
-        # Enable CUPS to print documents.
-        # services.printing.enable = true;
+  # Enable CUPS to print documents.
+  # services.printing.enable = true;
 
-        # Enable Samba.
-        services.samba = {
-        enable = true;
-        shares = {
-        devenv = {
+  # Enable Samba.
+  services.samba = {
+    enable = true;
+    shares = {
+      devenv = {
         path = "/home/joranvar/git/";
         "read only" = "no";
         browseable = "yes";
@@ -164,8 +175,8 @@
 
   nixpkgs.config.allowUnfree = true;
 
-    # Enable the X11 windowing system.
-    services.xserver = {
+  # Enable the X11 windowing system.
+  services.xserver = {
     enable = true;
     xkbOptions = "compose:ralt";
     windowManager.xmonad = {

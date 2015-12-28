@@ -13,6 +13,7 @@
  '(haskell-process-auto-import-loaded-modules t)
  '(haskell-process-log t)
  '(haskell-process-suggest-remove-import-lines t)
+ '(haskell-process-type 'cabal-repl)
  '(helm-external-programs-associations
    (quote
     (("mkv" . "vlc --play-and-exit")
@@ -60,6 +61,10 @@
 
 (use-package paradox
   :ensure t
+  :defer t
+  :commands
+  (paradox-list-packages
+   package-list-packages)
   :config
   (setq paradox-execute-asynchronously t)
   (paradox-enable)
@@ -188,6 +193,7 @@ Based on bh/skip-non-stuck-projects from Bernd Hansen."
 
 (use-package sauron
   :ensure t
+  :defer t
   :config
   (when (eq system-type 'windows-nt)
     (delete 'sauron-dbus sauron-modules))
@@ -195,21 +201,47 @@ Based on bh/skip-non-stuck-projects from Bernd Hansen."
 
 (use-package nix-mode)
 
-(use-package hi2
-  :ensure t)
+(use-package rainbow-delimiters
+  :ensure t
+  :config
+  (add-hook 'haskell-mode-hook 'rainbow-delimiters-mode))
+
+;; (use-package hindent
+;;   :ensure t
+;;   :config
+;;   (add-hook 'haskell-mode-hook #'hindent-mode))
+
+(use-package ghc
+  :ensure t
+  :config
+  (add-hook 'haskell-mode-hook (lambda () (ghc-init))))
 
 (use-package haskell-mode
   :ensure t
+  :defer t
   :config
   (require 'haskell-interactive-mode)
   (require 'haskell-process)
+  (require 'haskell-indentation)
   (add-hook 'haskell-mode-hook 'interactive-haskell-mode)
-  (add-hook 'haskell-mode-hook #'hi2-mode))
+  (add-hook 'haskell-mode-hook 'structured-haskell-mode)
+  (add-to-list 'company-backends 'company-ghc)
+  (setq company-ghc-show-info t)
+  (progn
+    (define-key haskell-mode-map (kbd "C-c C-l") 'haskell-process-load-or-reload)
+    (define-key haskell-mode-map (kbd "C-c C-z") 'haskell-interactive-switch)
+    (define-key haskell-mode-map (kbd "C-c C-n C-t") 'haskell-process-do-type)
+    (define-key haskell-mode-map (kbd "C-c C-n C-i") 'haskell-process-do-info)
+    (define-key haskell-mode-map (kbd "C-c C-n C-c") 'haskell-process-cabal-build)
+    (define-key haskell-mode-map (kbd "C-c C-n c") 'haskell-process-cabal)
+    (define-key haskell-mode-map (kbd "SPC") 'haskell-mode-contextual-space))
+  (eval-after-load 'haskell-cabal '(progn
+                                     (define-key haskell-cabal-mode-map (kbd "C-c C-z") 'haskell-interactive-switch)
+                                     (define-key haskell-cabal-mode-map (kbd "C-c C-k") 'haskell-interactive-mode-clear)
+                                     (define-key haskell-cabal-mode-map (kbd "C-c C-c") 'haskell-process-cabal-build)
+                                     (define-key haskell-cabal-mode-map (kbd "C-c c") 'haskell-process-cabal))))
 
 (use-package powershell
-  :ensure t)
-
-(use-package ghc
   :ensure t)
 
 (use-package fsharp-mode
@@ -231,6 +263,7 @@ Based on bh/skip-non-stuck-projects from Bernd Hansen."
 
 (use-package flycheck
   :ensure t
+  :defer t
   :defines fsharp-check flycheck-define-checker
   :config
   (progn
@@ -261,6 +294,7 @@ Based on bh/skip-non-stuck-projects from Bernd Hansen."
 
 (use-package gnus
   :ensure t
+  :defer t
   :defines smtpmail-smtp-service smtpmail-default-smtp-server gnus-ignored-newsgroups
   :config
   (use-package gnus-desktop-notify
@@ -271,6 +305,8 @@ Based on bh/skip-non-stuck-projects from Bernd Hansen."
       :ensure t
       :config
       (setq alert-default-style 'libnotify)))
+  (require 'org-contacts)
+  (setq org-contacts-files '("~/org/people.org"))
   (add-to-list 'gnus-secondary-select-methods
                '(nnimap "gmail"
                         (nnimap-address "imap.gmail.com")
@@ -329,9 +365,6 @@ Based on bh/skip-non-stuck-projects from Bernd Hansen."
 (add-hook 'org-mode-hook
           (lambda () (local-set-key "\C-c\M-o" 'org-mime-org-buffer-htmlize)))
 
-(require 'org-contacts)
-(setq org-contacts-files '("~/org/people.org"))
-
 (use-package epg
   :ensure t
   :config
@@ -387,6 +420,7 @@ Based on bh/skip-non-stuck-projects from Bernd Hansen."
 
 (use-package rase
   :ensure t
+  :defer t
   :config
   (setq calendar-latitude 50.9342277
         calendar-longitude -5.7725223)
@@ -400,7 +434,6 @@ Based on bh/skip-non-stuck-projects from Bernd Hansen."
                                      (joranvar/toggle-theme 'leuven))
                                     ((eq sun-event 'sunset)
                                      (joranvar/toggle-theme 'material)))))
-  :init
   (rase-start t))
 
 (use-package avy
@@ -486,6 +519,10 @@ Based on bh/skip-non-stuck-projects from Bernd Hansen."
                                          (projectile-relevant-known-projects)))
         magit-repo-dirs-depth 1))
 
+;; Set default commands for dired
+(add-to-list 'dired-guess-shell-alist-user '("\\.mkv" "vlc --play-and-exit"))
+(add-to-list 'dired-guess-shell-alist-user '("\\.avi" "vlc --play-and-exit"))
+
 (use-package neotree
   :ensure t
   :bind (("<f8>" . neotree-toggle))) ; TODO: try getting the project root from projectile first
@@ -559,6 +596,7 @@ Based on bh/skip-non-stuck-projects from Bernd Hansen."
 
 (use-package ecb
   :ensure t
+  :defer t
   :config
   (setq ecb-layout-name "left1")
   (setq-default semantic-symref-tool "global"))
