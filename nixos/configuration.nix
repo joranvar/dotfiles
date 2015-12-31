@@ -67,6 +67,8 @@
     usbutils
     binutils
     gnumake
+    gcc
+    gdb
 
     cabal-install
 
