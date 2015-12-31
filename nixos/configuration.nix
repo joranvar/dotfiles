@@ -58,6 +58,7 @@
 
     zsh
     git
+    jre
     libusb
     gnupg
     gnupg1compat
