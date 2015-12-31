@@ -575,6 +575,8 @@ Based on bh/skip-non-stuck-projects from Bernd Hansen."
   :load-path "lisp/sql-reformat"
   :commands sql-reformat)
 
+(add-to-list 'process-coding-system-alist '("sqlcmd" . cp850-dos))
+
 (use-package tf-git
   :load-path "lisp/tf-git"
   :commands (tf-mark-reviewed
