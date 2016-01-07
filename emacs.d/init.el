@@ -485,6 +485,9 @@ Based on bh/skip-non-stuck-projects from Bernd Hansen."
                 whitespace-line-column 160
                 indent-tabs-mode nil
                 require-final-newline nil)
+  (defadvice align-regexp (around align-regexp-with-spaces activate)
+    (let ((indent-tabs-mode nil))
+      ad-do-it))
   (global-whitespace-mode)
   (add-hook 'csharp-mode-hook #'whitespace-cleanup-mode)
   (add-hook 'fsharp-mode-hook #'whitespace-cleanup-mode))
