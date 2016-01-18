@@ -97,7 +97,9 @@
   :config
   (setq magit-commit-arguments (if (eq 'system 'gnu/linux)
                                    '("--gpg-sign=9BD68A49AB3D8E4D")
-                                 '(""))))
+                                 '("")))
+  (when (eq system-type 'windows-nt)
+    (setq magit-git-executable "c:/Program Files/Git/bin/git.exe")))
 
 (use-package helm
   :ensure t
