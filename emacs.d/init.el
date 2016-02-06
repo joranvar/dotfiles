@@ -285,6 +285,9 @@ Based on bh/skip-non-stuck-projects from Bernd Hansen."
     :modes fsharp-mode)
   (global-flycheck-mode)))
 
+(use-package editorconfig
+  :ensure t)
+
 (use-package highlight-symbol
   :ensure t
   :config
