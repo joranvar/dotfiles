@@ -285,6 +285,10 @@ Based on bh/skip-non-stuck-projects from Bernd Hansen."
     :modes fsharp-mode)
   (global-flycheck-mode)))
 
+(use-package smart-compile
+  :ensure t
+  :bind ("C-c m" . smart-compile))
+
 (use-package editorconfig
   :ensure t)
 
@@ -548,7 +552,6 @@ Based on bh/skip-non-stuck-projects from Bernd Hansen."
   :ensure t
   :bind (("C-c r" . vr/replace)
          ("C-c q" . vr/query-replace)
-         ("C-c m" . vr/mc-mark)
          ("C-s"   . isearch-forward-regexp)
          ("M-C-s" . isearch-forward)
          ("C-r"   . isearch-backward-regexp)
