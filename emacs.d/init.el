@@ -565,7 +565,8 @@ Based on bh/skip-non-stuck-projects from Bernd Hansen."
   :ensure t
   :bind (("C-x o" . ace-window))
   :config
-  (setq aw-scope 'frame))
+  (setq aw-scope 'frame)
+  (setq aw-keys '(?a ?o ?e ?u ?i ?d ?h ?t ?n ?s)))
 
 (setq focus-follows-mouse t
       mouse-autoselect-window t)
