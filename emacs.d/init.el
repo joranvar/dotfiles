@@ -288,6 +288,13 @@ Based on bh/skip-non-stuck-projects from Bernd Hansen."
     :modes fsharp-mode)
   (global-flycheck-mode)))
 
+(use-package smart-compile
+  :ensure t
+  :bind ("C-c m" . smart-compile))
+
+(use-package editorconfig
+  :ensure t)
+
 (use-package highlight-symbol
   :ensure t
   :config
@@ -548,7 +555,6 @@ Based on bh/skip-non-stuck-projects from Bernd Hansen."
   :ensure t
   :bind (("C-c r" . vr/replace)
          ("C-c q" . vr/query-replace)
-         ("C-c m" . vr/mc-mark)
          ("C-s"   . isearch-forward-regexp)
          ("M-C-s" . isearch-forward)
          ("C-r"   . isearch-backward-regexp)
@@ -562,7 +568,8 @@ Based on bh/skip-non-stuck-projects from Bernd Hansen."
   :ensure t
   :bind (("C-x o" . ace-window))
   :config
-  (setq aw-scope 'frame))
+  (setq aw-scope 'frame)
+  (setq aw-keys '(?a ?o ?e ?u ?i ?d ?h ?t ?n ?s)))
 
 (setq focus-follows-mouse t
       mouse-autoselect-window t)
