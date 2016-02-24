@@ -8,34 +8,9 @@
   imports =
     [ # Include the results of the hardware scan.
       /etc/nixos/hardware-configuration.nix
+      # Include the local machine configuration.
+      /etc/nixos/local-machine.nix
     ];
-
-  # Use the gummiboot efi boot loader.
-  boot.loader.gummiboot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
-
-  boot.extraModprobeConfig = ''
-    # options snd_hda_intel enable=0,1
-    options i915 modeset=1 i915_enable_rc6=7 i915_enable_fbc=1 lvds_downclock=1
-    # options snd slots=snd-hda-intel
-    options snd-hda-intel index=0 id=PCH
-    options snd-hda-intel index=1 id=HDMI
-  '';
-  boot.blacklistedKernelModules = [ "snd_pcsp" "nouveau" ];
-  boot.kernelModules = [ "intel_agp" "i915" ];
-  hardware.pulseaudio.enable = true;
-
-  hardware.opengl.driSupport32Bit = true;
-
-  hardware.enableAllFirmware = true;
-
-  networking.hostName = "lapbart"; # Define your hostname.
-  networking.hostId = "3d14756b";
-  # networking.wireless.enable = true;  # Enables wireless.
-  networking.firewall.enable = true;
-  networking.firewall.allowPing = true;
-  networking.firewall.allowedTCPPorts = [ 445 139 ];
-  networking.firewall.allowedUDPPorts = [ 137 138 ];
 
   # Select internationalisation properties.
   # i18n = {
@@ -190,9 +165,6 @@
       enable = true;
       twoFingerScroll = true;
     };
-    videoDrivers = [ "intel" ];
-    xrandrHeads = [ "HDMI1" "eDP1" ];
-    resolutions = [ { x = 2560; y = 1440; } { x = 1920; y = 1080; } ];
     windowManager.default = "xmonad";
     desktopManager.xterm.enable = false;
     desktopManager.default = "none";
@@ -207,16 +179,6 @@
   programs.ssh.startAgent = false; # gpg agent takes over this role
 
   services.nixosManual.showManual = true;
-
-  # Power buttons.
-  services.logind.extraConfig = ''
-    HandlePowerKey=suspend
-    PowerKeyIgnoreInhibited=yes
-  '';
-
-  # Enable the KDE Desktop Environment.
-  # services.xserver.displayManager.kdm.enable = true;
-  # services.xserver.desktopManager.kde4.enable = true;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.extraUsers.joranvar = {
@@ -238,6 +200,4 @@
 
   programs.zsh.enable = true;
   users.defaultUserShell = "/var/run/current-system/sw/bin/zsh";
-
-  virtualisation.libvirtd.enable = true;
 }
