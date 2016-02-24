@@ -87,6 +87,7 @@
     # virtmanager
     remmina
     redshift
+    davmail
 
     dmenu
     xscreensaver
