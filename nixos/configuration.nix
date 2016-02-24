@@ -56,6 +56,8 @@
     mono
     czmq
 
+    sqsh
+
     python34
     python34Packages.pywinrm
 
