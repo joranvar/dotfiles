@@ -98,6 +98,7 @@
     pidgin
     skype
     gitAndTools.git-annex
+    zip
 
     steam
 
