@@ -3,7 +3,7 @@ Set-TaskbarOptions -Size Small -Lock -Dock Bottom
 
 choco install microsoft-build-tools      -y
 choco install MsSqlServer2012Express     -y
-choco install visualstudio2015enterprise -y -version 14.0.23107.0 -InstallArguments "/Features:WebTools SQL"
+choco install visualstudio2015enterprise -y -InstallArguments "/Features:WebTools SQL"
 choco install netfx-4.5.2-devpack        -y
 choco install tfs2013powertools          -y
 choco install vs2015.vscommands          -y
