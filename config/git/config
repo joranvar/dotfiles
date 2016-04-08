@@ -5,6 +5,8 @@
 	tfci = tf checkin --deep --note='"Code Reviewer"=' --note='"Jira Issue ID"=-'
 	tfco = tf pull --deep --rebase
 	tfu = tf fetch --deep
+        cleanup = "!git branch --merged master | grep  -v '\\*\\|master\\|local-.*' | xargs -n 1 git branch -d"
+        rcleanup = "!git branch -r --merged origin/master | xargs -L1 | cut -d'/' -f2- | grep  -v '\\*\\|master' | xargs git push origin --delete"
 [diff "utf16"]
 	textconv = "iconv -f utf-16 -t utf-8"
 [diff "dll"]
