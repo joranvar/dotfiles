@@ -25,6 +25,7 @@
  '(magit-log-arguments
    (quote
     ("--graph" "--color" "--decorate" "--show-signature" "-n256")))
+ '(magit-merge-arguments (quote ("--no-ff")))
  '(magit-rebase-arguments (quote ("--autostash")))
  '(org-agenda-files
    (quote
