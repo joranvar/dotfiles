@@ -238,23 +238,11 @@ Based on bh/skip-non-stuck-projects from Bernd Hansen."
   (require 'haskell-interactive-mode)
   (require 'haskell-process)
   (require 'haskell-indentation)
+  (use-package company-ghc
+    :ensure t
+    :config (add-to-list 'company-backends 'company-ghc))
   (add-hook 'haskell-mode-hook 'interactive-haskell-mode)
-  (add-hook 'haskell-mode-hook 'structured-haskell-mode)
-  (add-to-list 'company-backends 'company-ghc)
-  (setq company-ghc-show-info t)
-  (progn
-    (define-key haskell-mode-map (kbd "C-c C-l") 'haskell-process-load-or-reload)
-    (define-key haskell-mode-map (kbd "C-c C-z") 'haskell-interactive-switch)
-    (define-key haskell-mode-map (kbd "C-c C-n C-t") 'haskell-process-do-type)
-    (define-key haskell-mode-map (kbd "C-c C-n C-i") 'haskell-process-do-info)
-    (define-key haskell-mode-map (kbd "C-c C-n C-c") 'haskell-process-cabal-build)
-    (define-key haskell-mode-map (kbd "C-c C-n c") 'haskell-process-cabal)
-    (define-key haskell-mode-map (kbd "SPC") 'haskell-mode-contextual-space))
-  (eval-after-load 'haskell-cabal '(progn
-                                     (define-key haskell-cabal-mode-map (kbd "C-c C-z") 'haskell-interactive-switch)
-                                     (define-key haskell-cabal-mode-map (kbd "C-c C-k") 'haskell-interactive-mode-clear)
-                                     (define-key haskell-cabal-mode-map (kbd "C-c C-c") 'haskell-process-cabal-build)
-                                     (define-key haskell-cabal-mode-map (kbd "C-c c") 'haskell-process-cabal))))
+  (setq company-ghc-show-info t))
 
 (use-package powershell
   :ensure t)
