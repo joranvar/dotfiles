@@ -48,6 +48,7 @@
     gdb
 
     cabal-install
+    cabal2nix
 
     emacs
     aspell
