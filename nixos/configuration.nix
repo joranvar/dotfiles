@@ -87,7 +87,10 @@
     libnotify
     notify-osd
 
-    # virtmanager
+    virtmanager
+    linuxPackages.virtualbox
+    vagrant
+
     remmina
     redshift
     davmail
