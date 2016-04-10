@@ -102,6 +102,8 @@
     zip
 
     steam
+    androidsdk
+    android-udev-rules
     chromium
 
     pass
