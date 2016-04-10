@@ -102,6 +102,7 @@
     zip
 
     steam
+    chromium
 
     pass
     yubikey-personalization
@@ -111,6 +112,8 @@
     gnome3.gvfs
     gnome3.nautilus
   ];
+
+  nixpkgs.config.chromium = { enableWideVine = true; enablePepperFlash = true; };
 
   fonts = {
     enableFontDir = true;
