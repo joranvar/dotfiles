@@ -1,5 +1,3 @@
-export NIX_PATH=nixpkgs="$HOME/nixpkgs"
-
 source ~/.antigen/antigen.zsh
 
 antigen bundle gpg-agent
