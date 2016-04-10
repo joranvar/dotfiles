@@ -61,8 +61,8 @@
 
     sqsh
 
-    python34
-    python34Packages.pywinrm
+    python35
+#    python35Packages.pywinrm
 
     nox
 
