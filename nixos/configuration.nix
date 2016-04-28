@@ -14,6 +14,8 @@
       /etc/nixos/local-machine.nix
     ];
 
+  system.autoUpgrade.enable = true;
+
   # Select internationalisation properties.
   # i18n = {
   #   consoleFont = "lat9w-16";
