@@ -27,7 +27,7 @@ import XMonad.Util.Run (spawnPipe)
 import XMonad.Util.SpawnOnce (spawnOnce)
 
 -- Keys
-import XMonad (mod4Mask, (.|.), shiftMask, xK_l, xK_b, xK_p, xK_x, xK_w, xK_r, xK_e)
+import XMonad (mod4Mask, (.|.), shiftMask, xK_l, xK_b, xK_p, xK_x, xK_w, xK_r, xK_e, KeySym, ButtonMask)
 import XMonad.Util.EZConfig (additionalKeys)
 
 -- Main
@@ -50,6 +50,7 @@ myConfig logHandle =
   . myStartupHook
   . myTerminal
   . myKeys
+  . applyScreensaver (mod4Mask .|. shiftMask, xK_l)
 
 myModMask :: XConfig a -> XConfig a
 myModMask x = x { modMask = mod4Mask }
@@ -78,8 +79,7 @@ myStartupHook :: XConfig a -> XConfig a
 myStartupHook x = x { startupHook = mapM_ spawnOnce startupCommands }
   where
     startupCommands =
-      [ "/usr/bin/env xscreensaver -no-splash"
-      , "trayer --SetPartialStrut true --edge top --align right --width 10 --height 14 --transparent true --alpha 0 --tint black"
+      [ "trayer --SetPartialStrut true --edge top --align right --width 10 --height 14 --transparent true --alpha 0 --tint black"
       , "nm-applet"
       ]
 
@@ -88,8 +88,7 @@ myTerminal x = x { terminal = "/usr/bin/env emacsclient -c -n -e \"(eshell \\\"@
 
 myKeys :: XConfig a -> XConfig a
 myKeys = flip additionalKeys $
-   [ ((mod4Mask .|. shiftMask, xK_l                    ), spawn "xscreensaver-command -lock")
-   , ((mod4Mask,               xK_b                    ), sendMessage ToggleStruts)
+   [ ((mod4Mask,               xK_b                    ), sendMessage ToggleStruts)
    , ((mod4Mask,               xK_p                    ), spawn "dmenu_run -b")                     -- Run command
    , ((mod4Mask .|. shiftMask, xK_p                    ), spawn "urxvt -e `dmenu_path | dmenu -b`") -- Run command in terminal
    , ((mod4Mask,               xK_x                    ), spawn "~/dotfiles/xmonad/xrandr-toggle.sh")
@@ -100,3 +99,9 @@ myKeys = flip additionalKeys $
    ] ++
    [ ((mod4Mask .|. mask, key), f sc) | (key, sc) <- zip [xK_w, xK_e] [0..]
                                       , (f, mask) <- [(viewScreen, 0), (sendToScreen, shiftMask)] ]
+
+applyScreensaver :: (ButtonMask, KeySym) -> XConfig a -> XConfig a
+applyScreensaver lockKey = addLockKey lockKey . addStartup
+  where
+    addLockKey key x = x `additionalKeys` [ (key, spawn "xscreensaver-command -lock") ]
+    addStartup x = x { startupHook = spawnOnce "/usr/bin/env xscreensaver -no-splash" >> startupHook x }
