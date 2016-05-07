@@ -75,10 +75,13 @@ myLogHook logHandle x = x { logHook = dynamicLogWithPP xmobarPP
                             } }
 
 myStartupHook :: XConfig a -> XConfig a
-myStartupHook x = x { startupHook = mapM_ spawnOnce
-                      [ "/usr/bin/env xscreensaver -no-splash"
-                      , "trayer --SetPartialStrut true --edge top --align right --width 10 --height 14 --transparent true --alpha 0 --tint black"
-                      , "nm-applet" ] }
+myStartupHook x = x { startupHook = mapM_ spawnOnce startupCommands }
+  where
+    startupCommands =
+      [ "/usr/bin/env xscreensaver -no-splash"
+      , "trayer --SetPartialStrut true --edge top --align right --width 10 --height 14 --transparent true --alpha 0 --tint black"
+      , "nm-applet"
+      ]
 
 myTerminal :: XConfig a -> XConfig a
 myTerminal x = x { terminal = "/usr/bin/env emacsclient -c -n -e \"(eshell \\\"@login\\\")\"" }
