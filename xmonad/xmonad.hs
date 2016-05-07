@@ -84,15 +84,16 @@ myTerminal :: XConfig a -> XConfig a
 myTerminal x = x { terminal = "/usr/bin/env emacsclient -c -n -e \"(eshell \\\"@login\\\")\"" }
 
 myKeys :: XConfig a -> XConfig a
-myKeys = flip additionalKeys
-  ( [ ((mod4Mask .|. shiftMask, xK_l                    ), spawn "xscreensaver-command -lock")
-    , ((mod4Mask,               xK_b                    ), sendMessage ToggleStruts)
-    , ((mod4Mask,               xK_p                    ), spawn "dmenu_run -b")
-    , ((mod4Mask,               xK_x                    ), spawn "~/dotfiles/xmonad/xrandr-toggle.sh")
-    , ((0,                      xF86XK_AudioLowerVolume ), void $ lowerVolume 6)
-    , ((0,                      xF86XK_AudioRaiseVolume ), void $ raiseVolume 3)
-    , ((0,                      xF86XK_AudioMute        ), void toggleMute)
-    , ((mod4Mask,               xK_r                    ), spawn "pkill redshift || redshift -l 50.9342277:-5.7725223")
-    ] ++
-    [ ((mod4Mask .|. mask, key), f sc) | (key, sc) <- zip [xK_w, xK_e] [0..]
-                                       , (f, mask) <- [(viewScreen, 0), (sendToScreen, shiftMask)] ] )
+myKeys = flip additionalKeys $
+   [ ((mod4Mask .|. shiftMask, xK_l                    ), spawn "xscreensaver-command -lock")
+   , ((mod4Mask,               xK_b                    ), sendMessage ToggleStruts)
+   , ((mod4Mask,               xK_p                    ), spawn "dmenu_run -b")                     -- Run command
+   , ((mod4Mask .|. shiftMask, xK_p                    ), spawn "urxvt -e `dmenu_path | dmenu -b`") -- Run command in terminal
+   , ((mod4Mask,               xK_x                    ), spawn "~/dotfiles/xmonad/xrandr-toggle.sh")
+   , ((0,                      xF86XK_AudioLowerVolume ), void $ lowerVolume 6)
+   , ((0,                      xF86XK_AudioRaiseVolume ), void $ raiseVolume 3)
+   , ((0,                      xF86XK_AudioMute        ), void toggleMute)
+   , ((mod4Mask,               xK_r                    ), spawn "pkill redshift || redshift -l 50.9342277:-5.7725223")
+   ] ++
+   [ ((mod4Mask .|. mask, key), f sc) | (key, sc) <- zip [xK_w, xK_e] [0..]
+                                      , (f, mask) <- [(viewScreen, 0), (sendToScreen, shiftMask)] ]
