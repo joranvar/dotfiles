@@ -291,7 +291,8 @@ Based on bh/skip-non-stuck-projects from Bernd Hansen."
 
 (use-package smart-compile
   :ensure t
-  :bind ("C-c m" . smart-compile))
+  :bind ("C-c m" . smart-compile)
+  :config (setq compilation-auto-jump-to-first-error t))
 
 (use-package editorconfig
   :ensure t)
