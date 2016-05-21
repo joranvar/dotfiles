@@ -521,6 +521,8 @@ Based on bh/skip-non-stuck-projects from Bernd Hansen."
     :config (progn (persp-mode)
                    (use-package persp-projectile
                      :ensure t)))
+  (use-package helm-ag
+    :ensure t)
   (use-package helm-projectile
     :ensure t
     :config
