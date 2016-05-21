@@ -76,7 +76,7 @@ myLogHook logHandle x = x { logHook = dynamicLogWithPP xmobarPP
                             } }
 
 myStartupHook :: XConfig a -> XConfig a
-myStartupHook x = x { startupHook = mapM_ spawnOnce startupCommands }
+myStartupHook x = x { startupHook = mapM_ spawnOnce startupCommands >> startupHook x }
   where
     startupCommands =
       [ "trayer --SetPartialStrut true --edge top --align right --width 10 --height 14 --transparent true --alpha 0 --tint black"
