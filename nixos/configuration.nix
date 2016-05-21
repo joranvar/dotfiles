@@ -56,6 +56,8 @@
     aspell
     aspellDicts.en
     aspellDicts.nl
+    antiword
+    pandoc
 
     fsharp
     mono
