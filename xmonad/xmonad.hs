@@ -47,10 +47,10 @@ myConfig logHandle =
   . myEventHook
   . myLayoutHook
   . myLogHook logHandle
-  . myStartupHook
+  . applyScreensaver (mod4Mask .|. shiftMask, xK_l) . myStartupHook
   . myTerminal
   . myKeys
-  . applyScreensaver (mod4Mask .|. shiftMask, xK_l)
+
 
 myModMask :: XConfig a -> XConfig a
 myModMask x = x { modMask = mod4Mask }
@@ -76,7 +76,7 @@ myLogHook logHandle x = x { logHook = dynamicLogWithPP xmobarPP
                             } }
 
 myStartupHook :: XConfig a -> XConfig a
-myStartupHook x = x { startupHook = mapM_ spawnOnce startupCommands >> startupHook x }
+myStartupHook x = x { startupHook = mapM_ spawnOnce startupCommands }
   where
     startupCommands =
       [ "trayer --SetPartialStrut true --edge top --align right --width 10 --height 14 --transparent true --alpha 0 --tint black"
