@@ -104,7 +104,7 @@
     samba
     flashplayer
     pidgin
-    skype
+    #skype
     gitAndTools.git-annex
     zip
 
