@@ -81,6 +81,7 @@
     pavucontrol
 
     xlsfonts
+    libxml2
 
     trayer
     haskellPackages.ghc
