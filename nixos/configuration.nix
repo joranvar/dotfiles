@@ -58,6 +58,8 @@
     aspellDicts.nl
     antiword
     pandoc
+    libreoffice
+    tetex
 
     fsharp
     mono
