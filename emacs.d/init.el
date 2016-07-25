@@ -243,6 +243,9 @@ Based on bh/skip-non-stuck-projects from Bernd Hansen."
   (require 'haskell-interactive-mode)
   (require 'haskell-process)
   (require 'haskell-indentation)
+  (use-package hlint-refactor
+    :ensure t
+    :config (add-hook 'haskell-mode-hook 'hlint-refactor-mode))
   (use-package company-ghc
     :ensure t
     :config (add-to-list 'company-backends 'company-ghc))
