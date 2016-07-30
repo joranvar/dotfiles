@@ -109,7 +109,7 @@
     flashplayer
     pidgin
     #skype
-    gitAndTools.git-annex
+    #gitAndTools.git-annex
     zip
 
     #steam
