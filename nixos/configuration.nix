@@ -104,6 +104,7 @@
 
     dmenu
     xscreensaver
+    maim
     samba
     flashplayer
     pidgin
