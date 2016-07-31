@@ -13,7 +13,7 @@
  '(haskell-process-auto-import-loaded-modules t)
  '(haskell-process-log t)
  '(haskell-process-suggest-remove-import-lines t)
- '(haskell-process-type 'cabal-repl)
+ '(haskell-process-type (quote stack-ghci))
  '(helm-external-programs-associations
    (quote
     (("mkv" . "vlc --play-and-exit")
@@ -213,6 +213,7 @@ Based on bh/skip-non-stuck-projects from Bernd Hansen."
 
 (use-package nix-sandbox
   :ensure t
+  :defer t
   :config
   (setq flycheck-command-wrapper-function
         (lambda (command) (apply 'nix-shell-command (nix-current-sandbox) command))
@@ -278,20 +279,20 @@ Based on bh/skip-non-stuck-projects from Bernd Hansen."
   :defines fsharp-check flycheck-define-checker
   :config
   (progn
-  (flycheck-define-checker fsharp-check
-    "My F# checker that utilizes FSharp.mk and fsharp-check."
-    :command
-    ("sh"
-     (eval (joranvar-find-file-upwards "fsharp-check"))
-     (eval (joranvar-find-file-upwards "Makefile"))
-     source
-     (eval (f-filename buffer-file-name)))
-    :error-patterns
-    ((error line-start (file-name) "(" line "," column "): error "
-            (message (and (one-or-more not-newline) "\n" (zero-or-more (and (one-or-more not-newline) "\n")) (or "\n" buffer-end))))
-     (warning line-start (file-name) "(" line "," column "): warning "
-              (message (and (one-or-more not-newline) "\n" (zero-or-more (and (one-or-more not-newline) "\n")) (or "\n" buffer-end)))))
-    :modes fsharp-mode)
+  ;; (flycheck-define-checker fsharp-check
+  ;;   "My F# checker that utilizes FSharp.mk and fsharp-check."
+  ;;   :command
+  ;;   ("sh"
+  ;;    (eval (joranvar-find-file-upwards "fsharp-check"))
+  ;;    (eval (joranvar-find-file-upwards "Makefile"))
+  ;;    source
+  ;;    (eval (f-filename buffer-file-name)))
+  ;;   :error-patterns
+  ;;   ((error line-start (file-name) "(" line "," column "): error "
+  ;;           (message (and (one-or-more not-newline) "\n" (zero-or-more (and (one-or-more not-newline) "\n")) (or "\n" buffer-end))))
+  ;;    (warning line-start (file-name) "(" line "," column "): warning "
+  ;;             (message (and (one-or-more not-newline) "\n" (zero-or-more (and (one-or-more not-newline) "\n")) (or "\n" buffer-end)))))
+  ;;   :modes fsharp-mode)
   (global-flycheck-mode)))
 
 (use-package smart-compile
