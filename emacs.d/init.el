@@ -168,8 +168,6 @@ Based on bh/skip-non-stuck-projects from Bernd Hansen."
   (setq org-agenda-files '("~/org/gtd.org"))
   (setq org-capture-templates '(("t" "INBOX" entry (file+headline "gtd.org" "INBOX")
                                  "* TODO %?\n%U\n%a\n" :clock-in t :clock-resume t)
-                                ("j" "Project related journal" entry (clock)
-                                 "* TODO %?\n%U\n" :clock-in t :clock-resume t)
                                 ("i" "Interrupt" entry (file+headline "gtd.org" "Journal")
                                  "* %? :7051:\n%U\n" :clock-in t :clock-resume t)
                                 ))
