@@ -162,6 +162,8 @@ Based on bh/skip-non-stuck-projects from Bernd Hansen."
   (setq org-agenda-dim-blocked-tasks 'invisible
         org-enforce-todo-dependencies t)
   (setq org-agenda-todo-ignore-scheduled 'future) ;; Ignore TODO items for the future
+  (setq org-agenda-span 2)
+  (setq org-agenda-tags-column -100)
   (setq org-use-speed-commands
       (lambda () (and (looking-at org-outline-regexp) (looking-back "^\**"))))
   (org-clock-persistence-insinuate)
