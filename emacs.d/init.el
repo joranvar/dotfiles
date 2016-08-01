@@ -27,9 +27,7 @@
     ("--graph" "--color" "--decorate" "--show-signature" "-n256")))
  '(magit-merge-arguments (quote ("--no-ff")))
  '(magit-rebase-arguments (quote ("--autostash")))
- '(org-agenda-files
-   (quote
-    ("~/org/house.org" "~/org/habits.org" "~/org/gtd.org")))
+ '(org-agenda-files (quote ("~/org/foe.org" "~/org/gtd.org")))
  '(package-selected-packages
    (quote
     (powershell zop-to-char expand-region rdp auto-package-update aggressive-indent aggressive-indent-mode smartparens multiple-cursors whitespace-cleanup-mode visual-regexp neotree persp-projectile perspective use-package smart-mode-line-powerline-theme org-plus-contrib omnisharp material-theme magit leuven-theme hi2 helm-projectile ghc avy)))
