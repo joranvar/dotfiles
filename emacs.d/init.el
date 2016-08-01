@@ -186,7 +186,7 @@ Based on bh/skip-non-stuck-projects from Bernd Hansen."
                    (org-agenda-skip-function 'joranvar/skip-scheduled-items)
                    (org-tags-match-list-sublevels 'indented)))))))
   (setq org-mobile-directory "~/org/mobile/")
-  (setq org-feed-alist '(("xkcd" "http://xkcd.com/rss.xml" "~/org/gtd.org" "INBOX"))
+  (setq org-feed-alist '(("xkcd" "http://xkcd.com/rss.xml" "~/org/gtd.org" "INBOX/xkcd"))
         org-feed-default-template "\n* TODO %h\n  %U\n  %description\n  %a\n")
   (org-feed-update-all)
   (setq org-refile-targets '((org-agenda-files . (:maxlevel . 5)))
