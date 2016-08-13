@@ -97,7 +97,7 @@
   :commands (magit-git-repo-p magit-status-internal)
   :bind (("M-G" . magit-status))
   :config
-  (setq magit-commit-arguments (if (eq 'system 'gnu/linux)
+  (setq magit-commit-arguments (if (eq system-type 'gnu/linux)
                                    '("--gpg-sign=9BD68A49AB3D8E4D")
                                  '("")))
   (use-package git-timemachine
