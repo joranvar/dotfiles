@@ -613,6 +613,10 @@ Based on bh/skip-non-stuck-projects from Bernd Hansen."
   :init (use-package moz
           :ensure t))
 
+(use-package org-log-to-jira
+  :load-path "lisp/org-log-to-jira"
+  :commands (org-log-to-jira))
+
 (use-package ecb
   :ensure t
   :defer t
