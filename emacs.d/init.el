@@ -281,12 +281,13 @@ Based on bh/skip-non-stuck-projects from Bernd Hansen."
 (use-package fsharp-mode
   :ensure t)
 
-(use-package linum-relative
+(use-package nlinum
   :ensure t
-  :defer t
   :config
-  (global-linum-mode)
-  (linum-relative-on))
+  (setq nlinum-format "%5d")
+  (global-nlinum-mode)
+  (column-number-mode)
+  (size-indication-mode))
 
 (use-package auto-complete
   :ensure t)
