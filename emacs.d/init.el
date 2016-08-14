@@ -560,12 +560,12 @@ Based on bh/skip-non-stuck-projects from Bernd Hansen."
     (setq projectile-switch-project-action (lambda () (if (magit-git-repo-p (projectile-project-root))
                                                           (magit-status-internal (projectile-project-root))
                                                         (dired (projectile-project-root))))))
-  (setq magit-repo-dirs (mapcar (lambda (dir)
-                                  (substring dir 0 -1))
-                                (-filter (lambda (project)
-                                           (file-directory-p (concat project "/.git/")))
-                                         (projectile-relevant-known-projects)))
-        magit-repo-dirs-depth 1))
+  (setq magit-repository-directories (mapcar (lambda (dir)
+                                               (substring dir 0 -1))
+                                             (-filter (lambda (project)
+                                                        (file-directory-p (concat project "/.git/")))
+                                                      (projectile-relevant-known-projects)))
+        magit-repository-directories-depth 1))
 
 ;; Set default commands for dired
 (add-to-list 'dired-guess-shell-alist-user '("\\.mkv" "vlc --play-and-exit"))
