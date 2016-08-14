@@ -291,7 +291,17 @@ Based on bh/skip-non-stuck-projects from Bernd Hansen."
 
 (global-hl-line-mode t)
 
+(use-package fuzzy
+  :ensure t)
 (use-package auto-complete
+  :ensure t
+  :config
+  (use-package auto-complete-config)
+  (setq ac-quick-help-prefer-pos-tip nil)
+  (ac-config-default)
+  (setq ac-auto-start nil)
+  :diminish auto-complete-mode)
+(use-package auto-complete-chunk
   :ensure t)
 
 (defun joranvar-find-file-upwards (filename)
