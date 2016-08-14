@@ -631,6 +631,19 @@ Based on bh/skip-non-stuck-projects from Bernd Hansen."
 (setq auto-save-interval 0)
 (setq auto-save-timeout (* 60 5))
 
+(use-package hideshow
+  :config
+  (setq hs-hide-comments-when-hiding-all t)
+  (setq hs-isearch-open t)
+  (add-hook 'prog-mode #'hs-minor-mode)
+  (defun display-code-line-counts (ov)
+    "Displaying overlay content in echo area or tooltip"
+    (when (eq 'code (overlay-get ov 'hs))
+      (overlay-put ov 'help-echo
+                   (buffer-substring (overlay-start ov)
+                                     (overlay-end ov)))))
+  (setq hs-set-up-overlay #'display-code-line-counts)
+  :diminish hs-minor-mode)
 (use-package org-log-to-jira
   :load-path "lisp/org-log-to-jira"
   :commands (org-log-to-jira))
