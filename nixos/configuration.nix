@@ -59,7 +59,8 @@
     antiword
     pandoc
     libreoffice
-    tetex
+    texLive
+    texLiveExtra
 
     fsharp
     mono
