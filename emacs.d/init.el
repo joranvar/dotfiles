@@ -344,6 +344,11 @@ Based on bh/skip-non-stuck-projects from Bernd Hansen."
   (progn
     (add-hook 'prog-mode-hook #'highlight-symbol-mode)))
 
+(use-package unicode-fonts
+  :ensure t
+  :config
+  (unicode-fonts-setup))
+
 (use-package async
   :ensure t)
 
