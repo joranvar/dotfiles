@@ -576,9 +576,7 @@ Based on bh/skip-non-stuck-projects from Bernd Hansen."
   :bind (("<f8>" . neotree-toggle))) ; TODO: try getting the project root from projectile first
 
 (use-package multiple-cursors
-  :ensure t
-  :bind (("C->" . mc/mark-next-like-this)
-         ("C-<" . mc/mark-next-previous-this)))
+  :ensure t)
 
 (use-package expand-region
   :ensure t
