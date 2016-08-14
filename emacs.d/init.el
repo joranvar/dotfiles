@@ -63,7 +63,6 @@
 
 (use-package paradox
   :ensure t
-  :defer t
   :commands
   (paradox-list-packages
    package-list-packages)
