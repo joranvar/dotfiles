@@ -672,8 +672,6 @@ Based on bh/skip-non-stuck-projects from Bernd Hansen."
   (setenv "PATH" (concat "C:\\GnuWin\\bin;" (getenv "PATH")))
   (setq exec-path (append '("C:/GnuWin/bin") exec-path)))
 
-(set-face-attribute 'default nil :height 80)
-
 (defun joranvar-insert-guid ()
   "Insert a guid at point."
   (interactive)
