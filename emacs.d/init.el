@@ -456,45 +456,15 @@ Based on bh/skip-non-stuck-projects from Bernd Hansen."
   :config
   (setq browse-url-browser-function 'eww-browse-url))
 
-(defvar joranvar/current-theme nil)
-(defun joranvar/toggle-theme (theme)
-  "Enable THEME if it is not loaded, disabling all themes that are."
-  (if (eq joranvar/current-theme theme)
-      (progn
-        (setq joranvar/current-theme nil)
-        (disable-theme theme))
-    (progn
-      (disable-theme joranvar/current-theme)
-      (setq joranvar/current-theme theme)
-      (enable-theme theme))))
-
-(use-package material-theme
+(use-package solarized-theme
   :ensure t
-  :config (disable-theme 'material)
-  :init (bind-key "C-c t d" (lambda () (interactive) (joranvar/toggle-theme 'material))))
-
-(use-package leuven-theme
-  :ensure t
-  :config (disable-theme 'leuven)
-  :init (bind-key "C-c t l" (lambda () (interactive) (joranvar/toggle-theme 'leuven))))
-
-(use-package rase
-  :ensure t
-  :defer t
   :config
-  (setq calendar-latitude 50.9342277
-        calendar-longitude -5.7725223)
-  (add-hook 'rase-functions (lambda (sun-event &optional first-run)
-                              (if first-run
-                                  (cond ((memq sun-event '(sunrise midday))
-                                         (joranvar/toggle-theme 'leuven))
-                                        (t
-                                         (joranvar/toggle-theme 'material))))
-                              (cond ((eq sun-event 'sunrise)
-                                     (joranvar/toggle-theme 'leuven))
-                                    ((eq sun-event 'sunset)
-                                     (joranvar/toggle-theme 'material)))))
-  (rase-start t))
+  (setq solarized-distinct-fringe-background t)
+  (setq solarized-high-contrast-mode-line nil)
+  (setq solarized-use-less-bold t)
+  (setq solarized-use-more-italic nil)
+  (setq solarized-emphasize-indicators nil)
+  (load-theme 'solarized-dark t))
 
 (use-package avy
   :ensure t
