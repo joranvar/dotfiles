@@ -700,6 +700,12 @@ Based on bh/skip-non-stuck-projects from Bernd Hansen."
 (tool-bar-mode -1)
 (menu-bar-mode -1)
 
+(use-package diff-hl
+  :ensure t
+  :config
+  (add-hook 'magit-post-refresh-hook 'diff-hl-magit-post-refresh)
+  (global-diff-hl-mode))
+
 (provide 'init)
 ;;; init.el ends here
 (put 'narrow-to-region 'disabled nil)
