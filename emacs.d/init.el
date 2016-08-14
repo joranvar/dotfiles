@@ -699,6 +699,8 @@ Based on bh/skip-non-stuck-projects from Bernd Hansen."
 (server-start)
 (tool-bar-mode -1)
 (menu-bar-mode -1)
+(scroll-bar-mode 0)
+(setq make-pointer-invisible t)
 
 (use-package diff-hl
   :ensure t
