@@ -625,6 +625,12 @@ Based on bh/skip-non-stuck-projects from Bernd Hansen."
   :init (use-package moz
           :ensure t))
 
+(setq auto-save-default t)
+(setq make-backup-files nil)
+(setq auto-save-visited-file-name t)
+(setq auto-save-interval 0)
+(setq auto-save-timeout (* 60 5))
+
 (use-package org-log-to-jira
   :load-path "lisp/org-log-to-jira"
   :commands (org-log-to-jira))
