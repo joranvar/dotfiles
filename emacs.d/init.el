@@ -289,6 +289,8 @@ Based on bh/skip-non-stuck-projects from Bernd Hansen."
   (column-number-mode)
   (size-indication-mode))
 
+(global-hl-line-mode t)
+
 (use-package auto-complete
   :ensure t)
 
