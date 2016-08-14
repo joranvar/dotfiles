@@ -506,6 +506,7 @@ Based on bh/skip-non-stuck-projects from Bernd Hansen."
 
 (use-package whitespace-cleanup-mode
   :ensure t
+  :diminish whitespace-mode global-whitespace-mode
   :config
   (setq-default whitespace-style '(face spaces tabs newline
                                         space-mark tab-mark ; newline-mark
@@ -518,7 +519,8 @@ Based on bh/skip-non-stuck-projects from Bernd Hansen."
   (defadvice align-regexp (around align-regexp-with-spaces activate)
     (let ((indent-tabs-mode nil))
       ad-do-it))
-  (global-whitespace-mode)
+  (setq-default tab-width 2)
+  (global-whitespace-mode t)
   (add-hook 'csharp-mode-hook #'whitespace-cleanup-mode)
   (add-hook 'fsharp-mode-hook #'whitespace-cleanup-mode))
 
