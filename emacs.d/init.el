@@ -215,6 +215,14 @@ Based on bh/skip-non-stuck-projects from Bernd Hansen."
 (use-package htmlize
   :ensure t)
 
+(use-package markdown-mode
+  :ensure t
+  :commands (markdown-mode gfm-mode)
+  :mode (("README\\.md\\'" . gfm-mode)
+         ("\\.md\\'" . markdown-mode)
+         ("\\.markdown\\'" . markdown-mode))
+  :init (setq markdown-command "pandoc -f markdown -t html5 --ascii"))
+
 (use-package sauron
   :ensure t
   :defer t
