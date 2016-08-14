@@ -340,6 +340,15 @@ Based on bh/skip-non-stuck-projects from Bernd Hansen."
   (global-pretty-mode)
   (global-prettify-symbols-mode))
 
+(use-package anzu
+  :ensure t
+  :config
+  (global-anzu-mode t)
+  (setq anzu-mode-lighter "")
+  (setq anzu-deactivate-region t)
+  (setq anzu-search-threshold 1000)
+  (setq anzu-replace-to-string-separator " ⇒ "))
+
 (use-package async
   :ensure t)
 
