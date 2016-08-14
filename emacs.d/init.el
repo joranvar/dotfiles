@@ -310,25 +310,10 @@ Based on bh/skip-non-stuck-projects from Bernd Hansen."
 
 (use-package flycheck
   :ensure t
-  :defer t
-  :defines fsharp-check flycheck-define-checker
   :config
   (progn
-  ;; (flycheck-define-checker fsharp-check
-  ;;   "My F# checker that utilizes FSharp.mk and fsharp-check."
-  ;;   :command
-  ;;   ("sh"
-  ;;    (eval (joranvar-find-file-upwards "fsharp-check"))
-  ;;    (eval (joranvar-find-file-upwards "Makefile"))
-  ;;    source
-  ;;    (eval (f-filename buffer-file-name)))
-  ;;   :error-patterns
-  ;;   ((error line-start (file-name) "(" line "," column "): error "
-  ;;           (message (and (one-or-more not-newline) "\n" (zero-or-more (and (one-or-more not-newline) "\n")) (or "\n" buffer-end))))
-  ;;    (warning line-start (file-name) "(" line "," column "): warning "
-  ;;             (message (and (one-or-more not-newline) "\n" (zero-or-more (and (one-or-more not-newline) "\n")) (or "\n" buffer-end)))))
-  ;;   :modes fsharp-mode)
-  (global-flycheck-mode)))
+    (add-hook 'after-init-hook #'global-flycheck-mode))
+  :diminish flycheck-mode)
 
 (use-package smart-compile
   :ensure t
