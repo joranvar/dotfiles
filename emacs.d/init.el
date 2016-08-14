@@ -334,6 +334,12 @@ Based on bh/skip-non-stuck-projects from Bernd Hansen."
   :config
   (unicode-fonts-setup))
 
+(use-package pretty-mode
+  :ensure t
+  :config
+  (global-pretty-mode)
+  (global-prettify-symbols-mode))
+
 (use-package async
   :ensure t)
 
