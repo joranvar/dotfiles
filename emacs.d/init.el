@@ -81,15 +81,26 @@
 (use-package f :ensure t)
 (use-package rdp :ensure t)
 
+;; (use-package solarized-theme
+;;   :ensure t
+;;   :config
+;;   (setq solarized-distinct-fringe-background t)
+;;   (setq solarized-high-contrast-mode-line nil)
+;;   (setq solarized-use-less-bold t)
+;;   (setq solarized-use-more-italic nil)
+;;   (setq solarized-emphasize-indicators nil)
+;;   (load-theme 'solarized-light t))
+
 (use-package smart-mode-line-powerline-theme
-  :defer t
+  :ensure t)
+
   :ensure t)
 
 (use-package smart-mode-line
   :ensure t
   :config
-  (setq sml/theme 'respectful)
-  (sml/setup))
+  (sml/setup)
+  )
 
 (use-package magit
   :ensure t
@@ -455,16 +466,6 @@ Based on bh/skip-non-stuck-projects from Bernd Hansen."
   :ensure t
   :config
   (setq browse-url-browser-function 'eww-browse-url))
-
-(use-package solarized-theme
-  :ensure t
-  :config
-  (setq solarized-distinct-fringe-background t)
-  (setq solarized-high-contrast-mode-line nil)
-  (setq solarized-use-less-bold t)
-  (setq solarized-use-more-italic nil)
-  (setq solarized-emphasize-indicators nil)
-  (load-theme 'solarized-dark t))
 
 (use-package avy
   :ensure t
