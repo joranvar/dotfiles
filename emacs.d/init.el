@@ -81,15 +81,15 @@
 (use-package f :ensure t)
 (use-package rdp :ensure t)
 
-;; (use-package solarized-theme
-;;   :ensure t
-;;   :config
-;;   (setq solarized-distinct-fringe-background t)
-;;   (setq solarized-high-contrast-mode-line nil)
-;;   (setq solarized-use-less-bold t)
-;;   (setq solarized-use-more-italic nil)
-;;   (setq solarized-emphasize-indicators nil)
-;;   (load-theme 'solarized-light t))
+(use-package solarized-theme
+  :ensure t
+  :config
+  (setq solarized-distinct-fringe-background t)
+  (setq solarized-high-contrast-mode-line nil)
+  (setq solarized-use-less-bold t)
+  (setq solarized-use-more-italic nil)
+  (setq solarized-emphasize-indicators nil)
+  (load-theme 'solarized-light t))
 
 (use-package feature-mode
   :ensure t)
