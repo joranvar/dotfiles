@@ -91,16 +91,12 @@
 ;;   (setq solarized-emphasize-indicators nil)
 ;;   (load-theme 'solarized-light t))
 
-(use-package smart-mode-line-powerline-theme
+(use-package feature-mode
   :ensure t)
 
-  :ensure t)
-
-(use-package smart-mode-line
+(use-package powerline
   :ensure t
-  :config
-  (sml/setup)
-  )
+  :config (powerline-default-theme))
 
 (use-package magit
   :ensure t
