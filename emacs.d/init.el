@@ -286,7 +286,8 @@ Based on bh/skip-non-stuck-projects from Bernd Hansen."
   :ensure t)
 
 (use-package fsharp-mode
-  :ensure t)
+  :ensure t
+  :config (setq fsharp-indent-offset 2))
 
 (use-package nlinum
   :ensure t
