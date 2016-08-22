@@ -97,6 +97,10 @@
     haskellPackages.xmonad-extras
     libnotify
     notify-osd
+    compton
+    mpd
+    scrot
+    nitrogen
 
     virtmanager
     linuxPackages.virtualbox
@@ -107,6 +111,7 @@
     davmail
 
     dmenu
+    dzen2
     xscreensaver
     maim
     samba
