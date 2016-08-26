@@ -63,9 +63,7 @@
 
 (use-package paradox
   :ensure t
-  :commands
-  (paradox-list-packages
-   package-list-packages)
+  :defer 2
   :config
   (setq paradox-execute-asynchronously t)
   (paradox-enable)
