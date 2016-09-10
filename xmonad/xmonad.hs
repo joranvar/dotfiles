@@ -89,8 +89,8 @@ myTerminal x = x { terminal = "/usr/bin/env emacsclient -c -n -e \"(eshell \\\"@
 myKeys :: XConfig a -> XConfig a
 myKeys = flip additionalKeys $
    [ ((mod4Mask,               xK_b                    ), sendMessage ToggleStruts)
-   , ((mod4Mask,               xK_p                    ), spawn "dmenu_run -b")                     -- Run command
-   , ((mod4Mask .|. shiftMask, xK_p                    ), spawn "urxvt -e `dmenu_path | dmenu -b`") -- Run command in terminal
+   , ((mod4Mask,               xK_p                    ), spawn "exec $(yeganesh -x -- -nb orange -nf '#444' -sb yellow -sf black -fn Monospace-9:normal)")                     -- Run command
+   , ((mod4Mask .|. shiftMask, xK_p                    ), spawn "termite -e $(yeganesh -x -- -nb orange -nf '#444' -sb yellow -sf black -fn Monospace-9:normal)") -- Run command in terminal
    , ((mod4Mask,               xK_x                    ), spawn "~/dotfiles/xmonad/xrandr-toggle.sh")
    , ((0,                      xF86XK_AudioLowerVolume ), void $ lowerVolume 6)
    , ((0,                      xF86XK_AudioRaiseVolume ), void $ raiseVolume 3)

@@ -95,6 +95,7 @@
     haskellPackages.xmonad
     haskellPackages.xmonad-contrib
     haskellPackages.xmonad-extras
+    haskellPackages.yeganesh
     libnotify
     notify-osd
     compton
