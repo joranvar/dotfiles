@@ -84,7 +84,7 @@ myStartupHook x = x { startupHook = mapM_ spawnOnce startupCommands }
       ]
 
 myTerminal :: XConfig a -> XConfig a
-myTerminal x = x { terminal = "/usr/bin/env emacsclient -c -n -e \"(eshell \\\"@login\\\")\"" }
+myTerminal x = x { terminal = "/usr/bin/env termite" }
 
 myKeys :: XConfig a -> XConfig a
 myKeys = flip additionalKeys $

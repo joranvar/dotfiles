@@ -81,6 +81,7 @@
 
     firefox
     rxvt_unicode_with-plugins
+    termite
     vlc
     sshfsFuse
     cifs_utils
