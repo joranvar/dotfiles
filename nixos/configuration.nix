@@ -106,7 +106,9 @@
     linuxPackages.virtualbox
     vagrant
 
+    freerdp
     remmina
+    x2vnc
     redshift
     davmail
 
