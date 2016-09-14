@@ -1,15 +1,15 @@
 #! /usr/bin/env zsh
 
-mode="2560x1440"
+screens=$(xrandr -q | grep ".* disconnected" | cut -f1 -d' ' | grep -v "eDP1")
+for s in $(echo $screens) ; do
+    xrandr --output $s --off
+done
 
-count=$(xrandr -q | grep -c "HDMI1 connected")
-if [[ $count -gt 0 ]]; then
-    echo Two screens
-    xrandr --output HDMI1 --auto --left-of eDP1 --mode $mode
-else
-    echo One screen
-    xrandr --output HDMI1 --off
-fi
+screens=$(xrandr -q | grep ".* connected" | cut -f1 -d' ' | grep -v "eDP1")
+for s in $(echo $screens) ; do
+    mode=$(xrandr -q | sed '1,/'$s' connected/d;/.* connected/,$d' | head -n 1 | cut -d' ' -f4)
+    xrandr --output $s --left-of eDP1 --mode $mode
+done
 
 pkill -USR1 xmobar
 pkill trayer
