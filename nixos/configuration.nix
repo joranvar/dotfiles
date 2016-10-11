@@ -97,6 +97,7 @@
     haskellPackages.xmonad-contrib
     haskellPackages.xmonad-extras
     haskellPackages.yeganesh
+    docker # For installing ghc-android - https://github.com/iphydf/docker-build-ghc-android
     libnotify
     notify-osd
     compton
@@ -214,13 +215,14 @@
   programs.ssh.startAgent = false; # gpg agent takes over this role
 
   services.nixosManual.showManual = true;
+  virtualisation.docker.enable = true;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.extraUsers.joranvar = {
     isNormalUser = true;
     createHome = true;
     home = "/home/joranvar";
-    extraGroups = [ "wheel" "disk" "cdrom" "networkmanager" "audio" "libvirtd" ];
+    extraGroups = [ "wheel" "disk" "cdrom" "networkmanager" "audio" "libvirtd" "docker" ];
     useDefaultShell = true;
     uid = 1000;
   };
