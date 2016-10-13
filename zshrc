@@ -11,3 +11,7 @@ antigen bundle zx2c4/password-store src/completion/pass.zsh-completion &> /dev/n
 antigen apply
 
 compdef _pass pass
+
+function weather() {curl wttr.in/$1 -f --stderr /dev/null | head -n 7;}
+
+export PATH=$PATH:/home/joranvar/.local/bin
