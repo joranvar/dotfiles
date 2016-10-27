@@ -291,7 +291,9 @@ Based on bh/skip-non-stuck-projects from Bernd Hansen."
   :ensure t
   :config
   (setq nlinum-format "%5d")
-  (global-nlinum-mode)
+  (add-hook 'ediff-before-setup-windows-hook (lambda () (nlinum-mode -1)))
+                                        ;  (global-nlinum-mode -1)
+  ;  (add-hook 'prog-mode-hook 'nlinum-mode)
   (column-number-mode)
   (size-indication-mode))
 
