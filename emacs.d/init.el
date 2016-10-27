@@ -198,7 +198,7 @@ Based on bh/skip-non-stuck-projects from Bernd Hansen."
         org-outline-path-complete-in-steps nil
         org-agenda-clockreport-parameter-plist '(:link t :maxlevel 3 :properties ("Pomodori" "ALLTAGS") :step day))
   (setq org-refile-target-verify-function 'bh/verify-refile-target)
-  (org-babel-do-load-languages 'org-babel-load-languages '((sql . t)))
+  (org-babel-do-load-languages 'org-babel-load-languages '((sql . t) (sh . t)))
   (setq org-html-checkbox-type 'unicode)
   (setq org-startup-align-all-tables t)
   (setq org-hide-emphasis-markers t)
