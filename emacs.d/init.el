@@ -158,6 +158,7 @@ Based on bh/skip-non-stuck-projects from Bernd Hansen."
   :config
   (add-to-list 'org-modules 'org-habit)
   (require 'org-contacts)
+  (eval-after-load 'ox '(require 'ox-koma-letter))
   (use-package ox-reveal
     :ensure t)
   (setq org-agenda-window-setup 'other-frame

@@ -58,9 +58,9 @@
     aspellDicts.nl
     antiword
     pandoc
+    gv
     libreoffice
-    texLive
-    texLiveExtra
+    (texlive.combine { inherit (texlive) scheme-tetex wrapfig capt-of; })
 
     fsharp
     mono
