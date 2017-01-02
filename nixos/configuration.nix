@@ -78,6 +78,7 @@
 
     networkmanagerapplet
     gkrellm
+    gimp
 
     firefox
     rxvt_unicode_with-plugins
