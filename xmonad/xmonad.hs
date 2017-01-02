@@ -27,7 +27,7 @@ import XMonad.Util.Run (spawnPipe)
 import XMonad.Util.SpawnOnce (spawnOnce)
 
 -- Keys
-import XMonad (mod4Mask, (.|.), shiftMask, xK_l, xK_b, xK_p, xK_x, xK_w, xK_r, xK_e, KeySym, ButtonMask)
+import XMonad (mod4Mask, (.|.), shiftMask, xK_l, xK_b, xK_p, xK_x, xK_w, xK_r, xK_e, xK_s, KeySym, ButtonMask)
 import XMonad.Util.EZConfig (additionalKeys)
 
 -- Main
@@ -49,6 +49,7 @@ myConfig logHandle =
   . myLogHook logHandle
   . myWorkSpaces
   . applyScreensaver (mod4Mask .|. shiftMask, xK_l) . myStartupHook
+  . applyScreenshot (mod4Mask, xK_s)
   . myTerminal
   . myKeys
 
@@ -109,3 +110,8 @@ applyScreensaver lockKey = addLockKey lockKey . addStartup
   where
     addLockKey key x = x `additionalKeys` [ (key, spawn "xscreensaver-command -lock") ]
     addStartup x = x { startupHook = spawnOnce "/usr/bin/env xscreensaver -no-splash" >> startupHook x }
+
+applyScreenshot :: (ButtonMask, KeySym) -> XConfig a -> XConfig a
+applyScreenshot scrotKey = addScrotKey scrotKey
+  where
+    addScrotKey key x = x `additionalKeys` [ (key, spawn "scrot -u -e 'gimp $f'") ]
