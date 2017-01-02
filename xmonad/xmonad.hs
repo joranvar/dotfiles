@@ -47,6 +47,7 @@ myConfig logHandle =
   . myEventHook
   . myLayoutHook
   . myLogHook logHandle
+  . myWorkSpaces
   . applyScreensaver (mod4Mask .|. shiftMask, xK_l) . myStartupHook
   . myTerminal
   . myKeys
@@ -74,6 +75,9 @@ myLogHook logHandle x = x { logHook = dynamicLogWithPP xmobarPP
                             { ppOutput = hPutStrLn logHandle
                             , ppTitle = xmobarColor "green" "" . shorten 100
                             } }
+
+myWorkSpaces :: XConfig a -> XConfig a
+myWorkSpaces x = x { workspaces = ["i", "ii", "iii", "iv", "v", "vi"] }
 
 myStartupHook :: XConfig a -> XConfig a
 myStartupHook x = x { startupHook = mapM_ spawnOnce startupCommands }
