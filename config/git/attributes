@@ -1,3 +1,4 @@
 #*.ncrunchsolution diff=utf16
 #*.ncrunchproject diff=utf16
 *.org diff=orgmode
+*.fs diff=fsharp
