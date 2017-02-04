@@ -463,7 +463,8 @@ Based on bh/skip-non-stuck-projects from Bernd Hansen."
 (use-package eww
   :ensure t
   :config
-  (setq browse-url-browser-function 'eww-browse-url))
+  (setq browse-url-generic-program (executable-find "conkeror"))
+  (setq browse-url-browser-function 'browse-url-generic))
 
 (use-package avy
   :ensure t
@@ -714,6 +715,9 @@ Based on bh/skip-non-stuck-projects from Bernd Hansen."
   :config
   (add-hook 'magit-post-refresh-hook 'diff-hl-magit-post-refresh)
   (global-diff-hl-mode))
+
+(use-package conkeror-minor-mode
+  :ensure t)
 
 (provide 'init)
 ;;; init.el ends here

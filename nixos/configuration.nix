@@ -81,6 +81,7 @@
     gimp
 
     firefox
+    conkeror
     rxvt_unicode_with-plugins
     termite
     vlc
