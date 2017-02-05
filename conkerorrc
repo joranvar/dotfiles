@@ -41,3 +41,6 @@ require("user-agent-policy");
 user_agent_policy.define_policy("default",
     user_agent_firefox(),
     "web.whatsapp.com");
+user_agent_policy.define_policy("pivotal",
+    "Mozilla/5.0 (X11; Linux x86_64; rv:8.0.1) " + "Gecko/20100101 Firefox/8.0.1",
+    "www.pivotaltracker.com");
