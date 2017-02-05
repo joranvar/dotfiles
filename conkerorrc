@@ -1,5 +1,8 @@
 load_paths.unshift("chrome://conkeror-contrib/content/");
 
+/// Session save and restore
+require("session.js");
+
 /// Show a tweaked modeline
 require("mode-line.js");
 require("mode-line-buttons.js");
