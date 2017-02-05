@@ -1,9 +1,14 @@
 load_paths.unshift("chrome://conkeror-contrib/content/");
 
+/// Show a tweaked modeline
 require("mode-line.js");
-// funky icons in the modeline
 require("mode-line-buttons.js");
-mode_line_add_buttons(standard_mode_line_buttons, true);
+//mode_line_add_buttons(standard_mode_line_buttons, true);
+add_hook("mode_line_hook", mode_line_adder(buffer_count_widget), true);
+add_hook("mode_line_hook", mode_line_adder(loading_count_widget), true);
+remove_hook("mode_line_hook", mode_line_adder(clock_widget));
+require("favicon");
+add_hook("mode_line_hook", mode_line_adder(buffer_icon_widget), true);
 
 define_browser_object_class(
     "history-url", null,
