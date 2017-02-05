@@ -31,3 +31,10 @@ interactive("find-url-from-history-new-buffer",
 
 define_key(content_buffer_normal_keymap, "h", "find-url-from-history-new-buffer");
 define_key(content_buffer_normal_keymap, "H", "find-url-from-history");
+
+/// Send Firefox-compatible user agent string to some sites
+require("user-agent-policy");
+
+user_agent_policy.define_policy("default",
+    user_agent_firefox(),
+    "web.whatsapp.com");
