@@ -13,6 +13,7 @@ remove_hook("mode_line_hook", mode_line_adder(clock_widget));
 require("favicon");
 add_hook("mode_line_hook", mode_line_adder(buffer_icon_widget), true);
 
+/// Enable history browsing
 define_browser_object_class(
     "history-url", null,
     function (I, prompt) {
