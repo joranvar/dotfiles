@@ -11,7 +11,7 @@ import XMonad.Hooks.ManageDocks (avoidStruts, manageDocks, ToggleStruts(..))
 import XMonad.Hooks.EwmhDesktops (ewmh, fullscreenEventHook)
 
 -- Window layout
-import XMonad (Tall(..), Mirror(..), Full(..), Window, (|||))
+import XMonad (Tall(..), Mirror(..), Full(..), Window, (|||), doShift, className, (=?), (-->))
 import XMonad.Layout.NoBorders (noBorders, smartBorders)
 
 -- Taffybar
@@ -41,8 +41,10 @@ main = do
 myConfig :: XConfig a -> XConfig _
 myConfig =
   ewmh
+  . pagerHints
   . myModMask
   . myManageHook
+  . applySteamSettings
   . myEventHook
   . myLayoutHook
   . myWorkSpaces
@@ -50,13 +52,15 @@ myConfig =
   . applyScreenshot (mod4Mask, xK_s)
   . myTerminal
   . myKeys
-  . pagerHints
 
 myModMask :: XConfig a -> XConfig a
 myModMask x = x { modMask = mod4Mask }
 
 myManageHook :: XConfig a -> XConfig a
 myManageHook x = x { manageHook = manageDocks <+> manageHook x }
+
+applySteamSettings :: XConfig a -> XConfig a
+applySteamSettings x = x { manageHook = className =? "hl2_linux" --> doShift "two" <+> manageHook x }
 
 myEventHook :: XConfig a -> XConfig a
 myEventHook x = x { handleEventHook = fullscreenEventHook <+> handleEventHook x }

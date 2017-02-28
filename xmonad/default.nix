@@ -6,17 +6,15 @@ let
     ghc-mod
     hlint
     hoogle
-    structured-haskell-mode
     hasktags
-    present
     stylish-haskell
-
 
     xmonad
     xmonad-contrib
     xmonad-extras
     random
     split
+    taffybar
   ]);
 in
   stdenv.mkDerivation {

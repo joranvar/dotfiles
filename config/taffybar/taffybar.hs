@@ -24,25 +24,26 @@ import System.Information.CPU
 import Control.Applicative ((<$>))
 
 pagerCfg = defaultPagerConfig
-    { emptyWorkspace = colorize "#6b6b6b" "" . escape
---    { emptyWorkspace = \xs -> ""
-    , activeWorkspace  = colorize "#429942" "" . escape . wrap "<" ">"
-    }
+     { emptyWorkspace = colorize "#6b6b6b" "" . escape
+     , visibleWorkspace = colorize "#429942" "" . escape . wrap "(" ")"
+-- --    { emptyWorkspace = \xs -> ""
+     , activeWorkspace  = colorize "#429942" "" . escape . wrap "[" "]"
+     }
+
 
 main = do
     scr <- maybe 0 read <$> lookupEnv "TAFFY_SCREEN"
 
-    pager <- pagerNew pagerCfg
+    let -- wss = wspaceSwitcherNew pager
+        -- wnd = windowSwitcherNew pager
 
-    let wss = wspaceSwitcherNew pager
-        wnd = windowSwitcherNew pager
-
+        pager = taffyPagerNew pagerCfg
         clock = textClockNew Nothing "<span fgcolor='orange'>%Y %m %d %H:%M:%S</span>" 1
         mpris = mpris2New
         battery = textBatteryNew "$percentage$%/$time$" 60
         tray = systrayNew
         wea = weatherNew (defaultWeatherConfig "EHBK") 10
-        -- vol = volumeW
+--        vol = volumeW
 
         mem = pollingGraphNew memCfg 1 memCallback
             where
@@ -69,9 +70,10 @@ main = do
     defaultTaffybar defaultTaffybarConfig
         { barHeight = 20
         , monitorNumber = scr
-        , startWidgets = [wss, wnd]
+        , startWidgets = [pager]
+        -- , startWidgets = [wss, wnd]
         -- , startWidgets = [wss]
         , endWidgets = reverse $ if scr == 0
-            then [wea, mpris, cpu, mem, clock, tray]
+            then [wea, mpris, cpu, mem, clock, battery, tray]
             else [clock]
         }
