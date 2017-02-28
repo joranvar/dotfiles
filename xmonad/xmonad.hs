@@ -14,8 +14,8 @@ import XMonad.Hooks.EwmhDesktops (ewmh, fullscreenEventHook)
 import XMonad (Tall(..), Mirror(..), Full(..), Window, (|||))
 import XMonad.Layout.NoBorders (noBorders, smartBorders)
 
--- XMobar
-import XMonad.Hooks.DynamicLog (dynamicLogWithPP, xmobarPP, ppOutput, ppTitle, xmobarColor, shorten)
+-- Taffybar
+import System.Taffybar.Hooks.PagerHints (pagerHints)
 
 -- Volume control
 import XMonad.Actions.Volume (lowerVolume, raiseVolume, toggleMute)
@@ -36,23 +36,21 @@ import Data.Default (def)
 
 main :: IO ()
 main = do
-  logHandle <- spawnPipe "/usr/bin/env xmobar -x 1"
-  xmonad $ myConfig logHandle def
+  xmonad $ myConfig def
 
-myConfig :: Handle -> XConfig a -> XConfig _
-myConfig logHandle =
+myConfig :: XConfig a -> XConfig _
+myConfig =
   ewmh
   . myModMask
   . myManageHook
   . myEventHook
   . myLayoutHook
-  . myLogHook logHandle
   . myWorkSpaces
   . applyScreensaver (mod4Mask .|. shiftMask, xK_l) . myStartupHook
   . applyScreenshot (mod4Mask, xK_s)
   . myTerminal
   . myKeys
-
+  . pagerHints
 
 myModMask :: XConfig a -> XConfig a
 myModMask x = x { modMask = mod4Mask }
@@ -71,12 +69,6 @@ myLayoutHook x = x { layoutHook = avoidStruts $ smartBorders tiled ||| smartBord
     delta = 3/100
     tiled_ratio = 1/2
 
-myLogHook :: Handle -> XConfig a -> XConfig a
-myLogHook logHandle x = x { logHook = dynamicLogWithPP xmobarPP
-                            { ppOutput = hPutStrLn logHandle
-                            , ppTitle = xmobarColor "green" "" . shorten 100
-                            } }
-
 myWorkSpaces :: XConfig a -> XConfig a
 myWorkSpaces x = x { workspaces = ["i", "ii", "iii", "iv", "v", "vi"] }
 
@@ -84,8 +76,7 @@ myStartupHook :: XConfig a -> XConfig a
 myStartupHook x = x { startupHook = mapM_ spawnOnce startupCommands }
   where
     startupCommands =
-      [ "trayer --SetPartialStrut true --edge top --align right --width 10 --height 14 --transparent true --alpha 0 --tint black"
-      , "nm-applet"
+      [ "nm-applet"
       ]
 
 myTerminal :: XConfig a -> XConfig a

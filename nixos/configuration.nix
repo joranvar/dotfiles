@@ -94,6 +94,7 @@
 
     trayer
     haskellPackages.ghc
+    taffybar
     haskellPackages.xmobar
     haskellPackages.xmonad
     haskellPackages.xmonad-contrib
