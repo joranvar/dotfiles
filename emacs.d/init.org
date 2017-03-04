@@ -1,0 +1,39 @@
+#+TITLE: The dotfile root
+
+* Purpose
+
+This file is tangled on Emacs startup, which will result in both more configuration to be loaded by Emacs and dotfiles to serve as configuration for other programs.
+
+* Emacs configuration
+:PROPERTIES:
+:header-args: :tangle ./init.org.el :comments noweb :tangle-mode (identity #o444)
+:END:
+
+** Package preparation
+
+*** Package sources
+
+#+BEGIN_SRC emacs-lisp
+  (add-to-list 'load-path (expand-file-name "~/.emacs.d/elpa"))
+
+  (setq package-archives '(("gnu"          . "http://elpa.gnu.org/packages/")
+                           ("melpa-stable" . "http://stable.melpa.org/packages/")
+                           ("melpa"        . "http://melpa.org/packages/")
+                           ("org"          . "http://orgmode.org/elpa/")))
+
+  (package-initialize)
+#+END_SRC
+
+*** ~use-package~
+
+Then, we'll use ~use-package~ to install and configure all others.
+
+#+BEGIN_SRC emacs-lisp
+  (unless (package-installed-p 'use-package)
+    (package-refresh-contents)
+    (package-install 'use-package))
+
+  (eval-when-compile
+    (require 'use-package))
+#+END_SRC
+
