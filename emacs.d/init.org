@@ -95,3 +95,8 @@ Then, we'll use ~use-package~ to install and configure all others.
     (require 'use-package))
 #+END_SRC
 
+Ensure that a package is installed by default (why would I enter it otherwise?)
+
+#+BEGIN_SRC emacs-lisp
+  (setq use-package-always-ensure t)
+#+END_SRC
