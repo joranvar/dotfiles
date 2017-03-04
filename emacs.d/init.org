@@ -123,4 +123,5 @@ Please, use all my screen real estate for information, not for "places to click 
   (when (fboundp 'tool-bar-mode) (tool-bar-mode -1))
   (when (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
   (if (fboundp 'tooltip-mode) (tooltip-mode -1) (setq tooltip-use-echo-area t))
+  (fringe-mode '(4 . 0))
 #+END_SRC
