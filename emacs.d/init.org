@@ -148,6 +148,8 @@ I want to know where am, and have immediate visual feedback about my text.
   (global-hl-line-mode)
   (column-number-mode)
   (show-paren-mode)
-  (global-linum-mode)
+
+  (use-package linum
+    :config (global-linum-mode))
 #+END_SRC
 
