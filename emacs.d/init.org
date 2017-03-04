@@ -101,6 +101,19 @@ Ensure that a package is installed by default (why would I enter it otherwise?)
   (setq use-package-always-ensure t)
 #+END_SRC
 
+*** ~paradox~
+
+Finally, we'll switch to using paradox, for its async execution and automatic updating functionalities.
+
+#+BEGIN_SRC emacs-lisp
+  (use-package paradox
+    :config
+    (progn
+      (setq paradox-execute-asynchronously t)
+      (paradox-enable)
+      (paradox-refresh-upgradeable-packages)))
+#+END_SRC
+
 ** Custom settings
 
 They should not be set in the generated ~init.org.el~, but sometimes I want to see what a customization does.
