@@ -125,3 +125,16 @@ Please, use all my screen real estate for information, not for "places to click 
   (if (fboundp 'tooltip-mode) (tooltip-mode -1) (setq tooltip-use-echo-area t))
   (fringe-mode '(4 . 0))
 #+END_SRC
+
+*** Show me info about my buffer
+
+I want to know where am, and have immediate visual feedback about my text.
+
+#+BEGIN_SRC emacs-lisp
+  (setq global-hl-line-sticky-flag t)
+  (global-hl-line-mode)
+  (column-number-mode)
+  (show-paren-mode)
+  (global-linum-mode)
+#+END_SRC
+
