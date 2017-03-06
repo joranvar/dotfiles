@@ -168,3 +168,21 @@ This is the theme I will use currently.
   (use-package powerline
     :config (powerline-default-theme))
 #+END_SRC
+
+** Menus and discovery
+
+*** ~helm~
+
+I've used ~helm~ for quite some time now, and I like the way it works.  Therefore, it's the default menu for everything now.
+
+#+BEGIN_SRC emacs-lisp
+  (use-package helm
+    :bind (("M-x" . helm-M-x)
+           ("C-x C-f" . helm-find-files)
+           ("M-y" . helm-show-kill-ring)
+           ("C-x b" . helm-mini))
+    :init (progn
+            (require 'helm-config)
+            (helm-mode 1)
+            (helm-autoresize-mode t)))
+#+END_SRC
