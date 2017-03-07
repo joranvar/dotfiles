@@ -262,3 +262,14 @@ Each project is either a version controlled (~magit~!) directory, or some direct
                                                                   (projectile-relevant-known-projects)))
                     magit-repository-directories-depth 1)))
 #+END_SRC
+
+** Completion
+
+*** ~company~
+
+#+BEGIN_SRC emacs-lisp
+  (use-package company
+    :config (progn
+              (global-company-mode)
+              (setq company-idle-delay 0.1)))
+#+END_SRC
