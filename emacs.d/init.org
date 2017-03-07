@@ -196,3 +196,43 @@ I've used ~helm~ for quite some time now, and I like the way it works.  Therefor
             (helm-mode 1)
             (helm-autoresize-mode t)))
 #+END_SRC
+
+** Projects
+
+Each project is either a version controlled (~magit~!) directory, or some directory I want to be able to browse at once (local repos of files, e.g. videos or pictures).
+
+*** Version control
+
+#+BEGIN_SRC emacs-lisp
+  (use-package magit
+    :commands (magit-git-repo-p
+               magit-status-internal)
+    :bind (("C-c g" . magit-status))
+    :config
+    (setq magit-commit-arguments (if (eq system-type 'gnu/linux)
+                                     '("--gpg-sign")
+                                   '(""))
+          magit-diff-arguments '("--ignore-space-change"
+                                 "--ignore-all-space"
+                                 "--no-ext-diff"
+                                 "-M"
+                                 "-C")
+          magit-log-arguments '("--graph"
+                                "--color"
+                                "--decorate"
+                                "--show-signature"
+                                "-n256")
+          magit-merge-arguments '("--no-ff")
+          magit-rebase-arguments '("--autostash")
+          magit-diff-refine-hunk t)
+    (use-package git-timemachine)
+    (when (eq system-type 'windows-nt)
+      (setq magit-git-executable "c:/Program Files/Git/bin/git.exe")))
+#+END_SRC
+
+#+BEGIN_SRC emacs-lisp
+  (use-package diff-hl
+    :config (progn
+              (add-hook 'magit-post-refresh-hook 'diff-hl-magit-post-refresh)
+              (global-diff-hl-mode)))
+#+END_SRC
