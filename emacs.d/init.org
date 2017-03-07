@@ -123,6 +123,16 @@ They should not be set in the generated ~init.org.el~, but sometimes I want to s
   (when (file-exists-p custom-file) (load custom-file))
 #+END_SRC
 
+** Basic utils
+
+~dash.el~, ~f.el~ and ~s.el~ cannot be omitted, as they provide very useful tools for emacs-lisp programming.
+
+#+BEGIN_SRC emacs-lisp
+  (use-package dash)
+  (use-package s)
+  (use-package f)
+#+END_SRC
+
 ** Aesthetics
 
 I want my Emacs to look good.
