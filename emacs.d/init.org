@@ -305,3 +305,11 @@ Also, please indent my code smartly (except for in F#, it does not play nice the
               (add-to-list 'aggressive-indent-excluded-modes 'fsharp-mode)))
 #+END_SRC
 
+*** F#
+
+In F#, I'd like to set the following settings:
+
+#+BEGIN_SRC emacs-lisp
+  (use-package fsharp-mode
+    :config (setq fsharp-indent-offset 2))
+#+END_SRC
