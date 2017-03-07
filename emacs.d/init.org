@@ -154,7 +154,6 @@ Please, use all my screen real estate for information, not for "places to click 
 I want to know where am, and have immediate visual feedback about my text.
 
 #+BEGIN_SRC emacs-lisp
-  (setq global-hl-line-sticky-flag t)
   (global-hl-line-mode)
   (column-number-mode)
   (show-paren-mode)
@@ -235,4 +234,31 @@ Each project is either a version controlled (~magit~!) directory, or some direct
     :config (progn
               (add-hook 'magit-post-refresh-hook 'diff-hl-magit-post-refresh)
               (global-diff-hl-mode)))
+#+END_SRC
+
+*** Navigation
+
+#+BEGIN_SRC emacs-lisp
+  (use-package projectile
+    :bind (("M-P" . helm-projectile))
+    :diminish projectile-mode
+    :config (progn
+              (projectile-global-mode)
+              (setq projectile-indexing-method 'alien
+                    projectile-completion-system 'helm
+                    ;; projectile-enable-caching t ;; This messes up tramp-sudo, see https://github.com/bbatsov/projectile/issues/835
+                    projectile-enable-idle-timer t)
+              (use-package helm-ag)
+              (use-package helm-projectile
+                :config (progn
+                          (helm-projectile-on)
+                          (setq projectile-switch-project-action (lambda () (if (magit-git-repo-p (projectile-project-root))
+                                                                           (magit-status-internal (projectile-project-root))
+                                                                         (dired (projectile-project-root)))))))
+              (setq magit-repository-directories (mapcar (lambda (dir)
+                                                           (substring dir 0 -1))
+                                                         (-filter (lambda (project)
+                                                                    (file-directory-p (concat project "/.git/")))
+                                                                  (projectile-relevant-known-projects)))
+                    magit-repository-directories-depth 1)))
 #+END_SRC
