@@ -273,3 +273,35 @@ Each project is either a version controlled (~magit~!) directory, or some direct
               (global-company-mode)
               (setq company-idle-delay 0.1)))
 #+END_SRC
+
+** Programming
+
+*** General stuff
+
+I use flycheck for almost any buffer that can be checked, so enable it everywhere.
+
+#+BEGIN_SRC emacs-lisp
+  (use-package flycheck
+    :config (global-flycheck-mode))
+#+END_SRC
+
+I like my parentheses balanced, thank you!
+
+#+BEGIN_SRC emacs-lisp
+  (use-package smartparens
+    :config (progn
+              (require 'smartparens-config)
+              (show-smartparens-global-mode)
+              (smartparens-global-strict-mode)
+              (sp-use-paredit-bindings)))
+#+END_SRC
+
+Also, please indent my code smartly (except for in F#, it does not play nice there)!
+
+#+BEGIN_SRC emacs-lisp
+  (use-package aggressive-indent
+    :config (progn
+              (global-aggressive-indent-mode)
+              (add-to-list 'aggressive-indent-excluded-modes 'fsharp-mode)))
+#+END_SRC
+
