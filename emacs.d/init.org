@@ -75,6 +75,14 @@ They should not be set in the generated ~init.org.el~, but sometimes I want to s
   (use-package f)
 #+END_SRC
 
+*** Async
+
+Add some asyncness, for the sake of less waiting time.
+
+#+BEGIN_SRC emacs-lisp
+  (use-package async)
+#+END_SRC
+
 ** Aesthetics
 
 I want my Emacs to look good.
