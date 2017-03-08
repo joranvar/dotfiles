@@ -595,3 +595,12 @@ Also, I want to be able to compose mail in org-mode and send it as html.
                         (lambda () (local-set-key "\C-c o" 'org-mime-org-buffer-htmlize)))))
 
 #+END_SRC
+
+** Browsing
+
+Use conkeror by default.
+
+#+BEGIN_SRC emacs-lisp
+  (setq browse-url-generic-program (executable-find "conkeror")
+        browse-url-browser-function 'browse-url-generic)
+#+END_SRC
