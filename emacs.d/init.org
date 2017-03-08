@@ -120,6 +120,14 @@ This is the theme I will use currently.
     :config (powerline-default-theme))
 #+END_SRC
 
+** Start Emacs as a server
+
+#+BEGIN_SRC emacs-lisp
+  (use-package server
+    :config (progn
+              (unless (server-running-p) (server-start))))
+#+END_SRC
+
 ** Menus and discovery
 
 *** ~helm~
