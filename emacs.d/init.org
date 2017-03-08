@@ -499,14 +499,7 @@ Gnus will be used to read the mail that was pulled over here.
                                                                (directory "~/Maildir/Exchange")
                                                                (directory-files nnheader-directory-files-safe)
                                                                (get-new-mail nil)))
-                    mail-user-agent 'message-user-agent
-                    smtpmail-smtp-service 587
-                    message-send-mail-function 'smtpmail-send-it
-                    smtpmail-default-smtp-server "smtp.gmail.com"
                     mm-discouraged-alternatives '("text/html" "text/richtext") ;; Prefer text/plain
-                    message-citation-line-function 'message-insert-formatted-citation-line
-                    message-citation-line-format "On %a, %b %d %Y, %f writes:\n"
-                    message-cite-style message-cite-style-outlook
                     gnus-decay-scores t
                     gnus-use-adaptive-scoring t)
               (when window-system
@@ -552,4 +545,53 @@ Gnus will be used to read the mail that was pulled over here.
                     mm-decrypt-option 'always
                     gnus-buttonized-mime-types '("multipart/alternative" "multipart/encrypted" "multipart/signed"))
               (add-hook 'gnus-message-setup-hook (lambda () (mml-secure-message-sign)))))
+#+END_SRC
+
+*** Sending mail
+
+When sending a mail, it should reflect who I want to send it as (from my work mail, or personal).
+
+#+BEGIN_SRC emacs-lisp
+  (use-package smtpmail
+    :config (progn
+              (setq gnus-posting-styles
+                    '(("cgm"
+                       (signature "")
+                       (address "bart.post@cgm.com")
+                       ("X-Message-SMTP-Method" "smtp localhost 1025 bart.post@cgm.com"))
+                      ("gmail"
+                       (signature "")
+                       (address "bart.post@gmail.com")
+                       ("X-Message-SMTP-Method" "smtp smtp.gmail.com 587 bart.post@gmail.com"))))
+              (setq smtpmail-stream-type nil
+                    mail-user-agent 'message-user-agent
+                    smtpmail-smtp-service 587
+                    message-send-mail-function 'smtpmail-send-it
+                    smtpmail-default-smtp-server "smtp.gmail.com"
+                    message-citation-line-function 'message-insert-formatted-citation-line
+                    message-citation-line-format "On %a, %b %d %Y, %f writes:\n"
+                    message-cite-style message-cite-style-outlook
+                    send-mail-function 'smtpmail-send-it)))
+#+END_SRC
+
+Also, I want to be able to compose mail in org-mode and send it as html.
+
+#+BEGIN_SRC emacs-lisp
+  (use-package org-mime
+    :config (progn
+              (add-hook 'message-mode-hook
+                        (lambda ()
+                          (orgstruct-mode)
+                          (local-set-key "\C-c o" (lambda ()
+                                                    (interactive)
+                                                    (save-excursion
+                                                      (message-goto-body)
+                                                      (when (looking-at "<#secure.*>") (forward-line 1))
+                                                      (set-mark-command nil)
+                                                      (insert "#+OPTIONS: toc:nil ^:nil\n")
+                                                      (goto-char (point-max))
+                                                      (org-mime-htmlize))))))
+              (add-hook 'org-mode-hook
+                        (lambda () (local-set-key "\C-c o" 'org-mime-org-buffer-htmlize)))))
+
 #+END_SRC
