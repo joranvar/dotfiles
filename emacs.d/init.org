@@ -4,64 +4,6 @@
 
 This file is tangled on Emacs startup, which will result in both more configuration to be loaded by Emacs and dotfiles to serve as configuration for other programs.
 
-* Mail configuration
-
-I used to check mail with gnus, directly from the imap-server (in the Exchange case, from davmail), but gnus is quite slow, and when checking mail, freezes Emacs a bit.
-After reading http://cachestocaches.com/2017/3/complete-guide-email-emacs-using-mu-and-/, I decided to setup a different configuration, and use mu, mu4e and offlineimap.
-
-** Offline imap
-:PROPERTIES:
-:header-args: :tangle ~/.offlineimaprc :comments noweb :tangle-mode (identity #o444)
-:END:
-
-#+BEGIN_SRC conf
-  [general]
-  accounts = Gmail, Exchange
-  maxsyncaccounts = 2
-
-  [Account Gmail]
-  localrepository = LocalGmail
-  remoterepository = RepositoryGmail
-  autorefresh = 5
-  quick = 10
-  postsynchook = mu index --maildir ~/Maildir
-  status_backend = sqlite
-
-  [Reposiroty LocalGmail]
-  type = Maildir
-  localfolders = ~/Maildir/Gmail
-
-  [Reposiroty RepositoryGmail]
-  type = Gmail
-  maxconnections = 2
-  remoteuser = YOUR_GMAIL_USERNAME
-  remotepass = YOUR_GMAIL_PASSWORD
-  folderfilter = lambda foldername: foldername not in ['[Gmail]/All Mail', '[Gmail]/Important']
-  sslcacertfile = /usr/local/etc/openssl/cert.pem  # This will only work for macOS
-
-  # These are effectively the same as the above
-  [Account Exchange]
-  localrepository = LocalExchange
-  remoterepository = RepositoryExchange
-  autorefresh = 5
-  quick = 10
-  postsynchook = mu index --maildir ~/Maildir
-  status_backend = sqlite
-
-  [Repository LocalExchange]
-  type = Maildir
-  localfolders = ~/Maildir/Exchange
-
-  [Repository RemoteExchange]
-  type = Imap
-  maxconnections = 2
-  remoteuser = YOUR_EXCHANGE_USERNAME
-  remotepass = YOUR_EXCHANGE_PASSWORD
-  #folderfilter = lambda foldername: foldername not in ['[Exchange]/All Mail', '[Exchange]/Important']
-
-  sslcacertfile = /usr/local/etc/openssl/cert.pem  # This will only work for macOS
-#+END_SRC
-
 * Emacs configuration
 :PROPERTIES:
 :header-args: :tangle ./init.org.el :comments noweb :tangle-mode (identity #o444)
@@ -313,3 +255,233 @@ In F#, I'd like to set the following settings:
   (use-package fsharp-mode
     :config (setq fsharp-indent-offset 2))
 #+END_SRC
+** Mail configuration
+
+I used to check mail with Gnus, directly from the imap-server (in the Exchange case, from davmail), but the Gnus/davmail combination is quite slow, and when checking mail, freezes Emacs a bit.
+After reading http://cachestocaches.com/2017/3/complete-guide-email-emacs-using-mu-and-/, I decided to setup a different configuration, and use offlineimap.
+Reading https://nakkaya.com/2010/04/10/using-offlineimap-with-gnus/ after that, I decided to skip the mu4e, and use the nnmaildir backend in Gnus.
+This backend, however, needs a script to be run for syncing the flags with a "regular" Maildir backend.
+
+*** Flag syncing script
+:PROPERTIES:
+:header-args: :tangle ~/sync_nnmaildir :comments noweb :tangle-mode (identity #o555) :shebang "#!/usr/bin/env perl"
+:END:
+
+This script was downloaded (and adjusted a tiny bit) from http://groups.google.com/group/linux.debian.user/msg/7594165a2b6d1c49.
+
+#+BEGIN_SRC perl
+  # Maildir flags are:
+  #         D (draft)
+  #         F (flagged)
+  #         R (replied)
+  #         S (seen)
+  #         T (trashed)
+  # and must occur in ASCII order.
+  #
+  # flagmatchre = re.compile(':.*2,([A-Z]+)')
+  #
+  # filename:2,F   => .nnmaildir/marks/tick/filename
+  # filename:2,R   => .nnmaildir/marks/reply/filename
+  # filename:2,S   => .nnmaildir/marks/read/filename
+
+  use strict;
+  use File::Basename;
+  use Getopt::Long;
+  $Getopt::Long::ignorecase = 0;
+
+  my $from_gnus = 0;
+  my $from_maildir = 0;
+  my $dir = "~/Maildir";
+  GetOptions('-g' => \$from_gnus,
+             '-m' => \$from_maildir,
+             '-d=s' => \$dir);
+
+  if (! ($from_gnus ^ $from_maildir)) {
+      die "Usage: sync_nnmaildir -g [-f]\n   or: sync_nnmaildir -m [-v -f]\n";
+  }
+
+  for (glob "$dir/*") {
+      my $mb = $_;
+      mkdir "$mb/.nnmaildir";
+      mkdir "$mb/.nnmaildir/marks";
+
+      for (glob "$mb/cur/*") {
+          my $file = $_;
+
+          /(.*)\/cur\/(.*?):.*2,(.*)$/;
+          my $path = $1;
+          my $message = $2;
+          my $flags = $3;
+
+          if ($from_maildir) {
+              # Sync ticked flags
+              if ($flags =~ /F/) {
+                  mkdir "$path/.nnmaildir/marks/tick";
+                  my $dst = "$path/.nnmaildir/marks/tick/$message";
+                  link "$file","$dst"
+                      and print "Added mail in $mb to nnmaildir ticks\n";
+              } else {
+                  my $dst = "$path/.nnmaildir/marks/tick/$message";
+                  unlink "$dst"
+                      and print "Removed mail in $mb from nnmaildir ticks\n";
+              }
+
+              # Sync replied flags
+              if ($flags =~ /R/) {
+                  mkdir "$path/.nnmaildir/marks/reply";
+                  my $dst = "$path/.nnmaildir/marks/reply/$message";
+                  link "$file","$dst"
+                      and print "Added mail in $mb to nnmaildir replies\n";
+              } else {
+                  my $dst = "$path/.nnmaildir/marks/reply/$message";
+                  unlink "$dst"
+                      and print "Removed mail in $mb from nnmaildir replies\n";
+              }
+
+              # Sync read flags
+              if ($flags =~ /S/) {
+                  mkdir "$path/.nnmaildir/marks/read";
+                  my $dst = "$path/.nnmaildir/marks/read/$message";
+                  link "$file","$dst"
+                      and print "Added mail in $mb to nnmaildir seen\n";
+              } else {
+                  my $dst = "$path/.nnmaildir/marks/read/$message";
+                  unlink "$dst"
+                      and print "Removed mail in $mb from nnmaildir seen\n";
+              }
+          } elsif ($from_gnus) {
+              my $new_flags = '';
+
+              if (-e "$path/.nnmaildir/marks/tick/$message") {
+                  $new_flags = $new_flags . 'F';
+              }
+              if (-e "$path/.nnmaildir/marks/reply/$message") {
+                  $new_flags = $new_flags . 'R';
+              }
+              if (-e "$path/.nnmaildir/marks/read/$message") {
+                  $new_flags = $new_flags . 'S';
+              }
+
+              if ($new_flags ne $flags) {
+                  rename "$file", "$path/cur/$message:2,$new_flags"
+                      and print "Marked mail in $mb as $new_flags\n";
+              }
+          }
+      }
+  }
+
+#+END_SRC
+
+
+*** Offline imap
+:PROPERTIES:
+:header-args: :tangle ~/.offlineimaprc :comments noweb :tangle-mode (identity #o444)
+:END:
+
+#+BEGIN_SRC conf
+  [general]
+  accounts = Gmail, Exchange
+  maxsyncaccounts = 2
+  pythonfile = ~/.offlineimap.py
+
+  [Account Gmail]
+  localrepository = LocalGmail
+  remoterepository = RemoteGmail
+  autorefresh = 5
+  quick = 10
+  postsynchook = ~/sync_nnmaildir -m
+  presynchook = ~/sync_nnmaildir -g
+  status_backend = sqlite
+
+  [Repository LocalGmail]
+  type = Maildir
+  localfolders = ~/Maildir/Gmail
+
+  [Repository RemoteGmail]
+  type = Gmail
+  maxconnections = 2
+  remoteuser = bart.post@gmail.com
+  remotepasseval = get_password_emacs("gmail", "imaps")
+  folderfilter = lambda foldername: foldername not in ['[Gmail]/All Mail', '[Gmail]/Important']
+  sslcacertfile = /etc/ssl/certs/ca-certificates.crt
+
+  # These are effectively the same as the above
+  [Account Exchange]
+  localrepository = LocalExchange
+  remoterepository = RemoteExchange
+  autorefresh = 5
+  quick = 10
+  postsynchook = ~/sync_nnmaildir -m
+  presynchook = ~/sync_nnmaildir -g
+  status_backend = sqlite
+
+  [Repository LocalExchange]
+  type = Maildir
+  localfolders = ~/Maildir/Exchange
+
+  # This uses davmail
+  [Repository RemoteExchange]
+  type = IMAP
+  maxconnections = 2
+  remoteuser = bart.post@cgm.com
+  remotehost = localhost
+  remotepasseval = get_password_emacs("localhost", "1143")
+  remoteport = 1143
+  ssl = no
+  sync_deletes = no
+
+  sslcacertfile = /etc/ssl/certs/ca-certificates.crt
+#+END_SRC
+
+
+
+*** Password management with .authinfo.gpg
+
+This python script will be used to get the credentials.
+
+#+BEGIN_SRC python :tangle ~/.offlineimap.py :comments noweb :tangle-mode (identity #o444)
+  import subprocess
+  def get_output(cmd):
+    # Bunch of boilerplate to catch the output of a command:
+    pipe = subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+    (output, errout) = pipe.communicate()
+    assert pipe.returncode == 0 and not errout
+    return output
+  def get_password_emacs(host, port):
+    cmd = "emacsclient --eval '(offlineimap-get-password \"%s\" \"%s\")'" % (host,port)
+    return get_output(cmd).strip().lstrip('"').rstrip('"')
+#+END_SRC
+
+And this is the code that will be used to decrypt the authinfo.
+
+#+BEGIN_SRC emacs-lisp
+  (use-package offlineimap
+    :config (progn
+              (setq auth-sources (list "~/.authinfo.gpg"))
+              (defun offlineimap-get-password (host port)
+                (let ((netrc (nth 0 (auth-source-search
+                                     :host host
+                                     :port port))))
+                  (when netrc (let ((secret (plist-get netrc :secret)))
+                                (if (functionp secret)
+                                    (funcall secret)
+                                  secret)))))))
+#+END_SRC
+
+*** Gnus
+
+Gnus will be used to read the mail that was pulled over here.
+
+#+BEGIN_SRC emacs-lisp
+  (use-package gnus
+    :config (progn
+              (setq gnus-select-method '(nnmaildir "GMail"
+                                                   (directory "~/Maildir/Gmail")
+                                                   (directory-files nnheader-directory-files-safe)
+                                                   (get-new-mail nil))
+                    gnus-secondary-select-methods '((nnmaildir "Exchange"
+                                                               (directory "~/Maildir/Exchange")
+                                                               (directory-files nnheader-directory-files-safe)
+                                                               (get-new-mail nil))))))
+#+END_SRC
+
