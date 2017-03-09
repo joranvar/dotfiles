@@ -99,6 +99,13 @@ Please, use all my screen real estate for information, not for "places to click 
   (fringe-mode '(4 . 0))
 #+END_SRC
 
+Although, I do have a mouse, and sometimes I use it to focus a window in my window manager.  That's when I like to also focus a window inside Emacs.
+
+#+BEGIN_SRC emacs-lisp
+  (setq focus-follows-mouse t
+        mouse-autoselect-window t)
+#+END_SRC
+
 *** Show me info about my buffer
 
 I want to know where am, and have immediate visual feedback about my text.
