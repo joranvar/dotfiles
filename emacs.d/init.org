@@ -555,11 +555,11 @@ When sending a mail, it should reflect who I want to send it as (from my work ma
   (use-package smtpmail
     :config (progn
               (setq gnus-posting-styles
-                    '(("cgm"
+                    '(("Exchange"
                        (signature "")
                        (address "bart.post@cgm.com")
                        ("X-Message-SMTP-Method" "smtp localhost 1025 bart.post@cgm.com"))
-                      ("gmail"
+                      (t
                        (signature "")
                        (address "bart.post@gmail.com")
                        ("X-Message-SMTP-Method" "smtp smtp.gmail.com 587 bart.post@gmail.com"))))
