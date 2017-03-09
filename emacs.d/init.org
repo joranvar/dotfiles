@@ -604,3 +604,15 @@ Use conkeror by default.
   (setq browse-url-generic-program (executable-find "conkeror")
         browse-url-browser-function 'browse-url-generic)
 #+END_SRC
+
+** Literate programming
+
+Oh boy, org-babel is so nice!
+
+#+BEGIN_SRC emacs-lisp
+  (use-package org
+    :config (progn
+              (org-babel-do-load-languages 'org-babel-load-languages '((sql . t)
+                                                                       (sh . t)
+                                                                       (http . t)))))
+#+END_SRC
