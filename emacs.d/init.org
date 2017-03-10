@@ -563,14 +563,14 @@ When sending a mail, it should reflect who I want to send it as (from my work ma
     :config (progn
               (require 'message)
               (setq gnus-posting-styles
-                    '(("Exchange"
-                       (signature "")
-                       (address "bart.post@cgm.com")
-                       ("X-Message-SMTP-Method" "smtp localhost 1025 bart.post@cgm.com"))
-                      (t
+                    '((".*"
                        (signature "")
                        (address "bart.post@gmail.com")
-                       ("X-Message-SMTP-Method" "smtp smtp.gmail.com 587 bart.post@gmail.com"))))
+                       ("X-Message-SMTP-Method" "smtp smtp.gmail.com 587 bart.post@gmail.com"))
+                      ("Exchange"
+                       (signature "")
+                       (address "bart.post@cgm.com")
+                       ("X-Message-SMTP-Method" "smtp localhost 1025 bart.post@cgm.com"))))
               (setq smtpmail-stream-type nil
                     mail-user-agent 'message-user-agent
                     smtpmail-smtp-service 587
