@@ -619,7 +619,9 @@ Oh boy, org-babel is so nice!
 
 #+BEGIN_SRC emacs-lisp
   (use-package org
+    :ensure org-plus-contrib
     :config (progn
+              (use-package ob-http)
               (org-babel-do-load-languages 'org-babel-load-languages '((sql . t)
                                                                        (sh . t)
                                                                        (http . t)))))
