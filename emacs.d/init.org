@@ -561,6 +561,7 @@ When sending a mail, it should reflect who I want to send it as (from my work ma
 #+BEGIN_SRC emacs-lisp
   (use-package smtpmail
     :config (progn
+              (require 'message)
               (setq gnus-posting-styles
                     '(("Exchange"
                        (signature "")
