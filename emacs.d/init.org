@@ -11,8 +11,7 @@ This file is tangled on Emacs startup, which will result in both more configurat
 
 ** Package preparation
 
-*** Package sources
-
+*** Package sources 
 #+BEGIN_SRC emacs-lisp
   (add-to-list 'load-path (expand-file-name "~/.emacs.d/elpa"))
 
@@ -133,6 +132,33 @@ This is the theme I will use currently.
 #+BEGIN_SRC emacs-lisp
   (use-package powerline
     :config (powerline-default-theme))
+#+END_SRC
+
+** Basic text editing
+
+*** Whitespace pet peeves
+
+Do, please do, remove whitespace from the end of lines, before saving my buffers.
+
+#+BEGIN_SRC emacs-lisp
+  (use-package whitespace-cleanup-mode
+    :diminish whitespace-mode global-whitespace-mode
+    :config (progn
+              (setq-default whitespace-style '(face spaces tabs newline
+                                                    space-mark tab-mark
+                                                    newline-mark
+                                                    trailing lines-tail empty
+                                                    indentation::space
+                                                    space-after-tab::space)
+                            whitespace-line-column 160
+                            indent-tabs-mode nil
+                            require-final-newline t)
+              (defadvice align-regexp (around align-regexp-with-spaces activate)
+                (let ((indent-tabs-mode nil))
+                  ad-do-it))
+              (setq-default tab-width 2)
+              (global-whitespace-mode)
+              (global-whitespace-cleanup-mode)))
 #+END_SRC
 
 ** Start Emacs as a server
@@ -279,6 +305,7 @@ In F#, I'd like to set the following settings:
   (use-package fsharp-mode
     :config (setq fsharp-indent-offset 2))
 #+END_SRC
+
 ** Mail configuration
 
 I used to check mail with Gnus, directly from the imap-server (in the Exchange case, from davmail), but the Gnus/davmail combination is quite slow, and when checking mail, freezes Emacs a bit.
@@ -396,7 +423,6 @@ This script was downloaded (and adjusted a tiny bit) from http://groups.google.c
 
 #+END_SRC
 
-
 *** Offline imap
 :PROPERTIES:
 :header-args: :tangle ~/.offlineimaprc :comments noweb :tangle-mode (identity #o444)
@@ -456,8 +482,6 @@ This script was downloaded (and adjusted a tiny bit) from http://groups.google.c
 
   sslcacertfile = /etc/ssl/certs/ca-certificates.crt
 #+END_SRC
-
-
 
 *** Password management with .authinfo.gpg
 
