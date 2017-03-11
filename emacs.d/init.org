@@ -627,3 +627,18 @@ Oh boy, org-babel is so nice!
                                                                        (sh . t)
                                                                        (http . t)))))
 #+END_SRC
+
+** Agenda management
+
+#+BEGIN_SRC emacs-lisp
+  (use-package org
+    :bind (("C-c a" . org-agenda))
+    :config (progn
+              (setq org-use-sub-superscripts '{}
+                    org-pretty-entities t
+                    org-fontify-emphasized-text t
+                    org-adapt-indentation nil
+                    org-hide-leading-stars t
+                    org-ellipsis "↷"
+                    org-catch-invisible-edits 'error)))
+#+END_SRC
