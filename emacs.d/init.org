@@ -567,19 +567,18 @@ When sending a mail, it should reflect who I want to send it as (from my work ma
                     '((".*"
                        (signature "")
                        (address "bart.post@gmail.com")
-                       ("X-Message-SMTP-Method" "smtp smtp.gmail.com 587 bart.post@gmail.com"))
+                       ("X-Message-SMTP-Method" "smtp smtp.gmail.com 587 bart.post@gmail.com")
+                       (eval (set (make-local-variable 'message-cite-style) message-cite-style-gmail)))
                       ("Exchange"
                        (signature "")
                        (address "bart.post@cgm.com")
-                       ("X-Message-SMTP-Method" "smtp localhost 1025 bart.post@cgm.com"))))
+                       ("X-Message-SMTP-Method" "smtp localhost 1025 bart.post@cgm.com")
+                       (eval (set (make-local-variable 'message-cite-style) message-cite-style-outlook)))))
               (setq smtpmail-stream-type nil
                     mail-user-agent 'message-user-agent
                     smtpmail-smtp-service 587
                     message-send-mail-function 'smtpmail-send-it
                     smtpmail-default-smtp-server "smtp.gmail.com"
-                    message-citation-line-function 'message-insert-formatted-citation-line
-                    message-citation-line-format "On %a, %b %d %Y, %f writes:\n"
-                    message-cite-style message-cite-style-outlook
                     send-mail-function 'smtpmail-send-it)))
 #+END_SRC
 
