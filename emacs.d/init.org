@@ -134,6 +134,19 @@ This is the theme I will use currently.
     :config (powerline-default-theme))
 #+END_SRC
 
+*** Window management
+
+Use ~ace-window~ to jump to where I want.
+
+#+BEGIN_SRC emacs-lisp
+  (use-package ace-window
+    :bind (("C-x o" . ace-window))
+    :config (progn
+              (setq aw-scope 'frame
+                    aw-keys '(?a ?o ?e ?u ?i ?d ?h ?t ?n ?s) ; I use Dvorak
+                    )))
+#+END_SRC
+
 ** Basic text editing
 
 *** Whitespace pet peeves
