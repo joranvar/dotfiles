@@ -334,6 +334,48 @@ In F#, I'd like to set the following settings:
               (add-to-list 'aggressive-indent-excluded-modes 'fsharp-mode)))
 #+END_SRC
 
+*** Haskell
+
+#+BEGIN_SRC emacs-lisp
+  (use-package haskell-mode
+    :mode "\\.hs\\'"
+    :config (progn
+              (require 'haskell-indentation)
+              (use-package hlint-refactor
+                :config (add-hook 'haskell-mode-hook 'hlint-refactor-mode))
+              (use-package company-ghc
+                :config (add-to-list 'company-backends 'company-ghc))
+              (setq company-ghc-show-info t)
+              (add-to-list 'aggressive-indent-excluded-modes 'haskell-mode)))
+#+END_SRC
+
+In Haskell, use `dante`.
+
+#+BEGIN_SRC emacs-lisp
+  (use-package dante
+    :commands 'dante-mode
+    :init (progn
+            (add-hook 'haskell-mode-hook 'dante-mode)
+            (setq-default dante-repl-command-line-methods-alist
+                          `(
+                            (styx .
+                                  ,(lambda (root)
+                                     (dante-repl-by-file root "styx.yaml"
+                                                         '("styx" "repl"))))
+                            (nix-new .
+                                     ,(lambda (root)
+                                        (dante-repl-by-file
+                                         (projectile-project-root)
+                                         "shell.nix"
+                                         `("nix-shell" "--run" "cabal new-repl"
+                                           ,(concat (projectile-project-root) "/shell.nix")))))
+                            (stack .
+                                   ,(lambda (root)
+                                      (dante-repl-by-file root "stack.yaml"
+                                                          '("stack" "repl"))))
+                            (bare  . ,(lambda (_) '("cabal" "repl")))))))
+#+END_SRC
+
 ** Mail configuration
 
 I used to check mail with Gnus, directly from the imap-server (in the Exchange case, from davmail), but the Gnus/davmail combination is quite slow, and when checking mail, freezes Emacs a bit.
