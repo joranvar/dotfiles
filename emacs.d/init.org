@@ -147,6 +147,20 @@ Use ~ace-window~ to jump to where I want.
                     )))
 #+END_SRC
 
+Kill side-windows with ~C-c q~
+
+#+BEGIN_SRC emacs-lisp
+  ;; Stolen from http://www.lunaryorn.com/posts/the-power-of-display-buffer-alist.html
+
+  (defun joranvar:quit-bottom-side-windows ()
+    "Quit bottom side windows of the current frame."
+    (interactive)
+    (dolist (window (window-at-side-list nil 'bottom))
+      (quit-window nil window)))
+
+  (global-set-key (kbd "C-c q") #'joranvar:quit-bottom-side-windows)
+#+END_SRC
+
 ** Basic text editing
 
 *** Whitespace pet peeves
