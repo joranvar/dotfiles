@@ -645,7 +645,7 @@ Gnus will be used to read the mail that was pulled over here.
                             gnus-thread-sort-functions '(gnus-thread-sort-by-number (not gnus-thread-sort-by-total-score))
                             gnus-subthread-sort-functions '(gnus-sort-thread-by-number))
               (add-hook 'gnus-group-mode-hook 'gnus-topic-mode) ;; Show me topics
-              ))
+              (add-hook 'gnus-startup-hook (lambda () (gnus-demon-add-handler 'gnus-demon-scan-news 1 t)))))
 #+END_SRC
 
 *** GPG for mails
