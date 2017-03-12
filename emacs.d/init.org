@@ -306,33 +306,14 @@ I use flycheck for almost any buffer that can be checked, so enable it everywher
 #+BEGIN_SRC emacs-lisp
   (use-package flycheck
     :config (progn
-              (defconst top-window-height 10 "Height to set top window to when splitting.")
-              (defun ensure-top-window ()
-                (interactive)
-                (let* ((w (selected-window))
-                       (is-top (and
-                                (eq (window-parent w) (frame-root-window))
-                                (eq (window-top-child (frame-root-window)) w))))
-                                          ; Make sure we're the top window, and default our height to
-                                          ; top-window-height.  This is a little destructive (loses all window state)
-                                          ; but generally only happens once per session.
-                  (when (not is-top)
-                    (delete-other-windows)
-                    (split-window-below top-window-height)
-                    (set-window-buffer (window-next-sibling w) "*scratch*"))
-                                          ; Don't let anybody split us horizontally.
-                  (setq window-size-fixed 'width)
-                                          ; Don't let anybody put anything else inside us.
-                  (set-window-dedicated-p w t)))
-
-                                          ; Make sure that the flycheck error list won't be split horizontally or have
-                                          ; something else be put in it. Note that this isn't a
-                                          ; flycheck-error-list-mode-hook because that runs before the window is created.
-              (add-hook 'flycheck-error-list-after-refresh-hook
-                        (lambda ()
-                          (with-selected-window (flycheck-get-error-list-window t)
-                            (ensure-top-window))))
-              (global-flycheck-mode)))
+              (global-flycheck-mode)
+              (add-to-list 'display-buffer-alist
+                           `(,(rx bos "*Flycheck errors*" eos)
+                             (display-buffer-reuse-window
+                              display-buffer-in-side-window)
+                             (reusable-frames . visible)
+                             (side            . bottom)
+                             (window-height   . 10)))))
 #+END_SRC
 
 I like my parentheses balanced, thank you!
