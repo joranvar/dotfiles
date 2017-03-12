@@ -161,6 +161,23 @@ Do, please do, remove whitespace from the end of lines, before saving my buffers
               (global-whitespace-cleanup-mode)))
 #+END_SRC
 
+*** Search and replace
+
+Search and replace with regexes by default, and show me what you're about to do.
+
+#+BEGIN_SRC emacs-lisp
+  (use-package anzu
+    :bind* (("C-c r" . anzu-query-replace-regexp)
+           ("C-c C-r" . anzu-replace-at-cursor-thing)
+           ("C-s" . isearch-forward-regexp)
+           ("C-r" . isearch-backward-regexp))
+    :diminish t
+    :config (progn
+              (global-anzu-mode)
+              (define-key isearch-mode-map [remap isearch-query-replace]  #'anzu-isearch-query-replace)
+              (define-key isearch-mode-map [remap isearch-query-replace-regexp] #'anzu-isearch-query-replace-regexp)))
+#+END_SRC
+
 ** Start Emacs as a server
 
 #+BEGIN_SRC emacs-lisp
