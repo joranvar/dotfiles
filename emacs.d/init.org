@@ -184,7 +184,7 @@ Search and replace with regexes by default, and show me what you're about to do.
            ("C-c C-r" . anzu-replace-at-cursor-thing)
            ("C-s" . isearch-forward-regexp)
            ("C-r" . isearch-backward-regexp))
-    :diminish t
+    :diminish anzu-mode
     :config (progn
               (global-anzu-mode)
               (define-key isearch-mode-map [remap isearch-query-replace]  #'anzu-isearch-query-replace)
@@ -211,6 +211,7 @@ I've used ~helm~ for quite some time now, and I like the way it works.  Therefor
            ("C-x C-f" . helm-find-files)
            ("M-y" . helm-show-kill-ring)
            ("C-x b" . helm-mini))
+    :diminish helm-mode
     :init (progn
             (require 'helm-config)
             (helm-mode 1)
@@ -290,6 +291,7 @@ Each project is either a version controlled (~magit~!) directory, or some direct
 
 #+BEGIN_SRC emacs-lisp
   (use-package company
+    :diminish company-mode
     :config (progn
               (global-company-mode)
               (setq company-idle-delay 0.1)))
