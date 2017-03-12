@@ -320,7 +320,6 @@ Also, please indent my code smartly (except for in F#, it does not play nice the
   (use-package aggressive-indent
     :config (progn
               (global-aggressive-indent-mode)
-              (add-to-list 'aggressive-indent-excluded-modes 'fsharp-mode)
               (add-to-list 'aggressive-indent-excluded-modes 'org-mode)))
 #+END_SRC
 
@@ -330,7 +329,9 @@ In F#, I'd like to set the following settings:
 
 #+BEGIN_SRC emacs-lisp
   (use-package fsharp-mode
-    :config (setq fsharp-indent-offset 2))
+    :config (progn
+              (setq fsharp-indent-offset 2)
+              (add-to-list 'aggressive-indent-excluded-modes 'fsharp-mode)))
 #+END_SRC
 
 ** Mail configuration
