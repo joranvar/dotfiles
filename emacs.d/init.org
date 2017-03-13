@@ -741,6 +741,15 @@ Use conkeror by default.
         browse-url-browser-function 'browse-url-generic)
 #+END_SRC
 
+Use ~moz-repl~ to communicate with conkeror.
+
+#+BEGIN_SRC emacs-lisp
+  (use-package moz
+    :commands moz-minor-mode
+    :config (progn
+              (add-hook 'javascript-mode-hook (lambda () (moz-minor-mode 1)))))
+#+END_SRC
+
 ** Literate programming
 
 Oh boy, org-babel is so nice!
