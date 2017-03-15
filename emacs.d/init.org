@@ -769,7 +769,8 @@ Oh boy, org-babel is so nice!
 
 #+BEGIN_SRC emacs-lisp
   (use-package org
-    :bind (("C-c a" . org-agenda))
+    :bind (("C-c a" . org-agenda)
+           ("C-c c" . org-capture))
     :config (progn
               (setq org-use-sub-superscripts '{}
                     org-pretty-entities t
@@ -777,5 +778,12 @@ Oh boy, org-babel is so nice!
                     org-adapt-indentation nil
                     org-hide-leading-stars t
                     org-ellipsis "↷"
-                    org-catch-invisible-edits 'error)))
+                    org-catch-invisible-edits 'error
+                    org-capture-templates
+                    '(
+                      ("t" "INBOX" entry (file+headline "gtd.org" "INBOX")
+                       "* TODO %?\n%U\n%a\n" :clock-in t :clock-resume t)
+                      ("i" "Interrupt" entry (file+headline "gtd.org" "Journal")
+                       "* %? :16311:\n%U\n" :clock-in t :clock-resume t)
+                      ))))
 #+END_SRC
