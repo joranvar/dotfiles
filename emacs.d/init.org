@@ -761,7 +761,7 @@ Oh boy, org-babel is so nice!
     :config (progn
               (use-package ob-http)
               (org-babel-do-load-languages 'org-babel-load-languages '((sql . t)
-                                                                       (sh . t)
+                                                                       (shell . t)
                                                                        (http . t)))))
 #+END_SRC
 
