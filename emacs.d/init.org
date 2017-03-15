@@ -407,7 +407,8 @@ In Haskell, use `dante`.
 
 #+BEGIN_SRC emacs-lisp
   (use-package yaml-mode
-    :mode "\\.ya?ml\\'")
+    :mode "\\.ya?ml\\'"
+    :config (add-to-list 'aggressive-indent-excluded-modes 'yaml-mode))
 #+END_SRC
 
 ** Mail configuration
