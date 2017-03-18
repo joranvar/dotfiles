@@ -415,6 +415,13 @@ In Haskell, use `dante`.
     :config (add-to-list 'aggressive-indent-excluded-modes 'yaml-mode))
 #+END_SRC
 
+*** PowerShell
+
+#+BEGIN_SRC emacs-lisp
+  (use-package powershell
+    :mode "\\.ps\\'")
+#+END_SRC
+
 ** Mail configuration
 
 I used to check mail with Gnus, directly from the imap-server (in the Exchange case, from davmail), but the Gnus/davmail combination is quite slow, and when checking mail, freezes Emacs a bit.
