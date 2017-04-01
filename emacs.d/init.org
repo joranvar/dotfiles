@@ -125,6 +125,14 @@ I want to know where am, and have immediate visual feedback about my text.
     :config (powerline-default-theme))
 #+END_SRC
 
+*** Font size
+
+I like smaller fonts.
+
+#+BEGIN_SRC elisp
+  (set-face-attribute 'default nil :height 90)
+#+END_SRC
+
 *** Theme to use
 
 This is the theme I will use currently.
