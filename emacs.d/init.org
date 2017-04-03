@@ -620,7 +620,15 @@ And this is the code that will be used to decrypt the authinfo.
                   (when netrc (let ((secret (plist-get netrc :secret)))
                                 (if (functionp secret)
                                     (funcall secret)
-                                  secret)))))))
+                                  secret)))))
+              (defun offlineimap-get-username (host port)
+                (let ((netrc (nth 0 (auth-source-search
+                                     :host host
+                                     :port port))))
+                  (when netrc (let ((user (plist-get netrc :user)))
+                                (if (functionp user)
+                                    (funcall user)
+                                  user)))))))
 #+END_SRC
 
 *** Gnus
