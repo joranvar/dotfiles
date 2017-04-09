@@ -113,6 +113,7 @@ I want to know where am, and have immediate visual feedback about my text.
   (global-hl-line-mode)
   (column-number-mode)
   (show-paren-mode)
+  (setq auto-window-vscroll nil)          ; This should make the next-line command faster
 
   (use-package linum
     :config (global-linum-mode))
