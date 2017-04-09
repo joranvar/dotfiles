@@ -794,3 +794,9 @@ Oh boy, org-babel is so nice!
                                             ("i" "Interrupt" entry (file+headline "gtd.org" "Journal") "* %? :16311:\n%U\n" :clock-in t :clock-resume t))
                     org-agenda-span 1)))
 #+END_SRC
+
+*** Jira worklog integration
+
+#+BEGIN_SRC emacs-lisp
+  (load "/home/joranvar/git/org-log-to-jira/org-log-to-jira.el")
+#+END_SRC
