@@ -143,6 +143,7 @@ This is the theme I will use currently.
               (setq moe-theme-highlight-buffer-id t)
               (moe-theme-set-color 'cyan)
               (powerline-moe-theme)
+              (moe-light)
               ;; (require 'moe-theme-switcher)
               ))
 #+END_SRC
