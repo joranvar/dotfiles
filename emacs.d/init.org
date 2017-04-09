@@ -800,3 +800,22 @@ Oh boy, org-babel is so nice!
 #+BEGIN_SRC emacs-lisp
   (load "/home/joranvar/git/org-log-to-jira/org-log-to-jira.el")
 #+END_SRC
+
+** Communication
+
+*** IRC
+
+Using ERC for IRC makes sense.  I also use it to connect to my teams Slack.
+
+#+BEGIN_SRC emacs-lisp
+  (use-package erc
+    :config (progn
+              (add-to-list 'erc-modules 'log)
+              (erc-update-modules)
+              (setq erc-log-insert-log-on-open t)
+              (setq erc-log-channels t)
+              (setq erc-log-channels-directory "~/.irclogs")
+              (setq erc-save-buffer-on-part t
+                    erc-save-queries-on-quit t)
+              (setq erc-hide-timestamps nil)))
+#+END_SRC
