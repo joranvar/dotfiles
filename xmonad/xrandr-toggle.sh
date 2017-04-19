@@ -6,7 +6,7 @@ pkill taffybar
 
 export TAFFY_SCREEN=0
 taffybar&
-screens=$(xrandr -q | grep ".* disconnected" | cut -f1 -d' ' | grep -v "eDP1")
+screens=$(xrandr -q | grep ".* disconnected" | cut -f1 -d' ' | grep -v "eDP1\\|LVDS")
 for s in $(echo $screens) ; do
     echo $s off
     notifications+="$s off\n"
@@ -14,7 +14,7 @@ for s in $(echo $screens) ; do
 done
 
 prev=eDP1
-screens=$(xrandr -q | grep ".* connected" | cut -f1 -d' ' | grep -v "eDP1")
+screens=$(xrandr -q | grep ".* connected" | cut -f1 -d' ' | grep -v "eDP1\\|LVDS")
 for s in $(echo $screens) ; do
     TAFFY_SCREEN=$(($TAFFY_SCREEN + 1))
     mode=$(xrandr -q | sed '1,/'$s' connected/d;/.* connected/,$d' | head -n 1 | cut -d' ' -f4)
