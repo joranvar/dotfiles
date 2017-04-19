@@ -1,7 +1,6 @@
 {-# LANGUAGE PartialTypeSignatures #-}
 
 import Control.Monad (void)
-import System.IO (hPutStrLn, Handle)
 import XMonad.Actions.PhysicalScreens (viewScreen, sendToScreen)
 
 -- Docks
@@ -11,7 +10,7 @@ import XMonad.Hooks.ManageDocks (avoidStruts, manageDocks, ToggleStruts(..))
 import XMonad.Hooks.EwmhDesktops (ewmh, fullscreenEventHook)
 
 -- Window layout
-import XMonad (Tall(..), Mirror(..), Full(..), Window, (|||), doShift, className, (=?), (-->))
+import XMonad (Tall(..), Mirror(..), Full(..), (|||), doShift, className, (=?), (-->))
 import XMonad.Layout.NoBorders (noBorders, smartBorders)
 
 -- Taffybar
@@ -23,7 +22,6 @@ import Graphics.X11.ExtraTypes.XF86 (xF86XK_AudioLowerVolume, xF86XK_AudioRaiseV
 
 -- Events
 import XMonad (spawn, sendMessage)
-import XMonad.Util.Run (spawnPipe)
 import XMonad.Util.SpawnOnce (spawnOnce)
 
 -- Keys
