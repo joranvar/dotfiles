@@ -4,7 +4,7 @@ import Control.Monad (void)
 import XMonad.Actions.PhysicalScreens (viewScreen, sendToScreen)
 
 -- Docks
-import XMonad.Hooks.ManageDocks (avoidStruts, manageDocks, ToggleStruts(..))
+import XMonad.Hooks.ManageDocks (avoidStruts, docksEventHook, docksStartupHook, manageDocks, ToggleStruts(..))
 
 -- Full Screen Events
 import XMonad.Hooks.EwmhDesktops (ewmh, fullscreenEventHook)
@@ -61,7 +61,7 @@ applySteamSettings :: XConfig a -> XConfig a
 applySteamSettings x = x { manageHook = className =? "hl2_linux" --> doShift "two" <+> manageHook x }
 
 myEventHook :: XConfig a -> XConfig a
-myEventHook x = x { handleEventHook = fullscreenEventHook <+> handleEventHook x }
+myEventHook x = x { handleEventHook = docksEventHook <+> fullscreenEventHook <+> handleEventHook x }
 
 myLayoutHook :: XConfig a -> XConfig _
 myLayoutHook x = x { layoutHook = avoidStruts $ smartBorders tiled ||| smartBorders (Mirror tiled) ||| noBorders Full }
@@ -75,7 +75,7 @@ myWorkSpaces :: XConfig a -> XConfig a
 myWorkSpaces x = x { workspaces = ["i", "ii", "iii", "iv", "v", "vi"] }
 
 myStartupHook :: XConfig a -> XConfig a
-myStartupHook x = x { startupHook = mapM_ spawnOnce startupCommands }
+myStartupHook x = x { startupHook = docksStartupHook <+> mapM_ spawnOnce startupCommands }
   where
     startupCommands =
       [ "nm-applet"
