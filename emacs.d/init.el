@@ -16,7 +16,8 @@
 
 (require 'org)
 
-(let ((joranvar:init-path (file-name-directory (or load-file-name buffer-file-name))))
+(let ((joranvar:init-path (file-name-directory (or load-file-name buffer-file-name)))
+      (vc-follow-symlinks t))
   (org-babel-tangle-file (expand-file-name "init.org" joranvar:init-path))
   (load-file (expand-file-name "init.org.el" joranvar:init-path)))
 
