@@ -117,6 +117,8 @@
     x2vnc
     redshift
     davmail
+    notmuch
+    offlineimap
 
     dmenu
     dzen2
