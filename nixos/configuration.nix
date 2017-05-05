@@ -65,7 +65,6 @@
     fsharp
     mono
     czmq
-    rubygems
     ruby
     bundler
 
