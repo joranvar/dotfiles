@@ -44,7 +44,7 @@
 
   # Power buttons.
   services.logind.extraConfig = ''
-    HandlePowerKey=suspend
+    HandlePowerKey=hibernate
     PowerKeyIgnoreInhibited=yes
   '';
 
