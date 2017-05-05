@@ -163,7 +163,7 @@
   services.dbus = {
     enable = true;
     packages = [
-        pkgs.gnome.GConf
+#        pkgs.gnome.GConf
       ];
   };
 
