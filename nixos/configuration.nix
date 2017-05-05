@@ -159,6 +159,8 @@
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;
 
+  services.upower.enable = true;
+
   services.dbus = {
     enable = true;
     packages = [
