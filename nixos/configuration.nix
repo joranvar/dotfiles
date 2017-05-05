@@ -114,6 +114,7 @@
     freerdp
     remmina
     x2vnc
+    tigervnc
     redshift
     davmail
     notmuch
