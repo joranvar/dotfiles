@@ -133,7 +133,7 @@
     #steam
     androidsdk
     android-udev-rules
-    chromium
+#    chromium
 
     pass
     yubikey-personalization
