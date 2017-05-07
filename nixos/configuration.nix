@@ -107,7 +107,7 @@
     scrot
     nitrogen
 
-    virtmanager
+#    virtmanager
     linuxPackages.virtualbox
     vagrant
 
