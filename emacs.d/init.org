@@ -550,7 +550,6 @@ This script was downloaded (and adjusted a tiny bit) from http://groups.google.c
   quick = 10
   postsynchook = ~/sync_nnmaildir -m
   presynchook = ~/sync_nnmaildir -g
-  status_backend = sqlite
 
   [Repository LocalGmail]
   type = Maildir
@@ -572,7 +571,6 @@ This script was downloaded (and adjusted a tiny bit) from http://groups.google.c
   quick = 10
   postsynchook = ~/sync_nnmaildir -m
   presynchook = ~/sync_nnmaildir -g
-  status_backend = sqlite
 
   [Repository LocalExchange]
   type = Maildir
