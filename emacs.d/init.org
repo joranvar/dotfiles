@@ -668,6 +668,15 @@ Gnus will be used to read the mail that was pulled over here.
               (add-hook 'gnus-startup-hook (lambda () (gnus-demon-add-handler 'gnus-demon-scan-news 1 t)))))
 #+END_SRC
 
+*** notmuch
+
+Notmuch will also be used to read the mail that was pulled over here.  Let's see how it compares to Gnus.
+
+#+BEGIN_SRC emacs-lisp
+  (use-package notmuch
+    :bind (("C-c m" . notmuch-hello)))
+#+END_SRC
+
 *** GPG for mails
 
 #+BEGIN_SRC emacs-lisp
