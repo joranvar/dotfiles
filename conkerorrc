@@ -39,11 +39,14 @@ define_key(content_buffer_normal_keymap, "H", "find-url-from-history");
 /// Send Firefox-compatible user agent string to some sites
 require("user-agent-policy");
 
-user_agent_policy.define_policy("default",
-    user_agent_firefox(),
+user_agent_policy.define_policy("whatsapp",
+    "Mozilla/5.0 (X11; Linux x86_64; rv:53.0) Gecko/20100101 Firefox/53.0",
     "web.whatsapp.com");
+user_agent_policy.define_policy("default",
+    "Mozilla/5.0 (X11; Linux x86_64; rv:53.0) Gecko/20100101 Firefox/53.0",
+    "teamsatellite.slack.com");
 user_agent_policy.define_policy("pivotal",
-    "Mozilla/5.0 (X11; Linux x86_64; rv:8.0.1) " + "Gecko/20100101 Firefox/8.0.1",
+    "Mozilla/5.0 (X11; Linux x86_64; rv:53.0) Gecko/20100101 Firefox/53.0",
     "www.pivotaltracker.com");
 
 /// xkcd
