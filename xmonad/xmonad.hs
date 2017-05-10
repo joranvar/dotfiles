@@ -28,6 +28,9 @@ import XMonad.Util.SpawnOnce (spawnOnce)
 import XMonad (mod4Mask, (.|.), shiftMask, xK_l, xK_b, xK_p, xK_q, xK_x, xK_w, xK_r, xK_e, xK_s, KeySym, ButtonMask)
 import XMonad.Util.EZConfig (additionalKeys)
 
+-- WMName (for Java swing GUI)
+import XMonad.Hooks.SetWMName (setWMName)
+
 -- Main
 import XMonad (xmonad, XConfig(..), (<+>))
 import Data.Default (def)
@@ -46,7 +49,8 @@ myConfig =
   . myEventHook
   . myLayoutHook
   . myWorkSpaces
-  . applyScreensaver (mod4Mask .|. shiftMask, xK_l) . myStartupHook
+  . applyScreensaver (mod4Mask .|. shiftMask, xK_l)
+  . myStartupHook
   . applyScreenshot (mod4Mask, xK_s)
   . myTerminal
   . myKeys
@@ -75,7 +79,7 @@ myWorkSpaces :: XConfig a -> XConfig a
 myWorkSpaces x = x { workspaces = ["i", "ii", "iii", "iv", "v", "vi"] }
 
 myStartupHook :: XConfig a -> XConfig a
-myStartupHook x = x { startupHook = docksStartupHook <+> mapM_ spawnOnce startupCommands }
+myStartupHook x = x { startupHook = setWMName "LG3D" <+> docksStartupHook <+> mapM_ spawnOnce startupCommands }
   where
     startupCommands =
       [ "nm-applet"
