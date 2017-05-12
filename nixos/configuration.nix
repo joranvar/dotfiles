@@ -164,8 +164,8 @@
   services.dbus = {
     enable = true;
     packages = [
-#        pkgs.gnome.GConf
-      ];
+        pkgs.gnome3.gconf.out
+    ];
   };
 
   # Enable CUPS to print documents.
