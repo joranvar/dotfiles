@@ -144,7 +144,7 @@
     gnome3.gvfs
     gnome3.nautilus
 
-    factorio-demo
+    factorio
   ];
 
   nixpkgs.config.chromium = { enableWideVine = true; enablePepperFlash = true; };
