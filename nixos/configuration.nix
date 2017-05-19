@@ -26,6 +26,20 @@
     xmonad = pkgs.haskellPackages.xmonad;
     xmonad-contrib = pkgs.haskellPackages.xmonad-contrib;
     xmonad-extras = pkgs.haskellPackages.xmonad-extras;
+    factorio = with pkgs; import /home/joranvar/git/nixpkgs/pkgs/games/factorio/default.nix ({
+      stdenv = stdenv;
+      callPackage = callPackage;
+      fetchurl = fetchurl;
+      makeWrapper = makeWrapper;
+      alsaLib = alsaLib;
+      libX11 = xlibs.libX11;
+      libXcursor = xlibs.libXcursor;
+      libXinerama = xlibs.libXinerama;
+      libXrandr = xlibs.libXrandr;
+      libXi = xlibs.libXi;
+      mesa_noglu = mesa_noglu;
+      factorio-utils = factorio-utils;
+      releaseType = "alpha"; });
   };
 
   # List packages installed in system profile. To search by name, run:
