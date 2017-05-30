@@ -220,6 +220,15 @@ Search and replace with regexes by default, and show me what you're about to do.
               (define-key isearch-mode-map [remap isearch-query-replace-regexp] #'anzu-isearch-query-replace-regexp)))
 #+END_SRC
 
+*** Selecting stuff
+
+Use expand-region to conveniently select more of the current surroundings.
+
+#+BEGIN_SRC emacs-lisp
+  (use-package expand-region
+    :bind ("C-=" . er/expand-region))
+#+END_SRC
+
 ** Start Emacs as a server
 
 #+BEGIN_SRC emacs-lisp
