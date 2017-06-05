@@ -176,6 +176,13 @@ Kill side-windows with ~C-c q~
   (global-set-key (kbd "C-c q") #'joranvar:quit-bottom-side-windows)
 #+END_SRC
 
+*** Use pretty unicode characters
+
+#+BEGIN_SRC emacs-lisp
+  (use-package pretty-mode
+    :init (progn (global-pretty-mode t)))
+#+END_SRC
+
 ** Basic text editing
 
 *** Whitespace pet peeves
