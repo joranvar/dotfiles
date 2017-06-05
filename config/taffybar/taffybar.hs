@@ -16,6 +16,7 @@ import System.Taffybar.Widgets.PollingGraph
 import System.Information.Memory
 import System.Information.CPU
 
+import Graphics.UI.Gtk.General.RcStyle (rcParseString)
 
 import Control.Applicative ((<$>))
 
@@ -64,6 +65,9 @@ main = do
                     , graphLabel = Nothing
                     , graphDirection = RIGHT_TO_LEFT
                     }
+
+    rcParseString $
+      "gtk-font-name = \"Hack 9.0\""
 
     defaultTaffybar defaultTaffybarConfig
         { barHeight = 20
