@@ -392,6 +392,16 @@ In F#, I'd like to set the following settings:
               (add-to-list 'aggressive-indent-excluded-modes 'fsharp-mode)))
 #+END_SRC
 
+*** C#
+
+In C#, the following:
+
+#+BEGIN_SRC emacs-lisp
+  (use-package csharp-mode
+    :config (progn
+              (setq csharp-indent-offset 4)))
+#+END_SRC
+
 *** Haskell
 
 #+BEGIN_SRC emacs-lisp
