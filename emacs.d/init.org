@@ -819,6 +819,12 @@ Oh boy, org-babel is so nice!
                                                                        (http . t)))))
 #+END_SRC
 
+When exporting, I want to see pretty source code!
+
+#+BEGIN_SRC emacs-lisp
+  (use-package htmlize)
+#+END_SRC
+
 ** Agenda management
 
 #+BEGIN_SRC emacs-lisp
