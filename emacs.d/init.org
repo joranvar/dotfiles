@@ -126,6 +126,13 @@ I want to know where am, and have immediate visual feedback about my text.
     :config (powerline-default-theme))
 #+END_SRC
 
+*** Use UTF-8 by default
+
+#+BEGIN_SRC emacs-lisp
+  (set-language-environment "UTF-8")
+  (set-default-coding-systems 'utf-8-unix)
+#+END_SRC
+
 *** Font face
 
 I read about Hack.
