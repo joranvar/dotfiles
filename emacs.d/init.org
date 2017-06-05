@@ -126,6 +126,22 @@ I want to know where am, and have immediate visual feedback about my text.
     :config (powerline-default-theme))
 #+END_SRC
 
+*** Font face
+
+I read about Hack.
+
+#+BEGIN_SRC emacs-lisp
+  (when (member "Hack" (font-family-list))
+    (set-face-attribute 'default nil :font "Hack"))
+#+END_SRC
+
+Use Symbola for unicode characters
+
+#+BEGIN_SRC emacs-lisp
+  (when (member "Symbola" (font-family-list))
+    (set-fontset-font t 'unicode "Symbola" nil 'prepend))
+#+END_SRC
+
 *** Font size
 
 I like smaller fonts.

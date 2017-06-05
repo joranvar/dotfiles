@@ -167,6 +167,8 @@
     enableFontDir = true;
     fonts = with pkgs; [
       terminus_font
+      hack-font
+      symbola
     ];
   };
 
