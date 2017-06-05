@@ -1,12 +1,9 @@
 import System.Environment (lookupEnv)
-import Data.Maybe (fromMaybe)
 
 import System.Taffybar
 
 import System.Taffybar.TaffyPager
 import System.Taffybar.Pager
-import System.Taffybar.WindowSwitcher
-import System.Taffybar.WorkspaceSwitcher
 
 import System.Taffybar.Battery
 import System.Taffybar.SimpleClock
@@ -14,7 +11,6 @@ import System.Taffybar.Systray
 import System.Taffybar.MPRIS2
 import System.Taffybar.Weather
 
-import System.Taffybar.Widgets.PollingBar
 import System.Taffybar.Widgets.PollingGraph
 
 import System.Information.Memory
@@ -23,6 +19,7 @@ import System.Information.CPU
 
 import Control.Applicative ((<$>))
 
+pagerCfg :: PagerConfig
 pagerCfg = defaultPagerConfig
      { emptyWorkspace = colorize "#6b6b6b" "" . escape
      , visibleWorkspace = colorize "#429942" "" . escape . wrap "(" ")"
@@ -31,6 +28,7 @@ pagerCfg = defaultPagerConfig
      }
 
 
+main :: IO ()
 main = do
     scr <- maybe 0 read <$> lookupEnv "TAFFY_SCREEN"
 
