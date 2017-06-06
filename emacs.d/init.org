@@ -259,6 +259,21 @@ Use expand-region to conveniently select more of the current surroundings.
     :bind ("C-=" . er/expand-region))
 #+END_SRC
 
+*** Markdown formatting
+
+The mode itself.
+
+#+BEGIN_SRC emacs-lisp
+  (use-package markdown-mode)
+#+END_SRC
+
+Previewing changes on the fly.
+
+#+BEGIN_SRC emacs-lisp
+  (use-package flymd
+    :commands flymd-flyit)
+#+END_SRC
+
 ** Start Emacs as a server
 
 #+BEGIN_SRC emacs-lisp
