@@ -884,6 +884,7 @@ When exporting, I want to see pretty source code!
                     org-hide-leading-stars t
                     org-ellipsis "↷"
                     org-catch-invisible-edits 'error
+                    org-use-speed-commands t
                     org-capture-templates '(("t" "INBOX" entry (file+headline "gtd.org" "INBOX") "* TODO %?\n%U\n%a\n" :clock-in t :clock-resume t)
                                             ("i" "Interrupt" entry (file+headline "gtd.org" "Journal") "* %? :16311:\n%U\n" :clock-in t :clock-resume t))
                     org-agenda-span 1)))
