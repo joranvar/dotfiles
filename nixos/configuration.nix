@@ -176,6 +176,7 @@
 
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;
+  services.openssh.passwordAuthentication = false;
 
   services.upower.enable = true;
 
