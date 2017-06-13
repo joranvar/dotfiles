@@ -73,6 +73,7 @@
     antiword
     pandoc
     gv
+    ghostscript
     libreoffice
     (texlive.combine { inherit (texlive) scheme-tetex wrapfig capt-of; })
 
