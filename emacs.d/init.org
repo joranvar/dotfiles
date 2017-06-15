@@ -119,11 +119,26 @@ I want to know where am, and have immediate visual feedback about my text.
     :config (global-linum-mode))
 #+END_SRC
 
+*** Theme to use
+
+This is the theme I will use currently.
+
+#+BEGIN_SRC emacs-lisp 
+  (use-package leuven-theme
+    :config (progn
+              (load-theme 'leuven t)))
+#+END_SRC
+
 *** Mode line
 
 #+BEGIN_SRC emacs-lisp
-  (use-package powerline
-    :config (powerline-default-theme))
+  ;; (use-package powerline
+  ;;   :config (powerline-default-theme))
+  (use-package spaceline
+    :config (progn
+              (require 'spaceline-config)
+              (spaceline-emacs-theme)
+              (spaceline-helm-mode)))
 #+END_SRC
 
 *** Use UTF-8 by default
@@ -155,21 +170,6 @@ I like smaller fonts.
 
 #+BEGIN_SRC elisp
   (set-face-attribute 'default nil :height 90)
-#+END_SRC
-
-*** Theme to use
-
-This is the theme I will use currently.
-
-#+BEGIN_SRC emacs-lisp
-  (use-package moe-theme
-    :config (progn
-              (setq moe-theme-highlight-buffer-id t)
-              (moe-theme-set-color 'cyan)
-              (powerline-moe-theme)
-              (moe-light)
-              ;; (require 'moe-theme-switcher)
-              ))
 #+END_SRC
 
 *** Window management
