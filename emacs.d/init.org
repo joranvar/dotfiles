@@ -206,6 +206,17 @@ Kill side-windows with ~C-c q~
     :init (progn (global-pretty-mode t)))
 #+END_SRC
 
+*** Use icons
+
+#+BEGIN_SRC emacs-lisp
+  (use-package all-the-icons
+    ;; :config (all-the-icons-install-fonts)
+    )
+  (use-package all-the-icons-dired
+    :config (progn
+              (add-hook 'dired-mode-hook #'all-the-icons-dired-mode)))
+#+END_SRC
+
 ** Basic text editing
 
 *** Whitespace pet peeves
@@ -356,10 +367,16 @@ Each project is either a version controlled (~magit~!) directory, or some direct
               (use-package helm-ag)
               (use-package helm-projectile
                 :config (progn
-                          (helm-projectile-on)
-                          (setq projectile-switch-project-action (lambda () (if (magit-git-repo-p (projectile-project-root))
-                                                                           (magit-status-internal (projectile-project-root))
-                                                                         (dired (projectile-project-root)))))))
+                          (helm-projectile-on)))
+              (use-package neotree
+                :config (progn
+                          (setq neo-smart-open t)
+                          (setq neo-theme 'icons)
+                          (setq projectile-switch-project-action (lambda ()
+                                                                   (if (magit-git-repo-p (projectile-project-root))
+                                                                       (magit-status-internal (projectile-project-root))
+                                                                     (dired (projectile-project-root)))
+                                                                   (neotree-projectile-action)))))
               (setq magit-repository-directories (mapcar (lambda (dir)
                                                            (substring dir 0 -1))
                                                          (-filter (lambda (project)
