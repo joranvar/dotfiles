@@ -312,6 +312,11 @@ I've used ~helm~ for quite some time now, and I like the way it works.  Therefor
             (helm-autoresize-mode t)))
 #+END_SRC
 
+#+BEGIN_SRC emacs-lisp
+  (use-package ibuffer
+    :bind ("C-x C-b" . ibuffer))
+#+END_SRC
+
 ** Projects
 
 Each project is either a version controlled (~magit~!) directory, or some directory I want to be able to browse at once (local repos of files, e.g. videos or pictures).
