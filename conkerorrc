@@ -60,3 +60,14 @@ user_agent_policy.define_policy("pivotal",
 
 /// xkcd
 xkcd_add_title = true;
+
+/// Get cookie
+function getSessionCookie(url) {
+    var ios = Components.classes["@mozilla.org/network/io-service;1"]
+        .getService(Components.interfaces.nsIIOService);
+    var uri = ios.newURI(url, null, null);
+    var cookieSvc = Components.classes["@mozilla.org/cookieService;1"]
+        .getService(Components.interfaces.nsICookieService);
+    var cookie = cookieSvc.getCookieStringFromHttp(uri, uri, null);
+    return cookie;
+}
