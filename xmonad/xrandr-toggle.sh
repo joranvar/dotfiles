@@ -6,6 +6,14 @@ pkill taffybar
 
 export TAFFY_SCREEN=0
 taffybar&
+screens=("eDP1" "LVDS")
+for s in $(echo $screens) ; do
+    mode=$(xrandr -q | sed '1,/'$s' connected/d;/.* connected/,$d' | head -n 1 | cut -d' ' -f4)
+    echo $s $mode
+    notifications+="$s $mode\n"
+    xrandr --output $s --mode $mode
+done
+
 screens=$(xrandr -q | grep ".* disconnected" | cut -f1 -d' ' | grep -v "eDP1\\|LVDS")
 for s in $(echo $screens) ; do
     echo $s off
