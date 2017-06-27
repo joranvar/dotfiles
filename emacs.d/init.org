@@ -936,3 +936,14 @@ Using ERC for IRC makes sense.  I also use it to connect to my teams Slack.
                     erc-save-queries-on-quit t)
               (setq erc-hide-timestamps nil)))
 #+END_SRC
+
+** Secrets
+
+Some stuff I want to be kept hidden from others.  Luckily, we have gpg (and org-crypt)
+
+#+BEGIN_SRC emacs-lisp
+  (require 'org-crypt)
+  (org-crypt-use-before-save-magic)
+  (setq org-tags-exclude-from-inheritance (quote ("crypt")))
+  (setq org-crypt-key "AE05B5A8D130BE84B88192809BD68A49AB3D8E4D")
+#+END_SRC
