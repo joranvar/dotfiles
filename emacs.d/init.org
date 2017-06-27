@@ -115,8 +115,8 @@ I want to know where am, and have immediate visual feedback about my text.
   (show-paren-mode)
   (setq auto-window-vscroll nil)          ; This should make the next-line command faster
 
-  (use-package linum
-    :config (global-linum-mode))
+  (use-package nlinum
+    :config (global-nlinum-mode))
 #+END_SRC
 
 *** Theme to use
