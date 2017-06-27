@@ -993,3 +993,117 @@ Some stuff I want to be kept hidden from others.  Luckily, we have gpg (and org-
                 (add-hook 'before-save-hook 'org-encrypt-entries nil t)
                 (org-encrypt-entries)))
 #+END_SRC
+
+* Games
+
+** Nethack
+
+#+BEGIN_SRC conf :tangle ~/.nethackrc :comments noweb :tangle-mode (identity #o400)
+  # Compound options
+  OPTIONS=role:wizard
+  OPTIONS=race:elf
+  OPTIONS=align:chaotic
+  OPTIONS=gender:male
+  #OPTIONS=name:joranvar
+  OPTIONS=catname:Fluffy
+  OPTIONS=dogname:Bally
+  OPTIONS=horsename:Tricksy
+  #OPTIONS=pettype:cat
+  OPTIONS=autopickup
+  # cash, amulets, scrolls, spellbooks, potions, rings, wands
+  #* # NOT gems/rocks
+  OPTIONS=pickup_types:$"?+!=/
+  # Well, this is nice: "
+
+  OPTIONS=autodig
+  OPTIONS=autoquiver
+  OPTIONS=checkpoint
+  OPTIONS=nocmdassist
+  OPTIONS=color
+  OPTIONS=confirm
+  OPTIONS=DECgraphics
+  OPTIONS=noeight_bit_tty
+  OPTIONS=extmenu
+  OPTIONS=fixinv
+  OPTIONS=help
+  #OPTIONS=hp_monitor
+  OPTIONS=hilite_pet
+  OPTIONS=noignintr
+  OPTIONS=lit_corridor
+  OPTIONS=lootabc
+  OPTIONS=mail
+  OPTIONS=null
+  #OPTIONS=noparanoid_hit
+  #OPTIONS=noparanoid_quit
+  #OPTIONS=paranoid_remove
+  OPTIONS=prayconfirm
+  OPTIONS=pushweapon
+  OPTIONS=norest_on_space
+  OPTIONS=safe_pet
+  #OPTIONS=showborn
+  #OPTIONS=noshowbuc
+  OPTIONS=showexp
+  OPTIONS=showrace
+  OPTIONS=showscore
+  OPTIONS=silent
+  OPTIONS=sortpack
+  OPTIONS=sparkle
+  OPTIONS=nostandout
+  OPTIONS=time
+  OPTIONS=travel
+  #OPTIONS=use_darkgray
+  OPTIONS=nouse_inverse
+  OPTIONS=verbose
+  #OPTIONS=win_edge
+  # Compound options
+  OPTIONS=msghistory:20
+  OPTIONS=boulder:0
+  OPTIONS=disclose:+i +a +v +g +c
+  OPTIONS=fruit:snozberry
+  OPTIONS=menustyle:full
+  OPTIONS=menu_headings:inverse
+  OPTIONS=msg_window:reversed
+  OPTIONS=number_pad:1
+  OPTIONS=pickup_burden:stressed
+  OPTIONS=runmode:crawl
+  #OPTIONS=sortloot:full
+  OPTIONS=suppress_alert:3.4.3
+
+  ## With Menucolor Patch installed
+  OPTIONS=menucolors
+  MENUCOLOR="blessed"=green
+  MENUCOLOR="cursed"=orange&bold
+  MENUCOLOR="cursed .* \(being worn\)"=red&bold
+  MENUCOLOR="uncursed"=cyan
+
+  MENUCOLOR="holy"=yellow
+  MENUCOLOR="unholy"=brown
+
+  MENUCOLOR="loadstone\|wand \(of\|called\) cancellation"=red&bold
+  # color only the real Amulet
+  MENUCOLOR="Amulet of Yendor named"=magenta
+  MENUCOLOR="gold piece"=yellow
+
+  # forgotten spell
+  MENUCOLOR="[a-zA-Z] - [a-zA-Z ]+[ ]+[0-9]+\*[ ]+[a-z]+[ ]+[0-9]+%"=magenta
+
+
+  # # With Statuscolor patch installed
+  # # HP
+  # STATUSCOLOR=hp%100=green,hp%66=yellow,hp%50=orange
+  # STATUSCOLOR=hp%33=red&bold,hp%15:red&inverse,hp%0:red&inverse&blink
+  # # Pw
+  # STATUSCOLOR=pw%100=green,pw%66=yellow,pw%50:orange,pw%33=red&bold
+  # # Carry
+  # STATUSCOLOR=burdened:yellow,stressed:orange,strained:red&bold
+  # STATUSCOLOR=overtaxed:red&inverse,overloaded:red&inverse&blink
+  # # Hunger
+  # STATUSCOLOR=satiated:yellow,hungry:orange,weak:red&bold
+  # STATUSCOLOR=fainting:red&inverse,fainted:red&inverse&blink
+  # # Mental
+  # STATUSCOLOR=hallu:yellow,conf:orange,stun:red&bold
+  # # Health
+  # STATUSCOLOR=ill:red&inverse,foodpois:red&inverse,slime:red&inverse
+  # # Other
+  # STATUSCOLOR=held:red&inverse,blind:red&inverse
+#+END_SRC
