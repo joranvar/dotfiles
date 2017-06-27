@@ -15,10 +15,17 @@
 (package-initialize)
 
 (require 'org)
+(require 'org-crypt)
 
 (let ((joranvar:init-path (file-name-directory (or load-file-name buffer-file-name)))
       (vc-follow-symlinks t))
-  (org-babel-tangle-file (expand-file-name "init.org" joranvar:init-path))
+  (with-current-buffer (find-file-noselect (expand-file-name "init.org" joranvar:init-path))
+    (setq buffer-auto-save-file-name nil)
+    (org-decrypt-entries)
+    (org-babel-tangle)
+    (org-encrypt-entries)
+    (save-buffer)
+    (kill-buffer))
   (load-file (expand-file-name "init.org.el" joranvar:init-path)))
 
 (provide 'init)
