@@ -6,7 +6,7 @@ This file is tangled on Emacs startup, which will result in both more configurat
 
 * SSH configuration
 :PROPERTIES:
-:header-args: :tangle ~/.ssh/config :comments noweb :tangle-mode (identity #o444)
+:header-args: :tangle ~/.ssh/config :comments noweb :tangle-mode (identity #o400)
 :END:
 
 ** Default options
@@ -17,6 +17,24 @@ I want to see a visual key to become familiar with it.
   Host *
        VisualHostKey yes
 #+END_SRC
+
+
+** Host aliases                                                       :crypt:
+-----BEGIN PGP MESSAGE-----
+
+hQEMA6k/ZHkmEjnXAQf+MlO8uAM8qa80NoqNwWdRr47vVhvREke+ECxHnZP6ZFx7
+MtcfacRCYcP2F70aYWud7V/Yg/iBdqC1hvOXFbm1M3q4u5yWQdWNNqcuY9cxNiWN
+oOdj9fDxU+VYTGUckfPhUVqcCPfP1QQFHuTJIqbTCqRYo3uepR9h4SPR+IOItIjB
+kza/0pfo6cjYQrcBR4ViTjfMG576L38tQVqxQYF3UZ2UmnaVZ0LhN0BLHLiFQIQS
+laI/7xVZv7fZDaEX2efhJfhekFa3rHLTa5r9KPNYT4BH4Wlyyeyg8aNoxZNxE1Aq
+NUUALi1y0Qtxm/SC50fI2DyQS7w/cltx6auwo5dtm9LAIQFe2JHOy++OyHpQyFwY
+4aeAVesuOrCOx0eVyjDHzf8KXT1PrP/InaqZt8c84SpVZDCAceZlg6zDLuJcMs7q
+Ctal1/7T+A6D3XH6vRBNYsGwADvKSXfRCbb6OUVA2LfUfVNZEEcI0hEN2rmDAam8
+lPtCv/1py8QZ/ks5CR+1NFpWs1ky5uN+nuaKp2uaIMZuY3GYkLSIN34poRfHAWHh
+yFuQ6tSWJAWY5cW803unSfcirOUqEAW0PPcWM0OZndr9HZf/VvzZSf6ftUP0db0c
+gnzSSXXFnzWPsYiG8/f5WZTZgw==
+=Lf4Y
+-----END PGP MESSAGE-----
 
 * Emacs configuration
 :PROPERTIES:
