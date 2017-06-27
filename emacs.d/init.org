@@ -6,7 +6,7 @@ This file is tangled on Emacs startup, which will result in both more configurat
 
 * SSH configuration
 :PROPERTIES:
-:header-args: :tangle ~/.ssh/config :comments noweb :tangle-mode (identity #o400)
+:header-args: :tangle ~/.ssh/config :comments noweb :tangle-mode (identity #o400) :mkdirp yes
 :END:
 
 ** Default options
