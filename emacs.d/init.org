@@ -4,6 +4,20 @@
 
 This file is tangled on Emacs startup, which will result in both more configuration to be loaded by Emacs and dotfiles to serve as configuration for other programs.
 
+* SSH configuration
+:PROPERTIES:
+:header-args: :tangle ~/.ssh/config :comments noweb :tangle-mode (identity #o444)
+:END:
+
+** Default options
+
+I want to see a visual key to become familiar with it.
+
+#+BEGIN_SRC conf
+  Host *
+       VisualHostKey yes
+#+END_SRC
+
 * Emacs configuration
 :PROPERTIES:
 :header-args: :tangle ./init.org.el :comments noweb :tangle-mode (identity #o444)
