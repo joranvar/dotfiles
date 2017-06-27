@@ -189,6 +189,13 @@ I read about Hack.
     (set-face-attribute 'default nil :font "Hack"))
 #+END_SRC
 
+Which I also like for termite, by the way.
+
+#+BEGIN_SRC conf :tangle ~/.config/termite/config :comments noweb :tangle-mode (identity #o444) :mkdirp yes
+  [options]
+  font = Hack 9
+#+END_SRC
+
 Use Symbola for unicode characters
 
 #+BEGIN_SRC emacs-lisp
