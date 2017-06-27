@@ -946,4 +946,11 @@ Some stuff I want to be kept hidden from others.  Luckily, we have gpg (and org-
   (org-crypt-use-before-save-magic)
   (setq org-tags-exclude-from-inheritance (quote ("crypt")))
   (setq org-crypt-key "AE05B5A8D130BE84B88192809BD68A49AB3D8E4D")
+  (advice-add 'org-babel-tangle :around
+              (lambda (oldfun &rest args)
+                (org-decrypt-entries)
+                (remove-hook 'before-save-hook 'org-encrypt-entries t)
+                (apply oldfun args)
+                (add-hook 'before-save-hook 'org-encrypt-entries nil t)
+                (org-encrypt-entries)))
 #+END_SRC
