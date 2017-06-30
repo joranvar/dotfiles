@@ -1019,20 +1019,46 @@ When exporting, I want to see pretty source code!
 
 *** IRC
 
-Using ERC for IRC makes sense.  I also use it to connect to my teams Slack.
+Using RCIRC for IRC makes sense.  I also use it to connect to my team's Slack.
 
-#+BEGIN_SRC emacs-lisp
-  (use-package erc
+#+BEGIN_SRC emacs-lisp :noweb yes
+  (use-package rcirc
     :config (progn
-              (add-to-list 'erc-modules 'log)
-              (erc-update-modules)
-              (setq erc-log-insert-log-on-open t)
-              (setq erc-log-channels t)
-              (setq erc-log-channels-directory "~/.irclogs")
-              (setq erc-save-buffer-on-part t
-                    erc-save-queries-on-quit t)
-              (setq erc-hide-timestamps nil)))
+              (rcirc-track-minor-mode)
+<<irc-servers>>
+              (add-to-list 'rcirc-markup-text-functions #'rcirc-smileys)))
+
+    (defvar rcirc-smileys '((":)" . "☺")
+                            (":(" . "☹")
+                            ("<3" . "♥")))
+
+    (defvar rcirc-smiley-regexp
+      (regexp-opt (mapcar 'car rcirc-smileys))
+      "Regular expression matching the keys in rcirc-smileys.")
+
+    (defun rcirc-smileys (&rest ignore)
+      "Use unicode smileys in the buffer"
+      (goto-char (point-min))
+      (while (re-search-forward rcirc-smiley-regexp nil t)
+        (replace-match (cdr (assoc (match-string 0) rcirc-smileys)))))
 #+END_SRC
+
+**** IRC servers                                                      :crypt:
+-----BEGIN PGP MESSAGE-----
+
+hQEMA6k/ZHkmEjnXAQf+NfB6CrYIP5XH8c5WW9iCybnOsY9TgSzc95qr3WPCrJt7
+/mGw8bko4w9QbQh2sIcgVmw20FaZKAr6oWg4j9E7S17Mj0l6TDd+69dPapLDhwpc
+UxnungaoDOjfj2RZ/wMoRAZV99QHtoXj0ZiNVqRwDILR8VDdlDhZKey3rojUfuiJ
+sQC5HmTGt3IQSfm6OSFu4wM6LZ/Q9cdTHW3jJ50IDag33FzTI8/OEuah1pZ/KJ2Y
+yfk9rG5oN7sVEH93+MHw6oxuQnzOxI9Mm009fIaMD7e9KbMzMZUHi0URMl9QiMY8
+uvcvw4hdR8XBjZke6K4JQTlYOF0nYi+FJnl4f9Gj7tLAPgFZmIehVM/Xt2JiOBBQ
+kdG+UOTHmbGwUXUZzmOSSQMoK0ihZqr679WzoiBWIKQYNaBbfCcKv2IYWsdCZ0a2
+5oGQAfPDH2ZIyip/daJgAvkwNTrxV8UJzBaiw3Ltxg5y74gfUAaWoNioTxUeGpQR
+6+VcsoQ7SC2jlBzPMq3IQwK/ru1/LRvcv0XuMziy4BiMpHEPulwpxyLIhvi4ta4T
+kEP0XcthyIX2h4h26umXNNMxfZ5Zeaw/o0i/3FDmwbd+Lq+WZ9ucQV3kuqxua3tk
+gyy7yacivjdGm60qTIiusH3gEtN2GfFFA/sKf2l32G8g9V3fOAs71Ws71uC+AEF3
+=stvI
+-----END PGP MESSAGE-----
 
 ** Secrets
 
