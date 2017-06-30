@@ -18,22 +18,69 @@ I want to see a visual key to become familiar with it.
        VisualHostKey yes
 #+END_SRC
 
+** Host aliases                                                       :crypt:
+-----BEGIN PGP MESSAGE-----
+
+hQEMA6k/ZHkmEjnXAQgAjd0W9CeBnSVJjR9Fm4acbcM+DklomvBO66pv+yV5H0E7
+8DX7BVoMufn2eAUSKaxQI2JIW9Z40SNux02K+FByGLyZgmZVKY8rbneSIB6A84AK
+L/2Pak4D6DB+a9rX3+4qxIHNdcAr1mo5qlQnqhFwKXaD+KcMNg5ROgunt3U6A7pf
+ZCZEME+BVLfYT7f400KQw1i4MfkXkxr/LX9FeVYoj8haE80pnPtf0UOB4FTA31Yk
+EQodrS4fjqridyFu/UYXx+q3sIEStuEFeXwLeU1pektbrA93yWVVuzabwwvJVegq
+ovon3EIRvSdDsJg6ARqOOugmjQ/O62smVWMvMkbsDNLAmAGW4V0iJsJ0qFtML4IZ
+KydwdUGzqam+O0CMyIuC4nGpjBsMcb58asOZGJ7Qx/9pBYhTyd79RbKOKYespGD5
+ktIAl6hX1Dr4wl+k2ohzlhXU1CEAjKflSQQNzeknQ3LfT6v9AjNIDylv5AXOdcur
+KwFr4hzY2m/pYVMIGv/3eEohxfduSSjLRwzvDTig/UaAemlcd8p1BTPwVe7nyaAD
+0rEXiAbj3YZ5mzL910bAKLL7k/UUd7k5gF+3cWXdzoRxlNHEPshdkjYRIq0caO6h
+IugwONG1qwSLKFlwZVqfZdZGIWg29VtBfN8GyvjYYTwEvh2XBhmWUIoWJTn5HTjL
+OPVvkorlI6mZcqj2KtSM2fc38jlUzPwLgzwHndIl44hJUM3f0d1uv9+CA+5ecoFE
+P9150X7kn2FavsgUHMP/FSyOOiD6ZFL5uq241XfW5Ze+Ef2bcOmfRxLm
+=xqLD
+-----END PGP MESSAGE-----
+
+* Shell
+:PROPERTIES:
+:header-args: :tangle ~/.zshrc :comments noweb :tangle-mode (identity #o444)
+:END:
+
+** What was already there
+
+This part is to replace what was already there, before I started "going literal".
+
+#+BEGIN_SRC sh
+  source ~/.antigen/antigen.zsh
+
+  antigen bundle gpg-agent
+  antigen bundle git
+  antigen bundle zsh-users/zsh-syntax-highlighting
+  antigen use oh-my-zsh
+  antigen theme candy
+  antigen bundle spwhitt/nix-zsh-completions
+  antigen bundle zsh-users/zsh-completions src
+  antigen bundle zx2c4/password-store src/completion/pass.zsh-completion &> /dev/null
+  antigen apply
+
+  compdef _pass pass
+
+  function weather() {curl wttr.in/$1 -f --stderr /dev/null | head -n 7;}
+
+  export PATH=$PATH:/home/joranvar/.local/bin
+#+END_SRC
 
 ** Host aliases                                                       :crypt:
 -----BEGIN PGP MESSAGE-----
 
-hQEMA6k/ZHkmEjnXAQf+MlO8uAM8qa80NoqNwWdRr47vVhvREke+ECxHnZP6ZFx7
-MtcfacRCYcP2F70aYWud7V/Yg/iBdqC1hvOXFbm1M3q4u5yWQdWNNqcuY9cxNiWN
-oOdj9fDxU+VYTGUckfPhUVqcCPfP1QQFHuTJIqbTCqRYo3uepR9h4SPR+IOItIjB
-kza/0pfo6cjYQrcBR4ViTjfMG576L38tQVqxQYF3UZ2UmnaVZ0LhN0BLHLiFQIQS
-laI/7xVZv7fZDaEX2efhJfhekFa3rHLTa5r9KPNYT4BH4Wlyyeyg8aNoxZNxE1Aq
-NUUALi1y0Qtxm/SC50fI2DyQS7w/cltx6auwo5dtm9LAIQFe2JHOy++OyHpQyFwY
-4aeAVesuOrCOx0eVyjDHzf8KXT1PrP/InaqZt8c84SpVZDCAceZlg6zDLuJcMs7q
-Ctal1/7T+A6D3XH6vRBNYsGwADvKSXfRCbb6OUVA2LfUfVNZEEcI0hEN2rmDAam8
-lPtCv/1py8QZ/ks5CR+1NFpWs1ky5uN+nuaKp2uaIMZuY3GYkLSIN34poRfHAWHh
-yFuQ6tSWJAWY5cW803unSfcirOUqEAW0PPcWM0OZndr9HZf/VvzZSf6ftUP0db0c
-gnzSSXXFnzWPsYiG8/f5WZTZgw==
-=Lf4Y
+hQEMA6k/ZHkmEjnXAQf7BFOnkVTLrcwX7GVJOnK1BRf4248DL2kOrKFnudJoFsHS
+nfUO7EugugkpP0UhnbMaCS/kmxlMqtbGas3+ZMIr0I1zCfOBh942hY1T3XtupuVi
+8gUpR8EQ2qH/6VzCoBz/Rsv10U9klbcBauSh4O4JuQs+7tFxlvxlTHLyT6p9JN8O
+yD/iUDxl567kLifBop2PU2zUfRKrUY08a4XHILpmLB4JJtJVkIfWxEq49qa9z5Yn
+PuVWRweR4bsNjIF41QaIkP/wr134YlfSZYlp0bCqsNKBZC7CSGMn/NDSikj2c4hn
+ioU96uUPSF0+EOtzB6uh6S3y1MvdBwKjX0lHm4yk4NLAJgFnNGi6d3HJRXdpFUL0
+9thV68+9F1PqwmknqxMaKDGbSQDjqcGJZ5Fhii4Fr5IabZysY1MFptF/zKk1WxIT
+8dQKBIF5c1xKzVNJjgpyqc9izwLIUWnqWWYJ4KMCmHUR6X/lqw8DzX+wokKPAXqd
+0HvdbssqQeA2xSXOWKoG+C3N0J3iyZIYlKeRKRbpLKhRcJJCGiWSUqvJ55Sc7hv/
+oGn7qH6y1zDQ7usFf4SadWHc0OH68vGjaCeafDfbdJPjW/AvHMX0G9BM/k0IKPKI
+R4RyF/KBRNjleb/JOw7pybq8VUBJHeif
+=JNAe
 -----END PGP MESSAGE-----
 
 * Emacs configuration
