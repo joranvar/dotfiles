@@ -1001,7 +1001,7 @@ When exporting, I want to see pretty source code!
 *** Jira worklog integration
 
 #+BEGIN_SRC emacs-lisp
-  (load "/home/joranvar/git/org-log-to-jira/org-log-to-jira.el")
+  (load "/home/joranvar/dotfiles/emacs.d/lisp/org-log-to-jira/org-log-to-jira.el")
 #+END_SRC
 
 ** Communication
