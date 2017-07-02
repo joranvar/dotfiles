@@ -71,3 +71,6 @@ function getSessionCookie(url) {
     var cookie = cookieSvc.getCookieStringFromHttp(uri, uri, null);
     return cookie;
 }
+
+/// Allow full-screen
+user_pref('full-screen-api.enabled', true);
