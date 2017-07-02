@@ -23,9 +23,6 @@
   #   defaultLocale = "en_US.UTF-8";
   # };
   nixpkgs.config.packageOverrides = pkgs : rec {
-    xmonad = pkgs.haskellPackages.xmonad;
-    xmonad-contrib = pkgs.haskellPackages.xmonad-contrib;
-    xmonad-extras = pkgs.haskellPackages.xmonad-extras;
     factorio = with pkgs; import /home/joranvar/git/nixpkgs/pkgs/games/factorio/default.nix ({
       stdenv = stdenv;
       callPackage = callPackage;
@@ -40,6 +37,10 @@
       mesa_noglu = mesa_noglu;
       factorio-utils = factorio-utils;
       releaseType = "alpha"; });
+    haskellPackages = pkgs.haskellPackages;
+    xmonad = haskellPackages.xmonad;
+    xmonad-contrib = haskellPackages.xmonad-contrib;
+    xmonad-extras = haskellPackages.xmonad-extras;
   };
 
   # List packages installed in system profile. To search by name, run:
