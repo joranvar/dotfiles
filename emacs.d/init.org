@@ -949,6 +949,17 @@ Use conkeror by default.
         browse-url-browser-function 'browse-url-generic)
 #+END_SRC
 
+Use conkeror-minor-mode.
+
+#+BEGIN_SRC emacs-lisp
+  (use-package conkeror-minor-mode
+    :config (progn
+              (add-to-list 'auto-mode-alist' ("conkerorrc" . js-mode))
+              (add-hook 'js-mode-hook (lambda ()
+                                        (when (string-match "conkerorrc" (buffer-file-name))
+                                          (conkeror-minor-mode))))))
+#+END_SRC
+
 Use ~moz-repl~ to communicate with conkeror.
 
 #+BEGIN_SRC emacs-lisp
