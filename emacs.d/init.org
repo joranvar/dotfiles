@@ -1110,7 +1110,28 @@ This is the theme I will use currently.
               (load-theme 'leuven t)))
 #+END_SRC
 
-** Mode line
+** Transparency
+
+I like my windows to be a bit transparent, so that I can see my desktop
+
+*** Emacs
+#+BEGIN_SRC emacs-lisp
+ (set-frame-parameter (selected-frame) 'alpha '(95 . 70))
+ (add-to-list 'default-frame-alist '(alpha . (95 . 70)))
+#+END_SRC
+
+*** Termite
+#+BEGIN_SRC conf :tangle ~/.config/termite/config :comments noweb :tangle-mode (identity #o444) :mkdirp yes
+  [colors]
+  background = rgba(23, 23, 23, 0.8)
+#+END_SRC
+
+*** Composing window manager
+#+BEGIN_SRC sh :tangle ~/.xprofile :comments noweb :tangle-mode (identity #o444)
+  compton --backend xrender -fcCz -l -17 -t -17 -b
+#+END_SRC
+
+** Emacs Mode line
 
 #+BEGIN_SRC emacs-lisp
   ;; (use-package powerline
