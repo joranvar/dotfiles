@@ -289,7 +289,7 @@ Kill side-windows with ~C-c q~
 
 #+BEGIN_SRC emacs-lisp
   (use-package pretty-mode
-    :init (progn (global-pretty-mode t)))
+    :init (progn (global-prettify-symbols-mode t)))
 #+END_SRC
 
 *** Use icons
