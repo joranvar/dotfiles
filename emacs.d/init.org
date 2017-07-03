@@ -38,15 +38,14 @@ P9150X7kn2FavsgUHMP/FSyOOiD6ZFL5uq241XfW5Ze+Ef2bcOmfRxLm
 -----END PGP MESSAGE-----
 
 * Shell
-:PROPERTIES:
-:header-args: :tangle ~/.zshrc :comments noweb :tangle-mode (identity #o444)
-:END:
 
 ** What was already there
 
 This part is to replace what was already there, before I started "going literal".
 
-#+BEGIN_SRC sh
+*** Zsh
+
+#+BEGIN_SRC sh :tangle ~/.zshrc :comments noweb :tangle-mode (identity #o444)
   source ~/.antigen/antigen.zsh
 
   antigen bundle gpg-agent
@@ -64,6 +63,17 @@ This part is to replace what was already there, before I started "going literal"
   function weather() {curl wttr.in/$1 -f --stderr /dev/null | head -n 7;}
 
   export PATH=$PATH:/home/joranvar/.local/bin
+#+END_SRC
+
+*** Xprofile
+
+#+BEGIN_SRC sh :tangle ~/.xprofile :comments noweb :tangle-mode (identity #o444) :shebang #!/usr/bin/env zsh
+  gpg-connect-agent /bye
+  GPG_TTY=$(tty)
+  export GPG_TTY
+  export SSH_AUTH_SOCK="/var/run/user/1000/gnupg/S.gpg-agent.ssh"
+
+  unset SSH_AGENT_PID
 #+END_SRC
 
 ** Host aliases                                                       :crypt:
