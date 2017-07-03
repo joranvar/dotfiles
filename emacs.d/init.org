@@ -1110,6 +1110,14 @@ This is the theme I will use currently.
               (load-theme 'leuven t)))
 #+END_SRC
 
+** Screens
+
+Start with the correct resolutions.
+
+#+BEGIN_SRC sh :tangle ~/.xprofile :comments noweb :tangle-mode (identity #o444)
+  ~/dotfiles/xmonad/xrandr-toggle.sh
+#+END_SRC
+
 ** Transparency
 
 I like my windows to be a bit transparent, so that I can see my desktop
