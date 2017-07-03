@@ -161,148 +161,6 @@ Add some asyncness, for the sake of less waiting time.
   (use-package async)
 #+END_SRC
 
-** Aesthetics
-
-I want my Emacs to look good.
-
-*** No mouse cruft
-
-Please, use all my screen real estate for information, not for "places to click on".
-
-#+BEGIN_SRC emacs-lisp
-  (when (fboundp 'menu-bar-mode) (menu-bar-mode -1))
-  (when (fboundp 'tool-bar-mode) (tool-bar-mode -1))
-  (when (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
-  (if (fboundp 'tooltip-mode) (tooltip-mode -1) (setq tooltip-use-echo-area t))
-  (fringe-mode '(4 . 0))
-#+END_SRC
-
-Although, I do have a mouse, and sometimes I use it to focus a window in my window manager.  That's when I like to also focus a window inside Emacs.
-
-#+BEGIN_SRC emacs-lisp
-  (setq focus-follows-mouse t
-        mouse-autoselect-window t)
-#+END_SRC
-
-*** Show me info about my buffer
-
-I want to know where am, and have immediate visual feedback about my text.
-
-#+BEGIN_SRC emacs-lisp
-  (global-hl-line-mode)
-  (column-number-mode)
-  (show-paren-mode)
-  (setq auto-window-vscroll nil)          ; This should make the next-line command faster
-
-  (use-package nlinum
-    :config (global-nlinum-mode))
-#+END_SRC
-
-*** Theme to use
-
-This is the theme I will use currently.
-
-#+BEGIN_SRC emacs-lisp 
-  (use-package leuven-theme
-    :config (progn
-              (load-theme 'leuven t)))
-#+END_SRC
-
-*** Mode line
-
-#+BEGIN_SRC emacs-lisp
-  ;; (use-package powerline
-  ;;   :config (powerline-default-theme))
-  (use-package spaceline
-    :config (progn
-              (require 'spaceline-config)
-              (spaceline-emacs-theme)
-              (spaceline-helm-mode)))
-#+END_SRC
-
-*** Use UTF-8 by default
-
-#+BEGIN_SRC emacs-lisp
-  (set-language-environment "UTF-8")
-  (set-default-coding-systems 'utf-8-unix)
-#+END_SRC
-
-*** Font face
-
-I read about Hack.
-
-#+BEGIN_SRC emacs-lisp
-  (when (member "Hack" (font-family-list))
-    (set-face-attribute 'default nil :font "Hack"))
-#+END_SRC
-
-Which I also like for termite, by the way.
-
-#+BEGIN_SRC conf :tangle ~/.config/termite/config :comments noweb :tangle-mode (identity #o444) :mkdirp yes
-  [options]
-  font = Hack 9
-#+END_SRC
-
-Use Symbola for unicode characters
-
-#+BEGIN_SRC emacs-lisp
-  (when (member "Symbola" (font-family-list))
-    (set-fontset-font t 'unicode "Symbola" nil 'prepend))
-#+END_SRC
-
-*** Font size
-
-I like smaller fonts.
-
-#+BEGIN_SRC elisp
-  (set-face-attribute 'default nil :height 90)
-#+END_SRC
-
-*** Window management
-
-Use ~ace-window~ to jump to where I want.
-
-#+BEGIN_SRC emacs-lisp
-  (use-package ace-window
-    :bind (("C-x o" . ace-window))
-    :config (progn
-              (setq aw-scope 'frame
-                    aw-keys '(?a ?o ?e ?u ?i ?d ?h ?t ?n ?s) ; I use Dvorak
-                    )))
-#+END_SRC
-
-Kill side-windows with ~C-c q~
-
-#+BEGIN_SRC emacs-lisp
-  ;; Stolen from http://www.lunaryorn.com/posts/the-power-of-display-buffer-alist.html
-
-  (defun joranvar:quit-bottom-side-windows ()
-    "Quit bottom side windows of the current frame."
-    (interactive)
-    (dolist (window (window-at-side-list nil 'bottom))
-      (quit-window nil window)))
-
-  (global-set-key (kbd "C-c q") #'joranvar:quit-bottom-side-windows)
-#+END_SRC
-
-*** Use pretty unicode characters
-
-#+BEGIN_SRC emacs-lisp
-  (use-package pretty-mode
-    :init (progn (global-prettify-symbols-mode t)))
-#+END_SRC
-
-*** Use icons
-
-#+BEGIN_SRC emacs-lisp
-  (use-package all-the-icons
-    :config (progn (unless (file-exists-p "~/.local/share/fonts/all-the-icons.ttf")
-                     (all-the-icons-install-fonts))))
-  (use-package all-the-icons-dired
-    :config (progn
-              (add-hook 'dired-mode-hook #'all-the-icons-dired-mode)))
-#+END_SRC
-
 ** Basic text editing
 
 *** Whitespace pet peeves
@@ -1191,3 +1049,149 @@ Some stuff I want to be kept hidden from others.  Luckily, we have gpg (and org-
   # # Other
   # STATUSCOLOR=held:red&inverse,blind:red&inverse
 #+END_SRC
+
+* Aesthetics
+:PROPERTIES:
+:header-args: :tangle ./init.org.el :comments noweb :tangle-mode (identity #o444)
+:END:
+
+I want my desktop to look good.
+
+** No mouse cruft
+
+Please, use all my screen real estate for information, not for "places to click on".
+
+#+BEGIN_SRC emacs-lisp
+  (when (fboundp 'menu-bar-mode) (menu-bar-mode -1))
+  (when (fboundp 'tool-bar-mode) (tool-bar-mode -1))
+  (when (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
+  (if (fboundp 'tooltip-mode) (tooltip-mode -1) (setq tooltip-use-echo-area t))
+  (fringe-mode '(4 . 0))
+#+END_SRC
+
+Although, I do have a mouse, and sometimes I use it to focus a window in my window manager.  That's when I like to also focus a window inside Emacs.
+
+#+BEGIN_SRC emacs-lisp
+  (setq focus-follows-mouse t
+        mouse-autoselect-window t)
+#+END_SRC
+
+** Show me info about my buffer
+
+I want to know where am, and have immediate visual feedback about my text.
+
+#+BEGIN_SRC emacs-lisp
+  (global-hl-line-mode)
+  (column-number-mode)
+  (show-paren-mode)
+  (setq auto-window-vscroll nil)          ; This should make the next-line command faster
+
+  (use-package nlinum
+    :config (global-nlinum-mode))
+#+END_SRC
+
+** Theme to use
+
+This is the theme I will use currently.
+
+#+BEGIN_SRC emacs-lisp 
+  (use-package leuven-theme
+    :config (progn
+              (load-theme 'leuven t)))
+#+END_SRC
+
+** Mode line
+
+#+BEGIN_SRC emacs-lisp
+  ;; (use-package powerline
+  ;;   :config (powerline-default-theme))
+  (use-package spaceline
+    :config (progn
+              (require 'spaceline-config)
+              (spaceline-emacs-theme)
+              (spaceline-helm-mode)))
+#+END_SRC
+
+** Use UTF-8 by default
+
+#+BEGIN_SRC emacs-lisp
+  (set-language-environment "UTF-8")
+  (set-default-coding-systems 'utf-8-unix)
+#+END_SRC
+
+** Font face
+
+I read about Hack.
+
+#+BEGIN_SRC emacs-lisp
+  (when (member "Hack" (font-family-list))
+    (set-face-attribute 'default nil :font "Hack"))
+#+END_SRC
+
+Which I also like for termite, by the way.
+
+#+BEGIN_SRC conf :tangle ~/.config/termite/config :comments noweb :tangle-mode (identity #o444) :mkdirp yes
+  [options]
+  font = Hack 9
+#+END_SRC
+
+Use Symbola for unicode characters
+
+#+BEGIN_SRC emacs-lisp
+  (when (member "Symbola" (font-family-list))
+    (set-fontset-font t 'unicode "Symbola" nil 'prepend))
+#+END_SRC
+
+** Font size
+
+I like smaller fonts.
+
+#+BEGIN_SRC elisp
+  (set-face-attribute 'default nil :height 90)
+#+END_SRC
+
+** Window management
+
+Use ~ace-window~ to jump to where I want.
+
+#+BEGIN_SRC emacs-lisp
+  (use-package ace-window
+    :bind (("C-x o" . ace-window))
+    :config (progn
+              (setq aw-scope 'frame
+                    aw-keys '(?a ?o ?e ?u ?i ?d ?h ?t ?n ?s) ; I use Dvorak
+                    )))
+#+END_SRC
+
+Kill side-windows with ~C-c q~
+
+#+BEGIN_SRC emacs-lisp
+  ;; Stolen from http://www.lunaryorn.com/posts/the-power-of-display-buffer-alist.html
+
+  (defun joranvar:quit-bottom-side-windows ()
+    "Quit bottom side windows of the current frame."
+    (interactive)
+    (dolist (window (window-at-side-list nil 'bottom))
+      (quit-window nil window)))
+
+  (global-set-key (kbd "C-c q") #'joranvar:quit-bottom-side-windows)
+#+END_SRC
+
+** Use pretty unicode characters
+
+#+BEGIN_SRC emacs-lisp
+  (use-package pretty-mode
+    :init (progn (global-prettify-symbols-mode t)))
+#+END_SRC
+
+** Use icons
+
+#+BEGIN_SRC emacs-lisp
+  (use-package all-the-icons
+    :config (progn (unless (file-exists-p "~/.local/share/fonts/all-the-icons.ttf")
+                     (all-the-icons-install-fonts))))
+  (use-package all-the-icons-dired
+    :config (progn
+              (add-hook 'dired-mode-hook #'all-the-icons-dired-mode)))
+#+END_SRC
+
