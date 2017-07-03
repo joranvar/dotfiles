@@ -1131,6 +1131,12 @@ I like my windows to be a bit transparent, so that I can see my desktop
   compton --backend xrender -fcCz -l -17 -t -17 -b
 #+END_SRC
 
+** Wallpapers
+
+#+BEGIN_SRC sh :tangle ~/.xprofile :comments noweb :tangle-mode (identity #o444)
+  while true; do feh --bg-scale --randomize --recursive ~/Pictures; sleep 60; done &
+#+END_SRC
+
 ** Emacs Mode line
 
 #+BEGIN_SRC emacs-lisp
