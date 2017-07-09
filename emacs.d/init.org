@@ -16,6 +16,9 @@ I want to see a visual key to become familiar with it.
 #+BEGIN_SRC conf
   Host *
        VisualHostKey yes
+       ControlPath ~/.ssh/controlmasters/%r@%h:%p
+       ControlMaster auto
+       ControlPersist 10m
 #+END_SRC
 
 ** Host aliases                                                       :crypt:
@@ -79,18 +82,19 @@ This part is to replace what was already there, before I started "going literal"
 ** Host aliases                                                       :crypt:
 -----BEGIN PGP MESSAGE-----
 
-hQEMA6k/ZHkmEjnXAQf7BFOnkVTLrcwX7GVJOnK1BRf4248DL2kOrKFnudJoFsHS
-nfUO7EugugkpP0UhnbMaCS/kmxlMqtbGas3+ZMIr0I1zCfOBh942hY1T3XtupuVi
-8gUpR8EQ2qH/6VzCoBz/Rsv10U9klbcBauSh4O4JuQs+7tFxlvxlTHLyT6p9JN8O
-yD/iUDxl567kLifBop2PU2zUfRKrUY08a4XHILpmLB4JJtJVkIfWxEq49qa9z5Yn
-PuVWRweR4bsNjIF41QaIkP/wr134YlfSZYlp0bCqsNKBZC7CSGMn/NDSikj2c4hn
-ioU96uUPSF0+EOtzB6uh6S3y1MvdBwKjX0lHm4yk4NLAJgFnNGi6d3HJRXdpFUL0
-9thV68+9F1PqwmknqxMaKDGbSQDjqcGJZ5Fhii4Fr5IabZysY1MFptF/zKk1WxIT
-8dQKBIF5c1xKzVNJjgpyqc9izwLIUWnqWWYJ4KMCmHUR6X/lqw8DzX+wokKPAXqd
-0HvdbssqQeA2xSXOWKoG+C3N0J3iyZIYlKeRKRbpLKhRcJJCGiWSUqvJ55Sc7hv/
-oGn7qH6y1zDQ7usFf4SadWHc0OH68vGjaCeafDfbdJPjW/AvHMX0G9BM/k0IKPKI
-R4RyF/KBRNjleb/JOw7pybq8VUBJHeif
-=JNAe
+hQEMA6k/ZHkmEjnXAQf9Gi+qkyD9hGPq+4fnGu5ZLPGhESwIdGlvkpLw7BzMpSm3
+lQ/VaAcZ2C+NkzaB7iXfyx5VkHlaxhGelBxT9N36dcNrLRFXTZP9axOqt5xzq2OD
+7yEi0CdtEQ+KKzQTF384Xm4FsOR8Ab2wIKnvLSNuO60T2oPuPWVoJ5TuACnfPjGj
+J/IQ9KiJ43960gklzDlslb8n0hm4YVK7CK6hZuorSr+sxuAyjm0t5f1zVEhSJNKz
+ZmD7UzfVCyJfDZTXIbJH89+Ik3Jt0g0YzXC1y703wGz1yxzXHwOSc0sonrNVlzxY
+GSAB7Om/u0d3q7UeNatR1sr1sDMCDFCqjbo3NFcod9LAWgHYRchRyGRiYguHT73M
+rhImXAujntte0LOOalIXcMnanIuZohhizmirEJrFCU6hx/iubYf1l4C2kjzEfwnQ
+DiJwQSs9AEZLNF/xPXHcmKjME1+T5cz0sjd1GgY+0WhS03QIGnBouhPE78+5DD+r
+Nwsvg0O0h54OhVmQaxSPUEkSuy5A5OjptIfcRTGhFMaVbvbVAmVcIcWvWJOFXuq4
+q2+KwxXZd9Kx1hrJQQDBUy6jhq4GwFmME1pXCx0jdzGRmvKetBfLYcexCBufBtNw
+IV22LMkkK5nTZAcZN4bSYxyx7Kp7kjKjyiyy9yCkfbfnx4/3OyuQjTwKFcle64jN
+xC1wY2PMiHGwxxsKJlwXu5OzK7/Gq6E8nBCF5A==
+=4Ab7
 -----END PGP MESSAGE-----
 
 * Emacs configuration
