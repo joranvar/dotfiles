@@ -45,6 +45,11 @@ interactive("find-url-from-history-new-buffer",
 define_key(content_buffer_normal_keymap, "h", "find-url-from-history-new-buffer");
 define_key(content_buffer_normal_keymap, "H", "find-url-from-history");
 
+/// Add webjumps
+define_webjump("hoogle", "http://haskell.org/hoogle/?hoogle=%s", $alternative = "http://haskell.org/hoogle/");
+
+define_webjump("hackage", "http://google.com/search?as_sitesearch=hackage.haskell.org%2Fpackage&as_q=%s");
+
 /// Send Firefox-compatible user agent string to some sites
 require("user-agent-policy");
 
