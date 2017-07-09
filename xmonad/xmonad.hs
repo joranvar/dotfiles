@@ -113,5 +113,5 @@ applyScreensaver lockKey = addLockKey lockKey . addStartup
 applyScreenshot :: (ButtonMask, KeySym) -> XConfig a -> XConfig a
 applyScreenshot scrotKey = addScrotKey scrotKey
   where
-    addScrotKey key x = x `additionalKeys` [ (first (.|. shiftMask) $ key, spawn "cd ~/tmp ; scrot '%Y-%m-%d-%H-%M-%s.png' -u -e 'gimp $f'")
-                                           , (key                        , spawn "cd ~/tmp ; scrot '%Y-%m-%d-%H-%M-%s.png' -m -e 'gimp $f'") ]
+    addScrotKey key x = x `additionalKeys` [ (first (.|. shiftMask) $ key, spawn "cd ~/tmp/scrot ; scrot '%Y-%m-%d-%H-%M-%s.png' -u -e 'feh --start-at ~/tmp/scrot/$f ~/tmp/scrot'")
+                                           , (key                        , spawn "cd ~/tmp/scrot ; scrot '%Y-%m-%d-%H-%M-%s.png' -m -e 'feh --start-at ~/tmp/scrot/$f ~/tmp/scrot'") ]
