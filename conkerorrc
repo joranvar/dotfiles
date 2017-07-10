@@ -79,3 +79,12 @@ function getSessionCookie(url) {
 
 /// Allow full-screen
 user_pref('full-screen-api.enabled', true);
+
+// set default webjump
+read_url_handler_list = [read_url_make_default_webjump_handler("google")];
+// possibly valid URL
+function possibly_valid_url (str) {
+    return (/[\.\/:]/.test(str)) &&
+        !(/\S\s+\S/.test(str)) &&
+        !(/^\s*$/.test(str));
+}
