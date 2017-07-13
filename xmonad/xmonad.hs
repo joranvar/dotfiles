@@ -98,7 +98,7 @@ myKeys = flip additionalKeys $
    , ((0,                      xF86XK_AudioLowerVolume ), void $ lowerVolume 6)
    , ((0,                      xF86XK_AudioRaiseVolume ), void $ raiseVolume 3)
    , ((0,                      xF86XK_AudioMute        ), void toggleMute)
-   , ((mod4Mask,               xK_r                    ), spawn "pkill redshift || redshift -l 50.9342277:-5.7725223")
+   , ((mod4Mask .|. shiftMask, xK_b                    ), spawn "pkill redshift || redshift -l 50.9342277:-5.7725223")
    , ((mod4Mask,               xK_q                    ), spawn "cd ~/.xmonad ; nix-shell --pure --command 'ghc --make xmonad.hs -i -ilib -fforce-recomp -v0 -o xmonad-x86_64-linux' && xmonad --restart")
    ] ++
    [ ((mod4Mask .|. mask, key), f sc) | (key, sc) <- zip [xK_w, xK_e, xK_r] [0..]
