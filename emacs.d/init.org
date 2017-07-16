@@ -1029,13 +1029,13 @@ Some stuff I want to be kept hidden from others.  Luckily, we have gpg (and org-
 
   ## With Menucolor Patch installed
   OPTIONS=menucolors
-  MENUCOLOR="blessed"=green
-  MENUCOLOR="cursed"=orange&bold
-  MENUCOLOR="cursed .* \(being worn\)"=red&bold
-  MENUCOLOR="uncursed"=cyan
+  MENUCOLOR="[Bb]lessed"=green
+  MENUCOLOR="[Cc]ursed"=orange&bold
+  MENUCOLOR="[Cc]ursed .* \(being worn\)"=red&bold
+  MENUCOLOR="[Uu]ncursed"=cyan
 
-  MENUCOLOR="holy"=yellow
-  MENUCOLOR="unholy"=brown
+  MENUCOLOR="[Hh]oly"=yellow
+  MENUCOLOR="[Uu]nholy"=brown
 
   MENUCOLOR="loadstone\|wand \(of\|called\) cancellation"=red&bold
   # color only the real Amulet
@@ -1044,7 +1044,6 @@ Some stuff I want to be kept hidden from others.  Luckily, we have gpg (and org-
 
   # forgotten spell
   MENUCOLOR="[a-zA-Z] - [a-zA-Z ]+[ ]+[0-9]+\*[ ]+[a-z]+[ ]+[0-9]+%"=magenta
-
 
   # # With Statuscolor patch installed
   # # HP
