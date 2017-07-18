@@ -864,7 +864,7 @@ When exporting, I want to see pretty source code!
 
 ** Agenda management
 
-#+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp :noweb yes
   (use-package org
     :bind (("C-c a" . org-agenda)
            ("C-c c" . org-capture))
@@ -877,10 +877,61 @@ When exporting, I want to see pretty source code!
                     org-ellipsis "↷"
                     org-catch-invisible-edits 'error
                     org-use-speed-commands t
-                    org-capture-templates '(("t" "INBOX" entry (file+headline "gtd.org" "INBOX") "* TODO %?\n%U\n%a\n" :clock-in t :clock-resume t)
-                                            ("i" "Interrupt" entry (file+headline "gtd.org" "Journal") "* %? :16311:\n%U\n" :clock-in t :clock-resume t))
+                    org-todo-keywords '((sequence "TODO(t)" "WAITING(w)" "|" "DONE(d)" "CANCELLED(c)"))
                     org-agenda-span 1
-                    org-clock-report-include-clocking-task t)))
+                    org-clock-report-include-clocking-task t)
+              <<gtd-setup>>
+              ))
+#+END_SRC
+
+*** My GTD setup
+
+I just based this on https://emacs.cafe/emacs/orgmode/gtd/2017/06/30/orgmode-gtd.html, which is really like setups I've used before.
+
+#+NAME: gtd-setup
+#+BEGIN_SRC emacs-lisp :tangle no
+  (setq org-agenda-files '("~/org/inbox.org"
+                           "~/org/gtd.org"
+                           "~/org/tickler.org")
+        org-refile-targets '(("~/org/gtd.org" :maxlevel . 3)
+                             ("~/org/someday.org" :level . 1)
+                             ("~/org/tickler.org" :maxlevel . 2))
+        org-capture-templates '(("t" "Todo [inbox]" entry
+                                 (file+headline "~/org/inbox.org" "INBOX")
+                                 "* TODO %i%?\n%U\n%a\n"
+                                 :clock-in t :clock-resume t)
+                                ("i" "Interrupt" entry
+                                 (file+headline "~/org/inbox.org" "Interrupts")
+                                 "* %i%? :@interrupt:\n%U\n"
+                                 :clock-in t :clock-resume t)
+                                ("T" "Tickler" entry
+                                 (file+headline "~/org/tickler.org" "Tickler")
+                                 "* %i%?\n%^t\n"))
+        org-agenda-custom-commands '((" " "Default" ((agenda "")
+                                                     (todo "" ((org-agenda-overriding-header "INBOX")
+                                                               (org-agenda-files '("~/org/inbox.org"))))
+                                                     (todo "" ((org-agenda-overriding-header "Next Action")
+                                                               (org-agenda-skip-function #'joranvar:org-agenda-skip-all-siblings-but-first)
+                                                               (org-agenda-files (remove "~/org/inbox.org" org-agenda-files))))))
+                                     ("o" "At the office" tags-todo "@office"
+                                      ((org-agenda-overriding-header "Office")
+                                       (org-agenda-skip-function #'joranvar:org-agenda-skip-all-siblings-but-first)))))
+
+  (defun joranvar:org-agenda-skip-all-siblings-but-first ()
+    "Skip all but the first non-done entry."
+    (let (should-skip-entry)
+      (unless (org-current-is-todo)
+        (setq should-skip-entry t))
+      (save-excursion
+        (while (and (not should-skip-entry) (org-goto-sibling t))
+          (when (org-current-is-todo)
+            (setq should-skip-entry t))))
+      (when should-skip-entry
+        (or (outline-next-heading)
+            (goto-char (point-max))))))
+
+  (defun org-current-is-todo ()
+    (string= "TODO" (org-get-todo-state)))
 #+END_SRC
 
 *** Jira worklog integration
