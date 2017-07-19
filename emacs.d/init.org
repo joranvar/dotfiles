@@ -911,7 +911,7 @@ I just based this on https://emacs.cafe/emacs/orgmode/gtd/2017/06/30/orgmode-gtd
                                  :clock-in t :clock-resume t)
                                 ("T" "Tickler" entry
                                  (file+headline "~/org/tickler.org" "Tickler")
-                                 "* %i%?\n%^t\n"))
+                                 "* %i%?\n%^t%a\n"))
         org-agenda-custom-commands '((" " "Default" ((agenda "")
                                                      (todo "" ((org-agenda-overriding-header "INBOX")
                                                                (org-agenda-files '("~/org/inbox.org"))))
