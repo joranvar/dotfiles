@@ -879,7 +879,12 @@ When exporting, I want to see pretty source code!
                     org-use-speed-commands t
                     org-todo-keywords '((sequence "TODO(t)" "WAITING(w)" "|" "DONE(d)" "CANCELLED(c)"))
                     org-agenda-span 1
-                    org-clock-report-include-clocking-task t)
+                    org-clock-report-include-clocking-task t
+                    org-agenda-prefix-format '((agenda . " %i %-12:c%?-12t% s")
+                                               (timeline . "  % s")
+                                               (todo . " %l%i %-12:c")
+                                               (tags . " %i %-12:c")
+                                               (search . " %i %-12:c")))
               <<gtd-setup>>
               ))
 #+END_SRC
