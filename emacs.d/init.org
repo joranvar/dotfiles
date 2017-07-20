@@ -882,6 +882,8 @@ When exporting, I want to see pretty source code!
                     org-agenda-skip-scheduled-if-done t
                     org-agenda-skip-timestamp-if-done t
                     org-clock-report-include-clocking-task t
+                    org-refile-use-outline-path t
+                    org-outline-path-complete-in-steps nil
                     org-agenda-prefix-format '((agenda . " %i %-12:c%?-12t% s")
                                                (timeline . "  % s")
                                                (todo . " %i %-12:c")
