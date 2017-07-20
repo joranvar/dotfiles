@@ -879,10 +879,12 @@ When exporting, I want to see pretty source code!
                     org-use-speed-commands t
                     org-todo-keywords '((sequence "TODO(t)" "WAITING(w)" "|" "DONE(d)" "CANCELLED(c)"))
                     org-agenda-span 1
+                    org-agenda-skip-scheduled-if-done t
+                    org-agenda-skip-timestamp-if-done t
                     org-clock-report-include-clocking-task t
                     org-agenda-prefix-format '((agenda . " %i %-12:c%?-12t% s")
                                                (timeline . "  % s")
-                                               (todo . " %l%i %-12:c")
+                                               (todo . " %i %-12:c")
                                                (tags . " %i %-12:c")
                                                (search . " %i %-12:c")))
               <<gtd-setup>>
@@ -917,7 +919,8 @@ I just based this on https://emacs.cafe/emacs/orgmode/gtd/2017/06/30/orgmode-gtd
                                                                (org-agenda-files '("~/org/inbox.org"))))
                                                      (todo "" ((org-agenda-overriding-header "Next Action")
                                                                (org-agenda-skip-function #'joranvar:org-agenda-skip-all-siblings-but-first)
-                                                               (org-agenda-files (remove "~/org/inbox.org" org-agenda-files))))))
+                                                               (org-agenda-files (remove "~/org/inbox.org" org-agenda-files))
+                                                               (org-agenda-prefix-format '((todo . " %-50b %-12:c")))))))
                                      ("o" "At the office" tags-todo "@office"
                                       ((org-agenda-overriding-header "Office")
                                        (org-agenda-skip-function #'joranvar:org-agenda-skip-all-siblings-but-first)))))
