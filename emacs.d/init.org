@@ -97,6 +97,14 @@ xC1wY2PMiHGwxxsKJlwXu5OzK7/Gq6E8nBCF5A==
 =4Ab7
 -----END PGP MESSAGE-----
 
+** Command aliases
+
+These snippets can be quite useful, sometimes.
+
+#+BEGIN_SRC sh :tangle ~/.zshrc :comments noweb :tangle-mode (identity #o444)
+  timer () { timeout $1 zsh -c "(for i in \$(seq 1 999999); do echo -ne \\\\r$1: \$i; sleep 1; done)"; echo }
+#+END_SRC
+
 * Emacs configuration
 :PROPERTIES:
 :header-args: :tangle ./init.org.el :comments noweb :tangle-mode (identity #o444)
