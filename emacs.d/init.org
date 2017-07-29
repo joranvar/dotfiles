@@ -296,7 +296,7 @@ Each project is either a version controlled (~magit~!) directory, or some direct
     :bind (("C-c g" . magit-status))
     :config
     (setq magit-commit-arguments (if (eq system-type 'gnu/linux)
-                                     '("--gpg-sign")
+                                     (list (s-concat "--gpg-sign=" org-crypt-key))
                                    '(""))
           magit-diff-arguments '("--ignore-space-change"
                                  "--ignore-all-space"
