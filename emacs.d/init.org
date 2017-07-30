@@ -1161,6 +1161,12 @@ Although, I do have a mouse, and sometimes I use it to focus a window in my wind
         mouse-autoselect-window t)
 #+END_SRC
 
+But, do not move my mouse pointer around.  This sometimes even caused my emacs to lose focus, because the mouse pointer just leaves the frame.
+
+#+BEGIN_SRC emacs-lisp
+  (advice-add 'set-mouse-position :override #'ignore)
+#+END_SRC
+
 ** Show me info about my buffer
 
 I want to know where am, and have immediate visual feedback about my text.
