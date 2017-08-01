@@ -75,7 +75,7 @@ main = do
         , startWidgets = [pager]
         -- , startWidgets = [wss, wnd]
         -- , startWidgets = [wss]
-        , endWidgets = reverse $ if scr == 0
+        , endWidgets = reverse $ if scr == 1
             then [wea, mpris, cpu, mem, clock, battery, tray]
             else [clock]
         }
