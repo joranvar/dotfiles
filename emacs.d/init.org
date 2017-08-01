@@ -58,10 +58,7 @@ This part is to replace what was already there, before I started "going literal"
   antigen theme candy
   antigen bundle spwhitt/nix-zsh-completions
   antigen bundle zsh-users/zsh-completions src
-  antigen bundle zx2c4/password-store src/completion/pass.zsh-completion &> /dev/null
   antigen apply
-
-  compdef _pass pass
 
   function weather() {curl wttr.in/$1 -f --stderr /dev/null | head -n 7;}
 
