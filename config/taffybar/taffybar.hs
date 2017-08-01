@@ -24,8 +24,9 @@ pagerCfg :: PagerConfig
 pagerCfg = defaultPagerConfig
      { emptyWorkspace = colorize "#6b6b6b" "" . escape
      , visibleWorkspace = colorize "#429942" "" . escape . wrap "(" ")"
--- --    { emptyWorkspace = \xs -> ""
+ --    { emptyWorkspace = \xs -> ""
      , activeWorkspace  = colorize "#429942" "" . escape . wrap "[" "]"
+     , activeWindow = escape . shorten 100
      }
 
 
