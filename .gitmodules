@@ -4,3 +4,4 @@
 [submodule "emacs.d/lisp/org-log-to-jira"]
 	path = emacs.d/lisp/org-log-to-jira
 	url = git@github.com:joranvar/org-log-to-jira
+	branch = master
