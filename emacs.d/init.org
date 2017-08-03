@@ -1271,7 +1271,7 @@ Use Symbola for unicode characters
 I like smaller fonts.
 
 #+BEGIN_SRC elisp
-  (set-face-attribute 'default nil :height 90)
+  (set-face-attribute 'default nil :height 75)
 #+END_SRC
 
 ** Window management
