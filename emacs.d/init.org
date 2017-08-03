@@ -413,6 +413,12 @@ Also, please indent my code smartly (except for in F#, it does not play nice the
               (recompile-on-save-advice compile)))
 #+END_SRC
 
+#+BEGIN_SRC emacs-lisp
+  (use-package makefile-executor
+    :config (progn
+              (add-hook 'makefile-hook #'makefile-executor-mode)))
+#+END_SRC
+
 *** F#
 
 In F#, I'd like to set the following settings:
