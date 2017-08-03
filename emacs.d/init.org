@@ -739,6 +739,7 @@ Notmuch will also be used to read the mail that was pulled over here.  Let's see
 
 #+BEGIN_SRC emacs-lisp
   (use-package notmuch
+    :disabled
     :bind (("C-c m" . notmuch-hello)))
 #+END_SRC
 
