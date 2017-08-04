@@ -75,7 +75,7 @@
     gv
     ghostscript
     libreoffice
-    (texlive.combine { inherit (texlive) scheme-tetex wrapfig capt-of; })
+#    (texlive.combine { inherit (texlive) scheme-tetex wrapfig capt-of; })
 
     fsharp
     mono
