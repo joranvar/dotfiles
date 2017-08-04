@@ -23,24 +23,24 @@
   #   defaultLocale = "en_US.UTF-8";
   # };
   nixpkgs.config.packageOverrides = pkgs : rec {
-    factorio = with pkgs; import /home/joranvar/git/nixpkgs/pkgs/games/factorio/default.nix ({
-      stdenv = stdenv;
-      callPackage = callPackage;
-      fetchurl = fetchurl;
-      makeWrapper = makeWrapper;
-      alsaLib = alsaLib;
-      libX11 = xlibs.libX11;
-      libXcursor = xlibs.libXcursor;
-      libXinerama = xlibs.libXinerama;
-      libXrandr = xlibs.libXrandr;
-      libXi = xlibs.libXi;
-      mesa_noglu = mesa_noglu;
-      factorio-utils = factorio-utils;
-      releaseType = "alpha"; });
     haskellPackages = pkgs.haskellPackages;
     xmonad = haskellPackages.xmonad;
     xmonad-contrib = haskellPackages.xmonad-contrib;
     xmonad-extras = haskellPackages.xmonad-extras;
+    # factorio = with pkgs; import /home/joranvar/git/nixpkgs/pkgs/games/factorio/default.nix ({
+    #   stdenv = stdenv;
+    #   callPackage = callPackage;
+    #   fetchurl = fetchurl;
+    #   makeWrapper = makeWrapper;
+    #   alsaLib = alsaLib;
+    #   libX11 = xlibs.libX11;
+    #   libXcursor = xlibs.libXcursor;
+    #   libXinerama = xlibs.libXinerama;
+    #   libXrandr = xlibs.libXrandr;
+    #   libXi = xlibs.libXi;
+    #   mesa_noglu = mesa_noglu;
+    #   factorio-utils = factorio-utils;
+    #   releaseType = "alpha"; });
   };
 
   # List packages installed in system profile. To search by name, run:
@@ -160,7 +160,7 @@
     gnome3.gvfs
     gnome3.nautilus
 
-    factorio
+#    factorio
   ];
 
   nixpkgs.config.chromium = { enableWideVine = true; enablePepperFlash = true; };
