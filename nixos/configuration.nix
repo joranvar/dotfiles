@@ -84,6 +84,8 @@
     bundler
 
     sqsh
+    freetds
+    unixODBC
 
     python35
 #    python35Packages.pywinrm
