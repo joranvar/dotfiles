@@ -23,10 +23,9 @@
   #   defaultLocale = "en_US.UTF-8";
   # };
   nixpkgs.config.packageOverrides = pkgs : rec {
-    haskellPackages = pkgs.haskellPackages;
-    xmonad = haskellPackages.xmonad;
-    xmonad-contrib = haskellPackages.xmonad-contrib;
-    xmonad-extras = haskellPackages.xmonad-extras;
+    xmonad = pkgs.haskellPackages.xmonad;
+    xmonad-contrib = pkgs.haskellPackages.xmonad-contrib;
+    xmonad-extras = pkgs.haskellPackages.xmonad-extras;
     # factorio = with pkgs; import /home/joranvar/git/nixpkgs/pkgs/games/factorio/default.nix ({
     #   stdenv = stdenv;
     #   callPackage = callPackage;
