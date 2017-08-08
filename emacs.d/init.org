@@ -496,6 +496,33 @@ In Haskell, use `dante`.
     :config (progn (ipretty-mode)))
 #+END_SRC
 
+*** XML
+
+Show where I am in xml
+
+#+BEGIN_SRC emacs-lisp
+  (defun nxml-where ()
+    "Display the hierarchy of XML elements the point is on as a
+  path. from http://www.emacswiki.org/emacs/NxmlMode"
+    (interactive)
+    (let ((path nil))
+      (save-excursion
+        (save-restriction
+          (widen)
+          (while
+              (and (< (point-min) (point)) ;; Doesn't error if point is at
+                   ;; beginning of buffer
+                   (condition-case nil
+                       (progn
+                         (nxml-backward-up-element) ; always returns nil
+                         t)
+                     (error nil)))
+            (setq path (cons (xmltok-start-tag-local-name) path)))
+          (if (called-interactively-p t)
+              (message "/%s" (mapconcat 'identity path "/"))
+            (format "/%s" (mapconcat 'identity path "/")))))))
+#+END_SRC
+
 ** Mail configuration
 
 I used to check mail with Gnus, directly from the imap-server (in the Exchange case, from davmail), but the Gnus/davmail combination is quite slow, and when checking mail, freezes Emacs a bit.
