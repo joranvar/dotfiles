@@ -420,6 +420,18 @@ Also, please indent my code smartly (except for in F#, it does not play nice the
               (add-hook 'makefile-hook #'makefile-executor-mode)))
 #+END_SRC
 
+*** Remote compilation with NCrunch and ssh/rsync
+
+#+BEGIN_SRC emacs-lisp
+  (defun joranvar/ncrunch-match-file ()
+    (s-replace "\\" "/" (match-string-no-properties 1)))
+
+  (add-to-list 'compilation-error-regexp-alist
+               (list (rx "ERROR (Build): "
+                         (0+ nonl) "\\NCrunch\\" (1+ digit) "\\" (1+ digit) "\\"
+                         (group-n 1 (1+ nonl)) space "(" (group-n 2 (1+ digit)) "):") 'joranvar/ncrunch-match-file 2 nil 2))
+#+END_SRC
+
 *** F#
 
 In F#, I'd like to set the following settings:
