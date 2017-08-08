@@ -883,6 +883,17 @@ When exporting, I want to see pretty source code!
   (use-package htmlize)
 #+END_SRC
 
+Also: exported listings should be pretty.
+
+#+BEGIN_SRC emacs-lisp
+  (setq org-latex-listings 'minted
+        org-latex-packages-alist '(("" "minted"))
+        org-latex-minted-options '(("breaklines"))
+        org-latex-pdf-process
+        '("pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"
+          "pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"))
+#+END_SRC
+
 ** Agenda management
 
 #+BEGIN_SRC emacs-lisp :noweb yes
