@@ -26,6 +26,7 @@
     xmonad = pkgs.haskellPackages.xmonad;
     xmonad-contrib = pkgs.haskellPackages.xmonad-contrib;
     xmonad-extras = pkgs.haskellPackages.xmonad-extras;
+    freetds = pkgs.freetds.override { odbcSupport = true; };
     # factorio = with pkgs; import /home/joranvar/git/nixpkgs/pkgs/games/factorio/default.nix ({
     #   stdenv = stdenv;
     #   callPackage = callPackage;
