@@ -19,25 +19,27 @@ I want to see a visual key to become familiar with it.
        ControlPath ~/.ssh/controlmasters/%r@%h:%p
        ControlMaster auto
        ControlPersist 10m
+       PreferredAuthentications publickey
 #+END_SRC
 
 ** Host aliases                                                       :crypt:
 -----BEGIN PGP MESSAGE-----
 
-hQEMA6k/ZHkmEjnXAQgAjd0W9CeBnSVJjR9Fm4acbcM+DklomvBO66pv+yV5H0E7
-8DX7BVoMufn2eAUSKaxQI2JIW9Z40SNux02K+FByGLyZgmZVKY8rbneSIB6A84AK
-L/2Pak4D6DB+a9rX3+4qxIHNdcAr1mo5qlQnqhFwKXaD+KcMNg5ROgunt3U6A7pf
-ZCZEME+BVLfYT7f400KQw1i4MfkXkxr/LX9FeVYoj8haE80pnPtf0UOB4FTA31Yk
-EQodrS4fjqridyFu/UYXx+q3sIEStuEFeXwLeU1pektbrA93yWVVuzabwwvJVegq
-ovon3EIRvSdDsJg6ARqOOugmjQ/O62smVWMvMkbsDNLAmAGW4V0iJsJ0qFtML4IZ
-KydwdUGzqam+O0CMyIuC4nGpjBsMcb58asOZGJ7Qx/9pBYhTyd79RbKOKYespGD5
-ktIAl6hX1Dr4wl+k2ohzlhXU1CEAjKflSQQNzeknQ3LfT6v9AjNIDylv5AXOdcur
-KwFr4hzY2m/pYVMIGv/3eEohxfduSSjLRwzvDTig/UaAemlcd8p1BTPwVe7nyaAD
-0rEXiAbj3YZ5mzL910bAKLL7k/UUd7k5gF+3cWXdzoRxlNHEPshdkjYRIq0caO6h
-IugwONG1qwSLKFlwZVqfZdZGIWg29VtBfN8GyvjYYTwEvh2XBhmWUIoWJTn5HTjL
-OPVvkorlI6mZcqj2KtSM2fc38jlUzPwLgzwHndIl44hJUM3f0d1uv9+CA+5ecoFE
-P9150X7kn2FavsgUHMP/FSyOOiD6ZFL5uq241XfW5Ze+Ef2bcOmfRxLm
-=xqLD
+hQEMA6k/ZHkmEjnXAQf/TSn4GjDd5JOEu4R6gjeXCR8sG0WzHRai6aST5bK1Qh2Z
+lIirOxr98OoqGzfuK1jd0wfNSdylnWGvRo8yXo/6QjaB1YCNemQy4CNgaeA2GiCR
+e8c72swi1z1FWVxqpvKCJw0VyyUfv8R+qvD1eZLvb/9tRy6Vv1U+U0N97xysQpka
+EFn9J3D4iKZXxy4CIAvOChPrEmms4WPytqbnxq8PIoSfRWLTVFlB8kjlsvRHmJyM
+3rQZPlA9q50W63rOYgxWxyH/j/Y36cGtfMXh2f7VlrKr1FIJqU3Mf/1m7yA2IaFz
+5T+EppU26uSDTCqI0u2s6bdsVfebZ54TKA2V9bxHmtLAogHtPIY5/yLF66zmXAf/
+YohUUdUh9FcFjbRG4qUUD+Iema0+oZ3j63YjiTzNT05/oyQXel0UyacWGg4FhJ2c
+iEdCG0Tckh6Pya2Jc690jFGegXM5Dh3+teCrIfly1t3scAKzndAl1Qgh5lZHyYCG
+LVdXHSTDODOqwdTAghTriTlUUA3sE5JzGeNxSd+j+BMcyUuaJvyDxNwLoWnltJT8
+kCJlvs9a0J2LW7kvCqxCL1/oat9SYVnmCZPtpROPPpPrK0uXI+Qmm8NUCj8n95ta
+BnyXHq7H0RficGiShDKynsT4Z08SCWLvi2by5o+attdNVEuaPhw9kKSN3zBhS4Qo
+7onBISaqCbT2geVfM9vaWnnfX3AHHI1EtcQ3K6OQUVJEAbpLu0A4O1zcNEkfaTp+
+CSVFRXPQAwQtfAL0XZkYDlSFp2/bSWhZljOFr1At0q56Drj8zNqku0bilBtCStpx
+1vBaXQ==
+=m4A/
 -----END PGP MESSAGE-----
 
 * Shell
@@ -79,19 +81,19 @@ This part is to replace what was already there, before I started "going literal"
 ** Host aliases                                                       :crypt:
 -----BEGIN PGP MESSAGE-----
 
-hQEMA6k/ZHkmEjnXAQf9Gi+qkyD9hGPq+4fnGu5ZLPGhESwIdGlvkpLw7BzMpSm3
-lQ/VaAcZ2C+NkzaB7iXfyx5VkHlaxhGelBxT9N36dcNrLRFXTZP9axOqt5xzq2OD
-7yEi0CdtEQ+KKzQTF384Xm4FsOR8Ab2wIKnvLSNuO60T2oPuPWVoJ5TuACnfPjGj
-J/IQ9KiJ43960gklzDlslb8n0hm4YVK7CK6hZuorSr+sxuAyjm0t5f1zVEhSJNKz
-ZmD7UzfVCyJfDZTXIbJH89+Ik3Jt0g0YzXC1y703wGz1yxzXHwOSc0sonrNVlzxY
-GSAB7Om/u0d3q7UeNatR1sr1sDMCDFCqjbo3NFcod9LAWgHYRchRyGRiYguHT73M
-rhImXAujntte0LOOalIXcMnanIuZohhizmirEJrFCU6hx/iubYf1l4C2kjzEfwnQ
-DiJwQSs9AEZLNF/xPXHcmKjME1+T5cz0sjd1GgY+0WhS03QIGnBouhPE78+5DD+r
-Nwsvg0O0h54OhVmQaxSPUEkSuy5A5OjptIfcRTGhFMaVbvbVAmVcIcWvWJOFXuq4
-q2+KwxXZd9Kx1hrJQQDBUy6jhq4GwFmME1pXCx0jdzGRmvKetBfLYcexCBufBtNw
-IV22LMkkK5nTZAcZN4bSYxyx7Kp7kjKjyiyy9yCkfbfnx4/3OyuQjTwKFcle64jN
-xC1wY2PMiHGwxxsKJlwXu5OzK7/Gq6E8nBCF5A==
-=4Ab7
+hQEMA6k/ZHkmEjnXAQgAgi3uH6wfd58+0iApAzqik9lpqXVFzKC3S/Pz9Xpq9YVo
+DhiKApO4jBfQ4j9ybywyy9u17xA9bXAJGpF/RbMJC/IJjucCgHoUc5K9iaqr760T
+ZyA/Zg2WAy24JCkWv0H51YYcsxx/y614uUqU9CHr2JUv2CtGIyrmqfN6Ng1Ej89K
+IB97kifopvnkNacz2dzVdAoo/Vf3tAiszR9/vu/7m9ubqTXSIeXcpYqTD5lt3saS
+rDbhfLoPUJBt2U+kskV9RP+dcylSN4jgqHgOfbk1YfwPuaC7bRf0jmQC3emzMBQr
+/F3a1JsOPWZFJS9NsGbbEPqYu7Wa+/qDewPJs8sShdLAbAFzYvmGLTWAVW6Zbl1v
+MKt3cg6lI3a2rlKBUnCK06bIoQQAYS54SijRnqoGacpiWd15g7cQ0u6nKVGYnDWo
+SToUttf5569Z81iTxBZuBQaq6XZOcf+fHwzRyDyiDnYeBFuzxi80wXLGM+TEdOD9
+8MyPu769dUnoxdET5RIe4xwOCEYIMeVRnZeT1dH6gQKqoEHgFoZTek1SlTER/gFf
+U6oeunrhRnFdMQQ2/NyVV+NvHG0AaULZNV9pCago4FvcXzHDYk07qzxfoU6D6V/m
+skai0qYDd24UFBbJy8OdW1vTAJjPSZs7QljdK7bNrOnyPdu3AEjYZSz/vKlD2rpS
+LBsDdrcg0RWIoAHdQQWv5kZL1UAfLzkXM7rv3Bk1BOmEDCv+OtLjgpxcz9ZWZQ==
+=/IN5
 -----END PGP MESSAGE-----
 
 ** Command aliases
