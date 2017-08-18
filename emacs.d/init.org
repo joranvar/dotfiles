@@ -785,7 +785,22 @@ Gnus will be used to read the mail that was pulled over here.
                             gnus-thread-sort-functions '(gnus-thread-sort-by-number (not gnus-thread-sort-by-total-score))
                             gnus-subthread-sort-functions '(gnus-sort-thread-by-number))
               (add-hook 'gnus-group-mode-hook 'gnus-topic-mode) ;; Show me topics
-              (add-hook 'gnus-startup-hook (lambda () (gnus-demon-add-handler 'gnus-demon-scan-news 1 t)))))
+              (add-hook 'gnus-startup-hook (lambda () (gnus-demon-add-handler 'gnus-demon-scan-news 1 t)))
+              (gnus-add-configuration
+               '(article
+                 (horizontal 1.0
+                             (vertical 25
+                                       (group 1.0))
+                             (vertical 1.0
+                                       (summary 0.25 point)
+                                       (article 1.0)))))
+              (gnus-add-configuration
+               '(summary
+                 (horizontal 1.0
+                             (vertical 25
+                                       (group 1.0))
+                             (vertical 1.0
+                                       (summary 1.0 point)))))))
 #+END_SRC
 
 *** notmuch
