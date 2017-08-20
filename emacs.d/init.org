@@ -1297,7 +1297,7 @@ I like my windows to be a bit transparent, so that I can see my desktop
 
 *** Composing window manager
 #+BEGIN_SRC sh :tangle ~/.xprofile :comments noweb :tangle-mode (identity #o444)
-  compton --backend xrender -fcCz -l -17 -t -17 --inactive-dim 0.5 --xrender-sync --unredir-if-possible --detect-transient
+  compton --backend xrender -fcCz -l -17 -t -17 --inactive-dim 0.5 --xrender-sync --unredir-if-possible --detect-transient &
 #+END_SRC
 
 ** Wallpapers
