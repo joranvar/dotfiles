@@ -1302,8 +1302,17 @@ I like my windows to be a bit transparent, so that I can see my desktop
 
 ** Wallpapers
 
+A simple wallpaper clock.
+
+#+BEGIN_SRC sh :tangle ~/bin/wallpaperclock :comments noweb :tangle-mode (identity #o755) :mkdirp yes :shebang "#!/usr/bin/env bash"
+  source ~/.wallpaperclock
+
+  hour=$(($(date +%-H) * 5 + $(date +%-M) / 12))
+  cd $WCZ && convert -layers flatten bg.jpg $(date +"month%-m.png weekday%u.png day%-d.png hour${hour}.png minute%-M.png second%-S.png") - | feh - --bg-scale
+#+END_SRC
+
 #+BEGIN_SRC sh :tangle ~/.xprofile :comments noweb :tangle-mode (identity #o444)
-  while true; do feh --bg-scale --randomize --recursive ~/Pictures; sleep 60; done &
+  while true; do nix-shell -p imagemagick --run ~/bin/wallpaperclock; sleep 60; done &
 #+END_SRC
 
 ** Emacs Mode line
