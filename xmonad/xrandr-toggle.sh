@@ -5,6 +5,12 @@ typeset -A notifications
 pkill taffybar
 
 export TAFFY_SCREEN=0
+if [[ $(xrandr -q | grep ".* connected" | wc -l) -eq 1 ]]; then
+    export TAFFY_MAIN_SCREEN=0
+else
+    export TAFFY_MAIN_SCREEN=1
+fi
+
 taffybar&
 screens=("eDP1" "LVDS1")
 for s in $screens ; do

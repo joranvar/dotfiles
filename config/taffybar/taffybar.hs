@@ -33,6 +33,7 @@ pagerCfg = defaultPagerConfig
 main :: IO ()
 main = do
     scr <- maybe 0 read <$> lookupEnv "TAFFY_SCREEN"
+    main_scr <- maybe 1 read <$> lookupEnv "TAFFY_MAIN_SCREEN"
 
     let -- wss = wspaceSwitcherNew pager
         -- wnd = windowSwitcherNew pager
@@ -76,7 +77,7 @@ main = do
         , startWidgets = [pager]
         -- , startWidgets = [wss, wnd]
         -- , startWidgets = [wss]
-        , endWidgets = reverse $ if scr == 1
+        , endWidgets = reverse $ if scr == main_scr
             then [wea, mpris, cpu, mem, clock, battery, tray]
             else [clock]
         }
