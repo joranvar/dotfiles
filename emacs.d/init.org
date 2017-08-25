@@ -4,6 +4,16 @@
 
 This file is tangled on Emacs startup, which will result in both more configuration to be loaded by Emacs and dotfiles to serve as configuration for other programs.
 
+* Me
+
+Who am I?
+
+#+BEGIN_SRC emacs-lisp :tangle ./init.org.el :comments noweb :tangle-mode (identity #o444)
+  (setq user-full-name "Bart Post"
+        user-mail-address "bart.post@gmail.com"
+        epg-user-id "AE05B5A8D130BE84B88192809BD68A49AB3D8E4D")
+#+END_SRC
+
 * SSH configuration
 :PROPERTIES:
 :header-args: :tangle ~/.ssh/config :comments noweb :tangle-mode (identity #o400) :mkdirp yes
@@ -295,7 +305,7 @@ Each project is either a version controlled (~magit~!) directory, or some direct
     :bind (("C-c g" . magit-status))
     :config
     (setq magit-commit-arguments (if (eq system-type 'gnu/linux)
-                                     (list (s-concat "--gpg-sign=" org-crypt-key))
+                                     (list (s-concat "--gpg-sign=" epg-user-id))
                                    '(""))
           magit-diff-arguments '("--ignore-space-change"
                                  "--ignore-all-space"
@@ -821,7 +831,6 @@ Notmuch will also be used to read the mail that was pulled over here.  Let's see
               (setq mml2015-use 'epg
 
                     mml2015-verbose t
-                    epg-user-id "9BD68A49AB3D8E4D"
                     mml2015-encrypt-to-self t
                     mml2015-always-trust nil
                     mml2015-cache-passphrase t
@@ -1092,7 +1101,7 @@ Some stuff I want to be kept hidden from others.  Luckily, we have gpg (and org-
   (require 'org-crypt)
   (org-crypt-use-before-save-magic)
   (setq org-tags-exclude-from-inheritance (quote ("crypt")))
-  (setq org-crypt-key "AE05B5A8D130BE84B88192809BD68A49AB3D8E4D")
+  (setq org-crypt-key epg-user-id)
   (advice-add 'org-babel-tangle :around
               (lambda (oldfun &rest args)
                 (org-decrypt-entries)
