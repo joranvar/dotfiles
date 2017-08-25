@@ -1306,8 +1306,15 @@ A simple wallpaper clock.
 
 #+BEGIN_SRC sh :tangle ~/bin/wallpaperclock :comments noweb :tangle-mode (identity #o755) :mkdirp yes :shebang "#!/usr/bin/env bash"
   source ~/.wallpaperclock
+  hours=$(ls $WCZ/hour??.png | tail -1 | sed -e 's/.*hour\(..\).png/\1/')
 
-  hour=$(($(date +%-H) * 5 + $(date +%-M) / 12))
+  if [[ $hours -eq 59 ]]; then
+      hour=$(($(($(date +%-I) * 5 + $(($(date +%-M) + 3)) / 12)) % 60))
+  elif [[ $hours -eq 23 ]]; then
+      hour=$(($(date +%-H)))
+  else
+      hour=$(($(date +%-I)))
+  fi
   cd $WCZ && convert -layers flatten bg.jpg $(date +"month%-m.png weekday%u.png day%-d.png hour${hour}.png minute%-M.png second%-S.png") - | feh - --bg-scale
 #+END_SRC
 
