@@ -862,19 +862,24 @@ When sending a mail, it should reflect who I want to send it as (from my work ma
                     '((".*"
                        (signature "")
                        (address "bart.post@gmail.com")
-                       ("X-Message-SMTP-Method" "smtp smtp.gmail.com 587 bart.post@gmail.com")
-                       (eval (set (make-local-variable 'message-cite-style) message-cite-style-gmail)))
+                       ("X-Message-SMTP-Method" "smtp smtp.gmail.com 587 bart.post@gmail.com"))
                       ("Exchange"
-                       (signature "")
+                       (signature "Bart Post\nApplication Programmer Team Satellite\nCompugroup Medical B.V.")
                        (address "bart.post@cgm.com")
-                       ("X-Message-SMTP-Method" "smtp localhost 1025 bart.post@cgm.com")
-                       (eval (set (make-local-variable 'message-cite-style) message-cite-style-outlook)))))
+                       ("X-Message-SMTP-Method" "smtp localhost 1025 bart.post@cgm.com"))))
               (setq smtpmail-stream-type nil
                     mail-user-agent 'message-user-agent
                     smtpmail-smtp-service 587
                     message-send-mail-function 'smtpmail-send-it
                     smtpmail-default-smtp-server "smtp.gmail.com"
-                    send-mail-function 'smtpmail-send-it)))
+                    send-mail-function 'smtpmail-send-it
+                    message-cite-style '((message-citation-line-format "On %Y-%m-%dT%T%z, %f wrote:")
+                                         (message-cite-function 'message-cite-original-without-signature)
+                                         (message-citation-line-function 'message-insert-formatted-citation-line)
+                                         (message-cite-reply-position 'traditional)
+                                         (message-yank-prefix "> ")
+                                         (message-yank-cited-prefix ">")
+                                         (message-yank-empty-prefix ">")))))
 #+END_SRC
 
 Also, I want to be able to compose mail in org-mode and send it as html.
