@@ -54,13 +54,16 @@ define_webjump("hackage", "http://google.com/search?as_sitesearch=hackage.haskel
 require("user-agent-policy");
 
 user_agent_policy.define_policy("whatsapp",
-    "Mozilla/5.0 (X11; Linux x86_64; rv:53.0) Gecko/20100101 Firefox/53.0",
+    "Mozilla/5.0 (X11; Linux x86_64; rv:54.0) Gecko/20100101 Firefox/54.0",
     "web.whatsapp.com");
-user_agent_policy.define_policy("default",
-    "Mozilla/5.0 (X11; Linux x86_64; rv:53.0) Gecko/20100101 Firefox/53.0",
+user_agent_policy.define_policy("satelslack",
+    "Mozilla/5.0 (X11; Linux x86_64; rv:54.0) Gecko/20100101 Firefox/54.0",
     "teamsatellite.slack.com");
+user_agent_policy.define_policy("limpyslack",
+    "Mozilla/5.0 (X11; Linux x86_64; rv:54.0) Gecko/20100101 Firefox/54.0",
+    "limpynet.slack.com");
 user_agent_policy.define_policy("pivotal",
-    "Mozilla/5.0 (X11; Linux x86_64; rv:53.0) Gecko/20100101 Firefox/53.0",
+    "Mozilla/5.0 (X11; Linux x86_64; rv:54.0) Gecko/20100101 Firefox/54.0",
     "www.pivotaltracker.com");
 
 /// xkcd
