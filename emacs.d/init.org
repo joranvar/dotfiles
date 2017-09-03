@@ -35,21 +35,21 @@ I want to see a visual key to become familiar with it.
 ** Host aliases                                                       :crypt:
 -----BEGIN PGP MESSAGE-----
 
-hQEMA6k/ZHkmEjnXAQf/TSn4GjDd5JOEu4R6gjeXCR8sG0WzHRai6aST5bK1Qh2Z
-lIirOxr98OoqGzfuK1jd0wfNSdylnWGvRo8yXo/6QjaB1YCNemQy4CNgaeA2GiCR
-e8c72swi1z1FWVxqpvKCJw0VyyUfv8R+qvD1eZLvb/9tRy6Vv1U+U0N97xysQpka
-EFn9J3D4iKZXxy4CIAvOChPrEmms4WPytqbnxq8PIoSfRWLTVFlB8kjlsvRHmJyM
-3rQZPlA9q50W63rOYgxWxyH/j/Y36cGtfMXh2f7VlrKr1FIJqU3Mf/1m7yA2IaFz
-5T+EppU26uSDTCqI0u2s6bdsVfebZ54TKA2V9bxHmtLAogHtPIY5/yLF66zmXAf/
-YohUUdUh9FcFjbRG4qUUD+Iema0+oZ3j63YjiTzNT05/oyQXel0UyacWGg4FhJ2c
-iEdCG0Tckh6Pya2Jc690jFGegXM5Dh3+teCrIfly1t3scAKzndAl1Qgh5lZHyYCG
-LVdXHSTDODOqwdTAghTriTlUUA3sE5JzGeNxSd+j+BMcyUuaJvyDxNwLoWnltJT8
-kCJlvs9a0J2LW7kvCqxCL1/oat9SYVnmCZPtpROPPpPrK0uXI+Qmm8NUCj8n95ta
-BnyXHq7H0RficGiShDKynsT4Z08SCWLvi2by5o+attdNVEuaPhw9kKSN3zBhS4Qo
-7onBISaqCbT2geVfM9vaWnnfX3AHHI1EtcQ3K6OQUVJEAbpLu0A4O1zcNEkfaTp+
-CSVFRXPQAwQtfAL0XZkYDlSFp2/bSWhZljOFr1At0q56Drj8zNqku0bilBtCStpx
-1vBaXQ==
-=m4A/
+hQEMA6k/ZHkmEjnXAQf+IGGcRGdILhRChfOWwugztcoFMbYqtFhYiwSTi3IbtUsp
+K4jBaRnQaPLWAfVjXQs+sV05fhJAn5FCK6ZXV4C7WZneA9UsmVqnRQuZ1pFm8mro
+Errm9lxpdBL41ohMENZbfG8dLg4dlGWqceY29RPEoz2p5YwZ2Fm+Wp4tcoexjv/F
+JshmAg+p2UIO+QaN9PJrejRxEChu9q2SHiz5gUa9Boa/tv0M4aV4vUqai4j+uLxL
+2MOnB/xIWisop7mtgY8ebl/RH6F2+kKWwxIddkFeY79KvdOHSNo2wkInS5w0xx8N
+yMXlrEj7ojLaGVXjwnJdq2nExmzmuJlsLZ0gZOvBTNLArAHCM/P/EahbJeuHwDDP
++2xqMSrUT2rr8oRAxNdzWsdacYrRGEgZM33u6Uqj+RxTEa1WwVxFkN7/JdL2nihv
+KoLV06azOFCprbEu1+yK73rph1/SLqnfom7uxKSu7ziNvImie1KveufoXXybRVdM
+iRxCkie/N6UzioxuIZ3Ur+pmL3MjtsaFuoT3eVCK6IRyuQi6ANEpGPsY1dytSSRb
+clcBdMbjzLW9lqeOwablZaF0DIWH5YP2G3p1GprW8/F04wZxgb3KVDkX4w4hy4rO
+SX7BuzrURVMtJTL1e/3qtusieobYtVspXDQX71Tn5LA2+FpCvBxYzzXOz67mzX1Q
++koCOnSM97Q+REdXR6vA8HNZjUrViaxI/Tn1T/B7H/hk1ylVtx/svGBgUkSvihCe
+T7Bin23ErTy3oSF9uJCHqJDEqMajVFRbKN6JcFG2zWiGz+KzPrn8lsHUAHUs24GD
+2g5/p3WupcXw4cHr40w=
+=Af+M
 -----END PGP MESSAGE-----
 
 * Shell
@@ -91,19 +91,20 @@ This part is to replace what was already there, before I started "going literal"
 ** Host aliases                                                       :crypt:
 -----BEGIN PGP MESSAGE-----
 
-hQEMA6k/ZHkmEjnXAQgAgi3uH6wfd58+0iApAzqik9lpqXVFzKC3S/Pz9Xpq9YVo
-DhiKApO4jBfQ4j9ybywyy9u17xA9bXAJGpF/RbMJC/IJjucCgHoUc5K9iaqr760T
-ZyA/Zg2WAy24JCkWv0H51YYcsxx/y614uUqU9CHr2JUv2CtGIyrmqfN6Ng1Ej89K
-IB97kifopvnkNacz2dzVdAoo/Vf3tAiszR9/vu/7m9ubqTXSIeXcpYqTD5lt3saS
-rDbhfLoPUJBt2U+kskV9RP+dcylSN4jgqHgOfbk1YfwPuaC7bRf0jmQC3emzMBQr
-/F3a1JsOPWZFJS9NsGbbEPqYu7Wa+/qDewPJs8sShdLAbAFzYvmGLTWAVW6Zbl1v
-MKt3cg6lI3a2rlKBUnCK06bIoQQAYS54SijRnqoGacpiWd15g7cQ0u6nKVGYnDWo
-SToUttf5569Z81iTxBZuBQaq6XZOcf+fHwzRyDyiDnYeBFuzxi80wXLGM+TEdOD9
-8MyPu769dUnoxdET5RIe4xwOCEYIMeVRnZeT1dH6gQKqoEHgFoZTek1SlTER/gFf
-U6oeunrhRnFdMQQ2/NyVV+NvHG0AaULZNV9pCago4FvcXzHDYk07qzxfoU6D6V/m
-skai0qYDd24UFBbJy8OdW1vTAJjPSZs7QljdK7bNrOnyPdu3AEjYZSz/vKlD2rpS
-LBsDdrcg0RWIoAHdQQWv5kZL1UAfLzkXM7rv3Bk1BOmEDCv+OtLjgpxcz9ZWZQ==
-=/IN5
+hQEMA6k/ZHkmEjnXAQf+LLpbyzmsI/m8m54Xj6arwRueLRp/SaDamR7FKAlAK75d
+nFBYhw8Ha22xkj3LuUKmBU4WIp1tGnANu4AGEXyIORpwmxlf4iArCEuvgLIshtas
+8cvbKiNY5ht2oxBCyI/jyJief0g1s8ruyeZbguttoToHzGUS1a1NccysuBr9keT3
+T6a8ttkxzGqxo/ML+yUP8zmamvUDDeoJoy8Pp5YRI5psMar7Q1yxbdT4d3hLMGsK
+ZYbIBhFPFxvD1YbmGmzSpH2wCfug9HRzH3reY/6tmdvPu/doqlEoPZp8lL16oNVe
+yYPR5VpZM46z5eX24MPA1aRdc2QcL3niTZL8ENLB6tLAeQHbgMts78lWnqZ1JnBs
+DboGR/XZFx51FhlLCEW7SmKUM2MABgqp7KqW+GJRn2ovtjHd86wkWr8+qD7fM66J
+WG2Np2nJkGr6KPdSOZA6QZ085f2Ii4dGQL28Emneu3OSS+w9nljvseFWcPyAOCjH
+eCjFYjReu22m0zxOSXq5J+6OqJ0DYR6D+aDN2SNi1u/OA3ZHvAfFRYEVg+KOyPh0
+m1TBpfdhWwhyyoeeZT8UNxF68uFILTXMOEg1GUnOaMi+Yx9zZhoB2a1PfjkXqJ4d
+bP07OF4LIKlwwlDEPmUylyfnbjFrV8Lo+os2mHpvGTv8CtoqmQ4u36aZl8eR9Azg
+AtI9vWqMBCNeBJXX1QEsesHib0BzhK6w007RbLlMfIRCg5qnGKzGa5z14eU+Esrx
+fFp7tjvThu5sRoU=
+=i7ss
 -----END PGP MESSAGE-----
 
 ** Command aliases
@@ -1083,19 +1084,19 @@ Using RCIRC for IRC makes sense.  I also use it to connect to my team's Slack.
 **** IRC servers                                                      :crypt:
 -----BEGIN PGP MESSAGE-----
 
-hQEMA6k/ZHkmEjnXAQgAgcEIJNxDtISxOT9P8h6eZ36qC53Eb42Hh6VmEyY0ODrF
-7SEwPC1OCObFHkHcLc9m1n+O1cAeHKqUj7f5DeeGkxpehxvL/43Aalvw4mOPU3yY
-VM84SIuOfJgD0ZPBryZYcsOmcYoroH7Yt7ZZ02gvYQ9zqE53Imi291+s96gCbX1u
-88w4OW/w3J/KJIbo/9Y0Lh5wn9DbWRpz/7CSmVdR8letQH1gZ1FhZJO8c4b9bpbg
-HacZFHFYq/hw9mKGNe1HiDBh8lCPesygGJFBWaMwtXiZEwhQn/+fUzNv0bwq/8Kd
-63D3EwKIIaGD+Zx5WzXXVfzwCk/iy/PvoqqRC7oZ6tLAZgH5cWMj0cIhPCDYzKnn
-Fn03siQt5yBQYmQrh6XDEymvDK2wu+yBbRmUUXH2YewcMf1XQKzh9EIa7zR2F1zO
-wkYlp8hqYsU2PaAsd+RFm1ZhKgLajzrGVwvCVNl9pX6WTb3OJJsyq/W62EBCm4b7
-NVq5dgH/AKwUA+6D1J8QSzBINZ14yUxmsn8/Igg4Wh3v7laNKSg7Yk8j6JSySfdV
-RYAE0fMsY2bCKuUU8GArdwZlrn9O0zpws2P85Y/8/cZ4VVjGisd9K2SAqbJVEbIE
-GIdIhLtWZ+3AaI3J6EOdK09dA4RzrXYW1+w/WD+hpf0RTlqinJSbTrCOcm7kCuFz
-r+ZjBSSIqEO5AK+nG3e6F68svpi6A6VCiVquGUA4bpXnKA8h5bXTdA==
-=jpgS
+hQEMA6k/ZHkmEjnXAQf7BY/4T7iHCZSl6D8utCThhEH7j4YDTkO2ae2Fc8+b7Zvl
+1WmxmFZYiR/VCtodzBpA00X9tUq3b+O6mkVOAzcfBh8S+hOfGn5xQHMICxM4OZax
+1bi1enmZKCVFlBTTo5lZDn1vIa4JXzRR/0d1G8iMloX8vKhnw+xY3f3N7yhz/nIP
+hXKrZZ1TKDFzqEy5Hqm5MFiAv4+fVXWZaKMTOlI5N8UQD862jcs2b9+iHZcZ+LoW
+b3TO0w/HYDvdNc+b+h4eokaehhw1X3cGNTA74uAXlYGOLA/H08DmxpLZ3V5xuWU/
+O2S79jf1Mgi4exjeOunwo6u8EBOoXtR+0B7j4CS6kNLAZwGXrD3fR6HLjuQz2FCy
+ewkkmp9ajuNjcLWUokCBwIFCk7FbHgVZcPcnjGKzdqQrFiWnVpd4iUSh5VYrN0IB
+tIKl0pp8WfDZVvixpj/UiC8F3n2RdNJ/RNWSL2s5ml8b9agOiagOia4RBYLT7Z/g
+8MF4YFzy+Ay/V6fuzS4WUd88vXByYIof11LNSoX6GNJtFTTzVe9EsuJGFDyBnseR
+yoqVB22znuwn8iq7c5GCwW9sRfHFd3j1tRp/cDGygaxIgWXk/X1eAud7Ev6ODCKn
+nVJSxU4Nz79B5MgxOLddiHYn3wO72ACgWpE2OvjrBRdc7nbBB8WZFOOv+3xe41qJ
+1RcdXotfGlG+x5PDMcD0fNqjU2p851FtfI947Z61T2ezJYF9RaX8UIg=
+=v6Su
 -----END PGP MESSAGE-----
 
 ** Secrets
