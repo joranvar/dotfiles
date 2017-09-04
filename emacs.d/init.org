@@ -1302,9 +1302,9 @@ I want to know where am, and have immediate visual feedback about my text.
 This is the theme I will use currently.
 
 #+BEGIN_SRC emacs-lisp 
-  (use-package leuven-theme
+  (use-package tao-theme
     :config (progn
-              (load-theme 'leuven t)))
+              (load-theme 'tao-yang t)))
 #+END_SRC
 
 ** Screens
