@@ -203,12 +203,12 @@ Do, please do, remove whitespace from the end of lines, before saving my buffers
   (use-package whitespace-cleanup-mode
     :diminish whitespace-mode global-whitespace-mode
     :config (progn
-              (setq-default whitespace-style '(face spaces tabs newline
-                                                    space-mark tab-mark
-                                                    newline-mark
-                                                    trailing lines-tail empty
-                                                    indentation::space
-                                                    space-after-tab::space)
+              (setq-default whitespace-style '(face ;spaces tabs space-mark
+                                               tab-mark
+                                               newline newline-mark
+                                               trailing lines-tail empty
+                                               indentation::space
+                                               space-after-tab::space)
                             whitespace-line-column 160
                             indent-tabs-mode nil
                             require-final-newline t)
