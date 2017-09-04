@@ -261,6 +261,21 @@ Previewing changes on the fly.
     :commands flymd-flyit)
 #+END_SRC
 
+** Finances
+
+It's about time I managed my finances a bit better.  Luckily, ledger is there to help me!
+
+#+BEGIN_SRC emacs-lisp
+  (use-package ledger-mode
+    :config (add-to-list 'joranvar/babel-safe-languages "ledger"))
+#+END_SRC
+
+With ledger, I want to have the following settings, though.
+
+#+BEGIN_SRC conf :tangle ~/.ledgerrc :comments noweb :tangle-mode (identity #o444)
+  --date-format %Y-%m-%d
+#+END_SRC
+
 ** Start Emacs as a server
 
 #+BEGIN_SRC emacs-lisp
@@ -941,11 +956,17 @@ Oh boy, org-babel is so nice!
 #+BEGIN_SRC emacs-lisp
   (use-package org
     :ensure org-plus-contrib
+    :init (progn
+            (defvar joranvar/babel-safe-languages nil))
     :config (progn
               (use-package ob-http)
               (org-babel-do-load-languages 'org-babel-load-languages '((sql . t)
                                                                        (shell . t)
-                                                                       (http . t)))))
+                                                                       (ledger . t)
+                                                                       (http . t)))
+              (defun joranvar/babel-safe-languagep (lang body)
+                (not (--any (string= lang it) joranvar/babel-safe-languages)))
+              (setq org-confirm-babel-evaluate #'joranvar/babel-safe-languagep)))
 #+END_SRC
 
 When exporting, I want to see pretty source code!

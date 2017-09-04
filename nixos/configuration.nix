@@ -149,6 +149,7 @@
     #skype
     #gitAndTools.git-annex
     zip
+    ledger
 
     #steam
     androidsdk
