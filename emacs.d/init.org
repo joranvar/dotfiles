@@ -793,7 +793,9 @@ Gnus will be used to read the mail that was pulled over here.
                     gnus-secondary-select-methods '((nnmaildir "Exchange"
                                                                (directory "~/Maildir/Exchange")
                                                                (directory-files nnheader-directory-files-safe)
-                                                               (get-new-mail nil)))
+                                                               (get-new-mail nil))
+                                                    (nntp "news.usenetserver.com")
+                                                    (nntp "news.gwene.org"))
                     mm-discouraged-alternatives '("text/html" "text/richtext") ;; Prefer text/plain
                     gnus-decay-scores t
                     gnus-fetch-old-headers t
