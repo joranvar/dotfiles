@@ -810,7 +810,7 @@ Gnus will be used to read the mail that was pulled over here.
                 (setq gnus-sum-thread-tree-leaf-with-other "├─► ")
                 (setq gnus-sum-thread-tree-single-leaf     "╰─► "))
               (setq-default gnus-summary-line-format "%U%R%z %(%&user-date;  %-15,15f  %B%s%)\n"
-                            gnus-user-date-format-alist '((t . "%Y-%m-%d %H:%M"))
+                            gnus-user-date-format-alist '((t . "%Y-%m-%dT%T%z"))
                             gnus-summary-thread-gathering-function 'gnus-gather-threads-by-subject
                             gnus-thread-sort-functions '(gnus-thread-sort-by-number (not gnus-thread-sort-by-total-score))
                             gnus-subthread-sort-functions '(gnus-sort-thread-by-number))
