@@ -819,7 +819,7 @@ Gnus will be used to read the mail that was pulled over here.
               (gnus-add-configuration
                '(article
                  (horizontal 1.0
-                             (vertical 25
+                             (vertical 50
                                        (group 1.0))
                              (vertical 1.0
                                        (summary 0.25 point)
@@ -827,7 +827,7 @@ Gnus will be used to read the mail that was pulled over here.
               (gnus-add-configuration
                '(summary
                  (horizontal 1.0
-                             (vertical 25
+                             (vertical 50
                                        (group 1.0))
                              (vertical 1.0
                                        (summary 1.0 point)))))))
