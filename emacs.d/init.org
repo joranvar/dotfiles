@@ -833,6 +833,16 @@ Gnus will be used to read the mail that was pulled over here.
                                        (summary 1.0 point)))))))
 #+END_SRC
 
+*** BUG FIX
+
+[[gnus:nntp+news.usenetserver.com:gnu.emacs.gnus#mailman.400.1505223107.14750.info-gnus-english@gnu.org][Email from Reiner Steib: Security: Gnus & GNU Emacs 25.]]
+
+#+BEGIN_SRC emacs-lisp
+  (eval-after-load "enriched"
+    '(defun enriched-decode-display-prop (start end &optional param)
+       (list start end)))
+#+END_SRC
+
 *** notmuch
 
 Notmuch will also be used to read the mail that was pulled over here.  Let's see how it compares to Gnus.
