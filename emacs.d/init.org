@@ -1330,6 +1330,27 @@ This is the theme I will use currently.
               (load-theme 'tao-yang t)))
 #+END_SRC
 
+And these are the colors.
+
+#+BEGIN_SRC emacs-lisp
+  (use-package rainbow-identifiers
+    :config (progn
+              ;;; Source: https://www.reddit.com/r/emacs/comments/6xpzx6/subword_syntax_highlighting_with/ by /u/gottabeme
+              (defun rainbow-identifiers--matcher (end)
+                "The matcher function to be used by font lock mode."
+                (catch 'rainbow-identifiers--matcher
+                  (while (re-search-forward (rx word-start (*? any) word-end) end t)
+                    (let ((beginning (match-beginning 0))
+                          (end (match-end 0)))
+                      (when (run-hook-with-args-until-failure 'rainbow-identifiers-filter-functions beginning end)
+                        (let* ((identifier (buffer-substring-no-properties beginning end))
+                               (hash (rainbow-identifiers--hash-function identifier)))
+                          (setq rainbow-identifiers--face (funcall rainbow-identifiers-choose-face-function hash))
+                          (throw 'rainbow-identifiers--matcher t)))))
+                  nil))
+              (add-hook 'prog-mode-hook 'rainbow-identifiers-mode)))
+#+END_SRC
+
 ** Screens
 
 Start with the correct resolutions.
