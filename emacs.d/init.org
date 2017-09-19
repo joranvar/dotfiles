@@ -525,7 +525,8 @@ In Haskell, use `dante`.
 
 #+BEGIN_SRC emacs-lisp
   (use-package powershell
-    :mode "\\.ps\\'")
+    :mode "\\.ps\\'"
+    :config (add-to-list 'aggressive-indent-excluded-modes 'powershell-mode))
 #+END_SRC
 
 *** Nix
