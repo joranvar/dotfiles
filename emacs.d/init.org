@@ -220,6 +220,14 @@ Do, please do, remove whitespace from the end of lines, before saving my buffers
               (global-whitespace-cleanup-mode)))
 #+END_SRC
 
+*** Whitespace visualisation
+
+#+BEGIN_SRC emacs-lisp
+  (use-package highlight-indent-guides
+    :config (progn
+              (add-hook 'prog-mode-hook #'highlight-indent-guides-mode)))
+#+END_SRC
+
 *** Search and replace
 
 Search and replace with regexes by default, and show me what you're about to do.
