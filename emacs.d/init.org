@@ -1128,19 +1128,53 @@ Using RCIRC for IRC makes sense.  I also use it to connect to my team's Slack.
 **** IRC servers                                                      :crypt:
 -----BEGIN PGP MESSAGE-----
 
-hQEMA6k/ZHkmEjnXAQf7BY/4T7iHCZSl6D8utCThhEH7j4YDTkO2ae2Fc8+b7Zvl
-1WmxmFZYiR/VCtodzBpA00X9tUq3b+O6mkVOAzcfBh8S+hOfGn5xQHMICxM4OZax
-1bi1enmZKCVFlBTTo5lZDn1vIa4JXzRR/0d1G8iMloX8vKhnw+xY3f3N7yhz/nIP
-hXKrZZ1TKDFzqEy5Hqm5MFiAv4+fVXWZaKMTOlI5N8UQD862jcs2b9+iHZcZ+LoW
-b3TO0w/HYDvdNc+b+h4eokaehhw1X3cGNTA74uAXlYGOLA/H08DmxpLZ3V5xuWU/
-O2S79jf1Mgi4exjeOunwo6u8EBOoXtR+0B7j4CS6kNLAZwGXrD3fR6HLjuQz2FCy
-ewkkmp9ajuNjcLWUokCBwIFCk7FbHgVZcPcnjGKzdqQrFiWnVpd4iUSh5VYrN0IB
-tIKl0pp8WfDZVvixpj/UiC8F3n2RdNJ/RNWSL2s5ml8b9agOiagOia4RBYLT7Z/g
-8MF4YFzy+Ay/V6fuzS4WUd88vXByYIof11LNSoX6GNJtFTTzVe9EsuJGFDyBnseR
-yoqVB22znuwn8iq7c5GCwW9sRfHFd3j1tRp/cDGygaxIgWXk/X1eAud7Ev6ODCKn
-nVJSxU4Nz79B5MgxOLddiHYn3wO72ACgWpE2OvjrBRdc7nbBB8WZFOOv+3xe41qJ
-1RcdXotfGlG+x5PDMcD0fNqjU2p851FtfI947Z61T2ezJYF9RaX8UIg=
-=v6Su
+hQELA6k/ZHkmEjnXAQf3YnBQBI3U849OWPrHJDYaRT3fqBCTTHSP6dso+6bwoCrq
+uhmPfVuplqfncUzrJRHaSXPgR1UdLD5Rltfp4gqQQGL3rjNrPpDjEtfeFyQ1s582
+HT+9j1ip+BrOQ53eN2XmpJ1qi19PMvgJBI6rarsLPqT56BB1+OySufab+Ceou55j
+Lp2zlQBjCCAD/eT+pIb14vuJbIb0vuFima/R404ZILWvC7Fw4D7n9CxAWN1M24WK
+mJfoavCWsWAbwqr7WYOECAqbBMMYLn2MZ0PshdQX0EsSMS6k11PeA+S1YCrthIx0
+gIuw5TUTl5We95UVQd+xMOSJdua2Cj0jmu488sde0sA7AU8cNBtxOiC2h43Aaq3p
+OS4MIE4KZNzVz0dXQXq6irtu7qBl78OOq2KrhmbUcuJxmtXfv4aK04IbVWbSReS2
+XT3OmvuI6mx4n3kqKZVpHWCAbPHo2bPfYHw3FwvdixBGZ7ztFsv7fJqMjDL3+LDH
+OpwqhzQBLSrggQbSAdZMPO8txrNqeSBKWkkUgeL+UA2tH9GO6DzSIyywmMtKd47X
+2IhmCO4ahWEcvtrUwzfqHMcMfzV1FL1VGRDaKk0U37JwrduJnQsEEJjr8swqWTWL
+FKnH70MC3UsIcxAGxFPVieoyiIOnH3rccXVj12t+GPeNV4Yv8l6nK0P8X5A=
+=tRx+
+-----END PGP MESSAGE-----
+
+*** Slack
+
+I used to use the IRC gateway for Slack, but now I'm using the `slack` package.
+
+#+BEGIN_SRC emacs-lisp :noweb yes
+  (use-package slack
+    :commands (slack-start)
+    :init (progn
+            (setq slack-buffer-emojify t)
+            (setq slack-prefer-current-team t))
+    :config (progn
+<<slack-teams>>
+))
+#+END_SRC
+
+*** Slack teams                                                       :crypt:
+-----BEGIN PGP MESSAGE-----
+
+hQEMA6k/ZHkmEjnXAQf/cf6UyeH4GJ3J/9DWZbw9MC/TK1ciehxQpde8nJQzzNFl
+SxW207G7txHzu1tdlr8c5hJiXOGcoGBFRDJn/tCsTlO+4yD6AraNxmbzQ7cRVJbn
+Q9jZOa8Sqcn4D1Fe1QTPoO6Ga7SS1+Bfo+UtPU6qljC82Wej1z1mHf+Oy59jJ28o
+2Sgurj4Uao8kJKLp4z4FxBcHCcaOViUHWc0taCfE21eCZLojTq1joVZFdCCaf/5/
+jAtQ3sYfEUX5BygyXMdZaaZtudQX2Gu8zYI7/cpA5R0mp3DKIj0lidlg17wPBzo4
+r1/27CknyMTGlWQDUwVG/ofwWc32vdbH795fn/P3YtLAzgERhpyYkwZug6OvZOcq
+Qad4cPYRnTd8H+eNPTW2b14iw14CW1A5z5kAFn2Z8NGv6SlwBIbAceleNwn+YIzd
+fR6/+FqdxxRB+ZJlDg5ORaGcVPpAMd5FwrXXi+y4lW1IlSp572rFdL4bLqhhEkqL
+fQE6QpdwnIAknDQQFezitqesEMwO44/djo6gmpjV0+AEawUsqTU8PUa07v5XjiKc
+HtcMt7Dv9d1nR68UnToQzdNv8EzlOCNZXE65RcCa0XdCEsEzfjh0v4yvXkOG9TLJ
+TNTv1SBE8HYM6F1J+GaIwAVLvPN8gCaSqmF4rWoHNgyZToMiBIq+Z96m1FSDOnMC
+BzieeonRKtrBUnbzheiLijICtdqg3ZLBWbnbKLRZ1l7aEvVen1N29Vui9xqL9Hcg
+vO8MbRJ2/WnE4Ouk4E4dEuic1M0EVcrPiaE0DOoddirGsVlrV5e+sgwmhgAqjiJT
+K0q0KimTwxIiVX257doxbNBwnaOd63GFk/dWZIUyX0Gf7/1yj4PAkTf5yPnjOGiL
+=ySpm
 -----END PGP MESSAGE-----
 
 ** Secrets
