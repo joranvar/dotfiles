@@ -1351,7 +1351,8 @@ I want to know where am, and have immediate visual feedback about my text.
   (setq auto-window-vscroll nil)          ; This should make the next-line command faster
 
   (use-package nlinum
-    :config (global-nlinum-mode))
+    :config (progn
+              (add-hook 'prog-mode-hook #'nlinum-mode)))
 #+END_SRC
 
 ** Theme to use
