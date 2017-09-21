@@ -826,6 +826,9 @@ Gnus will be used to read the mail that was pulled over here.
                             gnus-subthread-sort-functions '(gnus-sort-thread-by-number))
               (add-hook 'gnus-group-mode-hook 'gnus-topic-mode) ;; Show me topics
               (add-hook 'gnus-startup-hook (lambda () (gnus-demon-add-handler (lambda () (gnus-group-get-new-news 2)) 1 t)))
+              (use-package gnus-desktop-notify
+                :config (progn
+                          (gnus-desktop-notify-mode)))
               (gnus-add-configuration
                '(article
                  (horizontal 1.0
