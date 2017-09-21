@@ -1450,6 +1450,27 @@ A simple wallpaper clock.
               (spaceline-helm-mode)))
 #+END_SRC
 
+** Notifications
+
+#+BEGIN_SRC emacs-lisp
+  (use-package alert
+    :commands (alert)
+    :init (setq alert-default-style 'notifications))
+#+END_SRC
+
+Log the notifications with Sauron
+
+#+BEGIN_SRC emacs-lisp
+  (use-package sauron
+    :commands (sauron-start)
+    :config (progn
+              (setq sauron-notifications-urgency-to-priority-plist
+                    '(:low 3 :normal 4 :critical 5 :otherwise 3))
+              (setq alert-user-configuration (quote ((nil notifications nil))))
+              (setq sauron-hide-mode-line t
+                    sauron-sticky-frame t)))
+#+END_SRC
+
 ** Use UTF-8 by default
 
 #+BEGIN_SRC emacs-lisp
