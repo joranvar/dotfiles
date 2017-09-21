@@ -1095,6 +1095,30 @@ I just based this on https://emacs.cafe/emacs/orgmode/gtd/2017/06/30/orgmode-gtd
     (string= "TODO" (org-get-todo-state)))
 #+END_SRC
 
+*** "Bullet Journal"
+
+I tried to use a bullet journal.  I like the concept of mindfully
+writing down what comes to mind, and planning the day, and I do like
+the various ways that you can manually lay out and give color to the
+various sections.
+
+I do miss the organizational aspects of having a computer and a
+keyboard and macro's and clocking time and hyperlinking and ... well,
+you know, all the digital stuff.
+
+Let's try this, then.
+
+#+BEGIN_SRC emacs-lisp
+  (use-package org-journal
+    :bind (("C-c j" . org-journal-new-entry))
+    :config (progn
+              (setq org-journal-date-format "%Y-%m-%d"
+                    org-journal-date-prefix "#+TITLE: "
+                    org-journal-time-format "%R - "
+                    org-journal-time-prefix "* "
+                    org-journal-dir "~/org/journal/")))
+#+END_SRC
+
 *** Jira worklog integration
 
 #+BEGIN_SRC emacs-lisp
