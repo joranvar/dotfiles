@@ -1443,6 +1443,27 @@ I like my windows to be a bit transparent, so that I can see my desktop
   compton --backend xrender -fcCz -l -17 -t -17 --inactive-dim 0.5 --xrender-sync --unredir-if-possible --detect-transient --dbus &
 #+END_SRC
 
+Set "focused_force" of current window.
+0 means force unfocused.
+1 means force focused.
+2 means auto focus (default setting).
+
+#+BEGIN_SRC sh :tangle ~/bin/compton.set.focused_force :comments noweb :tangle-mode (identity #o555) :shebang "#!/usr/bin/env zsh"
+  dpy=$(echo -n "$DISPLAY" | tr -c '[:alnum:]' _)
+  focused=$(dbus-send --print-reply=literal --dest=com.github.chjj.compton.${dpy} / com.github.chjj.compton.find_win string:focused | awk '{print $2}')
+
+  dbus-send --print-reply=literal --dest=com.github.chjj.compton.${dpy} / com.github.chjj.compton.win_set uint32:${focused} string:focused_force uint16:$1
+#+END_SRC
+
+Get "focused_force"
+
+#+BEGIN_SRC sh :tangle ~/bin/compton.get.focused_force :comments noweb :tangle-mode (identity #o555) :shebang "#!/usr/bin/env zsh"
+  dpy=$(echo -n "$DISPLAY" | tr -c '[:alnum:]' _)
+  focused=$(dbus-send --print-reply=literal --dest=com.github.chjj.compton.${dpy} / com.github.chjj.compton.find_win string:focused | awk '{print $2}')
+
+  dbus-send --print-reply=literal --dest=com.github.chjj.compton.${dpy} / com.github.chjj.compton.win_get uint32:${focused} string:focused_force
+#+END_SRC
+
 ** Wallpapers
 
 A simple wallpaper clock.
