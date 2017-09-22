@@ -5,13 +5,14 @@ import Control.Arrow (first)
 import XMonad.Actions.PhysicalScreens (viewScreen, sendToScreen)
 
 -- Docks
-import XMonad.Hooks.ManageDocks (avoidStruts, docksEventHook, docksStartupHook, manageDocks, ToggleStruts(..))
+import XMonad.Hooks.ManageDocks (avoidStruts, docksEventHook, docksStartupHook, manageDocks, docks, ToggleStruts(..))
 
 -- Full Screen Events
-import XMonad.Hooks.EwmhDesktops (ewmh, fullscreenEventHook)
+import XMonad.Hooks.EwmhDesktops (ewmh)
 
 -- Window layout
 import XMonad (Tall(..), Mirror(..), Full(..), (|||), doShift, className, (=?), (-->))
+import XMonad.Layout.Fullscreen (fullscreenSupport)
 import XMonad.Layout.NoBorders (noBorders, smartBorders)
 
 -- Taffybar
@@ -42,8 +43,9 @@ main = do
 
 myConfig :: XConfig a -> XConfig _
 myConfig =
-  ewmh
+  docks
   . pagerHints
+  . fullscreenSupport
   . myModMask
   . myManageHook
   . applySteamSettings
@@ -55,6 +57,7 @@ myConfig =
   . applyScreenshot (mod4Mask, xK_s)
   . myTerminal
   . myKeys
+  . ewmh
 
 myModMask :: XConfig a -> XConfig a
 myModMask x = x { modMask = mod4Mask }
@@ -66,7 +69,7 @@ applySteamSettings :: XConfig a -> XConfig a
 applySteamSettings x = x { manageHook = className =? "hl2_linux" --> doShift "two" <+> manageHook x }
 
 myEventHook :: XConfig a -> XConfig a
-myEventHook x = x { handleEventHook = docksEventHook <+> fullscreenEventHook <+> handleEventHook x }
+myEventHook x = x { handleEventHook = docksEventHook <+> handleEventHook x }
 
 myLayoutHook :: XConfig a -> XConfig _
 myLayoutHook x = x { layoutHook = avoidStruts $ smartBorders tiled ||| smartBorders (Mirror tiled) ||| noBorders Full }
@@ -80,7 +83,7 @@ myWorkSpaces :: XConfig a -> XConfig a
 myWorkSpaces x = x { workspaces = ["i", "ii", "iii", "iv", "v", "vi"] }
 
 myStartupHook :: XConfig a -> XConfig a
-myStartupHook x = x { startupHook = setWMName "LG3D" <+> docksStartupHook <+> mapM_ spawnOnce startupCommands }
+myStartupHook x = x { startupHook = setWMName "LG3D" <+> mapM_ spawnOnce startupCommands <+> docksStartupHook }
   where
     startupCommands =
       [ "nm-applet"
@@ -109,7 +112,7 @@ applyScreensaver :: (ButtonMask, KeySym) -> XConfig a -> XConfig a
 applyScreensaver lockKey = addLockKey lockKey . addStartup
   where
     addLockKey key x = x `additionalKeys` [ (key, spawn "xscreensaver-command -lock") ]
-    addStartup x = x { startupHook = spawnOnce "/usr/bin/env xscreensaver -no-splash" >> startupHook x }
+    addStartup x = x { startupHook = spawnOnce "/usr/bin/env xscreensaver -no-splash" <+> startupHook x }
 
 applyScreenshot :: (ButtonMask, KeySym) -> XConfig a -> XConfig a
 applyScreenshot scrotKey = addScrotKey scrotKey
