@@ -11,11 +11,13 @@ import XMonad.Hooks.ManageDocks (avoidStruts, docksEventHook, docksStartupHook, 
 import XMonad.Hooks.EwmhDesktops (ewmh)
 
 -- Window layout
-import XMonad (Tall(..), Mirror(..), Full(..), (|||), doShift, className, (=?), (-->))
+import XMonad (Tall(..), Mirror(..), Full(..), doShift, className, (=?), (-->))
 import XMonad.Layout.CenteredMaster (centerMaster)
 import XMonad.Layout.Fullscreen (fullscreenSupport)
 import XMonad.Layout.Grid (Grid(..))
+import XMonad.Layout.LayoutCombinators ((|||), JumpToLayout(..))
 import XMonad.Layout.NoBorders (noBorders, smartBorders)
+import qualified XMonad.StackSet as W
 
 -- Taffybar
 import System.Taffybar.Hooks.PagerHints (pagerHints)
@@ -25,11 +27,11 @@ import XMonad.Actions.Volume (lowerVolume, raiseVolume, toggleMute)
 import Graphics.X11.ExtraTypes.XF86 (xF86XK_AudioLowerVolume, xF86XK_AudioRaiseVolume, xF86XK_AudioMute)
 
 -- Events
-import XMonad (spawn, sendMessage)
+import XMonad (spawn, sendMessage, windows)
 import XMonad.Util.SpawnOnce (spawnOnce)
 
 -- Keys
-import XMonad (mod4Mask, (.|.), shiftMask, xK_l, xK_b, xK_p, xK_q, xK_x, xK_w, xK_r, xK_e, xK_s, xK_f, KeySym, ButtonMask)
+import XMonad (mod4Mask, (.|.), shiftMask, xK_l, xK_b, xK_p, xK_q, xK_x, xK_w, xK_r, xK_e, xK_s, xK_f, xK_z, KeySym, ButtonMask)
 import XMonad.Util.EZConfig (additionalKeys)
 
 -- WMName (for Java swing GUI)
@@ -97,6 +99,8 @@ myTerminal x = x { terminal = "/usr/bin/env termite" }
 myKeys :: XConfig a -> XConfig a
 myKeys = flip additionalKeys $
    [ ((mod4Mask,               xK_b                    ), sendMessage ToggleStruts)
+   , ((mod4Mask,               xK_z                    ), sendMessage (JumpToLayout "Grid") >> windows W.swapMaster)
+   , ((mod4Mask,               xK_f                    ), sendMessage (JumpToLayout "Full"))
    , ((mod4Mask,               xK_p                    ), spawn "exec $(yeganesh -x -- -nb orange -nf '#444' -sb yellow -sf black -fn Monospace-9:normal)")                     -- Run command
    , ((mod4Mask .|. shiftMask, xK_p                    ), spawn "termite -e $(yeganesh -x -- -nb orange -nf '#444' -sb yellow -sf black -fn Monospace-9:normal)") -- Run command in terminal
    , ((mod4Mask,               xK_x                    ), spawn "~/dotfiles/xmonad/xrandr-toggle.sh")
