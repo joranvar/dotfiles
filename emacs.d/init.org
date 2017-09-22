@@ -1056,7 +1056,9 @@ I just based this on https://emacs.cafe/emacs/orgmode/gtd/2017/06/30/orgmode-gtd
 #+BEGIN_SRC emacs-lisp :tangle no
   (setq org-agenda-files '("~/org/inbox.org"
                            "~/org/gtd.org"
-                           "~/org/tickler.org")
+                           "~/org/tickler.org"
+                           "~/org/journal")
+        org-agenda-file-regexp (rx bos (not (any ?.)) (or (0+ digit) (and (0+ nonl) ".org")) eos)
         org-refile-targets '(("~/org/gtd.org" :maxlevel . 3)
                              ("~/org/someday.org" :level . 1)
                              ("~/org/tickler.org" :maxlevel . 2))
@@ -1073,7 +1075,8 @@ I just based this on https://emacs.cafe/emacs/orgmode/gtd/2017/06/30/orgmode-gtd
                                  "* %i%?\n%^t%a\n"))
         org-agenda-custom-commands '((" " "Default" ((agenda "")
                                                      (todo "" ((org-agenda-overriding-header "INBOX")
-                                                               (org-agenda-files '("~/org/inbox.org"))))
+                                                               (org-agenda-files '("~/org/inbox.org"
+                                                                                   "~/org/journal/"))))
                                                      (todo "" ((org-agenda-overriding-header "Next Action")
                                                                (org-agenda-skip-function #'joranvar:org-agenda-skip-all-siblings-but-first)
                                                                (org-agenda-files (remove "~/org/inbox.org" org-agenda-files))
