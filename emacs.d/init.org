@@ -809,7 +809,11 @@ Gnus will be used to read the mail that was pulled over here.
                     gnus-decay-scores t
                     gnus-fetch-old-headers nil
                     gnus-build-sparse-threads t
-                    gnus-visible-headers "^From:\\|^Newsgroups:\\|^Subject:\\|^Date:\\|^Followup-To:\\|^Reply-To:\\|^Organization:\\|^Summary:\\|^Keywords:\\|^To:\\|^[BGF]?Cc:\\|^Posted-To:\\|^Mail-Copies-To:\\|^Mail-Followup-To:\\|^Apparently-To:\\|^Gnus-Warning:\\|^Resent-From:\\|^User-Agent:\\|^X-Newsreader:\\|X-MS-Has-Attach:\\|X-Mailer:"
+                    gnus-visible-headers (rx bol (or "From" "Newsgroups" "Subject" "Date" "Followup-To" "Reply-To" "Organization"
+                                                     "Summary" "Keywords" "To" (and (opt (any "BGF")) "Cc") "Posted-To" "Mail-Copies-To" "Mail-Followup-To"
+                                                     "Apparently-To" "Gnus-Warning" "Resent-From"
+                                                     "User-Agent" "X-Newsreader" "X-MS-Has-Attach" "X-Mailer")
+                                             ":")
                     gnus-use-adaptive-scoring t)
               (when window-system
                 (setq gnus-sum-thread-tree-indent "  ")
