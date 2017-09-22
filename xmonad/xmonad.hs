@@ -12,7 +12,9 @@ import XMonad.Hooks.EwmhDesktops (ewmh)
 
 -- Window layout
 import XMonad (Tall(..), Mirror(..), Full(..), (|||), doShift, className, (=?), (-->))
+import XMonad.Layout.CenteredMaster (centerMaster)
 import XMonad.Layout.Fullscreen (fullscreenSupport)
+import XMonad.Layout.Grid (Grid(..))
 import XMonad.Layout.NoBorders (noBorders, smartBorders)
 
 -- Taffybar
@@ -72,7 +74,7 @@ myEventHook :: XConfig a -> XConfig a
 myEventHook x = x { handleEventHook = docksEventHook <+> handleEventHook x }
 
 myLayoutHook :: XConfig a -> XConfig _
-myLayoutHook x = x { layoutHook = avoidStruts $ smartBorders tiled ||| smartBorders (Mirror tiled) ||| noBorders Full }
+myLayoutHook x = x { layoutHook = avoidStruts $ (smartBorders tiled ||| smartBorders (Mirror tiled)) ||| noBorders Full ||| smartBorders (centerMaster Grid) }
   where
     tiled = Tall nmaster delta tiled_ratio
     nmaster = 1
