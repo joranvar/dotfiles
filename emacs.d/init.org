@@ -1076,7 +1076,8 @@ I just based this on https://emacs.cafe/emacs/orgmode/gtd/2017/06/30/orgmode-gtd
         org-agenda-custom-commands '((" " "Default" ((agenda "")
                                                      (todo "" ((org-agenda-overriding-header "INBOX")
                                                                (org-agenda-files '("~/org/inbox.org"
-                                                                                   "~/org/journal/"))))
+                                                                                   "~/org/journal/"))
+                                                               (org-agenda-todo-ignore-scheduled 'all)))
                                                      (todo "" ((org-agenda-overriding-header "Next Action")
                                                                (org-agenda-skip-function #'joranvar:org-agenda-skip-all-siblings-but-first)
                                                                (org-agenda-files (remove "~/org/inbox.org" org-agenda-files))
