@@ -1038,6 +1038,7 @@ Also: exported listings should be pretty.
                     org-agenda-todo-ignore-scheduled 'future
                     org-agenda-skip-timestamp-if-done t
                     org-clock-report-include-clocking-task t
+                    org-clock-out-remove-zero-time-clocks t
                     org-refile-use-outline-path t
                     org-outline-path-complete-in-steps nil
                     org-agenda-prefix-format '((agenda . " %i %-12:c%?-12t% s")
