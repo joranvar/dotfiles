@@ -91,3 +91,10 @@ function possibly_valid_url (str) {
         !(/\S\s+\S/.test(str)) &&
         !(/^\s*$/.test(str));
 }
+
+/// Disable conkeror interpretation of keys on some sites
+require("key-kill");
+key_kill_mode.test.push(/^https:\/\/jira.cgm.ag\//);
+key_kill_mode.test.push(/^http:\/\/localhost:10080\//);
+key_kill_input_fields = true;
+
