@@ -1061,7 +1061,7 @@ I just based this on https://emacs.cafe/emacs/orgmode/gtd/2017/06/30/orgmode-gtd
                            "~/org/gtd.org"
                            "~/org/tickler.org"
                            "~/org/journal")
-        org-agenda-file-regexp (rx bos (not (any ?.)) (or (0+ digit) (and (0+ nonl) ".org")) eos)
+        org-agenda-file-regexp (rx bos (not (any ?.)) (0+ nonl) ".org" eos)
         org-refile-targets '(("~/org/gtd.org" :maxlevel . 3)
                              ("~/org/someday.org" :level . 1)
                              ("~/org/tickler.org" :maxlevel . 2))
@@ -1127,7 +1127,8 @@ Let's try this, then.
                     org-journal-date-prefix "#+TITLE: "
                     org-journal-time-format "%R - "
                     org-journal-time-prefix "* "
-                    org-journal-dir "~/org/journal/")))
+                    org-journal-dir "~/org/journal/"
+                    org-journal-file-format "%Y%m%d.org")))
 #+END_SRC
 
 *** Jira worklog integration
