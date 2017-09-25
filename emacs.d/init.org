@@ -1622,6 +1622,13 @@ Thanks Wilfred (https://www.emacswiki.org/emacs/ToggleWindowSplit).
     :init (progn (global-prettify-symbols-mode t)))
 #+END_SRC
 
+** Use completion for emoji
+
+#+BEGIN_SRC emacs-lisp
+  (use-package company-emoji
+    :config (add-to-list 'company-backends 'company-emoji))
+#+END_SRC
+
 ** Use icons
 
 #+BEGIN_SRC emacs-lisp
