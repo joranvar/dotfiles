@@ -373,10 +373,14 @@ Each project is either a version controlled (~magit~!) directory, or some direct
               (use-package helm-projectile
                 :config (progn
                           (helm-projectile-on)))
-              (setq projectile-switch-project-action (lambda ()
-                                                       (if (magit-git-repo-p (projectile-project-root))
-                                                           (magit-status-internal (projectile-project-root))
-                                                         (dired (projectile-project-root))))))
+              (use-package treemacs-projectile
+                :config (progn
+                          (setq treemacs-header-function #'treemacs-projectile-create-header)
+                          (setq projectile-switch-project-action (lambda ()
+                                                                   (if (magit-git-repo-p (projectile-project-root))
+                                                                       (magit-status-internal (projectile-project-root))
+                                                                     (dired (projectile-project-root)))
+                                                                   (treemacs-projectile))))))
     (setq magit-repository-directories (mapcar (lambda (dir)
                                                  (substring dir 0 -1))
                                                (-filter (lambda (project)
@@ -403,10 +407,7 @@ Use treemacs in combination with projectile
                     treemacs-is-never-other-window      nil
                     treemacs-goto-tag-strategy          'refetch-index)
               (treemacs-follow-mode t)
-              (treemacs-filewatch-mode t))
-    (use-package treemacs-projectile
-      :config (progn
-                (setq treemacs-header-function #'treemacs-projectile-create-header))))
+              (treemacs-filewatch-mode t)))
 #+END_SRC
 
 ** Completion
