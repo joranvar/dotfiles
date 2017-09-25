@@ -373,22 +373,40 @@ Each project is either a version controlled (~magit~!) directory, or some direct
               (use-package helm-projectile
                 :config (progn
                           (helm-projectile-on)))
-              (use-package neotree
-                :config (progn
-                          (setq neo-smart-open t)
-                          (setq neo-theme 'icons)
-                          (setq projectile-switch-project-action (lambda ()
-                                                                   (if (magit-git-repo-p (projectile-project-root))
-                                                                       (magit-status-internal (projectile-project-root))
-                                                                     (dired (projectile-project-root)))
-                                                                   ;; (neotree-projectile-action)
-                                                                   ))))
-              (setq magit-repository-directories (mapcar (lambda (dir)
-                                                           (substring dir 0 -1))
-                                                         (-filter (lambda (project)
-                                                                    (file-directory-p (concat project "/.git/")))
-                                                                  (projectile-relevant-known-projects)))
-                    magit-repository-directories-depth 1)))
+              (setq projectile-switch-project-action (lambda ()
+                                                       (if (magit-git-repo-p (projectile-project-root))
+                                                           (magit-status-internal (projectile-project-root))
+                                                         (dired (projectile-project-root))))))
+    (setq magit-repository-directories (mapcar (lambda (dir)
+                                                 (substring dir 0 -1))
+                                               (-filter (lambda (project)
+                                                          (file-directory-p (concat project "/.git/")))
+                                                        (projectile-relevant-known-projects)))
+          magit-repository-directories-depth 1)))
+#+END_SRC
+
+Use treemacs in combination with projectile
+
+#+BEGIN_SRC emacs-lisp
+  (use-package treemacs
+    :config (progn
+              (setq treemacs-follow-after-init          t
+                    treemacs-width                      35
+                    treemacs-indentation                2
+                    treemacs-git-integration            t
+                    treemacs-collapse-dirs              3
+                    treemacs-silent-refresh             nil
+                    treemacs-change-root-without-asking nil
+                    treemacs-sorting                    'alphabetic-desc
+                    treemacs-show-hidden-files          t
+                    treemacs-never-persist              nil
+                    treemacs-is-never-other-window      nil
+                    treemacs-goto-tag-strategy          'refetch-index)
+              (treemacs-follow-mode t)
+              (treemacs-filewatch-mode t))
+    (use-package treemacs-projectile
+      :config (progn
+                (setq treemacs-header-function #'treemacs-projectile-create-header))))
 #+END_SRC
 
 ** Completion
