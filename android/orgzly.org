@@ -1,0 +1,31 @@
+#+TITLE Orgzly stuff
+
+I happen to like orgzly for my android.  And because I want to share my org docs between my emacs and orgzly, these scripts are for sharing them.
+
+Credit to https://2li.ch/home/syncing-org-files where I found this method, but for fetching only.
+
+#+BEGIN_SRC sh :tangle ~/tmp/android/init_notes.sh :comments noweb :tangle-mode (identity #o555) :shebang "#!/bin/bash" :mkdirp yes
+  git config --global user.email bart.post@gmail.com
+  git config --global user.name "Nexus5X"
+  git clone https://joranvar@github.com/org /sdcard/Git/notes
+  git -C /sdcard/Git/notes checkout -b nexus
+#+END_SRC
+
+#+BEGIN_SRC sh :tangle ~/tmp/android/fetch_notes.sh :comments noweb :tangle-mode (identity #o555) :shebang "#!/bin/bash" :mkdirp yes
+  date +"%Y-%m-%d %H:%M:%S - fetch" >> ~/notes.log
+  git -C /sdcard/Git/notes fetch >> ~/notes.log
+  git -C /sdcard/Git/notes reset --hard origin/master >> ~/notes.log
+  am startservice --user 0 -a com.orgzly.intent.action.SYNC_START com.orgzly/com.orgzly.android.sync.SyncService >> ~/notes.log
+  exit 0
+#+END_SRC
+
+#+BEGIN_SRC sh :tangle ~/tmp/android/push_notes.sh :comments noweb :tangle-mode (identity #o555) :shebang "#!/bin/bash" :mkdirp yes
+  date +"%Y-%m-%d %H:%M:%S - push" >> ~/notes.log
+  am startservice --user 0 -a com.orgzly.intent.action.SYNC_START com.orgzly/com.orgzly.android.sync.SyncService >> ~/notes.log
+  sleep 10
+  git -C /sdcard/Git/notes commit -am "$(date +'%Y-%m-%d %H:%M')" >> ~/notes.log
+  git -C /sdcard/Git/notes push origin >> ~/notes.log
+  exit 0
+#+END_SRC
+
+Don't forget to run ~chmod +x~ and ~termux-fix-shebang~ on the scripts, to make them work.
