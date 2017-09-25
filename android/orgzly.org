@@ -28,4 +28,6 @@ Credit to https://2li.ch/home/syncing-org-files where I found this method, but f
   exit 0
 #+END_SRC
 
+Start termux on android, make a dir ~/.termux/tasker and move the scripts there, so that you can start them with the Termux:Tasker plugin.
+
 Don't forget to run ~chmod +x~ and ~termux-fix-shebang~ on the scripts, to make them work.
