@@ -367,7 +367,7 @@ Each project is either a version controlled (~magit~!) directory, or some direct
               (projectile-global-mode)
               (setq projectile-indexing-method 'alien
                     projectile-completion-system 'helm
-                    ;; projectile-enable-caching t ;; This messes up tramp-sudo, see https://github.com/bbatsov/projectile/issues/835
+                    projectile-enable-caching t ;; This messes up tramp-sudo, see https://github.com/bbatsov/projectile/issues/835
                     projectile-enable-idle-timer t)
               (use-package helm-ag)
               (use-package helm-projectile
