@@ -25,7 +25,7 @@ Credit to https://2li.ch/home/syncing-org-files where I found this method, but f
   am startservice --user 0 -a com.orgzly.intent.action.SYNC_START com.orgzly/com.orgzly.android.sync.SyncService >> ~/notes.log
   sleep 10
   git -C /sdcard/Git/notes commit -am "$(date +'%Y-%m-%d %H:%M')" >> ~/notes.log
-  git -C /sdcard/Git/notes push origin >> ~/notes.log
+  git -C /sdcard/Git/notes push --force-with-lease origin >> ~/notes.log
   exit 0
 #+END_SRC
 
