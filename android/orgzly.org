@@ -9,6 +9,7 @@ Credit to https://2li.ch/home/syncing-org-files where I found this method, but f
   git config --global user.name "Nexus5X"
   git clone https://joranvar@github.com/org /sdcard/Git/notes
   git -C /sdcard/Git/notes checkout -b nexus
+  git -C /sdcard/Git/notes branch -u origin/nexus nexus
 #+END_SRC
 
 #+BEGIN_SRC sh :tangle ~/tmp/android/fetch_notes.sh :comments noweb :tangle-mode (identity #o555) :shebang "#!/bin/bash" :mkdirp yes
