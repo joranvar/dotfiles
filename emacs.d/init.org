@@ -1097,6 +1097,7 @@ Also: exported listings should be pretty.
                     org-clock-out-remove-zero-time-clocks t
                     org-refile-use-outline-path t
                     org-log-into-drawer t
+                    org-log-done 'time
                     org-outline-path-complete-in-steps nil
                     org-agenda-prefix-format '((agenda . " %i %-12:c%?-12t% s")
                                                (timeline . "  % s")
