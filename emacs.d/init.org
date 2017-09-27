@@ -380,13 +380,13 @@ Each project is either a version controlled (~magit~!) directory, or some direct
                                                                    (if (magit-git-repo-p (projectile-project-root))
                                                                        (magit-status-internal (projectile-project-root))
                                                                      (dired (projectile-project-root)))
-                                                                   (treemacs-projectile))))))
-    (setq magit-repository-directories (mapcar (lambda (dir)
-                                                 (substring dir 0 -1))
-                                               (-filter (lambda (project)
-                                                          (file-directory-p (concat project "/.git/")))
-                                                        (projectile-relevant-known-projects)))
-          magit-repository-directories-depth 1)))
+                                                                   (treemacs-projectile)))))
+              (setq magit-repository-directories (mapcar (lambda (dir)
+                                                           (substring dir 0 -1))
+                                                         (-filter (lambda (project)
+                                                                    (file-directory-p (concat project "/.git/")))
+                                                                  (projectile-relevant-known-projects)))
+                    magit-repository-directories-depth 1)))
 #+END_SRC
 
 Use treemacs in combination with projectile
