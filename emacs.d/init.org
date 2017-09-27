@@ -275,6 +275,7 @@ It's about time I managed my finances a bit better.  Luckily, ledger is there to
 
 #+BEGIN_SRC emacs-lisp
   (use-package ledger-mode
+    :commands ledger-mode
     :config (add-to-list 'joranvar/babel-safe-languages "ledger"))
 #+END_SRC
 
