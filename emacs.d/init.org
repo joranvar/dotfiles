@@ -1197,6 +1197,39 @@ Let's try this, then.
   (load "/home/joranvar/dotfiles/emacs.d/lisp/org-log-to-jira/org-log-to-jira.el")
 #+END_SRC
 
+*** Syncing calendar with caldav
+
+#+BEGIN_SRC emacs-lisp :noweb yes
+  (use-package org-caldav
+    :commands org-caldav-sync
+    :config (progn
+              (setq org-caldav-url 'google
+                    org-caldav-calendar-id "bart.post@gmail.com"
+                    org-caldav-inbox "~/org/calendar.org"
+                    org-caldav-files org-agenda-files
+                    org-icalendar-timezone "Europe/Amsterdam")
+              <<org-caldav-secrets>>
+              ))
+#+END_SRC
+
+**** org-caldav-secrets                                               :crypt:
+-----BEGIN PGP MESSAGE-----
+
+hQEMA6k/ZHkmEjnXAQf/dCinaR2uGEzuxe8bzAiCWIFljhrz7e9JBMGM1l/SefY6
+USAdqt/Uh7682ptUEds5CFV7MouCR/0R11G4RnM2NQaa23U5c5oFVmM8wch+jRqv
+fCFeCwK8xzidJvZkVCcvk914JoGgfy51dYJdvyWGjUGGEusvqcIpn5u2cd15cz7I
+6tBgilmGb7JDet8gxvnsx/JxQJgfUegY5gOLOBGL77rnFZmOQA3vQNqWtm3KIHE6
+wrO2PiEcDqrTlmhKLA0ADMWSQxk/QDSZ3yr3mFbDVdaSY4ujZDBoWXpZ54LCtW+a
+ZrXfZsbmbe/AXUPe7NgUrDvBi5LPBI2axhMKvApBPNLARwE1SOR3pC+3ffIJ31Pv
+eJNVJxVE9uHms1aHzBsGzy8DORqmKl5pp4nyiY3/F9KHHSm6CDGYQBNqUzOZxo2j
+pHyweFmANNU3mBUwL+NIEIXpvMZ2AQLsD//iihoczDOFVX2iHFhAcAEzpyCntha0
+zl9qKMmcHw1uEzIp9skRKIqIp5pedx/BgN1muDRgt94qhC16/GJxtANUC3gu+yXT
+9fz7iReq7vWf+YfWytKAEv4p50JbUw5HZ6PANtXH9/ld6x47nw6W9/6zgBQ4mHpM
+94QNMm233LFMAgA9mwg60NeEs7/kPRFV5hPCOvCDuHToArA0gYYgzgxCBPThi2m6
+e4fzBjglDbB3
+=Asha
+-----END PGP MESSAGE-----
+
 ** Communication
 
 *** IRC
