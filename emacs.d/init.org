@@ -1078,7 +1078,8 @@ Also: exported listings should be pretty.
 #+BEGIN_SRC emacs-lisp :noweb yes
   (use-package org
     :bind (("C-c a" . org-agenda)
-           ("C-c c" . org-capture))
+           ("C-c c" . org-capture)
+           ("C-c C-o" . org-open-at-point-global))
     :config (progn
               (setq org-use-sub-superscripts '{}
                     org-pretty-entities t
