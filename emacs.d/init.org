@@ -422,6 +422,19 @@ Use treemacs in combination with projectile
               (setq company-idle-delay 0.1)))
 #+END_SRC
 
+*** ~yasnippet~
+
+Some snippets are entered more often than others.  I want to save
+time, thinking and typing mistakes on those.
+
+#+BEGIN_SRC emacs-lisp
+  (use-package yasnippet
+    :config (progn
+              (yas-global-mode 1)
+              (add-to-list 'company-backends 'company-ghc)
+              (use-package yasnippet-snippets)))
+#+END_SRC
+
 ** Programming
 
 *** General stuff
