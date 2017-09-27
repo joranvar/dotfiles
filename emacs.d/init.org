@@ -970,6 +970,30 @@ Also, I want to be able to compose mail in org-mode and send it as html.
 
 #+END_SRC
 
+** Contact management
+
+Why not slurp my contacts' addresses into emacs?
+
+#+BEGIN_SRC emacs-lisp
+  (use-package bbdb
+    :config (progn
+              (add-hook 'mail-setup-hook 'bbdb-mail-aliases)
+              (bbdb-initialize 'gnus 'message)
+              (bbdb-mua-auto-update-init 'gnus 'message)
+              (setq bbdb-mua-update-interactive-p '(query . create)
+                    bbdb-update-records-p 'create
+                    bbdb-notice-mail-hook 'bbdb-auto-notes
+                    bbdb-auto-notes-rules (list
+                                           '("Date" (".*" lastseen identity nil))
+                                           '("User-Agent" (".*" mailer identity nil)))
+                    bbdb-accept-message-alist '(("To" . "bart\.post@")
+                                                ("Cc" . "bart\.post@")
+                                                ("Bcc" . "bart\.post@"))
+                    bbdb-ignore-message-alist '(("From" . "@linkedin")))))
+  (use-package helm-bbdb)
+#+END_SRC
+
+
 ** Browsing
 
 Use conkeror by default.
