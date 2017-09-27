@@ -1564,6 +1564,7 @@ A simple wallpaper clock.
   ;; (use-package powerline
   ;;   :config (powerline-default-theme))
   (use-package spaceline
+    :disabled t
     :config (progn
               (require 'spaceline-config)
               (spaceline-emacs-theme)
