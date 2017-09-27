@@ -1147,7 +1147,9 @@ Let's try this, then.
                     org-journal-time-format "%R - "
                     org-journal-time-prefix "* "
                     org-journal-dir "~/org/journal/"
-                    org-journal-file-format "%Y%m%d.org")))
+                    org-journal-file-format "%Y%m%d.org"
+                    org-journal-file-pattern "^\\(?1:[0-9]\\{4\\}\\)\\(?2:[0-9][0-9]\\)\\(?3:[0-9][0-9]\\).org\\'")
+              (org-journal-update-auto-mode-alist)))
 #+END_SRC
 
 *** Jira worklog integration
