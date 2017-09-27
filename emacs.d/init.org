@@ -1459,10 +1459,13 @@ I want to know where am, and have immediate visual feedback about my text.
 
 This is the theme I will use currently.
 
-#+BEGIN_SRC emacs-lisp 
+#+BEGIN_SRC emacs-lisp
   (use-package tao-theme
+    :disabled
     :config (progn
-              (load-theme 'tao-yang t)))
+              (disable-theme 'tao-yin)
+              (load-theme 'tao-yin t)))
+
 #+END_SRC
 
 And these are the colors.
