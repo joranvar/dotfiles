@@ -1118,7 +1118,8 @@ I just based this on https://emacs.cafe/emacs/orgmode/gtd/2017/06/30/orgmode-gtd
   (setq org-agenda-files '("~/org/inbox.org"
                            "~/org/gtd.org"
                            "~/org/tickler.org"
-                           "~/org/journal")
+                           "~/org/journal"
+                           "~/org/calendar.org")
         org-agenda-file-regexp (rx bos (not (any ?.)) (0+ nonl) ".org" eos)
         org-refile-targets '(("~/org/gtd.org" :maxlevel . 3)
                              ("~/org/someday.org" :level . 1)
