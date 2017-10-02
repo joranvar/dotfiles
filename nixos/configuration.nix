@@ -158,6 +158,7 @@
 #    chromium
 
     pass
+    lastpass-cli
     yubikey-personalization
     yubikey-personalization-gui
     opensc
