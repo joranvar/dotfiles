@@ -728,7 +728,7 @@ This script was downloaded (and adjusted a tiny bit) from http://groups.google.c
 
 #+BEGIN_SRC conf
   [general]
-  accounts = Gmail, Exchange
+  accounts = Gmail, TopVintage
   maxsyncaccounts = 2
   pythonfile = ~/.offlineimap.py
 
@@ -753,23 +753,23 @@ This script was downloaded (and adjusted a tiny bit) from http://groups.google.c
   sslcacertfile = /etc/ssl/certs/ca-certificates.crt
 
   # These are effectively the same as the above
-  [Account Exchange]
-  localrepository = LocalExchange
-  remoterepository = RemoteExchange
+  [Account TopVintage]
+  localrepository = LocalTopVintage
+  remoterepository = RemoteTopVintage
   autorefresh = 5
   quick = 10
   postsynchook = ~/sync_nnmaildir -m
   presynchook = ~/sync_nnmaildir -g
 
-  [Repository LocalExchange]
+  [Repository LocalTopVintage]
   type = Maildir
-  localfolders = ~/Maildir/Exchange
+  localfolders = ~/Maildir/TopVintage
 
   # This uses davmail
-  [Repository RemoteExchange]
+  [Repository RemoteTopVintage]
   type = IMAP
   maxconnections = 2
-  remoteuser = bart.post@cgm.com
+  remoteuser = bart@topvintage.nl
   remotehost = localhost
   remotepasseval = get_password_emacs("localhost", "1143")
   remoteport = 1143
@@ -827,12 +827,17 @@ Gnus will be used to read the mail that was pulled over here.
 #+BEGIN_SRC emacs-lisp
   (use-package gnus
     :config (progn
-              (setq gnus-select-method '(nnmaildir "GMail"
-                                                   (directory "~/Maildir/Gmail")
-                                                   (directory-files nnheader-directory-files-safe)
-                                                   (get-new-mail nil))
-                    gnus-secondary-select-methods '((nnmaildir "Exchange"
-                                                               (directory "~/Maildir/Exchange")
+              (setq gnus-select-method '(nntp "news.xs4all.nl")
+                    gnus-secondary-select-methods '((nnmaildir "GMail"
+                                                               (directory "~/Maildir/Gmail")
+                                                               (directory-files nnheader-directory-files-safe)
+                                                               (get-new-mail nil))
+                                                    (nnmaildir "TopVintage"
+                                                               (directory "~/Maildir/TopVintage")
+                                                               (directory-files nnheader-directory-files-safe)
+                                                               (get-new-mail nil))
+                                                    (nnmaildir "CGM"
+                                                               (directory "~/Maildir/CGM")
                                                                (directory-files nnheader-directory-files-safe)
                                                                (get-new-mail nil))
                                                     (nntp "news.usenetserver.com")
@@ -942,7 +947,11 @@ When sending a mail, it should reflect who I want to send it as (from my work ma
                        (signature "")
                        (address "bart.post@gmail.com")
                        ("X-Message-SMTP-Method" "smtp smtp.gmail.com 587 bart.post@gmail.com"))
-                      ("Exchange"
+                      ("TopVintage"
+                       (signature "Bart Post\nBackend Genius\nTopVintage B.V.")
+                       (address "bart@topvintage.nl")
+                       ("X-Message-SMTP-Method" "smtp localhost 1025 bart.post@cgm.com"))
+                      ("CGM"
                        (signature "Bart Post\nApplication Programmer Team Satellite\nCompugroup Medical B.V.")
                        (address "bart.post@cgm.com")
                        ("X-Message-SMTP-Method" "smtp localhost 1025 bart.post@cgm.com"))))
@@ -1294,21 +1303,22 @@ I used to use the IRC gateway for Slack, but now I'm using the `slack` package.
 **** Slack teams                                                      :crypt:
 -----BEGIN PGP MESSAGE-----
 
-hQEMA6k/ZHkmEjnXAQf+ML+ZqkL8i3YycbwhI5mjE1verByUgVoTCQlfkfGvSFdi
-dTgqWXPJOEE6z38KJGwxRi3EMgV37WEm3hRaZwqb3+eZz/BrGDr6GDSVRxEgM0ks
-5fLhjJ0pMjaOCUTZ7VhSFtxUGefCneWe1JcNM7l8RAtKxERLSmtG5bV6h6zwFZ2T
-PLjlkLJ4JRr9vh2HgVSSmpDUzB/EPRn6kgmzgd9yh856R4PxNJjX7HF+9ylbRqHP
-chmW/ARudA1BoYk1wIBeIWT/qckPPVr+IbF9Kt/Joffp61ev2xAHx6nmBtgwMobr
-mB6XTB+jj4tRnJjv3mVfSjSvhU8Q4mLYHS4Moyzv1dLAygHbTU0+RDyI7sLiEasf
-+I4+CwM9LM3UrMUhN81Oy+VkDLa7hk3YDWrDvrLvs2361jCxPPiyOOZeo7jKBs3s
-1eRJjR2D8RBoEjSrcDu3KNbV5SrgS1iWe16E/P3DjSv6na+k0vCN/W+DLkOUfv1d
-LVeUM27QAV9wmYDrzVUINNICoFIB4pAdasxvOlE7HUIxF/DHBPXib5ZRIHBOrWe7
-L5FF0sJdoUGMyT0VKecv8fC9HGQIynSx5Y3wNPUG8jW/Mhmz0s3szos+OJzPf1Br
-/+1F02YBJ2YZqmGFMbcTF/sVXvBQBlevqP5AzGizqUa/NUBpKmhOg+UTzWk6Dx9w
-6FVgxjnVJUw6ibLVbwvcax/LFTp3Kx6PJMghtsPc7+C+Bc91UNMDa9M0lZUB5Lon
-ScwUysZulFHyFWm+8ihxqiU4wsj/qLL06h4Pc/62PXQCsFiIx1bVSb6Ut8yjakDS
-n6YRFlR+o8+CG4KG7lXnj6iRqgYipRF1HiFHkDWo//79CiviFPBwUVm7IWA=
-=tHsU
+hQEMA6k/ZHkmEjnXAQf/SPO4fO0gTP/+FHrpoxDkVS9yYSw8rYfTjtN+46lLLVLI
+26krEE/BWFnb/1H7eXicXfnFKX8+89tcckKpBgugkjcp5Xpf5huMcpcvJQogF3Hq
+BXAsIROK/CMCpZKEct474/87i+iwMbFdYJfKgY+CyufWuVWxD6J9FgYjYAgHsdLO
+vWe8v1T1ZO1eCCMG4EJB4tELyAMNTKKFA0KPQGhKp9Kq8IDYYNKUx9Ad6NlS13Sr
+fbZmHcLeoBSFsXpiVoYFOgnFwr9VFF/EfOp/NXNvDRDZzrVjMZaGMINQqK46oomT
+mPo4Un8ktn7A8wVEdIt4HQhwwGQW3fT2ANyDpg4XO9LA6gGbt7+m0K5HF9/OJlzg
+22FMhkz/6tEljS1DsepgJH4N265FMk6TAhs0ZK3sE76rRtT3yKlUh/kNgtNTvsK2
+VI6suFexTADJQTlPYxlcOnP6yrK6RZw642klmBpbx4J0/a0krhSmkhLXZmMDUv7p
+WxbK7P+a6dGu6pknjzs55Dit49Ige7hawIEK+JgsxoPtpAgMwoTwZy7ibXDMSbS6
+G2AnpU+EZm70pOikLteA1nYBbVqMuuLzqmeYVVJAYAQzduN1rMg72Kdiw/PL8gBp
+2T/dj3Oqgn3PnAfWbe35S7cJIkId9hkBaHDfliCTPqjRguTqCdvEjAE7HvmNROGs
+WD3GGR6hOJb+r3mVxg/A6eH7XOjO1BvljT1WvZ2KUjqUO5wqs+D7IHSUJF5/9NuZ
+IGrltyrbW49/ruRBcPr5scrEhYrlMeDstDwzm0j06HpbLgyhLwlqK4PX7Q8pojOq
+mGkpCAnlVfBBWYoFSACjHbKJ0MBrzu4v3J2UuqQT0/EDp//HArk6+JYDbsx4aK29
+YyZaMZViojbQanP1C5sDBu8MD9Xiyxv0ivx3ug==
+=GQAS
 -----END PGP MESSAGE-----
 
 ** Secrets
