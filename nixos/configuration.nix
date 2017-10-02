@@ -150,6 +150,7 @@
     #gitAndTools.git-annex
     zip
     ledger
+    gnuplot
 
     #steam
     androidsdk
