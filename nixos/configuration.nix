@@ -151,6 +151,8 @@
     zip
     ledger
     gnuplot
+    plantuml
+    graphviz
 
     #steam
     androidsdk

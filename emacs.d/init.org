@@ -613,6 +613,15 @@ Yes... Even PHP...
     :mode ((rx ".php" eos) . web-mode))
 #+END_SRC
 
+*** UML
+
+Drawing diagrams with plantuml is fun!
+
+#+BEGIN_SRC emacs-lisp
+  (setq org-plantuml-jar-path (s-concat (s-trim (shell-command-to-string "dirname $(dirname $(readlink -f $(which plantuml)))")) "/lib/plantuml.jar"))
+  (setenv "GRAPHVIZ_DOT" "/run/current-system/sw/bin/dot")
+#+END_SRC
+
 ** Mail configuration
 
 I used to check mail with Gnus, directly from the imap-server (in the Exchange case, from davmail), but the Gnus/davmail combination is quite slow, and when checking mail, freezes Emacs a bit.
@@ -1059,16 +1068,17 @@ Use ~moz-repl~ to communicate with conkeror.
 Oh boy, org-babel is so nice!
 
 #+BEGIN_SRC emacs-lisp
+  (defvar joranvar/babel-safe-languages nil)
   (use-package org
     :ensure org-plus-contrib
-    :init (progn
-            (defvar joranvar/babel-safe-languages nil))
     :config (progn
               (use-package ob-http)
               (org-babel-do-load-languages 'org-babel-load-languages '((sql . t)
                                                                        (shell . t)
                                                                        (ledger . t)
-                                                                       (http . t)))
+                                                                       (http . t)
+                                                                       (gnuplot . t)
+                                                                       (plantuml . t)))
               (defun joranvar/babel-safe-languagep (lang body)
                 (not (--any (string= lang it) joranvar/babel-safe-languages)))
               (setq org-confirm-babel-evaluate #'joranvar/babel-safe-languagep)))
@@ -1208,6 +1218,15 @@ Let's try this, then.
                     org-journal-file-format "%Y%m%d.org"
                     org-journal-file-pattern "^\\(?1:[0-9]\\{4\\}\\)\\(?2:[0-9][0-9]\\)\\(?3:[0-9][0-9]\\).org\\'")
               (org-journal-update-auto-mode-alist)))
+#+END_SRC
+
+To collect the information I enter there, like in a tracker, I use =org-collector=.
+
+#+BEGIN_SRC emacs-lisp
+  (require 'org-collector)
+  (use-package gnuplot
+    :config (progn
+              (add-to-list 'joranvar/babel-safe-languages "gnuplot")))
 #+END_SRC
 
 *** Jira worklog integration
