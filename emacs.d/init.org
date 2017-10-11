@@ -1592,6 +1592,14 @@ Get "focused_force"
   dbus-send --print-reply=literal --dest=com.github.chjj.compton.${dpy} / com.github.chjj.compton.win_get uint32:${focused} string:focused_force
 #+END_SRC
 
+** Screensaver
+
+Startup xscreensaver by default.
+
+#+BEGIN_SRC sh :tangle ~/.xprofile :comments noweb :tangle-mode (identity #o444)
+  xscreensaver &
+#+END_SRC
+
 ** Wallpapers
 
 A simple wallpaper clock.
