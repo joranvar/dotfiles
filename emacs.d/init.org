@@ -220,6 +220,14 @@ Do, please do, remove whitespace from the end of lines, before saving my buffers
               (global-whitespace-cleanup-mode)))
 #+END_SRC
 
+But...  Respect editorconfig settings for shared projects.
+
+#+BEGIN_SRC emacs-lisp
+  (use-package editorconfig
+    :ensure t
+    :config (editorconfig-mode 1))
+#+END_SRC
+
 *** Whitespace visualisation
 
 #+BEGIN_SRC emacs-lisp
