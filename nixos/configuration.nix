@@ -173,7 +173,7 @@
 #    factorio
   ];
 
-  nixpkgs.config.chromium = { enableWideVine = true; enablePepperFlash = true; };
+#  nixpkgs.config.chromium = { enableWideVine = true; enablePepperFlash = true; };
 
   fonts = {
     enableFontDir = true;
