@@ -11,39 +11,38 @@ else
     export TAFFY_MAIN_SCREEN=1
 fi
 
-taffybar&
-screens=("eDP1" "LVDS1")
-for s in $screens ; do
-    mode=$(xrandr -q | sed '1,/'$s' connected/d;/.* connected/,$d' | head -n 1 | cut -d' ' -f4)
-    if [[ -n $mode ]]; then
-        echo "Setting $mode for $s."
+order=($*)
+if [[ -z $order ]]; then
+    order=("HDMI1" "eDP1" "VGA1")
+fi
+
+active=$(xrandr -q | grep ".* connected" | cut -f1 -d' ')
+inactive=$(xrandr -q | grep ".* disconnected" | cut -f1 -d' ')
+
+for s in $order ; do
+    echo $s ${active[(I)$s]}
+    if [[ ${active[(I)$s]} -gt 0 ]]; then
+        mode=$(xrandr -q | sed '1,/'$s' connected/d;/.* connected/,$d' | head -n 1 | cut -d' ' -f4)
+        echo $s $mode
         notifications+="$s $mode\n"
-        xrandr --output $s --mode $mode
+        echo $s ${order[(I)$s]}
+        if [[ ${order[(I)$s]} -eq 1 ]]; then
+            xrandr --output $s --mode $mode
+        else
+            xrandr --output $s --right-of $prev --mode $mode
+        fi
+        taffybar&
         prev=$s
+        TAFFY_SCREEN=$(($TAFFY_SCREEN + 1))
     fi
 done
 
-if [[ -z $prev ]]; then
-    echo "No laptop screen found, not doing anything"
-    exit
-fi
-
-screens=$(xrandr -q | grep ".* disconnected" | cut -f1 -d' ' | grep -v "eDP1\\|LVDS1")
-for s in $(echo $screens) ; do
-    echo $s off
-    notifications+="$s off\n"
-    xrandr --output $s --off
-done
-
-screens=$(xrandr -q | grep ".* connected" | cut -f1 -d' ' | grep -v "eDP1\\|LVDS1")
-for s in $(echo $screens) ; do
+for s in $(echo $inactive) ; do
     TAFFY_SCREEN=$(($TAFFY_SCREEN + 1))
     mode=$(xrandr -q | sed '1,/'$s' connected/d;/.* connected/,$d' | head -n 1 | cut -d' ' -f4)
     echo $s $mode
-    notifications+="$s $mode\n"
-    xrandr --output $s --left-of $prev --mode $mode
-    taffybar&
-    prev=$s
+    notifications+="$s off\n"
+    xrandr --output $s --off
 done
 
 notify-send -t 1000 "New Resolutions" ${notifications[*]}
