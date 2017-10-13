@@ -88,6 +88,8 @@
     sqsh
     freetds
     unixODBC
+    mysql
+    mysql-workbench
 
     python35
 #    python35Packages.pywinrm
