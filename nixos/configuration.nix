@@ -1,4 +1,4 @@
-# -*- compile-command: "sudo nixos-rebuild switch"; -*-
+# -*- compile-command: "sudo mount /dev/sda1 /boot; sudo nixos-rebuild switch; sudo umount /boot"; -*-
 
 # Edit this configuration file to define what should be installed on
 # your system.  Help is available in the configuration.nix(5) man page
@@ -88,11 +88,17 @@
     sqsh
     freetds
     unixODBC
+    unixODBCDrivers.sqlite
+    mysql
+    mysql-workbench
+
+    clamav
 
     python35
 #    python35Packages.pywinrm
 
     nox
+    ctags
 
     networkmanagerapplet
     gkrellm
@@ -173,6 +179,8 @@
 
   nixpkgs.config.chromium = { enableWideVine = true; enablePepperFlash = true; };
 
+  hardware.sane.enable = true;
+
   fonts = {
     enableFontDir = true;
     fonts = with pkgs; [
@@ -224,6 +232,8 @@
     ipv6 = true;
   };
 
+  services.clamav = { daemon.enable = true; updater.enable = true; };
+
   nixpkgs.config.allowUnfree = true;
 
   # Enable the X11 windowing system.
@@ -258,7 +268,7 @@
     isNormalUser = true;
     createHome = true;
     home = "/home/joranvar";
-    extraGroups = [ "wheel" "disk" "cdrom" "networkmanager" "audio" "libvirtd" "docker" ];
+    extraGroups = [ "wheel" "disk" "cdrom" "networkmanager" "audio" "libvirtd" "docker" "scanner" ];
     useDefaultShell = true;
     uid = 1000;
   };

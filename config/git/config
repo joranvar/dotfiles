@@ -19,3 +19,7 @@
 	default = simple
 [merge]
 	renormalize = true
+[diff]
+	algorithm = histogram
+[magit]
+	hideCampaign = true

@@ -115,6 +115,21 @@ These snippets can be quite useful, sometimes.
   timer () { timeout $1 zsh -c "(for i in \$(seq 1 999999); do echo -ne \\\\r$1: \$i; sleep 1; done)"; echo }
 #+END_SRC
 
+** Convenient commands
+
+*** Starting emacs in a debugger
+
+#+BEGIN_SRC sh :tangle ~/bin/emacs_d :comments noweb :tangle-mode (identity #o555) :shebang "#!/usr/bin/env nix-shell\n#!nix-shell -i zsh -p 'with import <nixpkgs> {}; enableDebugging emacs25'"
+  emacs $* &
+  gdb -p $!
+#+END_SRC
+
+*** Starting emacsclient
+
+#+BEGIN_SRC sh :tangle ~/bin/emacsclient_d :comments noweb :tangle-mode (identity #o555) :shebang "#!/usr/bin/env nix-shell\n#!nix-shell -i zsh -p 'with import <nixpkgs> {}; enableDebugging emacs25'"
+  emacsclient $*
+#+END_SRC
+
 * Emacs configuration
 :PROPERTIES:
 :header-args: :tangle ./init.org.el :comments noweb :tangle-mode (identity #o444)
@@ -122,7 +137,8 @@ These snippets can be quite useful, sometimes.
 
 ** Package preparation
 
-*** Package sources 
+*** Package sources
+
 #+BEGIN_SRC emacs-lisp
   (add-to-list 'load-path (expand-file-name "~/.emacs.d/elpa"))
 
@@ -183,6 +199,7 @@ They should not be set in the generated ~init.org.el~, but sometimes I want to s
   (use-package dash)
   (use-package s)
   (use-package f)
+  (use-package request)
 #+END_SRC
 
 *** Async
@@ -388,8 +405,7 @@ Each project is either a version controlled (~magit~!) directory, or some direct
                           (setq projectile-switch-project-action (lambda ()
                                                                    (if (magit-git-repo-p (projectile-project-root))
                                                                        (magit-status-internal (projectile-project-root))
-                                                                     (dired (projectile-project-root)))
-                                                                   (treemacs-projectile)))))
+                                                                     (dired (projectile-project-root)))))))
               (setq magit-repository-directories (mapcar (lambda (dir)
                                                            (substring dir 0 -1))
                                                          (-filter (lambda (project)
@@ -413,7 +429,7 @@ Use treemacs in combination with projectile
                     treemacs-sorting                    'alphabetic-desc
                     treemacs-show-hidden-files          t
                     treemacs-never-persist              nil
-                    treemacs-is-never-other-window      t
+                    treemacs-is-never-other-window      nil
                     treemacs-goto-tag-strategy          'refetch-index)
               (treemacs-follow-mode t)
               (treemacs-filewatch-mode t)))
@@ -506,6 +522,15 @@ Also, please indent my code smartly (except for in F#, it does not play nice the
                (list (rx "ERROR (Build): "
                          (0+ nonl) "\\NCrunch\\" (1+ digit) "\\" (1+ digit) "\\"
                          (group-n 1 (1+ nonl)) space "(" (group-n 2 (1+ digit)) "):") 'joranvar/ncrunch-match-file 2 nil 2))
+
+
+  (defun joranvar/resolve-from-remote (orig-fun &rest args)
+    "Translate remote compilation path to local."
+    (-let [(filename . dirname) (apply orig-fun args)]
+      (cons
+       (and filename (s-replace-all '(("C:\\Development\\Satellite.lapbart\\" . "") ("\\" . "/")) filename))
+       (and dirname (s-replace-all '(("C:\\Development\\Satellite.lapbart\\" . "") ("\\" . "/")) dirname)))))
+  (advice-add 'csharp--compilation-error-file-resolve :around #'joranvar/resolve-from-remote)
 #+END_SRC
 
 *** F#
@@ -550,7 +575,24 @@ In Haskell, use `dante`.
   (use-package dante
     :commands 'dante-mode
     :init (progn
-            (add-hook 'haskell-mode-hook 'dante-mode)))
+            (add-hook 'haskell-mode-hook 'dante-mode))
+    :config (progn
+              (add-to-list 'dante-repl-command-line-methods-alist
+                           `(nix-new .
+                                     ,(lambda (root)
+                                        (dante-repl-by-file
+                                         (projectile-project-root)
+                                         '("shell.nix")
+                                         (-flatten `("nix-shell" ,(when dante-target '("--argstr" "pkg" dante-target))  "--run" "cabal repl"
+                                                     ,(concat (projectile-project-root) "/shell.nix")))))))))
+#+END_SRC
+
+Use hlint in dante.
+
+#+BEGIN_SRC emacs-lisp
+  (add-hook 'dante-mode-hook
+            '(lambda () (flycheck-add-next-checker 'haskell-dante
+                                              '(warning . haskell-hlint))))
 #+END_SRC
 
 *** Yaml
@@ -575,6 +617,7 @@ In Haskell, use `dante`.
   (use-package nix-mode
     :config (add-to-list 'aggressive-indent-excluded-modes 'nix-mode))
   (use-package company-nixos-options
+    :disabled t
     :config (progn (add-to-list 'company-backends 'company-nixos-options)))
 #+END_SRC
 
@@ -617,6 +660,7 @@ Show where I am in xml
 Yes... Even PHP...
 
 #+BEGIN_SRC emacs-lisp
+  (use-package php-mode)
   (use-package web-mode
     :mode ((rx ".php" eos) . web-mode))
 #+END_SRC
@@ -628,6 +672,7 @@ Drawing diagrams with plantuml is fun!
 #+BEGIN_SRC emacs-lisp
   (setq org-plantuml-jar-path (s-concat (s-trim (shell-command-to-string "dirname $(dirname $(readlink -f $(which plantuml)))")) "/lib/plantuml.jar"))
   (setenv "GRAPHVIZ_DOT" "/run/current-system/sw/bin/dot")
+  (add-to-list 'joranvar/babel-safe-languages "plantuml")
 #+END_SRC
 
 ** Mail configuration
@@ -952,6 +997,9 @@ Notmuch will also be used to read the mail that was pulled over here.  Let's see
                     gnus-message-replysignencrypted t
                     gnus-treat-x-pgp-sig t
 
+                    epg-gpg-program "gpg"
+                    epa-pinentry-mode 'loopback
+
                     ;; mm-sign-option 'guided
                     ;; mm-encrypt-option 'guided
                     mm-verify-option 'always
@@ -1102,8 +1150,12 @@ Also: exported listings should be pretty.
 
 #+BEGIN_SRC emacs-lisp
   (setq org-latex-listings 'minted
-        org-latex-packages-alist '(("" "minted"))
-        org-latex-minted-options '(("breaklines"))
+        org-latex-packages-alist '(("" "minted")
+                                   ("" "listings")
+                                   ("" "color"))
+        org-latex-minted-options '(("breaklines")
+                                   ("fontsize" "\\scriptsize")
+                                   ("xleftmargin" "\\parindent"))
         org-latex-pdf-process
         '("pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"
           "pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"))
@@ -1184,21 +1236,21 @@ I just based this on https://emacs.cafe/emacs/orgmode/gtd/2017/06/30/orgmode-gtd
                                       ((org-agenda-overriding-header "Office")
                                        (org-agenda-skip-function #'joranvar:org-agenda-skip-all-siblings-but-first)))))
 
-  (defun joranvar:org-agenda-skip-all-siblings-but-first ()
-    "Skip all but the first non-done entry."
-    (let (should-skip-entry)
-      (unless (org-current-is-todo)
-        (setq should-skip-entry t))
-      (save-excursion
-        (while (and (not should-skip-entry) (org-goto-sibling t))
-          (when (org-current-is-todo)
-            (setq should-skip-entry t))))
-      (when should-skip-entry
-        (or (outline-next-heading)
-            (goto-char (point-max))))))
+          (defun joranvar:org-agenda-skip-all-siblings-but-first ()
+            "Skip all but the first non-done entry."
+            (let (should-skip-entry)
+              (unless (org-current-is-todo)
+                (setq should-skip-entry t))
+              (save-excursion
+                (while (and (not should-skip-entry) (org-goto-sibling t))
+                  (when (org-current-is-todo)
+                    (setq should-skip-entry t))))
+              (when should-skip-entry
+                (or (outline-next-heading)
+                    (goto-char (point-max))))))
 
-  (defun org-current-is-todo ()
-    (string= "TODO" (org-get-todo-state)))
+          (defun org-current-is-todo ()
+            (string= "TODO" (org-get-todo-state)))
 #+END_SRC
 
 *** "Bullet Journal"
@@ -1252,7 +1304,10 @@ To collect the information I enter there, like in a tracker, I use =org-collecto
               (setq org-caldav-url 'google
                     org-caldav-calendar-id "bart.post@gmail.com"
                     org-caldav-inbox "~/org/calendar.org"
-                    org-caldav-files org-agenda-files
+                    org-caldav-files (org-agenda-files)
+                    org-caldav-delete-org-entries 'never
+                    org-caldav-delete-calendar-entries 'ask
+                    org-caldav-exclude-tags '("caldav_ignore")
                     org-icalendar-timezone "Europe/Amsterdam")
               <<org-caldav-secrets>>
               ))
@@ -1275,6 +1330,13 @@ zl9qKMmcHw1uEzIp9skRKIqIp5pedx/BgN1muDRgt94qhC16/GJxtANUC3gu+yXT
 e4fzBjglDbB3
 =Asha
 -----END PGP MESSAGE-----
+
+** Studying
+
+#+BEGIN_SRC emacs-lisp
+  (require 'org-drill)
+  (setq org-drill-add-random-noise-to-intervals-p t)
+#+END_SRC
 
 ** Communication
 
@@ -1339,23 +1401,45 @@ I used to use the IRC gateway for Slack, but now I'm using the `slack` package.
 **** Slack teams                                                      :crypt:
 -----BEGIN PGP MESSAGE-----
 
-hQEMA6k/ZHkmEjnXAQf/SPO4fO0gTP/+FHrpoxDkVS9yYSw8rYfTjtN+46lLLVLI
-26krEE/BWFnb/1H7eXicXfnFKX8+89tcckKpBgugkjcp5Xpf5huMcpcvJQogF3Hq
-BXAsIROK/CMCpZKEct474/87i+iwMbFdYJfKgY+CyufWuVWxD6J9FgYjYAgHsdLO
-vWe8v1T1ZO1eCCMG4EJB4tELyAMNTKKFA0KPQGhKp9Kq8IDYYNKUx9Ad6NlS13Sr
-fbZmHcLeoBSFsXpiVoYFOgnFwr9VFF/EfOp/NXNvDRDZzrVjMZaGMINQqK46oomT
-mPo4Un8ktn7A8wVEdIt4HQhwwGQW3fT2ANyDpg4XO9LA6gGbt7+m0K5HF9/OJlzg
-22FMhkz/6tEljS1DsepgJH4N265FMk6TAhs0ZK3sE76rRtT3yKlUh/kNgtNTvsK2
-VI6suFexTADJQTlPYxlcOnP6yrK6RZw642klmBpbx4J0/a0krhSmkhLXZmMDUv7p
-WxbK7P+a6dGu6pknjzs55Dit49Ige7hawIEK+JgsxoPtpAgMwoTwZy7ibXDMSbS6
-G2AnpU+EZm70pOikLteA1nYBbVqMuuLzqmeYVVJAYAQzduN1rMg72Kdiw/PL8gBp
-2T/dj3Oqgn3PnAfWbe35S7cJIkId9hkBaHDfliCTPqjRguTqCdvEjAE7HvmNROGs
-WD3GGR6hOJb+r3mVxg/A6eH7XOjO1BvljT1WvZ2KUjqUO5wqs+D7IHSUJF5/9NuZ
-IGrltyrbW49/ruRBcPr5scrEhYrlMeDstDwzm0j06HpbLgyhLwlqK4PX7Q8pojOq
-mGkpCAnlVfBBWYoFSACjHbKJ0MBrzu4v3J2UuqQT0/EDp//HArk6+JYDbsx4aK29
-YyZaMZViojbQanP1C5sDBu8MD9Xiyxv0ivx3ug==
-=GQAS
+hQEMA6k/ZHkmEjnXAQf/V9yJ2n0CAq1nVmya1cnPPujnQDWNqlt3K4OdEqII3sDP
+1yhV+UQTi9p79KlzF32gqAu5AqTl2FxJmBqdkmR/oLyqSIHyeRPYukKDn7wVMQ32
+6sXTP0emgzNce07AQQnJOWWNwrypjICvQ3vYgvPRnETxJmqpkZXyS4/iCypzp/nk
+rPG1iBSKZ5Pm9HwkwqVSvHHMsx6QA6ZcNMPWoIfbHpoB0x5TJyYlqZSIcmT+G1pY
+mkjaIFuCv6mJ7RhgsVr/G/aWPFYn0hhPr179Px1IBmz6ao2bsflDTsSCazc5FUA6
+d9NAmWAAOYFZmgpuSJzDeuB4h+HaVfdX6ziXh6NLItLBJgFX/Q8DuflHtH12oHXh
+lSt7nKw1I4Ipu9Ti0xyBMA6wC9DjrVcW5Ty4EiWdQh87g5C4mZFh83my5MLlxWVQ
+lLFnUkVbRxbtqIODpr5qxBaDR6NDONe22NpzmoO00ahh4H02vfsDWmtpWqvYEibh
+4pU3Npz+z+TPdJnxgHO/aOcJn93PyuTpVWbmDblpvU7u1YFHbkbWHbb2pyBvvrWy
+y9GLxthUtrCtkI3KOVIwbZPNtIOvY1ADvjyDkP/pbtjZEoy4USWAnvbDDt4LnCaU
+KloTSWHujd8zGudS8YWncIL5GxmXs1XkFxVU+ANWpgD+fE0oHKS5rVB406sEMwzF
+t9IIyxi2tmJ1BRXGDApYxqnf8LLEvnKFlpIBIg6GMAYnXV4ej0WnXqIq8bx/fNM4
+yqMstomt0a7Gu/oYtD4C5r11SlXbwkOG7+hT5xCx+UezTEyTfqc0eUsNFHTO6cTa
++iwBm+Ufyt3R+LpK9RFXlFBKS10DlefCfNMMhj8QcWP0Pf5dl9Z/8+wFwbaZCwUo
+qo00x/OdfF48w4T5ORe8Sl7CUMN2VwyLEuIiBxTBGKTs8CAxBmwSt7hU+OAEjrWd
+jqXGLecuhxdfKHmjlazuzBjQ/v+mE+nCAyZroY2fgPV54LN4yVlw9A==
+=lRUA
 -----END PGP MESSAGE-----
+
+*** Jabber
+
+The ultimate chat protocol!
+
+#+BEGIN_SRC emacs-lisp
+  (use-package jabber
+    :commands (jabber-connect
+               jabber-connect-all)
+    :config (progn
+              (setq jabber-account-list '(("joranvar@jabber.org"
+                                           (:network-server . "jabber.org")
+                                           (:port . 5222))
+                                          ("bart.post@gmail.com"
+                                           (:network-server . "talk.google.com")
+                                           (:port . 5222)))
+                    jabber-history-enabled t
+                    jabber-use-global-history nil
+                    jabber-backlog-number 40
+                    jabber-backlog-days 30)))
+#+END_SRC
 
 ** Secrets
 
@@ -1366,13 +1450,19 @@ Some stuff I want to be kept hidden from others.  Luckily, we have gpg (and org-
   (org-crypt-use-before-save-magic)
   (setq org-tags-exclude-from-inheritance (quote ("crypt")))
   (setq org-crypt-key epg-user-id)
-  (advice-add 'org-babel-tangle :around
-              (lambda (oldfun &rest args)
-                (org-decrypt-entries)
-                (remove-hook 'before-save-hook 'org-encrypt-entries t)
-                (apply oldfun args)
-                (add-hook 'before-save-hook 'org-encrypt-entries nil t)
-                (org-encrypt-entries)))
+  ;; (advice-add 'org-babel-tangle :around
+  ;;             (lambda (oldfun &rest args)
+  ;;               (org-decrypt-entries)
+  ;;               (remove-hook 'before-save-hook 'org-encrypt-entries t)
+  ;;               (apply oldfun args)
+  ;;               (add-hook 'before-save-hook 'org-encrypt-entries nil t)
+  ;;               (org-encrypt-entries)))
+#+END_SRC
+
+** Presentations
+
+#+BEGIN_SRC emacs-lisp
+  (use-package ox-reveal)
 #+END_SRC
 
 * Games
@@ -1583,8 +1673,8 @@ I like my windows to be a bit transparent, so that I can see my desktop
 
 *** Emacs
 #+BEGIN_SRC emacs-lisp
- (set-frame-parameter (selected-frame) 'alpha '(95 . 70))
- (add-to-list 'default-frame-alist '(alpha . (95 . 70)))
+ (set-frame-parameter (selected-frame) 'alpha '(98 . 70))
+ (add-to-list 'default-frame-alist '(alpha . (98 . 70)))
 #+END_SRC
 
 *** Termite
@@ -1642,7 +1732,7 @@ A simple wallpaper clock.
   else
       hour=$(($(date +%-I)))
   fi
-  cd $WCZ && convert -layers flatten bg.jpg $(date +"month%-m.png weekday%u.png day%-d.png hour${hour}.png minute%-M.png second%-S.png") - | feh - --bg-scale
+  cd $WCZ && convert -layers flatten bg.jpg $(date +"month%-m.png weekday%u.png day%-d.png hour${hour}.png minute%-M.png s-e-c-ond%-S.png") - | feh - --bg-scale
 #+END_SRC
 
 #+BEGIN_SRC sh :tangle ~/.xprofile :comments noweb :tangle-mode (identity #o444)
@@ -1719,6 +1809,7 @@ I like smaller fonts.
 
 #+BEGIN_SRC elisp
   (set-face-attribute 'default nil :height 75)
+  ;;(set-face-attribute 'default nil :height 90)
 #+END_SRC
 
 ** Window management
@@ -1792,3 +1883,9 @@ Thanks Wilfred (https://www.emacswiki.org/emacs/ToggleWindowSplit).
               (add-hook 'dired-mode-hook #'all-the-icons-dired-mode)))
 #+END_SRC
 
+** Music
+
+#+BEGIN_SRC emacs-lisp
+  (use-package bongo)
+  (use-package volume)
+#+END_SRC
