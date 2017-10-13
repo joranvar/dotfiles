@@ -31,7 +31,7 @@ import XMonad (spawn, sendMessage, windows)
 import XMonad.Util.SpawnOnce (spawnOnce)
 
 -- Keys
-import XMonad (mod4Mask, (.|.), shiftMask, xK_l, xK_b, xK_p, xK_q, xK_x, xK_w, xK_r, xK_e, xK_s, xK_f, xK_z, KeySym, ButtonMask)
+import XMonad (mod4Mask, (.|.), shiftMask, mod1Mask, xK_l, xK_b, xK_p, xK_q, xK_x, xK_w, xK_r, xK_e, xK_s, xK_f, xK_z, KeySym, ButtonMask)
 import XMonad.Util.EZConfig (additionalKeys)
 
 -- WMName (for Java swing GUI)
@@ -123,5 +123,6 @@ applyScreensaver lockKey = addLockKey lockKey . addStartup
 applyScreenshot :: (ButtonMask, KeySym) -> XConfig a -> XConfig a
 applyScreenshot scrotKey = addScrotKey scrotKey
   where
-    addScrotKey key x = x `additionalKeys` [ (first (.|. shiftMask) $ key, spawn "cd ~/tmp/scrot ; scrot '%Y-%m-%d-%H-%M-%s.png' -u -e 'feh --start-at ~/tmp/scrot/$f ~/tmp/scrot'")
+    addScrotKey key x = x `additionalKeys` [ (first (.|. mod1Mask) $ key , spawn "cd ~/tmp/scrot ; scrot '%Y-%m-%d-%H-%M-%s.png' -s -e 'feh --start-at ~/tmp/scrot/$f ~/tmp/scrot'")
+                                           , (first (.|. shiftMask) $ key, spawn "cd ~/tmp/scrot ; scrot '%Y-%m-%d-%H-%M-%s.png' -u -e 'feh --start-at ~/tmp/scrot/$f ~/tmp/scrot'")
                                            , (key                        , spawn "cd ~/tmp/scrot ; scrot '%Y-%m-%d-%H-%M-%s.png' -m -e 'feh --start-at ~/tmp/scrot/$f ~/tmp/scrot'") ]
