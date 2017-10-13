@@ -12,7 +12,7 @@ else
 fi
 
 taffybar&
-screens=("eDP1" "LVDS1")
+screens=("DP-4")
 for s in $screens ; do
     mode=$(xrandr -q | sed '1,/'$s' connected/d;/.* connected/,$d' | head -n 1 | cut -d' ' -f4)
     if [[ -n $mode ]]; then
@@ -28,14 +28,14 @@ if [[ -z $prev ]]; then
     exit
 fi
 
-screens=$(xrandr -q | grep ".* disconnected" | cut -f1 -d' ' | grep -v "eDP1\\|LVDS1")
+screens=$(xrandr -q | grep ".* disconnected" | cut -f1 -d' ' | grep -v "DP-4")
 for s in $(echo $screens) ; do
     echo $s off
     notifications+="$s off\n"
     xrandr --output $s --off
 done
 
-screens=$(xrandr -q | grep ".* connected" | cut -f1 -d' ' | grep -v "eDP1\\|LVDS1")
+screens=$(xrandr -q | grep ".* connected" | cut -f1 -d' ' | grep -v "DP-4")
 for s in $(echo $screens) ; do
     TAFFY_SCREEN=$(($TAFFY_SCREEN + 1))
     mode=$(xrandr -q | sed '1,/'$s' connected/d;/.* connected/,$d' | head -n 1 | cut -d' ' -f4)
