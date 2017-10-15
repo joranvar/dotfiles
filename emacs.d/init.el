@@ -13,6 +13,7 @@
                          ("org"          . "http://orgmode.org/elpa/")))
 
 (package-initialize)
+(setq load-prefer-newer t)
 
 (require 'org)
 (require 'org-crypt)
