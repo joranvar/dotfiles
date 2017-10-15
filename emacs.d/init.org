@@ -193,6 +193,12 @@ Add some asyncness, for the sake of less waiting time.
   (use-package async)
 #+END_SRC
 
+** Some global variables
+
+#+BEGIN_SRC emacs-lisp
+  (defvar joranvar/babel-safe-languages nil)
+#+END_SRC
+
 ** Basic text editing
 
 *** Whitespace pet peeves
@@ -1076,7 +1082,6 @@ Use ~moz-repl~ to communicate with conkeror.
 Oh boy, org-babel is so nice!
 
 #+BEGIN_SRC emacs-lisp
-  (defvar joranvar/babel-safe-languages nil)
   (use-package org
     :ensure org-plus-contrib
     :config (progn
