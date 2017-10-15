@@ -635,6 +635,7 @@ Drawing diagrams with plantuml is fun!
 #+BEGIN_SRC emacs-lisp
   (setq org-plantuml-jar-path (s-concat (s-trim (shell-command-to-string "dirname $(dirname $(readlink -f $(which plantuml)))")) "/lib/plantuml.jar"))
   (setenv "GRAPHVIZ_DOT" "/run/current-system/sw/bin/dot")
+  (add-to-list 'joranvar/babel-safe-languages "plantuml")
 #+END_SRC
 
 ** Mail configuration
