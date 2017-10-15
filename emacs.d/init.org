@@ -1258,7 +1258,10 @@ To collect the information I enter there, like in a tracker, I use =org-collecto
               (setq org-caldav-url 'google
                     org-caldav-calendar-id "bart.post@gmail.com"
                     org-caldav-inbox "~/org/calendar.org"
-                    org-caldav-files org-agenda-files
+                    org-caldav-files (org-agenda-files)
+                    org-caldav-delete-org-entries 'never
+                    org-caldav-delete-calendar-entries 'ask
+                    org-caldav-exclude-tags '("caldav_ignore")
                     org-icalendar-timezone "Europe/Amsterdam")
               <<org-caldav-secrets>>
               ))
