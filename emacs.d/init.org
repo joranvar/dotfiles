@@ -623,6 +623,7 @@ Show where I am in xml
 Yes... Even PHP...
 
 #+BEGIN_SRC emacs-lisp
+  (use-package php-mode)
   (use-package web-mode
     :mode ((rx ".php" eos) . web-mode))
 #+END_SRC
