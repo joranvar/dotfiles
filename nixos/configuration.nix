@@ -152,6 +152,7 @@
     #skype
     #gitAndTools.git-annex
     zip
+    unzip
     ledger
     gnuplot
     plantuml
