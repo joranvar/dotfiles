@@ -95,6 +95,7 @@
 #    python35Packages.pywinrm
 
     nox
+    ctags
 
     networkmanagerapplet
     gkrellm
