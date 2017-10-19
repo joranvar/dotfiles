@@ -108,6 +108,7 @@
     vlc
     sshfsFuse
     cifs_utils
+    s3fs
     pavucontrol
 
     xlsfonts
