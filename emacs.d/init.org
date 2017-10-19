@@ -633,9 +633,14 @@ Yes... Even PHP...
 Drawing diagrams with plantuml is fun!
 
 #+BEGIN_SRC emacs-lisp
-  (setq org-plantuml-jar-path (s-concat (s-trim (shell-command-to-string "dirname $(dirname $(readlink -f $(which plantuml)))")) "/lib/plantuml.jar"))
-  (setenv "GRAPHVIZ_DOT" "/run/current-system/sw/bin/dot")
-  (add-to-list 'joranvar/babel-safe-languages "plantuml")
+  (use-package plantuml-mode
+    :config (progn
+              (setq org-plantuml-jar-path (s-concat (s-trim (shell-command-to-string "dirname $(dirname $(readlink -f $(which plantuml)))")) "/lib/plantuml.jar"))
+              (setq plantuml-jar-path (s-concat (s-trim (shell-command-to-string "dirname $(dirname $(readlink -f $(which plantuml)))")) "/lib/plantuml.jar"))
+              (setenv "GRAPHVIZ_DOT" "/run/current-system/sw/bin/dot")
+              (add-to-list 'joranvar/babel-safe-languages "plantuml")
+              (use-package flycheck-plantuml
+                :config (flycheck-plantuml-setup))))
 #+END_SRC
 
 ** Mail configuration
