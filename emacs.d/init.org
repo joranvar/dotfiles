@@ -1354,23 +1354,23 @@ I used to use the IRC gateway for Slack, but now I'm using the `slack` package.
 **** Slack teams                                                      :crypt:
 -----BEGIN PGP MESSAGE-----
 
-hQEMA6k/ZHkmEjnXAQf8DKXkDfIgn8iOqlN1nF6PwtfW7MFe3IMZJU+uWgs522wg
-muci2RjiJEFqnWhYq2d8CffVqLhabD+VMX9OMx+lHnTQtyEml/N5knBTchTiEFCx
-KF0ipTCEL8e08VxPVqD/+ldFwBwR9vG3AOjhdyBhM2zDpGLm3BKvOtvBHt4R9Ivb
-FMw+rL8fR39fDlepNVLckM8fiQiSiBTC33M1c/Oy6wKdrqbe/jN3+J/BtwzYPmLI
-vKurEj79JX7e+NdmX+GrARBKKx/GGZ+UnIMUkWfnZAT8wXy/onjWWtNEjHyOUaqD
-rqOTjGRb2mDyTqVgFsDocLNbSgCd06BSg1Q6Znjc79LBGQG3pW+xwC7Axi4gabu3
-JrDqL+9IYqBPRYWJGehywMT3I6CjzcXIdff3nLUK87N8W6mmveVWRTOhWM9rqnou
-fZkwMNnz/dylWU2BgzLFsAtxhQ9cNqx/kp155EpkNjoFbX8EPeKIKRR7Cdk3WRUr
-caYZ24xec6dr5H3G6aQxntS7ec7hzjPzJSQ8stzRegMo4hGzh06uRPc5DvnsEX1w
-b4vSUIVK26yVHQcGJctdT0RmEqDpZ51n5eZLBz0NnKFkMOLbzpFQKpIRzVdQDAjr
-pyt6cKriwqjA2o6ZZtmNGr3H9fxuIuGU95M/ZdxwvikYAka8Q1ayZDHpzF68G9pA
-vWmjCBMj1+dBiN7/jV+AlJ6/zBwTyEld7KtnUwi1E2C91pKHx49AGbiZbrORu0Rv
-Shj8oKxJ/iwxEoOYSnNz64W+Hwups0Qwf5no1+PBR4xAMVbHjDjmrvyQK0A4ZcNK
-BfHSAN5w5zfwntsggTeRE+P3xMZharC1B13ioo3+f7WV5fLb11nJrlXF10jsu+bp
-9sRhs8XIlWcai4E9ROcW8I/ijRlUFOhBsw11m4C/HK/hS+PxjL9ErdLd6xgUbVHd
-1H45BIf3lkNrrWXTcajBT64seb5ycJCV+Cj9
-=g2a0
+hQEMA6k/ZHkmEjnXAQgAh8TD/H1d6MJw4UPJiSQOE8Q2HCzZyHdvtr7y4aRdhijq
+WTFlTxik+Txrzq6UwRrwoVnnDYp7NhYdYXhriVa/FdD5YpePH01JO+wfVQoUUTRg
+KiwPHasW5lBKr5j40nDokJeFLoWyCjjt1fW86/yn/Mpi/uTDgfMWjVLzd9KLVPDM
+hcOjhiaZhXZf+XM0kwPJnkUR6YkZB4ecwlW2dDyPk2g8iR/Lpg6Hy9eaqHfDsVwj
+XHz7kJu7xJdWAd3gMdqdoocKquaj0pvD6GhFLmNcqMK56W3LYw6L8GoqPFj4YhtS
+v4W4vk9fWCBgwi0sTkSTo1YxLCTpY8otA6QSsEAlf9LBJgFL58dXh8Jrgl/Mr/EH
+fYRlxcln7Xx9bTnVsYSkZ2hvJAW72hZxiEB+fh12BpT73HGoBhsRA9YruXh0Iaem
+W80dBDX8lmMPwAgWdH0khdIJ3zlE5J5bv6UfLGiRj7y5mIPGTPubnyBGg2QbYZpf
+pnTHIqaTtczedri6p0Li2ib8jq7geDnpGrWPonO/z/aIjqPF3WSt9RTb/Bx4gvjl
+yAz1RwSyyW+QQYhmNV9WPNAIYBtXtrrNTeEDtJDtERa8wTXpzGYeTGhN04etPN6Q
+helDNjkSveZtVIujb7mUw7PWhr6slazbcxeRwJYZOstM1TNBfvJMY4OrGKnFmqK5
+gs+dbfelhCLXekPsgBCgQDnoY1bnGQNRkBpcGvBMBkG0O8RlZzLWnUg8YB7ZY2vz
+eD5u+64u6D8O+aItB2BmXLEuxx6zs8dkaaVvOR3jXbqZTPj6SQeKEL3XM9tiAYsM
+Gf3vZybgzNEv9iX4sTTho0r8U9MD+FVofKZJkLbst4WgU2Smqyry8Mlf79uQh9R0
+aR9ivuM9VugjB9P2jLDI2cdSSAeXnDQvaSMfj/tOo8oHCuuGFzoJrwO2BNzzJohJ
+qMCTOEzrAL/HOIRIL8UMU8AYV3SkOZUl5y1QCfIwK7PGzSwPB2UURQ==
+=0rWp
 -----END PGP MESSAGE-----
 
 ** Secrets
