@@ -989,7 +989,7 @@ When sending a mail, it should reflect who I want to send it as (from my work ma
                       ("TopVintage"
                        (signature "Bart Post\nBackend Genius\nTopVintage B.V.")
                        (address "bart@topvintage.nl")
-                       ("X-Message-SMTP-Method" "smtp localhost 1025 bart.post@cgm.com"))
+                       ("X-Message-SMTP-Method" "smtp localhost 1025 bart@topvintage.nl"))
                       ("CGM"
                        (signature "Bart Post\nApplication Programmer Team Satellite\nCompugroup Medical B.V.")
                        (address "bart.post@cgm.com")
