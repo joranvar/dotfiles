@@ -1798,8 +1798,10 @@ Enable multiple monitors.
 (add-hook 'exwm-randr-screen-change-hook
           (lambda ()
             (start-process-shell-command
-             "xrandr" nil "xrandr --output HDMI-0 --right-of DP-4 --auto")))
+             "xrandr" nil "xrandr --output DP-4 --auto --output HDMI-0 --right-of DP-4 --auto")))
 (exwm-randr-enable)
+(require 'exwm-config)
+(exwm-config-default)
 #+END_SRC
 
 

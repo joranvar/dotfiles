@@ -237,6 +237,7 @@
     xkbOptions = "compose:ralt";
     windowManager.exwm = {
       enable = true;
+      enableDefaultConfig = false;
       extraPackages = e: [
         e.emms
         e.magit
