@@ -235,15 +235,18 @@
   services.xserver = {
     enable = true;
     xkbOptions = "compose:ralt";
-    windowManager.xmonad = {
+    windowManager.exwm = {
       enable = true;
-      enableContribAndExtras = true;
+      extraPackages = e: [
+        e.emms
+        e.magit
+      ];
     };
     synaptics = {
       enable = true;
       twoFingerScroll = true;
     };
-    windowManager.default = "xmonad";
+    windowManager.default = "exwm";
     desktopManager.xterm.enable = false;
     desktopManager.default = "none";
     displayManager.slim = {
