@@ -1555,9 +1555,11 @@ This is the theme I will use currently.
   (use-package tao-theme
     :disabled
     :config (progn
-              (disable-theme 'tao-yin)
+              (disable-theme 'tao-yang)
               (load-theme 'tao-yin t)))
-
+  (use-package leuven-theme
+    :config (progn
+              (load-theme 'leuven t)))
 #+END_SRC
 
 And these are the colors.
