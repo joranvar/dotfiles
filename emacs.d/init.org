@@ -1793,15 +1793,16 @@ Thanks Wilfred (https://www.emacswiki.org/emacs/ToggleWindowSplit).
 Enable multiple monitors.
 
 #+BEGIN_SRC emacs-lisp
-(require 'exwm-randr)
-(setq exwm-randr-workspace-output-plist '(0 "DP-4" 1 "HDMI-0"))
-(add-hook 'exwm-randr-screen-change-hook
-          (lambda ()
-            (start-process-shell-command
-             "xrandr" nil "xrandr --output DP-4 --auto --output HDMI-0 --right-of DP-4 --auto")))
-(exwm-randr-enable)
-(require 'exwm-config)
-(exwm-config-default)
+  (require 'exwm-randr)
+  (setq exwm-randr-workspace-output-plist '(0 "DP-4" 1 "HDMI-0" 2 "DP-0"))
+  (add-hook 'exwm-randr-screen-change-hook
+            (lambda ()
+              (start-process-shell-command
+               "xrandr" nil "xrandr --output DP-4 --auto --output HDMI-0 --right-of DP-4 --auto")))
+  (exwm-randr-enable)
+  (require 'exwm-config)
+  (exwm-config-default)
+  (set-frame-parameter (exwm-workspace--workspace-from-frame-or-index 0) 'font "Monospace 20")
 #+END_SRC
 
 
