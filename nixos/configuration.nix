@@ -148,7 +148,7 @@
     xscreensaver
     maim
     samba
-#    flashplayer
+    flashplayer
     pidgin
     #skype
     #gitAndTools.git-annex
