@@ -1805,6 +1805,32 @@ Enable multiple monitors.
   (set-frame-parameter (exwm-workspace--workspace-from-frame-or-index 0) 'font "Monospace 20")
 #+END_SRC
 
+Setup a nice system monitor in the message area.
+
+#+BEGIN_SRC emacs-lisp
+  (use-package symon
+    :config (progn
+              (setq symon-monitors '(symon-linux-memory-monitor
+                                     symon-linux-cpu-monitor
+                                     symon-linux-battery-monitor
+                                     symon-linux-network-rx-monitor
+                                     symon-linux-network-tx-monitor))
+              (symon-mode)))
+#+END_SRC
+
+Display the current time in the mode line.
+
+#+BEGIN_SRC emacs-lisp
+  (setq display-time-format "%FT%R")
+  (display-time)
+#+END_SRC
+
+Add a system tray.
+
+#+BEGIN_SRC emacs-lisp
+  (require 'exwm-systemtray)
+  (exwm-systemtray-enable)
+#+END_SRC
 
 ** Use pretty unicode characters
 
