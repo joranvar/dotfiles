@@ -12,6 +12,7 @@
       /etc/nixos/hardware-configuration.nix
       # Include the local machine configuration.
       /etc/nixos/local-machine.nix
+      /etc/nixos/yubikey-gpg.nix
     ];
 
   system.autoUpgrade.enable = true;
@@ -166,8 +167,6 @@
 
     pass
     lastpass-cli
-    yubikey-personalization
-    yubikey-personalization-gui
     opensc
 
     gnome3.gvfs
@@ -257,7 +256,6 @@
   };
 
   time.timeZone = "Europe/Amsterdam";
-  programs.ssh.startAgent = false; # gpg agent takes over this role
 
   services.nixosManual.showManual = true;
   virtualisation.docker.enable = true;
@@ -273,12 +271,6 @@
   };
   networking.networkmanager.enable = true;
   security.sudo.enable = true;
-
-  #  FIDO YubiKey
-  services.pcscd.enable = true;
-  services.udev.extraRules = ''
-     KERNEL=="hidraw*", SUBSYSTEM=="hidraw", ATTRS{idVendor}=="1050", ATTRS{idProduct}=="0111|0113|0114|0115|0116|0120", ENV{ID_SMARTCARD_READER}="1"
-  '';
 
   programs.zsh.enable = true;
   users.defaultUserShell = "/var/run/current-system/sw/bin/zsh";

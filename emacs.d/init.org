@@ -63,7 +63,7 @@ This part is to replace what was already there, before I started "going literal"
 #+BEGIN_SRC sh :tangle ~/.zshrc :comments noweb :tangle-mode (identity #o444)
   source ~/.antigen/antigen.zsh
 
-  antigen bundle gpg-agent
+  # antigen bundle gpg-agent
   antigen bundle git
   antigen bundle zsh-users/zsh-syntax-highlighting
   antigen use oh-my-zsh
@@ -79,13 +79,9 @@ This part is to replace what was already there, before I started "going literal"
 
 *** Xprofile
 
-#+BEGIN_SRC sh :tangle ~/.xprofile :comments noweb :tangle-mode (identity #o444) :shebang #!/usr/bin/env zsh
+#+BEGIN_SRC sh :tangle no :comments noweb :tangle-mode (identity #o444) :shebang #!/usr/bin/env zsh
   gpg-connect-agent /bye
-  GPG_TTY=$(tty)
-  export GPG_TTY
   export SSH_AUTH_SOCK="/var/run/user/1000/gnupg/S.gpg-agent.ssh"
-
-  unset SSH_AGENT_PID
 #+END_SRC
 
 ** Host aliases                                                       :crypt:

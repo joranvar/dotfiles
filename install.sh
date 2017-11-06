@@ -10,3 +10,11 @@ done
 
 # Compile xmonad for first use
 cd ~/.xmonad && nix-shell --pure --command 'ghc --make xmonad.hs -i -ilib -fforce-recomp -v0 -o xmonad-x86_64-linux'
+
+for i in nixos/configuration.nix nixos/yubikey-gpg.nix; do
+    echo $mypath/$i "->" /etc/$i
+    sudo mkdir -p /etc/${i:h}
+    [[ -a /etc/$i ]] || sudo ln -s $mypath/$i /etc/$i
+done
+
+[[ -a /etc/nixos/local-machine.nix ]] || sudo ln -s $mypath/nixos/$(hostname).nix /etc/nixos/local-machine.nix
