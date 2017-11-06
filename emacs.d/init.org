@@ -1581,6 +1581,14 @@ And these are the colors.
               (add-hook 'prog-mode-hook 'rainbow-identifiers-mode)))
 #+END_SRC
 
+While this is specific for org-mode.
+
+#+BEGIN_SRC emacs-lisp
+  (use-package org-bullets
+    :config (progn
+              (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1)))))
+#+END_SRC
+
 ** Screens
 
 Start with the correct resolutions.
