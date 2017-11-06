@@ -1828,3 +1828,13 @@ Enable multiple monitors.
               (add-hook 'dired-mode-hook #'all-the-icons-dired-mode)))
 #+END_SRC
 
+
+** Use `fancy-narrow`
+
+This is useful for pair programming and highlighting, for instance.
+
+#+BEGIN_SRC emacs-lisp
+  (use-package fancy-narrow
+    :config (progn
+              (fancy-narrow-mode)))
+#+END_SRC
