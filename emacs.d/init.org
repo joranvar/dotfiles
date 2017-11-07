@@ -1735,7 +1735,7 @@ Use Symbola for unicode characters
 I like smaller fonts.
 
 #+BEGIN_SRC elisp
-  (set-face-attribute 'default nil :height 75)
+  (set-default-font "Hack 10")
 #+END_SRC
 
 ** Window management
@@ -1798,7 +1798,7 @@ Enable multiple monitors.
   (exwm-randr-enable)
   (require 'exwm-config)
   (exwm-config-default)
-  (set-frame-parameter (exwm-workspace--workspace-from-frame-or-index 0) 'font "Monospace 20")
+  (set-frame-parameter (exwm-workspace--workspace-from-frame-or-index 0) 'font "Hack 20")
 #+END_SRC
 
 Setup a nice system monitor in the message area.
