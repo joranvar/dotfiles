@@ -1801,6 +1801,20 @@ Enable multiple monitors.
   (set-frame-parameter (exwm-workspace--workspace-from-frame-or-index 0) 'font "Hack 20")
 #+END_SRC
 
+Add the WM_TITLE and WM_CLASS of the exwm window to its buffer name.
+
+#+BEGIN_SRC emacs-lisp
+  (defun exwm-rename-buffer ()
+    (interactive)
+    (exwm-workspace-rename-buffer
+     (concat exwm-class-name ":"
+             (if (<= (length exwm-title) 50) exwm-title
+               (concat (substring exwm-title 0 49) "...")))))
+
+  (add-hook 'exwm-update-class-hook 'exwm-rename-buffer)
+  (add-hook 'exwm-update-title-hook 'exwm-rename-buffer)
+#+END_SRC
+
 Setup a nice system monitor in the message area.
 
 #+BEGIN_SRC emacs-lisp
