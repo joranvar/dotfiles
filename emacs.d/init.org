@@ -365,7 +365,7 @@ Each project is either a version controlled (~magit~!) directory, or some direct
   (use-package diff-hl
     :config (progn
               (add-hook 'magit-post-refresh-hook 'diff-hl-magit-post-refresh)
-              (global-diff-hl-mode)))
+              (global-diff-hl-mode 1)))
 #+END_SRC
 
 *** Navigation
@@ -1512,7 +1512,7 @@ Please, use all my screen real estate for information, not for "places to click 
   (when (fboundp 'tool-bar-mode) (tool-bar-mode -1))
   (when (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
   (if (fboundp 'tooltip-mode) (tooltip-mode -1) (setq tooltip-use-echo-area t))
-  (fringe-mode '(4 . 0))
+  (fringe-mode '(16 . 0))
 #+END_SRC
 
 Although, I do have a mouse, and sometimes I use it to focus a window in my window manager.  That's when I like to also focus a window inside Emacs.
