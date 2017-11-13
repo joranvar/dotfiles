@@ -159,6 +159,7 @@
     gnuplot
     plantuml
     graphviz
+    taskjuggler
 
     #steam
     androidsdk
