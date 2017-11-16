@@ -417,6 +417,15 @@ Use treemacs in combination with projectile
   ;;             (treemacs-filewatch-mode t)))
 #+END_SRC
 
+Use magithub for convenience.
+
+#+BEGIN_SRC emacs-lisp
+  (use-package magithub
+    :after magit
+    :config (progn
+              (magithub-feature-autoinject t)))
+#+END_SRC
+
 ** Completion
 
 *** ~company~

@@ -53,6 +53,7 @@
 
     zsh
     git
+    gitAndTools.hub
     jre
     libusb
     gnupg
