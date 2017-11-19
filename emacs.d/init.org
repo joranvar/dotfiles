@@ -1819,6 +1819,22 @@ Thanks Wilfred (https://www.emacswiki.org/emacs/ToggleWindowSplit).
 
 ** Use exwm
 
+Always use intercept the super key.
+
+#+BEGIN_SRC emacs-lisp
+  (exwm-input-set-key (kbd "s-l") (lambda () (interactive) (start-process "" nil "xscreensaver-command" "-lock")))
+#+END_SRC
+
+#+BEGIN_SRC emacs-lisp
+  (defvar joranvar/google-history)
+  (defun joranvar/google (&optional search-term) (interactive)
+         (start-process-shell-command "conkeror" nil
+                                      (format "conkeror 'g %s'" (or search-term (read-string "Google for: " nil 'joranvar/google-history)))))
+  (exwm-input-set-key (kbd "s-g") #'joranvar/google)
+
+  (exwm-input-set-key (kbd "s-j") (lambda () (interactive) (org-capture nil "j")))
+#+END_SRC
+
 Enable multiple monitors.
 
 #+BEGIN_SRC emacs-lisp
