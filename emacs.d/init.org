@@ -1050,7 +1050,10 @@ Why not slurp my contacts' addresses into emacs?
                                            '("User-Agent" (".*" mailer identity nil)))
                     bbdb-accept-message-alist '(("To" . "bart\.post@")
                                                 ("Cc" . "bart\.post@")
-                                                ("Bcc" . "bart\.post@"))
+                                                ("Bcc" . "bart\.post@")
+                                                ("To" . "bart@")
+                                                ("Cc" . "bart@")
+                                                ("Bcc" . "bart@"))
                     bbdb-ignore-message-alist '(("From" . "@linkedin")))))
   (use-package helm-bbdb)
 #+END_SRC
