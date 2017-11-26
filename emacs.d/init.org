@@ -1153,6 +1153,7 @@ Also: exported listings should be pretty.
                     org-log-into-drawer t
                     org-log-done 'time
                     org-outline-path-complete-in-steps nil
+                    org-agenda-clockreport-parameter-plist '(:link t :maxlevel 7 :fileskip0 t :compact t :narrow 160 :formula %)
                     org-agenda-prefix-format '((agenda . " %i %-12:c%?-12t% s")
                                                (timeline . "  % s")
                                                (todo . " %i %-12:c")
