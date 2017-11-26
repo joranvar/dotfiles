@@ -1838,6 +1838,8 @@ Always use intercept the super key.
   (exwm-input-set-key (kbd "s-g") #'joranvar/google)
 
   (exwm-input-set-key (kbd "s-j") (lambda () (interactive) (org-capture nil "j")))
+
+  (exwm-input-set-key (kbd "s-a") (lambda () (interactive) (org-agenda nil " ")))
 #+END_SRC
 
 Enable multiple monitors.
