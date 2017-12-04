@@ -297,6 +297,14 @@ With ledger, I want to have the following settings, though.
   --date-format %Y-%m-%d
 #+END_SRC
 
+I prefer to use hledger, now, so point to that executable.
+
+#+BEGIN_SRC emacs-lisp
+(setq ledger-mode-should-check-version nil
+      ledger-report-links-in-register nil
+      ledger-binary-path "hledger")
+#+END_SRC
+
 ** Start Emacs as a server
 
 #+BEGIN_SRC emacs-lisp

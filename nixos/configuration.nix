@@ -156,7 +156,7 @@
     #gitAndTools.git-annex
     zip
     unzip
-    ledger
+    hledger
     gnuplot
     plantuml
     graphviz
