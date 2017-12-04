@@ -28,20 +28,21 @@
     xmonad-contrib = pkgs.haskellPackages.xmonad-contrib;
     xmonad-extras = pkgs.haskellPackages.xmonad-extras;
     freetds = pkgs.freetds.override { odbcSupport = true; };
-    # factorio = with pkgs; import /home/joranvar/git/nixpkgs/pkgs/games/factorio/default.nix ({
-    #   stdenv = stdenv;
-    #   callPackage = callPackage;
-    #   fetchurl = fetchurl;
-    #   makeWrapper = makeWrapper;
-    #   alsaLib = alsaLib;
-    #   libX11 = xlibs.libX11;
-    #   libXcursor = xlibs.libXcursor;
-    #   libXinerama = xlibs.libXinerama;
-    #   libXrandr = xlibs.libXrandr;
-    #   libXi = xlibs.libXi;
-    #   mesa_noglu = mesa_noglu;
-    #   factorio-utils = factorio-utils;
-    #   releaseType = "alpha"; });
+    factorio = with pkgs; import /home/joranvar/git/nixos/nixpkgs/pkgs/games/factorio/default.nix ({
+      stdenv = stdenv;
+      callPackage = callPackage;
+      fetchurl = fetchurl;
+      makeWrapper = makeWrapper;
+      alsaLib = alsaLib;
+      libX11 = xlibs.libX11;
+      libXcursor = xlibs.libXcursor;
+      libXinerama = xlibs.libXinerama;
+      libXrandr = xlibs.libXrandr;
+      libXi = xlibs.libXi;
+      mesa_noglu = mesa_noglu;
+      factorio-utils = factorio-utils;
+      releaseType = "alpha";
+    });
   };
 
   # List packages installed in system profile. To search by name, run:
@@ -174,7 +175,7 @@
     gnome3.gvfs
     gnome3.nautilus
 
-#    factorio
+    factorio
   ];
 
 #  nixpkgs.config.chromium = { enableWideVine = true; enablePepperFlash = true; };
