@@ -149,6 +149,7 @@
     dmenu
     dzen2
     xscreensaver
+    xorg.xbacklight
     maim
     samba
     flashplayer
