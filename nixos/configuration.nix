@@ -120,6 +120,7 @@
     trayer
     haskellPackages.ghc
     taffybar
+    haskellPackages.stylish-haskell
     haskellPackages.xmobar
     haskellPackages.xmonad
     haskellPackages.xmonad-contrib

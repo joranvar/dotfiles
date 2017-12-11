@@ -570,6 +570,12 @@ In Haskell, use `dante`.
             (add-hook 'haskell-mode-hook 'dante-mode)))
 #+END_SRC
 
+Use stylish-haskell.
+
+#+BEGIN_SRC emacs-lisp
+  (setq haskell-stylish-on-save t)
+#+END_SRC
+
 *** Yaml
 
 #+BEGIN_SRC emacs-lisp
