@@ -49,6 +49,12 @@
     PowerKeyIgnoreInhibited=yes
   '';
 
+  powerManagement.powerUpCommands = ''
+    # Force ethernet
+    ip link set enp3s0 down
+    ip link set enp3s0 up
+  '';
+
   virtualisation.libvirtd.enable = true;
   virtualisation.virtualbox.host.enable = true;
 }
