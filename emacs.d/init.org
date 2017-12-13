@@ -1851,7 +1851,7 @@ Always use intercept the super key.
                                       (format "conkeror 'g %s'" (or search-term (read-string "Google for: " nil 'joranvar/google-history)))))
   (exwm-input-set-key (kbd "s-g") #'joranvar/google)
 
-  (exwm-input-set-key (kbd "s-j") (lambda () (interactive) (org-capture nil "j")))
+  (exwm-input-set-key (kbd "s-j") (lambda () (interactive) (flet ((delete-other-windows () #'ignore)) (org-capture nil "j"))))
 
   (exwm-input-set-key (kbd "s-a") (lambda () (interactive) (org-agenda nil " ")))
 
