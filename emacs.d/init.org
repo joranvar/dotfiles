@@ -551,22 +551,17 @@ In C#, the following:
   (use-package haskell-mode
     :mode "\\.hs\\'"
     :config (progn
-              (require 'haskell-indentation)
               (use-package hlint-refactor
                 :config (add-hook 'haskell-mode-hook 'hlint-refactor-mode))
               (use-package company-ghc
                 :config (add-to-list 'company-backends 'company-ghc))
-              (setq company-ghc-show-info t)
-              (add-to-list 'aggressive-indent-excluded-modes 'haskell-mode)))
-#+END_SRC
-
-In Haskell, use `dante`.
-
-#+BEGIN_SRC emacs-lisp
-  (use-package dante
-    :commands 'dante-mode
-    :init (progn
-            (add-hook 'haskell-mode-hook 'dante-mode)))
+              (setq company-ghc-show-info t
+                    haskell-tags-on-save t
+                    haskell-process-type 'ghci
+                    flycheck-haskell-ghc-executable "nix-ghc")
+              (add-to-list 'aggressive-indent-excluded-modes 'haskell-mode)
+              (require 'haskell-indentation)
+              (add-hook 'haskell-mode-hook #'haskell-indentation-mode)))
 #+END_SRC
 
 Use stylish-haskell.

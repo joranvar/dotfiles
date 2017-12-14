@@ -121,6 +121,8 @@
     haskellPackages.ghc
     taffybar
     haskellPackages.stylish-haskell
+    haskellPackages.hlint
+    haskellPackages.hasktags
     haskellPackages.xmobar
     haskellPackages.xmonad
     haskellPackages.xmonad-contrib
