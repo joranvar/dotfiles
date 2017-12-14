@@ -558,10 +558,12 @@ In C#, the following:
               (setq company-ghc-show-info t
                     haskell-tags-on-save t
                     haskell-process-type 'ghci
-                    flycheck-haskell-ghc-executable "nix-ghc")
+                    flycheck-haskell-ghc-executable "nix-ghc"
+                    haskell-process-path-ghci "nix-ghci")
               (add-to-list 'aggressive-indent-excluded-modes 'haskell-mode)
               (require 'haskell-indentation)
-              (add-hook 'haskell-mode-hook #'haskell-indentation-mode)))
+              (add-hook 'haskell-mode-hook #'haskell-indentation-mode)
+              (add-hook 'haskell-mode-hook #'interactive-haskell-mode)))
 #+END_SRC
 
 Use stylish-haskell.
