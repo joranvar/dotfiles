@@ -1758,18 +1758,18 @@ Log the notifications with Sauron
 
 ** Font face
 
-I read about Hack.
+I read about Hack.  But now I'm using Source Code Pro.
 
 #+BEGIN_SRC emacs-lisp
-  (when (member "Hack" (font-family-list))
-    (set-face-attribute 'default nil :font "Hack"))
+  (when (member "Source Code Pro" (font-family-list))
+    (set-face-attribute 'default nil :font "Source Code Pro"))
 #+END_SRC
 
 Which I also like for termite, by the way.
 
 #+BEGIN_SRC conf :tangle ~/.config/termite/config :comments noweb :tangle-mode (identity #o444) :mkdirp yes
   [options]
-  font = Hack 9
+  font = Source Code Pro 9
 #+END_SRC
 
 Use Symbola for unicode characters
@@ -1784,7 +1784,7 @@ Use Symbola for unicode characters
 I like smaller fonts.
 
 #+BEGIN_SRC elisp
-  (set-default-font "Hack 10")
+  (set-default-font "Source Code Pro 10")
 #+END_SRC
 
 ** Window management
@@ -1874,7 +1874,7 @@ Enable multiple monitors.
   (defun set-screens ()
     (start-process-shell-command
      "xrandr" nil "xrandr --output DP-4 --auto --output HDMI-0 --right-of DP-4 --auto --output DP-1 --left-of DP-4 --auto")
-    (set-frame-parameter (exwm-workspace--workspace-from-frame-or-index 0) 'font "Hack 20"))
+    (set-frame-parameter (exwm-workspace--workspace-from-frame-or-index 0) 'font "Source Code Pro 20"))
   (setq exwm-randr-screen-change-hook '(set-screens))
   (exwm-randr-enable)
   (require 'exwm-config)

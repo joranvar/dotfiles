@@ -189,6 +189,7 @@
     fonts = with pkgs; [
       terminus_font
       hack-font
+      source-code-pro
       symbola
     ];
   };
