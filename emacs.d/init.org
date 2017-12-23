@@ -435,6 +435,14 @@ Use magithub for convenience.
               (magithub-feature-autoinject t)))
 #+END_SRC
 
+Add magit-gh-pulls to that, for the better interface.
+
+#+BEGIN_SRC emacs-lisp
+  (use-package magit-gh-pulls
+    :config (progn
+              (add-hook 'magit-mode-hook 'turn-on-magit-gh-pulls)))
+#+END_SRC
+
 ** Completion
 
 *** ~company~
