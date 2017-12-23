@@ -1611,8 +1611,13 @@ This is the theme I will use currently.
               (disable-theme 'tao-yang)
               (load-theme 'tao-yin t)))
   (use-package leuven-theme
+    :disabled
     :config (progn
+              (disable-theme 'leuven)
               (load-theme 'leuven t)))
+  (use-package labburn-theme
+    :config (progn
+              (load-theme 'labburn)))
 #+END_SRC
 
 And these are the colors.
