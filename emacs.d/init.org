@@ -1835,6 +1835,10 @@ Thanks Wilfred (https://www.emacswiki.org/emacs/ToggleWindowSplit).
 
 ** Use exwm
 
+#+BEGIN_SRC emacs-lisp
+  (require 'exwm)
+#+END_SRC
+
 Always use intercept the super key.
 
 #+BEGIN_SRC emacs-lisp
