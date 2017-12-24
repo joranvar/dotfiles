@@ -119,6 +119,7 @@
 
     trayer
     haskellPackages.ghc
+    haskellPackages.ghcid
     taffybar
     haskellPackages.stylish-haskell
     haskellPackages.hlint
