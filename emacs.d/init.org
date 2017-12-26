@@ -1879,6 +1879,16 @@ Always use intercept the super key.
                         (interactive)
                         (start-process-shell-command "xbacklight -dec 5" nil "xbacklight -dec 5")
                         (message "%s" (shell-command-to-string "xbacklight"))))
+  (exwm-input-set-key (kbd "<XF86AudioRaiseVolume>")
+                      (lambda ()
+                        (interactive)
+                        (start-process-shell-command "amixer sset Master 5%+" nil "amixer sset Master 5%+")
+                        (message "%s" (shell-command-to-string "amixer sget Master | grep t: | cat"))))
+  (exwm-input-set-key (kbd "<XF86AudioLowerVolume>")
+                      (lambda ()
+                        (interactive)
+                        (start-process-shell-command "amixer sset Master 5%-" nil "amixer sset Master 5%-")
+                        (message "%s" (shell-command-to-string "amixer sget Master | grep t: | cat"))))
 #+END_SRC
 
 Enable multiple monitors.
