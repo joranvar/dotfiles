@@ -250,6 +250,7 @@
       extraPackages = e: [
         e.emms
         e.magit
+        e.structured-haskell-mode
       ];
     };
     synaptics = {
