@@ -38,7 +38,7 @@
 
   # Enable the X11 windowing system.
   services.xserver = {
-    videoDrivers = [ "nvidia" ];
+    videoDrivers = [ "nvidia" "displaylink" ];
     xrandrHeads = [ "HDMI1" "eDP1" ];
     resolutions = [ { x = 2560; y = 1440; } { x = 1920; y = 1080; } ];
   };
