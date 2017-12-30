@@ -122,7 +122,7 @@
     haskellPackages.ghc
     haskellPackages.ghcid
     taffybar
-    haskellPackages.stylish-haskell
+    haskellPackages.hindent
     haskellPackages.hlint
     haskellPackages.hasktags
     haskellPackages.xmobar
@@ -251,6 +251,7 @@
         e.emms
         e.magit
         e.structured-haskell-mode
+        e.hindent
       ];
     };
     synaptics = {
