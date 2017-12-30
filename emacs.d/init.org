@@ -563,6 +563,9 @@ In C#, the following:
                 :config (add-hook 'haskell-mode-hook 'hlint-refactor-mode))
               (use-package company-ghc
                 :config (add-to-list 'company-backends 'company-ghc))
+              (use-package flycheck-haskell
+                :config (progn
+                          (add-hook 'haskell-mode-hook #'flycheck-haskell-configure)))
               (setq company-ghc-show-info t
                     haskell-tags-on-save t
                     haskell-process-type 'ghci
