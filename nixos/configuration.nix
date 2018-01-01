@@ -43,7 +43,7 @@
       factorio-utils = factorio-utils;
       releaseType = "alpha";
     });
-    conkeror = pkgs.conkeror-unwrapped.override { firefox = pkgs.firefox-esr; };
+#    conkeror = pkgs.conkeror-unwrapped.override { firefox = pkgs.firefox-esr; };
   };
 
   # List packages installed in system profile. To search by name, run:
