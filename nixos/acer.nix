@@ -51,8 +51,8 @@
 
   powerManagement.powerUpCommands = ''
     # Force ethernet
-    ip link set enp3s0 down
-    ip link set enp3s0 up
+    ${pkgs.iproute}/bin/ip link set enp3s0 down
+    ${pkgs.iproute}/bin/ip link set enp3s0 up
   '';
 
   virtualisation.libvirtd.enable = true;
