@@ -649,9 +649,15 @@ Show where I am in xml
 Yes... Even PHP...
 
 #+BEGIN_SRC emacs-lisp
-  (use-package php-mode)
-  (use-package web-mode
-    :mode ((rx ".php" eos) . web-mode))
+  (use-package php-mode
+    :mode ((rx ".php" eos) . php-mode)
+    :config (progn
+              (add-hook 'php-mode-hook #'joranvar/php-mode-init)))
+  (defun joranvar/php-mode-init ()
+    (c-set-style "drupal")
+    (setq-local indent-tabs-mode t)
+    (setq-local tab-width 4)
+    (setq-local c-basic-offset 4))
 #+END_SRC
 
 *** UML
