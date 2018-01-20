@@ -32,8 +32,10 @@
   # networking.wireless.enable = true;  # Enables wireless.
   networking.firewall.enable = true;
   networking.firewall.allowPing = true;
-  networking.firewall.allowedTCPPorts = [ 445 139 ];
-  networking.firewall.allowedUDPPorts = [ 137 138 ];
+  networking.firewall.allowedTCPPorts = [ 445 139 6073 47624 ];
+  networking.firewall.allowedTCPPortRanges = [ { from = 2300; to = 2400; } ];
+  networking.firewall.allowedUDPPortRanges = [ { from = 2300; to = 2400; } ];
+  networking.firewall.allowedUDPPorts = [ 137 138 47630 6073 47624 ];
 
 
   # Enable the X11 windowing system.
