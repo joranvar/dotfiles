@@ -15,11 +15,11 @@
     # options snd_hda_intel enable=0,1
     # options i915 modeset=1 i915_enable_rc6=7 i915_enable_fbc=1 lvds_downclock=1
     # options snd slots=snd-hda-intel
-    # options nvidia-drm modeset=1
+    options nvidia-drm modeset=1
     options snd-hda-intel index=0 id=PCH
     options snd-hda-intel index=1 id=HDMI
   '';
-  boot.blacklistedKernelModules = [ "snd_pcsp" ];
+  boot.blacklistedKernelModules = [ "snd_pcsp" "nouveau" ];
   boot.kernelModules = [ "intel_agp" "i915" ];
   hardware.pulseaudio.enable = true;
 
@@ -40,7 +40,7 @@
 
   # Enable the X11 windowing system.
   services.xserver = {
-    videoDrivers = [ "displaylink" ];
+    videoDrivers = [ "nvidia" ];
     xrandrHeads = [ "HDMI1" "eDP1" ];
     resolutions = [ { x = 2560; y = 1440; } { x = 1920; y = 1080; } ];
   };
