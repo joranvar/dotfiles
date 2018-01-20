@@ -267,6 +267,8 @@
     };
   };
 
+  environment.etc."odbcinst.ini".text = "[FreeTDS]\nDriver=${pkgs.freetds}/lib/libtdsodbc.so\n";
+
   time.timeZone = "Europe/Amsterdam";
 
   services.nixosManual.showManual = true;
