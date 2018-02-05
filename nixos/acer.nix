@@ -4,6 +4,18 @@
 
 { config, pkgs, ... }:
 
+let lock-xscreensaver = pkgs.writeScript "lock-xscreensaver" ''
+  #! ${pkgs.bash}/bin/bash
+
+  _USER=joranvar # $(ps -aux \
+    # | awk '$0 !~ /root/ && /session/ {print $1}' \
+    # | sed -n '1p')
+
+  ${pkgs.su}/bin/su $_USER -c "DISPLAY=:0 ${pkgs.xscreensaver}/bin/xscreensaver-command -lock"
+'';
+
+in
+
 {
   imports = [ ];
 
@@ -49,6 +61,11 @@
   services.logind.extraConfig = ''
     HandlePowerKey=hibernate
     PowerKeyIgnoreInhibited=yes
+  '';
+
+  # Use YUBI to lock
+  services.udev.extraRules = ''
+    SUBSYSTEM=="usb", ACTION=="remove", ENV{ID_VENDOR_ID}=="1050", ENV{ID_MODEL_ID}="0111", RUN+="${lock-xscreensaver}"
   '';
 
   powerManagement.powerUpCommands = ''
