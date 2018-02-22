@@ -478,11 +478,16 @@ I use flycheck for almost any buffer that can be checked, so enable it everywher
 I like my parentheses balanced, thank you!
 
 #+BEGIN_SRC emacs-lisp
+  (defun joranvar/enable-smartparens ()
+    "Enable smartparens, but not if the file is too large."
+    (smartparens-strict-mode)
+    (when (< (buffer-size) 40000)
+      (show-smartparens-mode)))
+
   (use-package smartparens
     :config (progn
               (require 'smartparens-config)
-              (show-smartparens-global-mode)
-              (smartparens-global-strict-mode)
+              (add-hook 'prog-mode-hook #'joranvar/enable-smartparens)
               (sp-use-paredit-bindings)))
 #+END_SRC
 
