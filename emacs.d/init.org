@@ -500,7 +500,31 @@ Also, please indent my code smartly (except for in F#, it does not play nice the
               (add-to-list 'aggressive-indent-excluded-modes 'org-mode)))
 #+END_SRC
 
+Notifiy me with appropriate messages when a compilation ends.
+
 #+BEGIN_SRC emacs-lisp
+  (defun joranvar/play-sound (file)
+    "Play sound in FILE."
+    (start-process "aplay" nil "aplay" file))
+
+  (defun joranvar/compilation-notify (buffer reason)
+    "Handle notification that compilation in BUFFER ended with REASON."
+    (let ((exit-status (or
+                        (and (s-starts-with? "finished" reason) 0)
+                        (string-to-int (-second-item (s-match "with code \\([[:digit:]]\\)+" reason))))))
+      (if (> exit-status 0)
+          (progn
+            (joranvar/play-sound "/home/joranvar/Downloads/buildWarning.wav")
+            (alert (format "Compilation finished with errors (exit-status %d)" exit-status)
+                   :buffer buffer :severity 'high))
+        (joranvar/play-sound "/home/joranvar/Downloads/buildSuccess.wav")
+        (alert "Compilation finished" :buffer buffer))))
+
+  (use-package compile
+    :config
+    (use-package alert)
+    (setq compilation-scroll-output 'first-error)
+    (add-hook 'compilation-finish-functions #'joranvar/compilation-notify))
 #+END_SRC
 
 #+BEGIN_SRC emacs-lisp
