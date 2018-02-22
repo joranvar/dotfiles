@@ -1120,6 +1120,24 @@ Use ~moz-repl~ to communicate with conkeror.
               (add-hook 'javascript-mode-hook (lambda () (moz-minor-mode 1)))))
 #+END_SRC
 
+** Reading / studying
+
+When reading a pdf (for studying purposes), it's nice to be able to
+add some notes to the pages.  That's what `interleave` is for.
+
+#+BEGIN_SRC emacs-lisp
+  (use-package interleave
+    :config (progn
+              (defun joranvar/interleave-use-fancy-narrow (orig-fun &rest args)
+                (cl-letf (((symbol-function 'org-narrow-to-subtree) #'org-fancy-narrow-to-subtree)
+                          ((symbol-function 'widen) #'fancy-widen))
+                  (apply orig-fun args)))
+              (advice-add 'interleave--narrow-to-subtree :around #'joranvar/interleave-use-fancy-narrow)
+              (advice-add 'interleave-sync-pdf-page-current :around #'joranvar/interleave-use-fancy-narrow)
+              (advice-add 'interleave-sync-pdf-page-next :around #'joranvar/interleave-use-fancy-narrow)
+              (advice-add 'interleave-sync-pdf-page-previous :around #'joranvar/interleave-use-fancy-narrow)))
+#+END_SRC
+
 ** Literate programming
 
 Oh boy, org-babel is so nice!
