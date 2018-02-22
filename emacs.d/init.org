@@ -281,26 +281,14 @@ Previewing changes on the fly.
 
 ** Finances
 
-It's about time I managed my finances a bit better.  Luckily, ledger is there to help me!
+It's about time I managed my finances a bit better. I'm using beancount for such stuff now.
 
 #+BEGIN_SRC emacs-lisp
-  (use-package ledger-mode
-    :commands ledger-mode
-    :config (add-to-list 'joranvar/babel-safe-languages "ledger"))
-#+END_SRC
-
-With ledger, I want to have the following settings, though.
-
-#+BEGIN_SRC conf :tangle ~/.ledgerrc :comments noweb :tangle-mode (identity #o444)
-  --date-format %Y-%m-%d
-#+END_SRC
-
-I prefer to use hledger, now, so point to that executable.
-
-#+BEGIN_SRC emacs-lisp
-(setq ledger-mode-should-check-version nil
-      ledger-report-links-in-register nil
-      ledger-binary-path "hledger")
+  (use-package beancount
+    :load-path "/home/joranvar/dotfiles/emacs.d/lisp"
+    :mode "\\.beancount"
+    :commands beancount-mode
+    :config (add-to-list 'joranvar/babel-safe-languages "beancount"))
 #+END_SRC
 
 ** Start Emacs as a server
