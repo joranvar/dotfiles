@@ -501,10 +501,6 @@ Also, please indent my code smartly (except for in F#, it does not play nice the
 #+END_SRC
 
 #+BEGIN_SRC emacs-lisp
-  (use-package recompile-on-save
-    :bind (("C-c m" . recompile-on-save))
-    :config (progn
-              (setq compilation-scroll-output 'first-error)))
 #+END_SRC
 
 #+BEGIN_SRC emacs-lisp
