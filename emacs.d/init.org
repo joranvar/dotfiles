@@ -431,6 +431,7 @@ Use magithub for convenience.
 #+BEGIN_SRC emacs-lisp
   (use-package magithub
     :after magit
+    :disabled t
     :config (progn
               (magithub-feature-autoinject t)))
 #+END_SRC
