@@ -44,6 +44,12 @@
       releaseType = "alpha";
     });
 #    conkeror = pkgs.conkeror-unwrapped.override { firefox = pkgs.firefox-esr; };
+    composer2nix = (import (pkgs.fetchFromGitHub {
+      owner = "svanderburg";
+      repo = "composer2nix";
+      "rev" = "2f130084b545992954567d758039bf65698e1603";
+      "sha256" = "09ss6lzkyx77py7kh5r3sksjyb2871zi8088bqafhi80sa3m4fl1";
+    }) {});
   };
 
   # List packages installed in system profile. To search by name, run:
@@ -131,6 +137,10 @@
     haskellPackages.xmonad-extras
     haskellPackages.yeganesh
     docker # For installing ghc-android - https://github.com/iphydf/docker-build-ghc-android
+
+    composer2nix
+    nodePackages.node2nix
+
     libnotify
     notify-osd
     compton
