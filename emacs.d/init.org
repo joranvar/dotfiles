@@ -364,6 +364,19 @@ Each project is either a version controlled (~magit~!) directory, or some direct
               (global-diff-hl-mode 1)))
 #+END_SRC
 
+**** Use magit with org-mode
+
+#+BEGIN_SRC emacs-lisp
+  (use-package orgit)
+#+END_SRC
+
+Add todos to the project.
+
+#+BEGIN_SRC emacs-lisp
+(use-package magit-org-todos
+  :config (magit-org-todos-autoinsert))
+#+END_SRC
+
 *** Navigation
 
 #+BEGIN_SRC emacs-lisp
