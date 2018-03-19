@@ -1015,16 +1015,6 @@ Gnus will be used to read the mail that was pulled over here.
        (list start end)))
 #+END_SRC
 
-*** notmuch
-
-Notmuch will also be used to read the mail that was pulled over here.  Let's see how it compares to Gnus.
-
-#+BEGIN_SRC emacs-lisp
-  (use-package notmuch
-    :disabled
-    :bind (("C-c m" . notmuch-hello)))
-#+END_SRC
-
 *** GPG for mails
 
 #+BEGIN_SRC emacs-lisp
