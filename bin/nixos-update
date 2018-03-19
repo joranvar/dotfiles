@@ -1,0 +1,22 @@
+#! /usr/bin/env zsh
+update=0
+case $* in
+    *unstable*)
+        sudo nix-channel --add https://nixos.org/channels/nixos-unstable nixos
+        profile="nixos-unstable - "
+        ;;
+    *)
+        sudo nix-channel --add https://nixos.org/channels/nixos-17.09 nixos
+        profile=""
+        ;;
+esac
+
+case $* in
+    *update*)
+        sudo nix-channel --update
+        ;;
+esac
+
+sudo mount /dev/sda1 /boot
+sudo nixos-rebuild switch -p "$(date +%FT%H%M%S) - ${profile}$(git -C /home/joranvar/dotfiles/ log -1 --oneline)"
+sudo umount /boot

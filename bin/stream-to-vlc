@@ -1,0 +1,7 @@
+#! /usr/bin/env nix-shell
+#! nix-shell -p youtube-dl phantomjs2 vlc -i bash
+
+file=$(mktemp)
+youtube-dl "$1" -o - > $file
+vlc $file
+rm $file

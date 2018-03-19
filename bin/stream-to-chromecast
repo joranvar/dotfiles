@@ -1,0 +1,7 @@
+#! /usr/bin/env nix-shell
+#! nix-shell -p youtube-dl phantomjs2 python2 -i bash
+
+file=$(mktemp)
+youtube-dl $1 -o - > $file
+python2 ~/git/stream2chromecast/stream2chromecast.py $file
+rm $file

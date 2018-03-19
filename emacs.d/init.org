@@ -665,12 +665,16 @@ Yes... Even PHP...
   (use-package php-mode
     :mode ((rx ".php" eos) . php-mode)
     :config (progn
+              (setq flycheck-php-executable "nix-php"
+                    flycheck-php-phpcs-executable "nix-phpcs"
+                    flycheck-php-phpmd-executable "nix-phpmd")
               (add-hook 'php-mode-hook #'joranvar/php-mode-init)))
   (defun joranvar/php-mode-init ()
     (c-set-style "drupal")
     (setq-local indent-tabs-mode t)
     (setq-local tab-width 4)
     (setq-local c-basic-offset 4))
+  (use-package company-php)
 #+END_SRC
 
 *** UML

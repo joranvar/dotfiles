@@ -1,0 +1,3 @@
+#! /usr/bin/env bash
+args="${*/-q/}"
+nix-shell -p php71Packages.phpcs --show-trace --run "phpcs ${args}"

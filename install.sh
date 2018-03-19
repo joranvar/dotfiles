@@ -8,6 +8,13 @@ for i in antigen config/git config/mpd config/taffybar conkerorrc emacs.d/init.e
     [[ -a ~/.$i ]] || ln -s $mypath/$i ~/.$i
 done
 
+# Install bin files
+for i in bin/*; do
+    echo $mypath/$i "->" ~/$i
+    mkdir -p ~/${i:h}
+    [[ -a ~/$i ]] || ln -s $mypath/$i ~/$i
+done
+
 # Compile xmonad for first use
 cd ~/.xmonad && nix-shell --pure --command 'ghc --make xmonad.hs -i -ilib -fforce-recomp -v0 -o xmonad-x86_64-linux'
 
