@@ -803,6 +803,8 @@ This script was downloaded (and adjusted a tiny bit) from http://groups.google.c
       }
   }
 
+  exec ("notmuch", "new");
+
 #+END_SRC
 
 *** Offline imap
@@ -815,6 +817,7 @@ This script was downloaded (and adjusted a tiny bit) from http://groups.google.c
   accounts = Gmail, TopVintage
   maxsyncaccounts = 2
   pythonfile = ~/.offlineimap.py
+  fsync = false
 
   [Account Gmail]
   localrepository = LocalGmail
@@ -827,13 +830,16 @@ This script was downloaded (and adjusted a tiny bit) from http://groups.google.c
   [Repository LocalGmail]
   type = Maildir
   localfolders = ~/Maildir/Gmail
+  nametrans = lambda folder: {'archive': '[Gmail]/All Mail', }.get(folder, folder)
+  sync_deletes = no
 
   [Repository RemoteGmail]
   type = Gmail
   maxconnections = 2
   remoteuser = bart.post@gmail.com
   remotepasseval = get_password_emacs("gmail", "imaps")
-  folderfilter = lambda foldername: foldername not in ['[Gmail]/All Mail', '[Gmail]/Important']
+  folderfilter = lambda foldername: foldername == '[Gmail]/All Mail'
+  nametrans = lambda folder: {'[Gmail]/All Mail': 'archive', }.get(folder, folder)
   sslcacertfile = /etc/ssl/certs/ca-certificates.crt
 
   # These are effectively the same as the above
