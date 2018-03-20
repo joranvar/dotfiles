@@ -1947,16 +1947,6 @@ Always use intercept the super key.
                         (interactive)
                         (start-process-shell-command "xbacklight -dec 5" nil "xbacklight -dec 5")
                         (message "%s" (shell-command-to-string "xbacklight"))))
-  (exwm-input-set-key (kbd "<XF86AudioRaiseVolume>")
-                      (lambda ()
-                        (interactive)
-                        (start-process-shell-command "amixer sset Master 5%+" nil "amixer sset Master 5%+")
-                        (message "%s" (shell-command-to-string "amixer sget Master | grep t: | cat"))))
-  (exwm-input-set-key (kbd "<XF86AudioLowerVolume>")
-                      (lambda ()
-                        (interactive)
-                        (start-process-shell-command "amixer sset Master 5%-" nil "amixer sset Master 5%-")
-                        (message "%s" (shell-command-to-string "amixer sget Master | grep t: | cat"))))
 #+END_SRC
 
 Enable multiple monitors.
@@ -2013,6 +2003,65 @@ Add a system tray.
 #+BEGIN_SRC emacs-lisp
   (require 'exwm-systemtray)
   (exwm-systemtray-enable)
+#+END_SRC
+
+** Hydra keybindings
+
+Because starting up stuff involves lots of keypresses and memory
+(typing commands, remembering urls), but is also a quite frequent
+action, the following hydra binds useful commands.
+
+#+BEGIN_SRC emacs-lisp
+  (defun joranvar/change-font-size (amount)
+    "Change font size of current frame by AMOUNT."
+    (let* ((font (s-split-words (frame-parameter (selected-frame) 'font-parameter)))
+           (font-name (s-join " " (-drop-last 1 font)))
+           (font-size (string-to-number (-last-item font)))
+           (new-font-size (+ amount font-size))
+           (new-font (s-join " " (list font-name (int-to-string new-font-size)))))
+      (message "%s" new-font)
+      (set-frame-parameter (selected-frame) 'font new-font)))
+
+  (defun joranvar/change-volume (amount)
+    "Change the volume by AMOUNT percent."
+    (interactive)
+    (let ((volume-string (format "%d%%%s" (abs amount) (if (< 0 amount) "+" "-"))))
+      (start-process-shell-command (format "amixer sset Master %s" volume-string) nil (format "amixer sset Master %s" volume-string))
+      (message "%s" (shell-command-to-string "amixer sget Master | grep t: | cat"))))
+
+  (exwm-input-set-key (kbd "<XF86AudioRaiseVolume>") (joranvar/change-volume 5))
+  (exwm-input-set-key (kbd "<XF86AudioLowerVolume>") (joranvar/change-volume -5))
+
+  (exwm-input-set-key
+   (kbd "s-SPC")
+   (defhydra hydra-start (:color blue :hint nil)
+     "
+     ^Start^
+     ^^------
+     _y_: YouTrack
+     _s_: Slack
+     "
+     ("y" (lambda () (interactive) (start-process-shell-command "YouTrack" nil "firefox --new-window youtrack.topvintage.nl:8080")) "YouTrack")
+     ("e" (lambda () (interactive) (start-process-shell-command "Nested Emacs" nil "emacs --debug-init")) "Nested Emacs")
+     ("g" (lambda () (interactive) (hydra-game/body)) "Game")
+     ("+" (lambda () (interactive) (joranvar/change-font-size 1)) "Larger font" :color red)
+     ("-" (lambda () (interactive) (joranvar/change-font-size -1)) "Smaller font" :color red)
+     ("p" (lambda () (interactive) (joranvar/change-volume 5)) "Volume up" :color red)
+     ("n" (lambda () (interactive) (joranvar/change-volume -5)) "Volume down" :color red)))
+
+  (defhydra hydra-game (:color red :hint nil)
+    ("o" (lambda () (interactive) (start-process-shell-command "OBS" nil "nix-shell -p obs-studio --run obs")) "OBS")
+    ("s" (lambda () (interactive) (start-process-shell-command "Steam" nil "nix-shell -p steam --run steam")) "Steam")
+    ("v" (lambda () (interactive) (start-process-shell-command "Vagante" nil "nix-shell -p steam --run 'LD_LIBRARY_PATH=~/.steam/bin32/ cd /home/joranvar/.steam/steam/steamapps/common/vagante && ~/.steam/bin32/steam-runtime/run.sh ./vagante.exe'")) "Vagante"))
+
+  (add-hook 'exwm-manage-finish-hook
+            #'(lambda ()
+                (when (and exwm-class-name
+                           (string= exwm-class-name "Emacs"))
+                  (exwm-input-set-local-simulation-keys nil)
+                  ;; (setq-local exwm-input-prefix-keys '(?\C-c))
+                  (setq-local exwm-input-prefix-keys nil))))
+
 #+END_SRC
 
 ** Use pretty unicode characters
