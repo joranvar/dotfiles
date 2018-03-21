@@ -1938,6 +1938,12 @@ Always use intercept the super key.
   (exwm-input-set-key (kbd "s-l") (lambda () (interactive) (start-process "" nil "xscreensaver-command" "-lock")))
 #+END_SRC
 
+Do not iconify-or-deiconify-frame.  Does not work well with exwm, because there is no way to restore the frame if it is on a fixed screen.
+
+#+BEGIN_SRC emacs-lisp
+  (global-unset-key (kbd "C-z"))
+#+END_SRC
+
 #+BEGIN_SRC emacs-lisp
   (defvar joranvar/google-history)
   (defun joranvar/google (&optional search-term) (interactive)
