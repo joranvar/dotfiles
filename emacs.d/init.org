@@ -1821,13 +1821,25 @@ Log the notifications with Sauron
 
 #+BEGIN_SRC emacs-lisp
   (use-package sauron
-    :commands (sauron-start)
+    :commands (sauron-start-hidden)
+    :bind (("s-s" . #'joranvar/show-sauron))
     :config (progn
+              (setq sauron-modules '(sauron-erc sauron-org sauron-notifications sauron-twittering sauron-compilation))
               (setq sauron-notifications-urgency-to-priority-plist
                     '(:low 3 :normal 4 :critical 5 :otherwise 3))
               (setq alert-user-configuration (quote ((nil notifications nil))))
               (setq sauron-hide-mode-line t
-                    sauron-sticky-frame t)))
+                    sauron-sticky-frame t
+                    sauron-max-line-length nil)
+              (exwm-input-set-key (kbd "s-s") #'joranvar/show-sauron))
+    :init (defun joranvar/show-sauron ()
+            "Show Sauron in a pop up window."
+            (interactive)
+            (sauron-start-hidden)
+            (display-buffer (get-buffer "*Sauron*") '(display-buffer-in-side-window
+                                                      ((window-height . 20)
+                                                       (inhibit-same-window t)
+                                                       (side right))))))
 #+END_SRC
 
 ** Use UTF-8 by default
