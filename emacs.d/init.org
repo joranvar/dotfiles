@@ -1134,6 +1134,8 @@ Use eww by default, firefox as a fallback.
 #+BEGIN_SRC emacs-lisp
   (setq browse-url-generic-program (executable-find "firefox")
         browse-url-browser-function #'eww-browse-url)
+
+  (setq eww-search-prefix "https://www.google.nl/search?q=")
 #+END_SRC
 
 Use conkeror-minor-mode.
