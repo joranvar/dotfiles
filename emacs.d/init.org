@@ -527,9 +527,21 @@ Also, please indent my code smartly (except for in F#, it does not play nice the
 Notifiy me with appropriate messages when a compilation ends.
 
 #+BEGIN_SRC emacs-lisp
+  (defun joranvar/from-nix-package (name file)
+    "For the given nix package by NAME, return the packaged FILE."
+    (let ((nix-path (s-trim (shell-command-to-string (format "nix-build -E '(import <nixpkgs> {})'.%s" name)))))
+      (format "%s/%s" nix-path file)))
+
   (defun joranvar/play-sound (file)
     "Play sound in FILE."
-    (start-process "aplay" nil "aplay" file))
+    (start-process "ogg123" nil
+                   (joranvar/from-nix-package "vorbis-tools" "bin/ogg123")
+                   file))
+
+  (defun joranvar/sound-path (name)
+    "Find sound file by NAME."
+    (joranvar/from-nix-package "sound-theme-freedesktop"
+                               (format "share/sounds/freedesktop/stereo/%s.oga" name)))
 
   (defun joranvar/compilation-notify (buffer reason)
     "Handle notification that compilation in BUFFER ended with REASON."
@@ -538,10 +550,10 @@ Notifiy me with appropriate messages when a compilation ends.
                         (string-to-int (-second-item (s-match "with code \\([[:digit:]]\\)+" reason))))))
       (if (> exit-status 0)
           (progn
-            (joranvar/play-sound "/home/joranvar/Downloads/buildWarning.wav")
+            (joranvar/play-sound (joranvar/sound-path "dialog-warning"))
             (alert (format "Compilation finished with errors (exit-status %d)" exit-status)
                    :buffer buffer :severity 'high))
-        (joranvar/play-sound "/home/joranvar/Downloads/buildSuccess.wav")
+        (joranvar/play-sound (joranvar/sound-path "dialog-information"))
         (alert "Compilation finished" :buffer buffer))))
 
   (use-package compile
