@@ -1015,6 +1015,14 @@ Gnus will be used to read the mail that was pulled over here.
                                        (group 1.0))
                              (vertical 1.0
                                        (summary 1.0 point)))))))
+
+  (use-package nnreddit
+    :load-path "./lisp/nnreddit"
+    :config (progn
+              (add-to-list 'gnus-secondary-select-methods '(nnreddit ""
+                                                                     (display 'all)
+                                                                     (gnus-summary-goto-unread 'never)))
+              (gnus-group-unsubscribe-group "nnreddit:emacs")))
 #+END_SRC
 
 *** BUG FIX
