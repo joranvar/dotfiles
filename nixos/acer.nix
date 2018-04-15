@@ -6,12 +6,14 @@
 
 let lock-xscreensaver = pkgs.writeScript "lock-xscreensaver" ''
   #! ${pkgs.bash}/bin/bash
+  echo 'lock-xscreensaver called' | systemd-cat -t lock-xscreensaver -p info
 
   _USER=joranvar # $(ps -aux \
     # | awk '$0 !~ /root/ && /session/ {print $1}' \
     # | sed -n '1p')
 
   ${pkgs.su}/bin/su $_USER -c "DISPLAY=:0 ${pkgs.xscreensaver}/bin/xscreensaver-command -lock"
+  echo 'xscreensaver locking' | systemd-cat -t lock-xscreensaver -p info
 '';
 
 in
@@ -65,7 +67,7 @@ in
 
   # Use YUBI to lock
   services.udev.extraRules = ''
-    SUBSYSTEM=="usb", ACTION=="remove", ENV{ID_VENDOR_ID}=="1050", ENV{ID_MODEL_ID}="0111", RUN+="${lock-xscreensaver}"
+    SUBSYSTEM=="input", ACTION=="remove", ENV{ID_VENDOR_ID}=="1050", ENV{ID_MODEL_ID}=="0111", RUN+="${lock-xscreensaver}"
   '';
 
   powerManagement.powerUpCommands = ''
