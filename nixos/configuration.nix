@@ -193,7 +193,7 @@
     graphviz
     taskjuggler
 
-    #steam
+    steam
     androidsdk
     android-udev-rules
 #    chromium
