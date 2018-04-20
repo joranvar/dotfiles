@@ -2011,15 +2011,66 @@ Enable multiple monitors.
 
 #+BEGIN_SRC emacs-lisp
   (require 'exwm-randr)
-  (setq exwm-randr-workspace-output-plist '(0 "DP-4" 2 "HDMI-0" 1 "DP-1" 3 "DP-0.8"))
+  ;;(setq exwm-randr-workspace-output-plist '(0 "DP-4" 1 "DP-0.8" 2 "DP-0.1.1" 3 "DP-0.1.2" 4 "DP-0.2"))
+  (defun joranvar/set-font-on-laptop-screen-to-larger ()
+    "Set the font on frames that are displayed on \"DP-4\" to \"Source Code Pro 20\".
+
+      The others frames will get their font set to \"Source Code Pro 12\"."
+    (-each exwm-workspace--list
+      (lambda (frame)
+        (set-frame-parameter frame 'font
+                             (if (s-equals-p "DP-4" (frame-parameter frame 'exwm-randr-output))
+                                 "Source Code Pro 20"
+                               "Source Code Pro 10")))))
   (defun set-screens ()
     (start-process-shell-command
-     "xrandr" nil "xrandr --output DP-4 --auto --output HDMI-0 --right-of DP-4 --auto --output DP-1 --left-of DP-4 --auto --output DP-0.8 --left-of DP-4 --auto")
-    (set-frame-parameter (exwm-workspace--workspace-from-frame-or-index 0) 'font "Source Code Pro 20"))
+     "xrandr" nil (s-join " " '("xrandr --output DP-4 --auto"
+                                ;; "--output HDMI-0 --right-of DP-4 --auto"
+                                ;; "--output DP-1 --left-of DP-4 --auto"
+                                "--output DP-0.8 --right-of DP-4 --auto --primary" ;; @home
+                                "--output DP-0.2 --left-of DP-4 --auto"
+                                "--output DP-0.1.2 --right-of DP-4 --auto"
+                                "--output DP-0.1.1 --left-of DP-4 --auto")))
+    (joranvar/set-font-on-laptop-screen-to-larger))
   (setq exwm-randr-screen-change-hook '(set-screens))
   (exwm-randr-enable)
   (require 'exwm-config)
   (exwm-config-default)
+
+  ;; I want this to go in a defun, so that I can also call it at work, but the effect will be setting the other screens at convenient outputs (DP-0.1.1 and DP-0.1.2?), and having DP-4 switch the rest.
+  (defvar joranvar/current-context nil
+    "The currently set context for `joranvar/setup-screens'.")
+  (defun joranvar/setup-screens (context)
+    "Setup exwm outputs just the way I like them, according to CONTEXT.
+
+    If CONTEXT is `work', set DP-0.1.1 left and DP-0.1.2 right.
+    Otherwise, set DP-0.8 right."
+    (interactive)
+    (setq exwm-randr-workspace-output-plist
+          (if (equal context :work)
+              (-flatten (-concat
+                         '(0 "DP-0.1.1")
+                         (--map-indexed
+                          (-list (+ it-index 1) "DP-4")
+                          (-repeat 7 nil))
+                         '(9 "DP-0.1.2")))
+            (-flatten (-concat
+                       '(0 "DP-4")
+                       (--map-indexed
+                        (-list (+ it-index 1) "DP-0.8")
+                        (-repeat 8 nil))))))
+    (unless 'config-timestamp (exwm-randr--refresh))
+    (joranvar/set-font-on-laptop-screen-to-larger)
+    (setq joranvar/current-context context))
+  (defun joranvar/get-screens-context ()
+    "Return the current context, by seeing what monitors are attached."
+    (if (eq 0 (string-to-int (shell-command-to-string "xrandr --query | grep --count 'DP-0.1.1 connected'")))
+        :home
+      :work))
+  (defun joranvar/maybe-switch-context ()
+    (unless (eq joranvar/current-context (joranvar/get-screens-context))
+      (joranvar/setup-screens (joranvar/get-screens-context))))
+  (add-hook 'exwm-init-hook #'joranvar/maybe-switch-context)
 #+END_SRC
 
 Add the WM_TITLE and WM_CLASS of the exwm window to its buffer name.
