@@ -50,6 +50,16 @@
       "rev" = "2f130084b545992954567d758039bf65698e1603";
       "sha256" = "09ss6lzkyx77py7kh5r3sksjyb2871zi8088bqafhi80sa3m4fl1";
     }) {});
+    nixops = pkgs.nixops.overrideDerivation (
+      old: {
+        patchPhase = ''
+          substituteInPlace nix/eval-machine-info.nix \
+          --replace 'system.nixosVersion' 'system.nixos.version'
+          substituteInPlace nix/ec2.nix \
+          --replace 'system.nixosVersion' 'system.nixos.version'
+        '';
+      }
+    );
   };
 
   # List packages installed in system profile. To search by name, run:
@@ -140,6 +150,7 @@
 
     composer2nix
     nodePackages.node2nix
+    nixops
 
     libnotify
     notify-osd
