@@ -99,17 +99,17 @@
     (texlive.combine { inherit (texlive) scheme-tetex wrapfig capt-of minted ifplatform xstring framed; })
     python35Packages.pygments
 
-    fsharp
-    mono
-    czmq
-    ruby
-    bundler
+#    fsharp
+#    mono
+#    czmq
+#    ruby
+#    bundler
 
     sqsh
     freetds
     unixODBC
     mysql
-    mysql-workbench
+#    mysql-workbench
 
     python35
 #    python35Packages.pywinrm
@@ -118,12 +118,12 @@
     ctags
 
     networkmanagerapplet
-    gkrellm
+#    gkrellm
     gimp
 
     firefox
     conkeror
-    rxvt_unicode_with-plugins
+#    rxvt_unicode_with-plugins
     termite
     vlc
     sshfsFuse
@@ -191,7 +191,7 @@
     gnuplot
     plantuml
     graphviz
-    taskjuggler
+#    taskjuggler
 
     steam
     androidsdk
@@ -205,7 +205,7 @@
     gnome3.gvfs
     gnome3.nautilus
 
-    factorio
+#    factorio
   ];
 
 #  nixpkgs.config.chromium = { enableWideVine = true; enablePepperFlash = true; };
