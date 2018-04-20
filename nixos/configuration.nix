@@ -159,26 +159,29 @@
     scrot
     nitrogen
 
+    traceroute
+
 #    virtmanager
     linuxPackages.virtualbox
     vagrant
+#    ue4
 
-    freerdp
-    remmina
-    x2vnc
-    tigervnc
+#    freerdp
+#    remmina
+#    x2vnc
+#    tigervnc
     redshift
     davmail
     notmuch
     offlineimap
 
-    dmenu
-    dzen2
+#    dmenu
+#    dzen2
     xscreensaver
     xorg.xbacklight
     maim
     samba
-    flashplayer
+#    flashplayer
     pidgin
     #skype
     #gitAndTools.git-annex
