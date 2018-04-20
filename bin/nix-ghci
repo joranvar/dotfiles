@@ -1,2 +1,2 @@
 #! /usr/bin/env bash
-nix-shell --pure --command "ghci $*"
+nix-shell nix/shell.nix --pure --command "ghci $*"

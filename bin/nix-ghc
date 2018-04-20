@@ -1,2 +1,2 @@
 #! /usr/bin/env bash
-nix-shell --pure --show-trace --run "ghc $* -v"
+nix-shell nix/shell.nix --pure --run "ghc $*"
