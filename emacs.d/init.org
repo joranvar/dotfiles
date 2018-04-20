@@ -1975,7 +1975,8 @@ Thanks Wilfred (https://www.emacswiki.org/emacs/ToggleWindowSplit).
 Always use intercept the super key.
 
 #+BEGIN_SRC emacs-lisp
-  (exwm-input-set-key (kbd "s-l") (lambda () (interactive) (start-process "" nil "xscreensaver-command" "-lock")))
+  (exwm-input-set-key (kbd "s-l") (lambda () (interactive) (async-start-process "xscreensaver" "xscreensaver" #'ignore) (message "%s" (shell-command-to-string "xscreensaver-command -lock && echo 'Screensaver'"))))
+  (exwm-input-set-key (kbd "s-L") (lambda () (interactive) (message "%s" (shell-command-to-string "xscreensaver-command -exit && echo 'No screensaver'"))))
 #+END_SRC
 
 Do not iconify-or-deiconify-frame.  Does not work well with exwm, because there is no way to restore the frame if it is on a fixed screen.
