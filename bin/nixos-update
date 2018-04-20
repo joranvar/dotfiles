@@ -17,6 +17,8 @@ case $* in
         ;;
 esac
 
+commit=$(git -C /home/joranvar/dotfiles/ log -1 --oneline | sed -e 's/[^a-z0-9 ]//i')
+
 sudo mount /dev/sda1 /boot
-sudo nixos-rebuild switch -p "$(date +%FT%H%M%S) - ${profile}$(git -C /home/joranvar/dotfiles/ log -1 --oneline)"
+sudo nixos-rebuild switch -p "$(date +%FT%H%M%S) - ${profile}${commit}"
 sudo umount /boot
