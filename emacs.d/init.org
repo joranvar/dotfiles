@@ -529,7 +529,7 @@ Notifiy me with appropriate messages when a compilation ends.
 #+BEGIN_SRC emacs-lisp
   (defun joranvar/from-nix-package (name file)
     "For the given nix package by NAME, return the packaged FILE."
-    (let ((nix-path (s-trim (shell-command-to-string (format "nix-build -E '(import <nixpkgs> {})'.%s" name)))))
+    (let ((nix-path (s-trim (shell-command-to-string (format "nix-build -QE '(import <nixpkgs> {})'.%s" name)))))
       (format "%s/%s" nix-path file)))
 
   (defun joranvar/play-sound (file)
