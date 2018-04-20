@@ -2083,12 +2083,12 @@ action, the following hydra binds useful commands.
   (defun joranvar/change-volume (amount)
     "Change the volume by AMOUNT percent."
     (interactive)
-    (let ((volume-string (format "%d%%%s" (abs amount) (if (< 0 amount) "+" "-"))))
-      (start-process-shell-command (format "amixer sset Master %s" volume-string) nil (format "amixer sset Master %s" volume-string))
-      (message "%s" (shell-command-to-string "amixer sget Master | grep t: | cat"))))
+    (let ((volume-string (format "%s%d%%" (if (< 0 amount) "+" "-") (abs amount))))
+      (shell-command-to-string (format "pactl set-sink-volume @DEFAULT_SINK@ %s" volume-string))
+      (message "%s" (s-trim (shell-command-to-string "pactl list sinks | grep $'\tVolume:'")))))
 
-  (exwm-input-set-key (kbd "<XF86AudioRaiseVolume>") (joranvar/change-volume 5))
-  (exwm-input-set-key (kbd "<XF86AudioLowerVolume>") (joranvar/change-volume -5))
+  (exwm-input-set-key (kbd "<XF86AudioRaiseVolume>") (lambda () (interactive) (joranvar/change-volume 5)))
+  (exwm-input-set-key (kbd "<XF86AudioLowerVolume>") (lambda () (interactive) (joranvar/change-volume -5)))
 
   (exwm-input-set-key
    (kbd "s-SPC")
