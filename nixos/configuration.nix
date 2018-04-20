@@ -227,6 +227,10 @@
   services.openssh.passwordAuthentication = false;
 
   services.upower.enable = true;
+  services.printing = {
+    enable = true;
+    drivers = [ pkgs.gutenprint pkgs.gutenprintBin pkgs.brgenml1cupswrapper ];
+  };
 
   services.dbus = {
     enable = true;
