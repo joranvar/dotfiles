@@ -1216,6 +1216,12 @@ Oh boy, org-babel is so nice!
               (setq org-confirm-babel-evaluate #'joranvar/babel-safe-languagep)))
 #+END_SRC
 
+Especially when code can be executed async!
+
+#+BEGIN_SRC emacs-lisp
+  (use-package ob-async)
+#+END_SRC
+
 When exporting, I want to see pretty source code!
 
 #+BEGIN_SRC emacs-lisp
