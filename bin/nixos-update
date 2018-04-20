@@ -6,8 +6,8 @@ case $* in
         profile="nixos-unstable - "
         ;;
     *)
-        sudo nix-channel --add https://nixos.org/channels/nixos-17.09 nixos
-        profile=""
+        sudo nix-channel --add https://nixos.org/channels/nixos-18.03 nixos
+        profile="nixos-18.03 - "
         ;;
 esac
 
