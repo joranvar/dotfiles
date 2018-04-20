@@ -1201,16 +1201,21 @@ add some notes to the pages.  That's what `interleave` is for.
 Oh boy, org-babel is so nice!
 
 #+BEGIN_SRC emacs-lisp
-  (use-package org
+ (use-package org
     :ensure org-plus-contrib
     :config (progn
               (use-package ob-http)
+              (use-package ob-restclient)
               (org-babel-do-load-languages 'org-babel-load-languages '((sql . t)
                                                                        (shell . t)
                                                                        (ledger . t)
                                                                        (http . t)
                                                                        (gnuplot . t)
-                                                                       (plantuml . t)))
+                                                                       (plantuml . t)
+                                                                       (dot . t)
+                                                                       (python . t)
+                                                                       (restclient . t)
+                                                                       (js . t)))
               (defun joranvar/babel-safe-languagep (lang body)
                 (not (--any (string= lang it) joranvar/babel-safe-languages)))
               (setq org-confirm-babel-evaluate #'joranvar/babel-safe-languagep)))
