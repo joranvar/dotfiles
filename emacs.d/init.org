@@ -2024,7 +2024,7 @@ Enable multiple monitors.
                                "Source Code Pro 10")))))
   (defun set-screens ()
     (start-process-shell-command
-     "xrandr" nil (s-join " " '("xrandr --output DP-4 --auto"
+     "xrandr" nil (s-join " " '("xrandr --output DP-4 --mode 3840x2160 --panning 3840x2160" ;; Make panning and mode explicit!
                                 ;; "--output HDMI-0 --right-of DP-4 --auto"
                                 ;; "--output DP-1 --left-of DP-4 --auto"
                                 "--output DP-0.8 --right-of DP-4 --auto --primary" ;; @home
