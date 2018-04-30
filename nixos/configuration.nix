@@ -196,7 +196,7 @@
     steam
     androidsdk
     android-udev-rules
-#    chromium
+    chromium
 
     pass
     lastpass-cli
@@ -208,7 +208,7 @@
 #    factorio
   ];
 
-#  nixpkgs.config.chromium = { enableWideVine = true; enablePepperFlash = true; };
+  nixpkgs.config.chromium = { enableWideVine = true; enablePepperFlash = true; };
 
   fonts = {
     enableFontDir = true;
