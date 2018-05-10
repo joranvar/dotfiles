@@ -1149,11 +1149,11 @@ Why not slurp my contacts' addresses into emacs?
 
 ** Browsing
 
-Use eww by default, firefox as a fallback.
+Use conkeror (it works again!)
 
 #+BEGIN_SRC emacs-lisp
-  (setq browse-url-generic-program (executable-find "firefox")
-        browse-url-browser-function #'eww-browse-url)
+  (setq browse-url-generic-program (executable-find "conkeror")
+        browse-url-browser-function #'browse-url-conkeror)
 
   (setq eww-search-prefix "https://www.google.nl/search?q=")
 #+END_SRC
