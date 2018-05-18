@@ -314,6 +314,8 @@
   networking.networkmanager.enable = true;
   security.sudo.enable = true;
 
+
+  programs.browserpass.enable = true;
   programs.zsh.enable = true;
   users.defaultUserShell = "/var/run/current-system/sw/bin/zsh";
 }
