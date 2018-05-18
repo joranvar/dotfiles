@@ -86,6 +86,7 @@
 
     cabal-install
     cabal2nix
+    dhall
 
     emacs
     aspell
