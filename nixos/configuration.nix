@@ -166,7 +166,7 @@
     linuxPackages.virtualbox
     vagrant
 #    ue4
-    teamviewer
+    #teamviewer
 
 #    freerdp
 #    remmina
@@ -301,7 +301,7 @@
 
   time.timeZone = "Europe/Amsterdam";
 
-  services.teamviewer.enable = true;
+  services.teamviewer.enable = false;
 
   services.nixosManual.showManual = true;
   virtualisation.docker.enable = true;
