@@ -166,6 +166,7 @@
     linuxPackages.virtualbox
     vagrant
 #    ue4
+    teamviewer
 
 #    freerdp
 #    remmina
@@ -299,6 +300,8 @@
   environment.etc."odbcinst.ini".text = "[FreeTDS]\nDriver=${pkgs.freetds}/lib/libtdsodbc.so\n";
 
   time.timeZone = "Europe/Amsterdam";
+
+  services.teamviewer.enable = true;
 
   services.nixosManual.showManual = true;
   virtualisation.docker.enable = true;
