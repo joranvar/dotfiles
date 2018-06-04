@@ -316,6 +316,8 @@ I've used ~helm~ for quite some time now, and I like the way it works.  Therefor
             (require 'helm-config)
             (helm-mode 1)
             (helm-autoresize-mode t)))
+  (use-package helm-swoop
+    :bind (("C-s" . helm-swoop)))
 #+END_SRC
 
 #+BEGIN_SRC emacs-lisp
