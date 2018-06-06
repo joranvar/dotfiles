@@ -97,7 +97,8 @@
     gv
     ghostscript
     libreoffice
-    (texlive.combine { inherit (texlive) scheme-tetex wrapfig capt-of minted ifplatform xstring framed; })
+    (texlive.combine {
+      inherit (texlive) scheme-tetex wrapfig capt-of minted ifplatform xstring framed fvextra upquote; })
     python35Packages.pygments
 
 #    fsharp
